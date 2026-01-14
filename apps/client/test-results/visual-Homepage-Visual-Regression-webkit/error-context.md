@@ -1,0 +1,58 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Tao Architecture" [ref=e4]:
+        - /url: /
+        - img "Tao Architecture" [ref=e6]
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "Home" [ref=e10]:
+            - /url: /
+        - listitem [ref=e11]:
+          - link "Work" [ref=e12]:
+            - /url: /work
+        - listitem [ref=e13]:
+          - link "Studio" [ref=e14]:
+            - /url: /studio
+        - listitem [ref=e15]:
+          - link "Career" [ref=e16]:
+            - /url: /career
+        - listitem [ref=e17]:
+          - link "Contact" [ref=e18]:
+            - /url: /contact
+  - main [ref=e19]:
+    - paragraph [ref=e21]:
+      - text: Get started by editing
+      - code [ref=e22]: src/app/page.tsx
+  - contentinfo [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - heading "Tao Architecture" [level=3] [ref=e26]
+        - paragraph [ref=e27]: © 2025 Tao Architecture Pvt. Ltd. All Rights Reserved.
+      - generic [ref=e28]:
+        - link "Work" [ref=e29]:
+          - /url: /work
+        - link "Studio" [ref=e30]:
+          - /url: /studio
+        - link "Career" [ref=e31]:
+          - /url: /career
+        - link "Contact" [ref=e32]:
+          - /url: /contact
+      - generic [ref=e33]:
+        - link "Facebook F" [ref=e34]:
+          - /url: "#"
+          - generic [ref=e35]: Facebook
+          - text: F
+        - link "Instagram I" [ref=e36]:
+          - /url: "#"
+          - generic [ref=e37]: Instagram
+          - text: I
+        - link "LinkedIn L" [ref=e38]:
+          - /url: "#"
+          - generic [ref=e39]: LinkedIn
+          - text: L
+  - alert [ref=e40]
+```

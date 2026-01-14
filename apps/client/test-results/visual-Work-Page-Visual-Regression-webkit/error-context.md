@@ -1,0 +1,77 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Tao Architecture" [ref=e4]:
+        - /url: /
+        - img "Tao Architecture" [ref=e6]
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "Home" [ref=e10]:
+            - /url: /
+        - listitem [ref=e11]:
+          - link "Work" [ref=e12]:
+            - /url: /work
+        - listitem [ref=e13]:
+          - link "Studio" [ref=e14]:
+            - /url: /studio
+        - listitem [ref=e15]:
+          - link "Career" [ref=e16]:
+            - /url: /career
+        - listitem [ref=e17]:
+          - link "Contact" [ref=e18]:
+            - /url: /contact
+  - generic [ref=e19]:
+    - heading "Our Work" [level=1] [ref=e20]
+    - generic [ref=e21]:
+      - button "All" [ref=e22] [cursor=pointer]
+      - button "Residential" [ref=e23] [cursor=pointer]
+      - button "Commercial" [ref=e24] [cursor=pointer]
+      - button "Interior" [ref=e25] [cursor=pointer]
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e29]: "Image: Luxury Villa"
+        - generic [ref=e30]:
+          - heading "Luxury Villa" [level=3] [ref=e31]
+          - paragraph [ref=e32]: Residential
+      - generic [ref=e33]:
+        - generic [ref=e35]: "Image: Corporate HQ"
+        - generic [ref=e36]:
+          - heading "Corporate HQ" [level=3] [ref=e37]
+          - paragraph [ref=e38]: Commercial
+      - generic [ref=e39]:
+        - generic [ref=e41]: "Image: Modern Apartment"
+        - generic [ref=e42]:
+          - heading "Modern Apartment" [level=3] [ref=e43]
+          - paragraph [ref=e44]: Interior
+  - contentinfo [ref=e45]:
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - heading "Tao Architecture" [level=3] [ref=e48]
+        - paragraph [ref=e49]: © 2025 Tao Architecture Pvt. Ltd. All Rights Reserved.
+      - generic [ref=e50]:
+        - link "Work" [ref=e51]:
+          - /url: /work
+        - link "Studio" [ref=e52]:
+          - /url: /studio
+        - link "Career" [ref=e53]:
+          - /url: /career
+        - link "Contact" [ref=e54]:
+          - /url: /contact
+      - generic [ref=e55]:
+        - link "Facebook F" [ref=e56]:
+          - /url: "#"
+          - generic [ref=e57]: Facebook
+          - text: F
+        - link "Instagram I" [ref=e58]:
+          - /url: "#"
+          - generic [ref=e59]: Instagram
+          - text: I
+        - link "LinkedIn L" [ref=e60]:
+          - /url: "#"
+          - generic [ref=e61]: LinkedIn
+          - text: L
+  - alert [ref=e62]
+```
