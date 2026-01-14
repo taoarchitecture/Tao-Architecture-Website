@@ -1,6 +1,8 @@
 import React from 'react';
 import { PlayerModal } from './player-modal';
 
+export const dynamic = 'force-dynamic';
+
 async function fetchVideos(searchParams: { [key: string]: string | undefined }) {
   const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000'}/api/videos`);
   const q = searchParams.q || '';
@@ -16,9 +18,17 @@ async function fetchVideos(searchParams: { [key: string]: string | undefined }) 
   if (category) url.searchParams.set('category', category);
   if (tag) url.searchParams.set('tag', tag);
 
-  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
-  if (!res.ok) throw new Error('Failed to load videos');
-  return res.json();
+  try {
+    const res = await fetch(url.toString(), { cache: 'no-store' });
+    if (!res.ok) {
+      console.error(`Failed to fetch videos: ${res.status} ${res.statusText}`);
+      return { items: [], total: 0 };
+    }
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching videos:', error);
+    return { items: [], total: 0 };
+  }
 }
 
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
