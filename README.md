@@ -22,27 +22,30 @@ The client is optimized for Vercel deployment.
 
 ### 2. Deploying the Server (API)
 
-**Note:** The server uses **SQLite** (`dev.db`) by default, which is **NOT compatible with Vercel** (serverless functions have ephemeral filesystems, meaning your database will reset constantly).
+The server has been configured for **Vercel Serverless Functions**.
 
-To deploy the server, you have two options:
+**Pre-requisites:**
+1.  **PostgreSQL Database**: You MUST use a Postgres database (e.g., Vercel Postgres, Neon, Supabase). SQLite will NOT work.
+2.  **Environment Variables**: Add the following in Vercel:
+    *   `DATABASE_URL`: Your Postgres connection string.
+    *   `JWT_SECRET`: A secure random string.
+    *   `YOUTUBE_API_KEY`: Your YouTube Data API key.
+    *   `CLOUDINARY_CLOUD_NAME`: Your Cloudinary Cloud Name.
+    *   `CLOUDINARY_API_KEY`: Your Cloudinary API Key.
+    *   `CLOUDINARY_API_SECRET`: Your Cloudinary API Secret.
 
-#### Option A: Deploy to a VPS or Persistent Cloud (Railway, Render, DigitalOcean) - **Recommended**
-1.  These platforms support persistent storage (volumes) or SQLite files if the instance doesn't restart often (though Postgres is better).
-2.  Set the build command to `npm install && npm run build`.
-3.  Start command: `npm start`.
-4.  Env Vars:
-    *   `PORT`: 5000 (or platform default)
-    *   `DATABASE_URL`: `file:./dev.db` (or your Postgres URL)
-    *   `YOUTUBE_API_KEY`: Your key.
-    *   `CLOUDINARY_...`: Your credentials.
+**Deployment Steps:**
+1.  Vercel will automatically detect the configuration in `vercel.json`.
+2.  It will build both the Client (Next.js) and the Server (Express as Serverless).
+3.  The API will be available at `/api/...`.
 
-#### Option B: Deploy to Vercel (Requires Migration)
-To run the server on Vercel, you **MUST**:
-1.  Migrate the database from SQLite to **PostgreSQL** (e.g., Vercel Postgres, Neon, Supabase).
-    *   Update `apps/server/prisma/schema.prisma` to use `provider = "postgresql"`.
-    *   Update `DATABASE_URL` to the Postgres connection string.
-2.  Refactor `src/index.ts` to export the Express app as a Serverless Function (instead of `app.listen`).
-3.  Replace `setInterval` (YouTube fetcher) with **Vercel Cron Jobs**.
+**Database Migration:**
+After deploying, you need to push the schema to your production database. Since you can't run shell commands easily on Vercel, run this locally (connecting to your production DB):
+```bash
+# Set your production DATABASE_URL in .env temporarily
+cd apps/server
+npx prisma db push
+```
 
 ## Local Development
 
