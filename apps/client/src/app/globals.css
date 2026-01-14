@@ -1,0 +1,156 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+  .text-fluid-h1 {
+    font-size: clamp(1.875rem, 1.5rem + 2vw, 3rem); /* 30px to 48px */
+  }
+  .text-fluid-h2 {
+    font-size: clamp(1.25rem, 1rem + 1.25vw, 1.875rem); /* 20px to 30px */
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: 'Agenda';
+  src: url('/fonts/Agenda-Light.woff') format('woff'),
+       url('/fonts/Agenda-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Agenda';
+  src: url('/fonts/Agenda-Light.woff') format('woff'),
+       url('/fonts/Agenda-Light.ttf') format('truetype');
+  font-weight: 400; /* Use Light as regular if Regular isn't available, or map correctly */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Agenda';
+  src: url('/fonts/Agenda-Bold.woff') format('woff'),
+       url('/fonts/Agenda-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --primary-gold: #c8b273;
+  --primary-red: #ee1c25;
+  --dark-grey: #231f20;
+  --medium-grey: #333333;
+}
+
+body {
+  font-family: 'Agenda', sans-serif;
+  color: var(--medium-grey);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Agenda', sans-serif;
+  color: var(--dark-grey);
+  font-weight: 700;
+}
+
+/* Legacy Button Styles */
+.btn {
+  display: inline-block;
+  font-family: 'Agenda', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 13px 30px;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-stroke {
+  background-color: transparent;
+  border-color: #000;
+  color: #000;
+}
+
+.btn-stroke:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn-fill {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.btn-fill:hover {
+  background-color: transparent;
+  color: #000;
+}
+
+/* Sliding Link Effect */
+.sliding-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+
+.sliding-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.sliding-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Loader Mask */
+.loader-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader-mask.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#loading {
+  background: url('/img/tao-loader.gif') no-repeat center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999;
+}
+
+/* Text Selection Color */
+::selection {
+  background: var(--primary-gold);
+  color: #fff;
+}
