@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Application {
+  id                    Int      @id @default(autoincrement())
+  positionApply         String
+  availabilityDate      String?
+  whyTao                String?
+  firstName             String
+  lastName              String
+  phone                 String
+  landline              String?
+  email                 String
+  address               String?
+  permanentAddress      String?
+  birthDate             String?
+  gender                String?
+  maritalStatus         String?
+  
+  // JSON fields for complex data
+  education             String?    // Stores SSC, HSC, Graduation, PostGraduation details (JSON)
+  experience            String?    // Stores previous work experience (JSON)
+  references            String?    // Stores referees (JSON)
+  skills                String?    // Stores software skills etc. (JSON)
+  
+  expectedSalary        String?
+  commitmentPeriod      String?
+  
+  resume                String?  // File path
+  salarySlip            String?  // File path
+  portfolio             String?  // File path
+  refLetter             String?  // File path
+  
+  status                String   @default("pending") // pending, approved, rejected, trash
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  category    String
+  location    String?
+  status      String?
+  plotArea    String?
+  builtUpArea String?
+  description String?    // Stores array of { type: 'paragraph', content: '...' } (JSON)
+  coverImage  String?
+  gallery     String?    // Stores array of { url: '...', caption: '...' } (JSON)
+  seoTitle    String?
+  seoDesc     String?
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  companyName String?
+  email       String
+  subject     String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model Video {
+  id            Int       @id @default(autoincrement())
+  videoId       String    @unique
+  title         String
+  description   String?
+  thumbnailUrl  String
+  publishedAt   DateTime
+  viewCount     Int?
+  channelId     String
+  etag          String?
+  lastSyncedAt  DateTime? @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  tags          VideoTagOnVideo[]
+  categories    VideoCategoryOnVideo[]
+
+  @@index([publishedAt])
+}
+
+model VideoTag {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  videos VideoTagOnVideo[]
+}
+
+model VideoTagOnVideo {
+  videoId Int
+  tagId   Int
+  video   Video    @relation(fields: [videoId], references: [id])
+  tag     VideoTag @relation(fields: [tagId], references: [id])
+
+  @@id([videoId, tagId])
+}
+
+model VideoCategory {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  videos VideoCategoryOnVideo[]
+}
+
+model VideoCategoryOnVideo {
+  videoId    Int
+  categoryId Int
+  video      Video         @relation(fields: [videoId], references: [id])
+  category   VideoCategory @relation(fields: [categoryId], references: [id])
+
+  @@id([videoId, categoryId])
+}
