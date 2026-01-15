@@ -5,6 +5,7 @@ interface PortfolioItem {
   id: string;
   category: string;
   title: string;
+  titleLines?: string[]; // Manual line breaks for overlay style
   subheading?: string;
   image: string;
   link: string;
@@ -18,6 +19,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'corporate',
     category: 'CORPORATE',
     title: 'Creating collaborative and contemporary work culture',
+    titleLines: ['Creating collaborative', 'and contemporary', 'work culture'],
     image: '/img/portfolio/masonry/1.jpg',
     link: '/work#corporate',
     overlayStyle: true,
@@ -34,6 +36,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'institutional',
     category: 'INSTITUTIONAL',
     title: 'Nurturing learning through interactive spaces',
+    titleLines: ['Nurturing learning', 'through interactive', 'spaces'],
     subheading: 'ARCHITECTURE + INTERIORS + LANDSCAPE + ART INSTALLATION',
     image: '/img/portfolio/masonry/institutional.jpg',
     link: '/work#institutional',
@@ -43,6 +46,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'studio',
     category: 'TAO – THE WAY',
     title: 'Breaking barriers between indoors and outdoors',
+    titleLines: ['Breaking barriers', 'between indoors', 'and outdoors'],
     subheading: 'SUSTAINABLE + ECO-CONSCIOUS',
     image: '/img/portfolio/masonry/landscape.jpg',
     link: '/studio',
@@ -52,6 +56,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'products',
     category: 'PRODUCTS',
     title: 'Carving functional sculptures as integral part of architecture',
+    titleLines: ['Carving functional sculptures', 'as integral part', 'of architecture'],
     subheading: 'CREATIVITY + INTERIORS',
     image: '/img/portfolio/masonry/furniture.jpg',
     link: '/work#products',
@@ -61,6 +66,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'installations',
     category: 'INSTALLATIONS',
     title: 'Filling soulful spirit within spaces',
+    titleLines: ['Filling soulful', 'spirit within', 'spaces'],
     subheading: 'CREATIVITY + CRAFT + COLLABORATION',
     image: '/img/portfolio/masonry/artinstallation.jpg',
     link: '/work#installations',
@@ -89,6 +95,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'apartments',
     category: 'LUXURY APARTMENTS',
     title: 'Forming nests around the sky',
+    titleLines: ['Forming nests', 'around the sky'],
     subheading: 'INTERIORS + FURNITURE + ART INSTALLATION',
     image: '/img/portfolio/masonry/pent.jpg',
     link: '/work#apartments',
@@ -98,6 +105,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'housing',
     category: 'HOUSING',
     title: 'Formulating cohesive and socio-culture environments',
+    titleLines: ['Formulating cohesive', 'and socio-culture', 'environments'],
     image: '/img/portfolio/masonry/aparments.jpg',
     link: '/work#housing',
     overlayStyle: true,
@@ -106,6 +114,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'coordination',
     category: 'COORDINATION',
     title: 'Collaborating global expertise with local enterprise',
+    titleLines: ['Collaborating global', 'expertise with', 'local enterprise'],
     subheading: 'COLLABORATION + INTEGRATION + ENTERPRISING',
     image: '/img/portfolio/masonry/coordination.jpg',
     link: '/work#corporate',
@@ -116,19 +125,15 @@ const portfolioItems: PortfolioItem[] = [
 const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
   // CORPORATE / OVERLAY STYLE
   if (item.overlayStyle) {
-    // Split title into lines manually for the visual effect if it contains specific keywords or is long
-    // This is a simplified approach to match the visual "Line Boxes" effect
-    const titleWords = item.title.split(' ');
-    const line1 = titleWords.slice(0, 2).join(' ');
-    const line2 = titleWords.slice(2, 4).join(' ');
-    const line3 = titleWords.slice(4).join(' ');
+    // Use manual titleLines if available, otherwise fallback to simple split (though manual is preferred)
+    const lines = item.titleLines || [item.title];
 
     return (
       <div className="mb-16 group relative w-[90%] mx-auto">
-        <div className="relative border-t-[8px] border-black pt-0">
+        <div className="relative border-t-[8px] border-[#222] pt-0">
            {/* Badge on Top Left - Overlapping the border */}
-           <div className="absolute -top-[14px] left-0 z-30">
-             <div className="bg-[#222] text-white px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em]">
+           <div className="absolute -top-[15px] left-0 z-30">
+             <div className="bg-[#222] text-white px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] shadow-sm">
                 {item.category}
              </div>
            </div>
@@ -148,35 +153,24 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
           </Link>
 
           {/* Overlay "Line Boxes" Content */}
-          <div className="absolute top-[12%] left-0 z-20 max-w-[75%]">
-             <div className="flex flex-col items-start space-y-0">
-               {/* Title Line 1 */}
-               <div className="bg-white px-5 py-2 border-b border-[#a0aec0] w-fit">
-                 <h3 className="text-[20px] font-light leading-none text-gray-800 whitespace-nowrap">
-                   {line1}
-                 </h3>
-               </div>
-               {/* Title Line 2 */}
-               <div className="bg-white px-5 py-2 border-b border-[#a0aec0] w-fit">
-                 <h3 className="text-[20px] font-light leading-none text-gray-800 whitespace-nowrap">
-                   {line2}
-                 </h3>
-               </div>
-               {/* Title Line 3 (if exists) */}
-               {line3 && (
-                 <div className="bg-white px-5 py-2 w-fit">
-                   <h3 className="text-[20px] font-light leading-none text-gray-800 whitespace-nowrap">
-                     {line3}
+          <div className="absolute top-[12%] left-0 z-20 max-w-[85%] pointer-events-none">
+             <div className="flex flex-col items-start space-y-0 pointer-events-auto">
+               {lines.map((line, index) => (
+                 <div key={index} className="bg-white px-6 py-2.5 border-b border-[#cbd5e0] w-fit shadow-sm">
+                   <h3 className="text-[22px] font-light leading-none text-gray-800 whitespace-nowrap">
+                     <Link href={item.link} className="hover:text-gray-500 transition-colors">
+                        {line}
+                     </Link>
                    </h3>
                  </div>
-               )}
+               ))}
                
                {/* Button */}
-               <div className="mt-3 ml-4">
+               <div className="mt-4 ml-6">
                  <Link 
                    href={item.link}
-                   className="inline-block border border-white bg-transparent/20 backdrop-blur-sm text-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
-                   style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+                   className="inline-block border border-white bg-white/10 backdrop-blur-[2px] text-white px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-sm"
+                   style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
                  >
                    See Projects
                  </Link>
