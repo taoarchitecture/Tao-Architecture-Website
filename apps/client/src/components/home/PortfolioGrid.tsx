@@ -116,12 +116,19 @@ const portfolioItems: PortfolioItem[] = [
 const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
   // CORPORATE / OVERLAY STYLE
   if (item.overlayStyle) {
+    // Split title into lines manually for the visual effect if it contains specific keywords or is long
+    // This is a simplified approach to match the visual "Line Boxes" effect
+    const titleWords = item.title.split(' ');
+    const line1 = titleWords.slice(0, 2).join(' ');
+    const line2 = titleWords.slice(2, 4).join(' ');
+    const line3 = titleWords.slice(4).join(' ');
+
     return (
       <div className="mb-16 group relative w-[90%] mx-auto">
-        <div className="relative">
-           {/* Badge on Top Left */}
-           <div className="absolute top-0 left-0 z-30">
-             <div className="bg-[#222] text-white px-4 py-1 text-[11px] font-bold uppercase tracking-[0.15em]">
+        <div className="relative border-t-[8px] border-black pt-0">
+           {/* Badge on Top Left - Overlapping the border */}
+           <div className="absolute -top-[14px] left-0 z-30">
+             <div className="bg-[#222] text-white px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em]">
                 {item.category}
              </div>
            </div>
@@ -140,24 +147,36 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
             </div>
           </Link>
 
-          {/* White Overlay Box */}
-          <div className="absolute top-[12%] left-0 z-20 w-[65%] bg-white p-6 shadow-sm">
-             <div className="flex flex-col gap-3">
-               {/* Title split into lines if needed */}
-               <h3 className="text-[22px] font-light leading-tight text-gray-800 border-b border-gray-300 pb-3">
-                 <Link href={item.link} className="hover:text-gray-600 transition-colors">
-                   {item.title}
-                 </Link>
-               </h3>
-               {item.subheading && (
-                 <h4 className="text-[10px] text-gray-500 font-bold uppercase tracking-widest border-b border-gray-300 pb-2">
-                   {item.subheading}
-                 </h4>
+          {/* Overlay "Line Boxes" Content */}
+          <div className="absolute top-[12%] left-0 z-20 max-w-[75%]">
+             <div className="flex flex-col items-start space-y-0">
+               {/* Title Line 1 */}
+               <div className="bg-white px-5 py-2 border-b border-[#a0aec0] w-fit">
+                 <h3 className="text-[20px] font-light leading-none text-gray-800 whitespace-nowrap">
+                   {line1}
+                 </h3>
+               </div>
+               {/* Title Line 2 */}
+               <div className="bg-white px-5 py-2 border-b border-[#a0aec0] w-fit">
+                 <h3 className="text-[20px] font-light leading-none text-gray-800 whitespace-nowrap">
+                   {line2}
+                 </h3>
+               </div>
+               {/* Title Line 3 (if exists) */}
+               {line3 && (
+                 <div className="bg-white px-5 py-2 w-fit">
+                   <h3 className="text-[20px] font-light leading-none text-gray-800 whitespace-nowrap">
+                     {line3}
+                   </h3>
+                 </div>
                )}
-               <div className="mt-2">
+               
+               {/* Button */}
+               <div className="mt-3 ml-4">
                  <Link 
                    href={item.link}
-                   className="inline-block bg-[#9CA3AF] text-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-700 transition-colors"
+                   className="inline-block border border-white bg-transparent/20 backdrop-blur-sm text-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                   style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
                  >
                    See Projects
                  </Link>
@@ -172,7 +191,7 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
   // STANDARD STYLE (Commercial, Luxury Villas)
   return (
     <div className="mb-16 group w-[90%] mx-auto">
-      <div className="relative">
+      <div className="relative border-t-[8px] border-black pt-0">
         {/* Badge on Image */}
         <div className="absolute top-4 left-4 z-10">
           <div className="bg-[#222] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em]">
