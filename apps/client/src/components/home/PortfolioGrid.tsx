@@ -8,7 +8,7 @@ interface PortfolioItem {
   subheading?: string;
   image: string;
   link: string;
-  heightClass?: string; // Tailwind height class for specific sizing
+  heightClass?: string;
 }
 
 const leftColumnItems: PortfolioItem[] = [
@@ -69,7 +69,7 @@ const rightColumnItems: PortfolioItem[] = [
     subheading: 'ARCHITECTURE + INTERIORS + LANDSCAPE + ART INSTALLATION',
     image: '/img/portfolio/masonry/luxury.jpg',
     link: '/work#luxuryvillas',
-    heightClass: 'h-[500px]', // Taller item
+    heightClass: 'h-[500px]',
   },
   {
     id: 'cozy-homes',
@@ -106,9 +106,10 @@ const rightColumnItems: PortfolioItem[] = [
 
 const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
   <div className="mb-12 group">
-    <div className="relative overflow-hidden border-t-2 border-neutral-dark-grey pt-2">
-      <div className="flex justify-between items-center mb-2 font-agenda">
-        <span className="text-sm font-bold uppercase tracking-wider">{item.category}</span>
+    {/* Badge/Category positioned top-left over the image */}
+    <div className="relative">
+      <div className="absolute top-4 left-4 z-10 bg-black text-white px-3 py-1 text-xs font-bold uppercase tracking-wider">
+        {item.category}
       </div>
       
       <Link href={item.link} className="block relative overflow-hidden">
@@ -127,19 +128,19 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
     
     <div className="mt-4 font-agenda">
       {item.subheading && (
-        <h4 className="text-xs text-neutral-light-grey mb-2 uppercase tracking-wide">
+        <h4 className="text-xs text-red-500 mb-2 uppercase tracking-wide font-bold">
           {item.subheading}
         </h4>
       )}
-      <h3 className="text-xl md:text-2xl font-light leading-tight">
-        <Link href={item.link} className="sliding-link hover:text-primary-red transition-colors duration-300">
+      <h3 className="text-xl md:text-2xl font-light leading-tight text-gray-800 mb-4">
+        <Link href={item.link} className="sliding-link hover:text-black transition-colors duration-300">
           {item.title}
         </Link>
       </h3>
-      <div className="mt-6">
+      <div>
         <Link 
           href={item.link}
-          className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white"
+          className="inline-block border border-black text-black px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors duration-300"
         >
           See Projects
         </Link>
