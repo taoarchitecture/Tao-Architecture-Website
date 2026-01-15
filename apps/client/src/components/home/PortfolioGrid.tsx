@@ -105,34 +105,34 @@ const rightColumnItems: PortfolioItem[] = [
 ];
 
 const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
-  <div className="mb-12 group">
+  <div className="mb-16 group">
     {/* Badge/Category positioned top-left over the image */}
-    <div className="relative">
-      <div className="absolute top-4 left-4 z-10 bg-black text-white px-3 py-1 text-xs font-bold uppercase tracking-wider">
+    <div className="relative overflow-hidden">
+      <div className="absolute top-0 left-0 z-10 bg-black text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em]">
         {item.category}
       </div>
       
       <Link href={item.link} className="block relative overflow-hidden">
-        <div className={`relative w-full ${item.heightClass || 'h-[300px]'} transition-transform duration-700 group-hover:scale-105`}>
+        <div className={`relative w-full ${item.heightClass || 'h-[320px]'} overflow-hidden`}>
            <Image
              src={item.image}
              alt={item.title}
              fill
-             className="object-cover"
+             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
              sizes="(max-width: 768px) 100vw, 50vw"
-             quality={80}
+             quality={90}
            />
         </div>
       </Link>
     </div>
     
-    <div className="mt-4 font-agenda">
+    <div className="mt-5 font-agenda">
       {item.subheading && (
-        <h4 className="text-xs text-red-500 mb-2 uppercase tracking-wide font-bold">
+        <h4 className="text-[10px] text-red-600 mb-2 font-bold uppercase tracking-widest">
           {item.subheading}
         </h4>
       )}
-      <h3 className="text-xl md:text-2xl font-light leading-tight text-gray-800 mb-4">
+      <h3 className="text-xl md:text-[22px] font-normal leading-snug text-gray-900 mb-5 max-w-md">
         <Link href={item.link} className="sliding-link hover:text-black transition-colors duration-300">
           {item.title}
         </Link>
@@ -140,7 +140,7 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
       <div>
         <Link 
           href={item.link}
-          className="inline-block border border-black text-black px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors duration-300"
+          className="inline-flex items-center justify-center border border-black text-black px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 ease-in-out"
         >
           See Projects
         </Link>
