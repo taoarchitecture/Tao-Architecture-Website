@@ -132,35 +132,28 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
           </Link>
 
           {/* Overlay Content Block */}
-          <div className="absolute top-[10%] left-0 z-20 max-w-[85%]">
+          <div className="absolute top-[8%] left-0 z-20 max-w-[85%]">
             {/* Category Badge */}
-            <div className="bg-black text-white px-4 py-1.5 inline-block text-[10px] font-bold uppercase tracking-[0.15em] mb-0">
+            <div className="bg-neutral-900 text-white px-5 py-1.5 inline-block text-[11px] font-bold uppercase tracking-[0.15em] mb-0 shadow-sm">
               {item.category}
             </div>
             
             {/* White Content Box */}
-            <div className="bg-white p-4 md:p-6 shadow-lg">
+            <div className="bg-white p-5 md:p-7 shadow-lg border-l-4 border-transparent">
               {item.subheading && (
-                <h4 className="text-[10px] text-red-600 mb-2 font-bold uppercase tracking-widest">
+                <h4 className="text-[10px] text-gray-500 mb-3 font-bold uppercase tracking-widest border-b border-gray-200 pb-2 inline-block">
                   {item.subheading}
                 </h4>
               )}
-              <h3 className="text-xl md:text-2xl font-light leading-snug text-gray-900 mb-5">
-                <Link href={item.link} className="hover:text-red-600 transition-colors duration-300">
+              <h3 className="text-xl md:text-[26px] font-light leading-snug text-gray-800 mb-6 border-b border-gray-300 pb-4">
+                <Link href={item.link} className="hover:text-gray-600 transition-colors duration-300">
                   {item.title}
                 </Link>
               </h3>
               
               <Link 
                 href={item.link}
-                className="inline-flex items-center justify-center border border-white bg-transparent text-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 ease-in-out absolute bottom-6 left-6 opacity-0"
-              >
-                {/* Hidden button for semantic structure, visible button is below */}
-              </Link>
-              
-              <Link 
-                href={item.link}
-                className="inline-flex items-center justify-center border border-gray-400 text-gray-800 px-5 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition-all duration-300 ease-in-out"
+                className="inline-flex items-center justify-center bg-gray-400 text-white border border-gray-400 px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-600 hover:border-gray-600 transition-all duration-300 ease-in-out"
               >
                 See Projects
               </Link>
