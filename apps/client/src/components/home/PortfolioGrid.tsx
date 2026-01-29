@@ -86,6 +86,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 'cozy-homes',
     category: 'COZY HOMES',
     title: 'Nourishing lives through intimate and sensitive spaces',
+    titleLines: ['Nourishing lives', 'through intimate', 'and sensitive spaces'],
     subheading: 'ARCHITECTURE + INTERIORS + CRAFT + LANDSCAPE',
     image: '/img/portfolio/masonry/cozyhomes.jpg',
     link: '/work#cozyhomes',
@@ -185,7 +186,7 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
   // STANDARD STYLE (Commercial, Luxury Villas)
   return (
     <div className="mb-16 group w-[90%] mx-auto">
-      <div className="relative border-t-[8px] border-black pt-0">
+      <div className="relative border-t-[8px] border-[#222] pt-0">
         {/* Badge on Image */}
         <div className="absolute top-4 left-4 z-10">
           <div className="bg-[#222] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em]">
