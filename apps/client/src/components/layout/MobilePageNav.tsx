@@ -13,7 +13,7 @@ interface MobilePageNavProps {
 
 const MobilePageNav = ({ items, activeItem, onSelect }: MobilePageNavProps) => {
   return (
-    <div className="md:hidden sticky top-[72px] z-40 bg-white border-b border-gray-100 shadow-sm overflow-x-auto">
+    <div className="md:hidden sticky top-[62px] z-40 bg-white border-b border-gray-100 shadow-sm overflow-x-auto transition-all duration-300">
       <div className="flex px-4 py-4 space-x-6 min-w-max">
         {items.map((item) => (
           <button

@@ -45,28 +45,28 @@ export default function Dashboard() {
 
   return (
     <AdminLayout>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Dashboard</h1>
-        <p className="text-gray-500 mt-2">Welcome back to Tao Architecture Admin</p>
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold text-neutral-dark-grey dark:text-white font-agenda">DASHBOARD</h1>
+        <p className="text-neutral-light-grey mt-2 text-sm tracking-wide uppercase">Welcome back to Tao Architecture Admin</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Stat Card 1 */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border-l-4 border-primary-red">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Total Projects</h3>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.projects}</p>
+        <div className="bg-white dark:bg-gray-800 p-8 shadow-sm border-l-2 border-primary-red">
+            <h3 className="text-neutral-light-grey text-xs font-bold uppercase tracking-[0.2em] mb-4">Total Projects</h3>
+            <p className="text-4xl font-bold text-neutral-black dark:text-white">{stats.projects}</p>
         </div>
 
         {/* Stat Card 2 */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border-l-4 border-primary-gold">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Job Applications</h3>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.applications}</p>
+        <div className="bg-white dark:bg-gray-800 p-8 shadow-sm border-l-2 border-primary-gold">
+            <h3 className="text-neutral-light-grey text-xs font-bold uppercase tracking-[0.2em] mb-4">Job Applications</h3>
+            <p className="text-4xl font-bold text-neutral-black dark:text-white">{stats.applications}</p>
         </div>
 
         {/* Stat Card 3 */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border-l-4 border-gray-500">
-            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">Unread Messages</h3>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.messages}</p>
+        <div className="bg-white dark:bg-gray-800 p-8 shadow-sm border-l-2 border-neutral-dark-grey">
+            <h3 className="text-neutral-light-grey text-xs font-bold uppercase tracking-[0.2em] mb-4">Unread Messages</h3>
+            <p className="text-4xl font-bold text-neutral-black dark:text-white">{stats.messages}</p>
         </div>
       </div>
     </AdminLayout>

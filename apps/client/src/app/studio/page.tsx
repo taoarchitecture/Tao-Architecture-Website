@@ -5,10 +5,54 @@ import Image from 'next/image';
 import Link from 'next/link';
 import StudioSidebar from '@/components/studio/StudioSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
-import { teamMembers, awards, publications } from '@/data/studio';
+import { getTeamMembers } from '@/lib/api';
+import { TeamMember } from '@/types';
 
 export default function Studio() {
   const [activeSection, setActiveSection] = useState('team');
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchTeam = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await getTeamMembers();
+      setTeamMembers(data);
+    } catch (err) {
+      console.error('Failed to fetch team members:', err);
+      setError('Failed to load team members. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeam();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-white pt-24 pb-20 flex justify-center items-center">
+        <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-white pt-24 pb-20 flex flex-col justify-center items-center">
+        <div className="text-red-600 uppercase tracking-widest text-xs mb-4">{error}</div>
+        <button 
+          onClick={fetchTeam}
+          className="px-6 py-2 border border-neutral-dark-grey text-xs font-bold uppercase tracking-widest hover:bg-neutral-dark-grey hover:text-white transition-colors"
+        >
+          Retry
+        </button>
+      </main>
+    );
+  }
 
   const scrollToSection = (id: string) => {
     // For now only team section exists, but future-proof

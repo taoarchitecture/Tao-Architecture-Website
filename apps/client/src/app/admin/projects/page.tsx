@@ -51,78 +51,78 @@ export default function ProjectsList() {
 
   return (
     <AdminLayout>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Projects</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold text-neutral-dark-grey font-agenda uppercase tracking-wider">Projects</h1>
         <Link 
           href="/admin/projects/new"
-          className="bg-primary-red hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center transition-colors"
+          className="bg-neutral-black hover:bg-primary-red/90 text-white px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] flex items-center transition-all duration-300"
         >
           <FiPlus className="mr-2" /> Add Project
         </Link>
       </div>
 
-      <div className="mb-6 relative">
-        <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      <div className="mb-8 relative">
+        <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-neutral-light-grey" />
         <input
           type="text"
-          placeholder="Search projects..."
-          className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-red dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+          placeholder="SEARCH PROJECTS..."
+          className="w-full pl-12 pr-4 py-4 border border-neutral-border placeholder-neutral-light-grey text-neutral-dark-grey focus:outline-none focus:border-primary-red font-agenda text-sm tracking-wide"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
       {isLoading ? (
-        <div className="text-center py-10">Loading...</div>
+        <div className="text-center py-20 text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
       ) : (
-        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-700">
+        <div className="bg-white border border-neutral-border shadow-sm">
+          <table className="min-w-full divide-y divide-neutral-border">
+            <thead className="bg-neutral-bg-light">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Project</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Project</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Category</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Status</th>
+                <th className="px-6 py-4 text-right text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="bg-white divide-y divide-neutral-border">
               {filteredProjects.map((project) => (
-                <tr key={project.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <tr key={project.id} className="hover:bg-neutral-bg-light transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
+                      <div className="flex-shrink-0 h-12 w-16 relative">
                         {project.coverImage ? (
-                          <img className="h-10 w-10 rounded object-cover" src={getImageUrl(project.coverImage)} alt="" />
+                          <img className="h-full w-full object-cover" src={getImageUrl(project.coverImage)} alt="" />
                         ) : (
-                          <div className="h-10 w-10 rounded bg-gray-200 dark:bg-gray-600"></div>
+                          <div className="h-full w-full bg-neutral-border"></div>
                         )}
                       </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">{project.title}</div>
-                        <div className="text-sm text-gray-500">{project.location}</div>
+                      <div className="ml-6">
+                        <div className="text-sm font-bold text-neutral-dark-grey uppercase tracking-wide">{project.title}</div>
+                        <div className="text-xs text-neutral-light-grey mt-1">{project.location}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    <span className="px-3 py-1 inline-flex text-xs leading-5 font-medium border border-neutral-border text-neutral-dark-grey uppercase tracking-wider">
                       {project.category}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-bold uppercase tracking-wider ${
                       project.status === 'Completed' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                        ? 'text-success' 
+                        : 'text-primary-gold'
                     }`}>
                       {project.status || 'Ongoing'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link href={`/admin/projects/edit/${project.id}`} className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-4">
-                      <FiEdit2 className="inline" />
+                    <Link href={`/admin/projects/edit/${project.id}`} className="text-neutral-dark-grey hover:text-primary-red mr-6 transition-colors inline-block">
+                      <FiEdit2 className="w-4 h-4" />
                     </Link>
-                    <button onClick={() => handleDelete(project.id)} className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
-                      <FiTrash2 className="inline" />
+                    <button onClick={() => handleDelete(project.id)} className="text-neutral-light-grey hover:text-primary-red transition-colors" aria-label="Delete project">
+                      <FiTrash2 className="w-4 h-4" />
                     </button>
                   </td>
                 </tr>

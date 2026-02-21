@@ -75,13 +75,11 @@ export default function Work() {
           <div className="w-full md:w-3/4 pl-0 md:pl-8">
             {workCategories.map((category) => {
               const categoryProjects = projects.filter(p => p.category === category.id);
-              
-              // If no projects in this category, render placeholder or skip (Legacy showed empty sections sometimes)
               // We'll render a min-height section to allow scrolling
               
               return (
                 <section key={category.id} id={category.id} className="mb-20 min-h-[300px] border-t-2 border-neutral-dark-grey pt-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {categoryProjects.map((project) => (
                       <div key={project.id} className="group mb-8">
                         <div className="relative w-full overflow-hidden border-t-2 border-black mb-4">

@@ -47,13 +47,17 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 py-4'}`}>
+    <nav 
+      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 py-4'}`}
+      role="navigation"
+      aria-label="Main Navigation"
+    >
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <div className="relative h-[45px] w-[180px]">
+        <Link href="/" className="flex items-center focus-ring rounded-sm">
+          <div className="relative h-[35px] w-[140px] md:h-[45px] md:w-[180px] transition-all duration-300">
              <Image 
                 src="/img/tao-logo.png" 
-                alt="Tao Architecture" 
+                alt="Tao Architecture - Home" 
                 fill
                 className="object-contain object-left"
                 priority
@@ -64,12 +68,18 @@ const Navbar = () => {
         <button
           onClick={() => setIsOpen(!isOpen)}
           type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-neutral-dark-grey rounded-lg md:hidden hover:bg-gray-100 focus:outline-none"
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-neutral-dark-grey rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus-ring"
         >
           <span className="sr-only">Open main menu</span>
-          <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
+          {isOpen ? (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          ) : (
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+          )}
         </button>
 
         <div className={`${isOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`}>
@@ -80,20 +90,26 @@ const Navbar = () => {
                   <>
                     <button 
                       onClick={() => toggleDropdown(link.name)}
-                      className={`block w-full py-3 px-3 rounded md:bg-transparent md:p-0 hover:text-primary-red transition-colors duration-200 flex items-center justify-center md:justify-start gap-1`}
+                      aria-haspopup="true"
+                      aria-expanded={openDropdown === link.name}
+                      className={`block w-full py-3 px-3 rounded md:bg-transparent md:p-0 hover:text-primary-red transition-colors duration-200 flex items-center justify-center md:justify-start gap-1 focus-ring`}
                     >
                       {link.name}
                       <span className="md:hidden text-[10px]">{openDropdown === link.name ? '▲' : '▼'}</span>
                     </button>
                     
                     {/* Desktop Dropdown */}
-                    <div className="hidden md:group-hover:block absolute left-0 mt-0 w-48 bg-white shadow-lg rounded-sm overflow-hidden pt-2 z-50">
+                    <div 
+                      className="hidden md:group-hover:block absolute left-0 mt-0 w-48 bg-white shadow-lg rounded-sm overflow-hidden pt-2 z-50"
+                      role="menu"
+                    >
                        <div className="bg-white border-t-2 border-primary-gold">
                         {link.dropdown.map((sublink) => (
                           <Link 
                             key={sublink.name}
                             href={sublink.href}
-                            className="block px-4 py-3 text-xs text-neutral-medium-grey hover:bg-gray-50 hover:text-primary-gold border-b border-gray-100 last:border-0 text-left"
+                            role="menuitem"
+                            className="block px-4 py-3 text-xs text-neutral-medium-grey hover:bg-gray-50 hover:text-primary-gold border-b border-gray-100 last:border-0 text-left focus:bg-gray-50 focus:text-primary-gold outline-none"
                           >
                             {sublink.name}
                           </Link>

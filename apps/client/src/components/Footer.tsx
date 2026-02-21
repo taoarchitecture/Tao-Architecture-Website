@@ -1,7 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import Image from 'next/image';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -27,71 +28,103 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-neutral-off-black text-white pt-16 pb-8">
+    <footer className="bg-neutral-off-black text-white pt-16 pb-8 relative">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between mb-12">
-          
-          {/* Left Column: Contact Info */}
-          <div className="md:w-1/2 mb-8 md:mb-0 text-center md:text-left">
-            <div className="mb-6">
-              <h5 className="font-agenda font-bold text-white mb-4 uppercase tracking-wider text-sm">TAO ARCHITECTURE PVT LTD</h5>
-              <address className="not-italic text-neutral-light-grey leading-relaxed mb-4 font-agenda text-[14px]">
-                <p>A/2 , Friends Enclave Society, West Block,</p>
-                <p>Opp Sai Hira Complex, Mundhwa,</p>
-                <p>Pune 411036 India</p>
-              </address>
-              <p className="text-[14px] mb-1 font-agenda">
-                <span className="text-neutral-light-grey">Call</span> <span className="ml-1 text-white">+91-744-771-9343 / 44</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {/* Brand Column */}
+          <div className="space-y-6">
+            <Link href="/" className="block w-[180px] hover:opacity-90 transition-opacity">
+              <Image 
+                src="/img/tao-logo-white.png" 
+                alt="TAO Architecture" 
+                width={180} 
+                height={45}
+                className="w-full h-auto"
+              />
+            </Link>
+            <p className="text-neutral-light-grey text-sm leading-relaxed max-w-xs">
+              Touching intangible beauty of nature, through tangible forms of Architecture.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Quick Links</h4>
+            <ul className="space-y-4">
+              {[
+                { label: 'Work', href: '/work' },
+                { label: 'Studio', href: '/studio' },
+                { label: 'Publications', href: '/media/publications' },
+                { label: 'Contact', href: '/contact' }
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link 
+                    href={link.href}
+                    className="text-neutral-light-grey hover:text-primary-red transition-colors text-sm font-medium flex items-center group"
+                  >
+                    <span className="w-0 overflow-hidden group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-2 text-primary-red">→</span>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Contact Us</h4>
+            <div className="space-y-4 text-sm text-neutral-light-grey">
+              <p className="leading-relaxed">
+                <strong className="block text-white mb-1">Pune Office:</strong>
+                A/2, Friends Enclave,<br/>
+                West Block, Opp Sai Hira Complex,<br/>
+                Mundhwa, Pune - 411036
               </p>
-              <p className="text-[14px] mb-1 font-agenda">
-                <span className="text-neutral-light-grey">Email</span> <a href="mailto:admin@taoarchitecture.com" className="ml-1 text-white hover:text-primary-gold transition-colors border-b border-transparent hover:border-primary-gold">admin@taoarchitecture.com</a>
-              </p>
-              <p className="text-[14px] font-agenda">
-                <span className="text-neutral-light-grey">Website</span> <a href="http://www.taoarchitecture.com/" className="ml-1 text-white hover:text-primary-gold transition-colors border-b border-transparent hover:border-primary-gold">www.taoarchitecture.com</a>
-              </p>
+              <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919822044555'}`} className="block hover:text-primary-red transition-colors">
+                {process.env.NEXT_PUBLIC_CONTACT_PHONE || '+91 98220 44555'}
+              </a>
+              <a href="mailto:info@taoarchitecture.com" className="block hover:text-primary-red transition-colors">
+                info@taoarchitecture.com
+              </a>
             </div>
           </div>
 
-          {/* Right Column: Links & Socials */}
-          <div className="md:w-1/2 flex flex-col items-center md:items-end">
-             {/* Quick Links */}
-             <ul className="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6 mb-8 font-agenda text-[13px] uppercase tracking-widest font-bold">
-               <li><Link href="/" className="hover:text-primary-red transition-colors">Home</Link></li>
-               <li><Link href="/work" className="hover:text-primary-red transition-colors">Work</Link></li>
-               <li><Link href="/services" className="hover:text-primary-red transition-colors">Services</Link></li>
-               <li><Link href="/studio" className="hover:text-primary-red transition-colors">Studio</Link></li>
-               <li><Link href="/contact" className="hover:text-primary-red transition-colors">Contact</Link></li>
-             </ul>
-
-             {/* Social Icons */}
-             <div className="flex gap-2">
-               <a href="https://www.facebook.com/taoarchitect/" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] bg-[#333] rounded-md flex items-center justify-center text-white hover:bg-primary-red hover:text-white transition-all duration-300">
-                 <FaFacebookF size={14} />
-               </a>
-               <a href="#" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] bg-[#333] rounded-md flex items-center justify-center text-white hover:bg-primary-red hover:text-white transition-all duration-300">
-                 <FaTwitter size={14} />
-               </a>
-               <a href="https://www.linkedin.com/company/tao-architecture-design/" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] bg-[#333] rounded-md flex items-center justify-center text-white hover:bg-primary-red hover:text-white transition-all duration-300">
-                 <FaLinkedinIn size={14} />
-               </a>
-               <a href="https://www.instagram.com/tao_architecture/?hl=en" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] bg-[#333] rounded-md flex items-center justify-center text-white hover:bg-primary-red hover:text-white transition-all duration-300">
-                 <FaInstagram size={14} />
-               </a>
-             </div>
+          {/* Social */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Follow Us</h4>
+            <div className="flex space-x-4">
+              {[
+                { icon: FaFacebookF, href: 'https://www.facebook.com/taoarchitecture', label: 'Facebook' },
+                { icon: FaInstagram, href: 'https://www.instagram.com/taoarchitecture', label: 'Instagram' },
+                { icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/tao-architecture-pvt-ltd', label: 'LinkedIn' },
+                { icon: FaYoutube, href: 'https://www.youtube.com/@TAOSTUDIO_0', label: 'YouTube' }
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-neutral-medium-grey flex items-center justify-center text-white hover:bg-primary-red hover:border-primary-red transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <social.icon size={16} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[#333] pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-neutral-light-grey uppercase tracking-widest font-agenda">
+        <div className="pt-8 border-t border-neutral-medium-grey flex flex-col md:flex-row justify-between items-center text-xs text-neutral-light-grey">
           <p 
-            onClick={handleAdminTrigger}
-            className="cursor-default select-none hover:text-neutral-light-grey transition-colors"
-            title="© TAO Architecture"
+            onClick={handleAdminTrigger} 
+            className="cursor-pointer hover:text-white transition-colors mb-4 md:mb-0 select-none"
           >
-            © TAO Architecture Private Limited, {new Date().getFullYear()}
+            © {new Date().getFullYear()} Tao Architecture Pvt. Ltd. All rights reserved.
           </p>
-          <div className="mt-2 md:mt-0">
-             <span>Website by VertoDesignss</span>
+          <div className="flex space-x-6">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
           </div>
         </div>
       </div>

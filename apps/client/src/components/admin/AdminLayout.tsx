@@ -10,14 +10,14 @@ interface AdminLayoutProps {
 const SidebarItem = ({ icon: Icon, label, href, active }: { icon: any, label: string, href: string, active: boolean }) => (
   <Link 
     href={href}
-    className={`flex items-center px-6 py-3 transition-colors duration-200 ${
+    className={`flex items-center px-6 py-4 transition-all duration-300 font-agenda uppercase tracking-widest text-xs ${
       active 
-        ? 'bg-primary-red text-white border-r-4 border-primary-gold' 
-        : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+        ? 'bg-neutral-off-black text-white border-r-2 border-primary-red' 
+        : 'text-neutral-light-grey hover:bg-neutral-off-black hover:text-white'
     }`}
   >
-    <Icon className="w-5 h-5 mr-3" />
-    <span className="font-medium">{label}</span>
+    <Icon className="w-4 h-4 mr-3" />
+    <span className="font-bold">{label}</span>
   </Link>
 );
 
@@ -31,16 +31,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex min-h-screen bg-neutral-bg-light">
       {/* Sidebar */}
-      <aside className="w-64 bg-black text-white hidden md:flex flex-col fixed h-full z-10">
-        <div className="p-6 border-b border-gray-800 flex items-center justify-center">
-          <h1 className="text-2xl font-bold tracking-widest text-white">
+      <aside className="w-64 bg-neutral-black text-white hidden md:flex flex-col fixed h-full z-10 border-r border-neutral-off-black">
+        <div className="h-20 border-b border-neutral-off-black flex items-center justify-center bg-neutral-black">
+          <h1 className="text-2xl font-bold tracking-[0.2em] text-white font-agenda">
             TAO<span className="text-primary-red">ARC</span>
           </h1>
         </div>
         
-        <nav className="flex-1 py-6 space-y-1">
+        <nav className="flex-1 py-8 space-y-1">
           <SidebarItem 
             icon={FiHome} 
             label="Dashboard" 
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           />
           <SidebarItem 
             icon={FiFileText} 
-            label="Career Applications" 
+            label="Applications" 
             href="/admin/career" 
             active={pathname.startsWith('/admin/career')} 
           />
@@ -67,10 +67,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           />
         </nav>
 
-        <div className="p-4 border-t border-gray-800">
+        <div className="p-4 border-t border-neutral-off-black bg-neutral-black">
           <button 
             onClick={handleLogout}
-            className="flex items-center w-full px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors"
+            className="flex items-center justify-center w-full px-4 py-3 text-xs font-bold uppercase tracking-widest text-neutral-light-grey hover:text-primary-red transition-colors border border-transparent hover:border-neutral-off-black"
           >
             <FiLogOut className="w-4 h-4 mr-2" />
             Sign Out
@@ -79,7 +79,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-8 overflow-y-auto">
+      <main className="flex-1 md:ml-64 p-10 overflow-y-auto min-h-screen bg-[#f7f7f7]">
         {children}
       </main>
     </div>

@@ -129,24 +129,24 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
   }, [title, isEditing, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 max-w-5xl mx-auto pb-10">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-12 max-w-5xl pb-20">
       
       {/* Section 1: Essentials */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-        <h3 className="text-lg font-semibold mb-4 border-b pb-2 dark:text-white">Essentials</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="bg-white p-8 shadow-sm border border-neutral-border">
+        <h3 className="text-sm font-bold uppercase tracking-widest mb-8 border-b border-neutral-border pb-4 text-neutral-dark-grey">Essentials</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
-            <input {...register('title', { required: true })} className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white" />
-            {errors.title && <span className="text-red-500 text-sm">Required</span>}
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Title</label>
+            <input {...register('title', { required: true })} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
+            {errors.title && <span className="text-primary-red text-xs mt-1 block">Required</span>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Slug</label>
-            <input {...register('slug', { required: true })} className="w-full border rounded p-2 bg-gray-50 dark:bg-gray-600 dark:text-gray-200" />
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Slug</label>
+            <input {...register('slug', { required: true })} className="w-full border border-neutral-border p-3 bg-neutral-bg text-neutral-medium-grey focus:outline-none" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
-            <select {...register('category')} className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white">
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Category</label>
+            <select {...register('category')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors appearance-none bg-white">
               <option value="luxuryvillas">Luxury Villas</option>
               <option value="corporate">Corporate</option>
               <option value="cozyhomes">Cozy Homes</option>
@@ -159,118 +159,146 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
-            <select {...register('status')} className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white">
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Status</label>
+            <select {...register('status')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors appearance-none bg-white">
               <option value="Ongoing">Ongoing</option>
               <option value="Completed">Completed</option>
             </select>
+          </div>
+          <div>
+             <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Order</label>
+             <input type="number" {...register('order')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
+          </div>
+          <div className="flex items-center mt-8">
+             <input type="checkbox" {...register('isFeatured')} id="isFeatured" className="w-5 h-5 text-primary-red border-neutral-border focus:ring-primary-red rounded-none" />
+             <label htmlFor="isFeatured" className="ml-3 text-xs font-bold text-neutral-dark-grey uppercase tracking-wider cursor-pointer select-none">Feature on Home Page</label>
           </div>
         </div>
       </div>
 
       {/* Section 2: Details */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-        <h3 className="text-lg font-semibold mb-4 border-b pb-2 dark:text-white">Project Details</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="bg-white p-8 shadow-sm border border-neutral-border">
+        <h3 className="text-sm font-bold uppercase tracking-widest mb-8 border-b border-neutral-border pb-4 text-neutral-dark-grey">Project Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Location</label>
-            <input {...register('location')} className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white" />
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Location</label>
+            <input {...register('location')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Plot Area</label>
-            <input {...register('plotArea')} className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white" />
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Plot Area</label>
+            <input {...register('plotArea')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Built-up Area</label>
-            <input {...register('builtUpArea')} className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white" />
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Built-up Area</label>
+            <input {...register('builtUpArea')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
         </div>
       </div>
 
       {/* Section 3: Content Builder */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-        <div className="flex justify-between items-center mb-4 border-b pb-2">
-            <h3 className="text-lg font-semibold dark:text-white">Content Builder</h3>
-            <button type="button" onClick={() => appendDesc({ value: '' })} className="text-sm text-primary-red hover:text-red-700 flex items-center">
+      <div className="bg-white p-8 shadow-sm border border-neutral-border">
+        <div className="flex justify-between items-center mb-8 border-b border-neutral-border pb-4">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-dark-grey">Content Builder</h3>
+            <button type="button" onClick={() => appendDesc({ value: '' })} className="text-xs font-bold uppercase tracking-widest text-primary-red hover:text-neutral-black transition-colors flex items-center">
                 <FiPlus className="mr-1" /> Add Paragraph
             </button>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-6">
             {descFields.map((field, index) => (
-                <div key={field.id} className="flex items-start gap-2">
+                <div key={field.id} className="relative">
                     <textarea 
                         {...register(`description.${index}.value` as const)} 
-                        rows={3}
-                        className="w-full border rounded p-2 dark:bg-gray-700 dark:text-white"
+                        rows={4}
+                        className="w-full border border-neutral-border p-4 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors resize-y"
                         placeholder="Enter paragraph text..."
                     />
-                    <button type="button" onClick={() => removeDesc(index)} className="text-red-500 mt-2 hover:text-red-700">
-                        <FiTrash />
+                    <button type="button" onClick={() => removeDesc(index)} className="absolute top-2 right-2 text-neutral-light-grey hover:text-primary-red transition-colors p-2">
+                        <FiTrash size={14} />
                     </button>
                 </div>
             ))}
-            {descFields.length === 0 && <p className="text-gray-400 italic text-sm">No content added yet.</p>}
+            {descFields.length === 0 && <p className="text-neutral-light-grey italic text-sm border border-dashed border-neutral-border p-8 text-center">No content added yet. Click "Add Paragraph" to start.</p>}
         </div>
       </div>
 
       {/* Section 4: Media */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-        <h3 className="text-lg font-semibold mb-4 border-b pb-2 dark:text-white">Media Manager</h3>
+      <div className="bg-white p-8 shadow-sm border border-neutral-border">
+        <h3 className="text-sm font-bold uppercase tracking-widest mb-8 border-b border-neutral-border pb-4 text-neutral-dark-grey">Media Manager</h3>
         
-        <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cover Image</label>
-            <div className="flex items-center space-x-4">
-                <div className="relative w-32 h-20 bg-gray-100 rounded overflow-hidden border">
+        <div className="mb-10">
+            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-4">Cover Image</label>
+            <div className="flex items-start space-x-6">
+                <div className="relative w-48 h-32 bg-neutral-bg border border-neutral-border overflow-hidden">
                     {coverPreview ? (
                         <Image src={coverPreview} alt="Cover" fill className="object-cover" />
                     ) : (
-                        <div className="flex items-center justify-center h-full text-gray-400 text-xs">No Image</div>
+                        <div className="flex items-center justify-center h-full text-neutral-light-grey text-xs uppercase tracking-wider">No Image</div>
                     )}
                 </div>
-                <input type="file" id="coverImage" accept="image/*" onChange={handleCoverChange} className="text-sm" />
+                <div>
+                  <input type="file" id="coverImage" accept="image/*" onChange={handleCoverChange} className="hidden" />
+                  <label htmlFor="coverImage" className="cursor-pointer inline-flex items-center px-6 py-3 border border-neutral-black text-neutral-black text-xs font-bold uppercase tracking-widest hover:bg-neutral-black hover:text-white transition-all duration-300">
+                    <FiUpload className="mr-2" /> Upload Cover
+                  </label>
+                  <p className="text-xs text-neutral-light-grey mt-2">Recommended size: 1920x1080px</p>
+                </div>
             </div>
         </div>
 
         <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Gallery Images</label>
-            <input type="file" id="gallery" accept="image/*" multiple className="mb-4 text-sm" />
+            <div className="flex justify-between items-center mb-4">
+              <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider">Gallery Images</label>
+              <div>
+                <input type="file" id="gallery" accept="image/*" multiple className="hidden" />
+                <label htmlFor="gallery" className="cursor-pointer inline-flex items-center px-4 py-2 text-xs font-bold uppercase tracking-widest text-primary-red hover:text-neutral-black transition-colors">
+                  <FiPlus className="mr-1" /> Add Images
+                </label>
+              </div>
+            </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {galleryPreviews.map((img, idx) => (
-                    <div key={idx} className="relative group aspect-square bg-gray-100 rounded overflow-hidden">
+                    <div key={idx} className="relative group aspect-square bg-neutral-bg border border-neutral-border overflow-hidden">
                         <Image src={getImageUrl(img.url)} alt="" fill className="object-cover" />
-                        <button 
-                            type="button" 
-                            onClick={() => {
-                                const newGallery = [...galleryPreviews];
-                                newGallery.splice(idx, 1);
-                                setGalleryPreviews(newGallery);
-                            }}
-                            className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                            <FiX size={12} />
-                        </button>
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <button 
+                              type="button" 
+                              onClick={() => {
+                                  const newGallery = [...galleryPreviews];
+                                  newGallery.splice(idx, 1);
+                                  setGalleryPreviews(newGallery);
+                              }}
+                              className="text-white hover:text-primary-red transition-colors"
+                          >
+                              <FiX size={24} />
+                          </button>
+                        </div>
                     </div>
                 ))}
+                {galleryPreviews.length === 0 && (
+                  <div className="col-span-full border border-dashed border-neutral-border p-12 text-center text-neutral-light-grey text-sm italic">
+                    No gallery images added.
+                  </div>
+                )}
             </div>
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex justify-end space-x-4">
+      <div className="flex justify-end space-x-4 pt-4 border-t border-neutral-border">
         <button 
             type="button" 
             onClick={() => router.back()}
-            className="px-6 py-2 border rounded text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
+            className="px-8 py-4 border border-transparent text-neutral-light-grey text-xs font-bold uppercase tracking-widest hover:text-neutral-black transition-colors"
         >
             Cancel
         </button>
         <button 
             type="submit" 
             disabled={isSubmitting}
-            className="px-6 py-2 bg-primary-red text-white rounded hover:bg-red-700 disabled:opacity-50"
+            className="px-10 py-4 bg-neutral-black text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary-red transition-all duration-300 disabled:opacity-50"
         >
-            {isSubmitting ? 'Saving...' : 'Save Project'}
+            {isSubmitting ? 'SAVING...' : 'SAVE PROJECT'}
         </button>
       </div>
     </form>

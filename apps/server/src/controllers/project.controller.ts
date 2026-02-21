@@ -72,21 +72,30 @@ export const getProjectById = async (req: Request, res: Response) => {
 
 export const createProject = async (req: Request, res: Response) => {
   try {
-    const { title, slug, category, location, status, plotArea, builtUpArea, description, seoTitle, seoDesc, isPublished } = req.body;
+    const { title, slug, category, location, status, plotArea, builtUpArea, description, seoTitle, seoDesc, isPublished, isFeatured, order, relatedProjects } = req.body;
     
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
     const coverImageFile = files['coverImage']?.[0];
     const galleryFiles = files['gallery'] || [];
 
-    const coverImageUrl = coverImageFile ? `/uploads/${coverImageFile.filename}` : null;
+    const isUrl = (path: string) => {
+      try {
+        new URL(path);
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    const coverImageUrl = coverImageFile 
+      ? (isUrl(coverImageFile.path) ? coverImageFile.path : `/uploads/${coverImageFile.filename}`)
+      : null;
     
     // Process gallery images
-    // In a real app, we might receive existing gallery JSON and append new files
-    // Here we assume basic creation
-    const galleryData = galleryFiles.map(file => ({
-      url: `/uploads/${file.filename}`,
+    const galleryData = galleryFiles.map((file, index) => ({
+      url: isUrl(file.path) ? file.path : `/uploads/${file.filename}`,
       caption: '',
-      order: 0 // Default order
+      order: index
     }));
 
     const project = await prisma.project.create({
@@ -98,10 +107,13 @@ export const createProject = async (req: Request, res: Response) => {
         status,
         plotArea,
         builtUpArea,
-        description: description ? description : '[]', // Expecting JSON string from frontend
+        description: description ? description : '[]',
         seoTitle,
         seoDesc,
         isPublished: isPublished === 'true',
+        isFeatured: isFeatured === 'true',
+        order: Number(order || 0),
+        relatedProjects: relatedProjects || '[]',
         coverImage: coverImageUrl,
         gallery: JSON.stringify(galleryData),
       },

@@ -9,6 +9,9 @@ import contactRoutes from './routes/contact.routes';
 import projectRoutes from './routes/project.routes';
 import videoRoutes from './routes/video.routes';
 import youtubeWebsubRoutes from './routes/youtube.websub.routes';
+import homeRoutes from './routes/home.routes';
+import studioRoutes from './routes/studio.routes';
+import mediaRoutes from './routes/media.routes';
 import path from 'path';
 
 dotenv.config();
@@ -31,6 +34,9 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/youtube/websub', youtubeWebsubRoutes);
+app.use('/api/home', homeRoutes);
+app.use('/api/studio', studioRoutes);
+app.use('/api/media', mediaRoutes);
 
 // Health check
 app.get('/', (req, res) => {
