@@ -4,9 +4,46 @@ import { useState, useEffect } from 'react';
 import ContactSidebar from '@/components/contact/ContactSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { GlobalSettings } from '@/types';
+import axios from 'axios';
+
+// Hardcoded defaults – used when API fails or settings not configured yet
+const DEFAULTS = {
+  contactEmail: 'admin@taoarchitecture.com',
+  phoneNumbers: '["+91-744-771-9343 / 44"]',
+  address: 'A/2 , Friends Enclave Society, West Block,\nOpp Sai Hira Complex, Mundhwa,\nPune 411036 India',
+  googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.7520911131955!2d73.89636821535252!3d18.540101787397706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c10126443907%3A0xc8701cf41af4250e!2sTAO+ARCHITECTURE+PVT.+LTD.!5e0!3m2!1sen!2sin!4v1528098796192',
+  facebookUrl: 'https://www.facebook.com/taoarchitect/',
+  instagramUrl: 'https://www.instagram.com/tao_architecture/?hl=en',
+  linkedinUrl: 'https://www.linkedin.com/company/tao-architecture-design/',
+};
 
 export default function Contact() {
   const [activeSection, setActiveSection] = useState<string>('contact-details');
+  const [settings, setSettings] = useState<GlobalSettings | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // Form state
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const res = await fetch(`${apiUrl}/settings`);
+        if (res.ok) setSettings(await res.json());
+      } catch { /* use defaults */ }
+    };
+    fetchSettings();
+  }, []);
+
+  const val = (key: keyof typeof DEFAULTS) => (settings as any)?.[key] || DEFAULTS[key];
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -41,6 +78,35 @@ export default function Contact() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+        firstName, lastName, companyName, email, subject, message
+      });
+      setSubmitted(true);
+      setFirstName(''); setLastName(''); setCompanyName('');
+      setEmail(''); setSubject(''); setMessage('');
+    } catch (error) {
+      console.error(error);
+      alert('Error sending message. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Parse phone numbers
+  let phones: string[] = [];
+  try {
+    phones = JSON.parse(val('phoneNumbers'));
+  } catch {
+    phones = [val('phoneNumbers')];
+  }
+
+  // Parse address lines
+  const addressLines = (val('address') || '').split('\n');
+
   return (
     <main className="min-h-screen bg-white pt-24 pb-20">
       <MobilePageNav 
@@ -65,7 +131,7 @@ export default function Contact() {
             <section id="contact-details" className="mb-20 pt-8">
               <div className="border-t-[10px] border-neutral-dark-grey mb-8">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.7520911131955!2d73.89636821535252!3d18.540101787397706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c10126443907%3A0xc8701cf41af4250e!2sTAO+ARCHITECTURE+PVT.+LTD.!5e0!3m2!1sen!2sin!4v1528098796192" 
+                  src={val('googleMapsUrl')} 
                   width="100%" 
                   height="310" 
                   style={{ border: 0 }} 
@@ -79,24 +145,24 @@ export default function Contact() {
               <div className="pl-4">
                 <p className="font-agenda text-lg mb-6">
                   <strong className="font-bold">TAO ARCHITECTURE PVT LTD</strong>,<br/>
-                  A/2 , Friends Enclave Society, West Block,<br/>
-                  Opp Sai Hira Complex, Mundhwa,<br/>
-                  Pune 411036 India
+                  {addressLines.map((line: string, i: number) => (
+                    <span key={i}>{line}<br/></span>
+                  ))}
                 </p>
 
                 <p className="font-agenda text-lg mb-8">
-                  <strong className="font-bold">Call</strong> +91-744-771-9343 / 44<br/>
-                  <strong className="font-bold">Email</strong> admin@taoarchitecture.com
+                  <strong className="font-bold">Call</strong> {phones.join(' / ')}<br/>
+                  <strong className="font-bold">Email</strong> {val('contactEmail')}
                 </p>
 
                 <div className="flex gap-3">
-                  <a href="https://www.linkedin.com/company/tao-architecture-design/" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                  <a href={val('linkedinUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
                     <FaLinkedinIn size={14} />
                   </a>
-                  <a href="https://www.facebook.com/taoarchitect/" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                  <a href={val('facebookUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
                     <FaFacebookF size={14} />
                   </a>
-                  <a href="https://www.instagram.com/tao_architecture/?hl=en" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                  <a href={val('instagramUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
                     <FaInstagram size={14} />
                   </a>
                 </div>
@@ -107,24 +173,37 @@ export default function Contact() {
             <section id="email-form" className="mb-20 border-t-[10px] border-neutral-dark-grey pt-10 px-8 bg-white">
               <h2 className="text-fluid-h1 font-light mb-8 font-agenda">Email us</h2>
               
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input type="text" placeholder="First Name*" className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
-                  <input type="text" placeholder="Last Name*" className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
-                </div>
-                
-                <input type="text" placeholder="Company Name" className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" />
-                <input type="email" placeholder="Email ID*" className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
-                <input type="text" placeholder="Subject*" className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
-                
-                <textarea rows={5} placeholder="Message" className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda"></textarea>
-                
-                <div className="flex justify-end">
-                  <button type="submit" className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white">
-                    Send
+              {submitted ? (
+                <div className="py-12 text-center">
+                  <p className="text-lg font-agenda text-neutral-dark-grey mb-4">Thank you for your message!</p>
+                  <p className="text-sm text-neutral-light-grey mb-6">We&apos;ll get back to you as soon as possible.</p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white"
+                  >
+                    Send Another Message
                   </button>
                 </div>
-              </form>
+              ) : (
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  </div>
+                  
+                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" />
+                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  
+                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda"></textarea>
+                  
+                  <div className="flex justify-end">
+                    <button type="submit" disabled={submitting} className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white disabled:opacity-50">
+                      {submitting ? 'Sending...' : 'Send'}
+                    </button>
+                  </div>
+                </form>
+              )}
             </section>
 
           </div>

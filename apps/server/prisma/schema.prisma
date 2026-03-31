@@ -178,3 +178,40 @@ model VideoCategoryOnVideo {
 
   @@id([videoId, categoryId])
 }
+
+model GlobalSettings {
+  id              Int      @id @default(autoincrement())
+  siteName        String?  @default("TAO Architecture Pvt. Ltd.")
+  contactEmail    String?  @default("info@taoarchitecture.com")
+  phoneNumbers    String?  // JSON Array e.g. ["+91-744-771-9343", "+91-744-771-9344"]
+  address         String?
+  googleMapsUrl   String?
+  facebookUrl     String?
+  instagramUrl    String?
+  linkedinUrl     String?
+  youtubeUrl      String?
+  footerTagline   String?  @default("Touching intangible beauty of nature, through tangible forms of Architecture.")
+  updatedAt       DateTime @updatedAt
+}
+
+model PageContent {
+  id          Int      @id @default(autoincrement())
+  pageSlug    String   @unique // e.g. 'services-intro', 'studio-intro'
+  title       String?
+  content     String?  @db.Text // Rich text HTML or plain text
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  description String?  @db.Text // Note text for the service
+  items       String?  @db.Text // JSON array of bullet-point items
+  image       String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

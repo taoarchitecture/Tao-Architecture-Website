@@ -3,11 +3,11 @@ import prisma from '../prisma';
 import nodemailer from 'nodemailer';
 
 export const submitContact = async (req: Request, res: Response) => {
-  const { firstName, lastName, email, subject, message } = req.body;
+  const { firstName, lastName, companyName, email, subject, message } = req.body;
 
   try {
     await prisma.contactSubmission.create({
-      data: { firstName, lastName, email, subject, message },
+      data: { firstName, lastName, companyName, email, subject, message },
     });
 
     // Send Email
@@ -32,5 +32,28 @@ export const submitContact = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error sending message' });
+  }
+};
+
+export const getContactSubmissions = async (req: Request, res: Response) => {
+  try {
+    const submissions = await prisma.contactSubmission.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+    res.json(submissions);
+  } catch (error) {
+    console.error('Error fetching contact submissions:', error);
+    res.status(500).json({ message: 'Error fetching contact submissions' });
+  }
+};
+
+export const deleteContactSubmission = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    await prisma.contactSubmission.delete({ where: { id: Number(id) } });
+    res.json({ message: 'Deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting contact submission:', error);
+    res.status(500).json({ message: 'Error deleting contact submission' });
   }
 };

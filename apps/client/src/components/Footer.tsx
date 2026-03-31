@@ -5,10 +5,41 @@ import Image from 'next/image';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { GlobalSettings } from '@/types';
+
+// Hardcoded defaults — used when API fails or settings not configured
+const DEFAULTS = {
+  siteName: 'TAO Architecture Pvt. Ltd.',
+  contactEmail: 'info@taoarchitecture.com',
+  footerTagline: 'Touching intangible beauty of nature, through tangible forms of Architecture.',
+  facebookUrl: 'https://www.facebook.com/taoarchitecture',
+  instagramUrl: 'https://www.instagram.com/taoarchitecture',
+  linkedinUrl: 'https://www.linkedin.com/company/tao-architecture-pvt-ltd',
+  youtubeUrl: 'https://www.youtube.com/@TAOSTUDIO_0',
+  phoneNumbers: '["+91 98220 44555"]',
+  address: 'A/2, Friends Enclave,\nWest Block, Opp Sai Hira Complex,\nMundhwa, Pune - 411036',
+};
 
 const Footer = () => {
   const router = useRouter();
   const [clickCount, setClickCount] = useState(0);
+  const [settings, setSettings] = useState<GlobalSettings | null>(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const res = await fetch(`${apiUrl}/settings`);
+        if (res.ok) {
+          const data = await res.json();
+          setSettings(data);
+        }
+      } catch {
+        // Silently fail — use defaults
+      }
+    };
+    fetchSettings();
+  }, []);
 
   // Reset click count after 2 seconds of inactivity
   useEffect(() => {
@@ -27,6 +58,27 @@ const Footer = () => {
     });
   };
 
+  // Helper to get value with fallback
+  const val = (key: keyof typeof DEFAULTS) => {
+    return (settings as any)?.[key] || DEFAULTS[key];
+  };
+
+  const socialLinks = [
+    { icon: FaFacebookF, href: val('facebookUrl'), label: 'Facebook' },
+    { icon: FaInstagram, href: val('instagramUrl'), label: 'Instagram' },
+    { icon: FaLinkedinIn, href: val('linkedinUrl'), label: 'LinkedIn' },
+    { icon: FaYoutube, href: val('youtubeUrl'), label: 'YouTube' },
+  ];
+
+  // Parse phone for display
+  let displayPhone = '+91 98220 44555';
+  try {
+    const phones = JSON.parse(val('phoneNumbers'));
+    if (Array.isArray(phones) && phones.length > 0) {
+      displayPhone = phones[0];
+    }
+  } catch { /* use default */ }
+
   return (
     <footer className="bg-neutral-off-black text-white pt-16 pb-8 relative">
       <div className="container mx-auto px-4">
@@ -43,7 +95,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-neutral-light-grey text-sm leading-relaxed max-w-xs">
-              Touching intangible beauty of nature, through tangible forms of Architecture.
+              {val('footerTagline')}
             </p>
           </div>
 
@@ -76,15 +128,15 @@ const Footer = () => {
             <div className="space-y-4 text-sm text-neutral-light-grey">
               <p className="leading-relaxed">
                 <strong className="block text-white mb-1">Pune Office:</strong>
-                A/2, Friends Enclave,<br/>
-                West Block, Opp Sai Hira Complex,<br/>
-                Mundhwa, Pune - 411036
+                {val('address').split('\n').map((line: string, i: number) => (
+                  <span key={i}>{line}<br/></span>
+                ))}
               </p>
-              <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919822044555'}`} className="block hover:text-primary-red transition-colors">
-                {process.env.NEXT_PUBLIC_CONTACT_PHONE || '+91 98220 44555'}
+              <a href={`tel:${displayPhone.replace(/\s/g, '')}`} className="block hover:text-primary-red transition-colors">
+                {displayPhone}
               </a>
-              <a href="mailto:info@taoarchitecture.com" className="block hover:text-primary-red transition-colors">
-                info@taoarchitecture.com
+              <a href={`mailto:${val('contactEmail')}`} className="block hover:text-primary-red transition-colors">
+                {val('contactEmail')}
               </a>
             </div>
           </div>
@@ -93,12 +145,7 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Follow Us</h4>
             <div className="flex space-x-4">
-              {[
-                { icon: FaFacebookF, href: 'https://www.facebook.com/taoarchitecture', label: 'Facebook' },
-                { icon: FaInstagram, href: 'https://www.instagram.com/taoarchitecture', label: 'Instagram' },
-                { icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/tao-architecture-pvt-ltd', label: 'LinkedIn' },
-                { icon: FaYoutube, href: 'https://www.youtube.com/@TAOSTUDIO_0', label: 'YouTube' }
-              ].map((social) => (
+              {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -120,7 +167,7 @@ const Footer = () => {
             onClick={handleAdminTrigger} 
             className="cursor-pointer hover:text-white transition-colors mb-4 md:mb-0 select-none"
           >
-            © {new Date().getFullYear()} Tao Architecture Pvt. Ltd. All rights reserved.
+            © {new Date().getFullYear()} {val('siteName')}. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 interface ServicesSidebarProps {
   activeSection: string;
+  items?: { id: string; label: string }[];
 }
 
-const serviceItems = [
+const DEFAULT_ITEMS = [
   { id: 'architecture-interiors', label: 'Architecture + Interiors' },
   { id: 'design-coordination', label: 'Design Coordination' },
   { id: 'procurement-assistance', label: 'Procurement Assistance' },
@@ -15,7 +14,9 @@ const serviceItems = [
   { id: 'project-management', label: 'Project Management' },
 ];
 
-export default function ServicesSidebar({ activeSection }: ServicesSidebarProps) {
+export default function ServicesSidebar({ activeSection, items }: ServicesSidebarProps) {
+  const serviceItems = items || DEFAULT_ITEMS;
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {

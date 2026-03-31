@@ -4,18 +4,100 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ServicesSidebar from '@/components/services/ServicesSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
+import { Service } from '@/types';
+import { getImageUrl } from '@/utils/image';
+
+// Hardcoded fallback services — used when no services exist in the DB
+const FALLBACK_SERVICES = [
+  {
+    id: 'architecture-interiors', slug: 'architecture-interiors',
+    title: 'Architecture + Interior Design', image: '/img/services/architecture-interiordesign.jpg',
+    items: ['Design Brief Preparation', 'Conceptualization of Design', 'Engineering Integration & Coordination', 'Design Finalization', 'Tender Documentation', 'Construction Documentation', 'Onsite Design Verification', 'Onsite design assistance', 'Certification of Bills', 'Project Closure Documentation']
+  },
+  {
+    id: 'design-coordination', slug: 'design-coordination',
+    title: 'Design Coordination', image: '/img/services/design-coordination.jpg',
+    items: ['Design Brief Preparation', 'Project Mapping', 'Selection of Suitable Stakeholders', 'Monitoring Design Outputs', 'Engineering and services integration', 'Structural integration', 'Material and Methodology', 'Finalization of Design', 'Verifying Engineering Integration', 'Certification & Tender Documents', 'Onsite Design Assistance', 'Certifying Project Closure Documents']
+  },
+  {
+    id: 'procurement-assistance', slug: 'procurement-assistance',
+    title: 'Procurement Assistance', image: '/img/services/procurement-assistance.jpg',
+    items: ['Optional presentation of product samples as per specifications', 'Quantification of products', 'Visit to showrooms/factories for material selection', 'Onsite mockup approval']
+  },
+  {
+    id: 'execution-coordination', slug: 'execution-coordination',
+    title: 'Execution Coordination', image: '/img/services/execution-coordination.jpg',
+    items: ['Project Mapping', 'Sequential scheduling of project', 'Selection of Suitable Stakeholders', 'Cross checking products and work orders', 'Onsite design assistance', 'Verifying translation of drawings onsite', 'Ensuring quality of work']
+  },
+  {
+    id: 'custom-furniture', slug: 'custom-furniture',
+    title: 'Custom Furniture + Art', image: '/img/services/customfurniture-art.jpg',
+    items: ['Design Brief and Ideology Preparation', 'Conceptualization', 'Selection of Artists/Skilled Resources', 'Preparation of Technical Documents', 'Approval of Mock-Up and Finishes', 'Installation Schedule and Program', 'Onsite Assistance', 'Quality Certification', 'Final Documentation']
+  },
+  {
+    id: 'project-management', slug: 'project-management',
+    title: 'Project Management : To Be Outsourced', image: '/img/services/project-management.jpg',
+    subtitle: '*At TAO, we work towards design and execution assistance whereas the below services are outsourced:',
+    items: ['Project Management', 'Regular onsite supervision', 'Onsite safety and sanitation', 'Placement of orders for commercial transactions', 'Management of agencies']
+  },
+];
+
+// Default intro text
+const DEFAULT_INTRO = {
+  title: 'Tao Architecture',
+  content: [
+    'TAO is a spiritual journey that justifies the essence of man, nature and its built form to engage the Spirit of Space in tangible forms. This timelessness is encapsulated by TAO. Imbibing this spiritual approach to Spatial designs as a means of connecting man with himself & his environment... TAOStudiO was conceptualized in 1994!!',
+    'TAOStudiO intends to dissolve the barrier between the inside and outside to create free spirited and complimentary environment for its end users. Our attempt has always been to create tangible forms of architecture as stepping stones and also cater to the emotional and spiritual needs of the end users. Allowing them to find a co-existential bond with nature as an organic entity through intangible spaces as an experiential element of architecture. TAOStudiO stands out, for the holistic design approach in creating a spatial Climate for our clients.',
+  ]
+};
 
 export default function Services() {
-  const [activeSection, setActiveSection] = useState('architecture-interiors');
+  const [activeSection, setActiveSection] = useState('');
+  const [services, setServices] = useState<any[]>([]);
+  const [introTitle, setIntroTitle] = useState(DEFAULT_INTRO.title);
+  const [introContent, setIntroContent] = useState<string[]>(DEFAULT_INTRO.content);
+  const [loading, setLoading] = useState(true);
 
-  const serviceItems = [
-    { id: 'architecture-interiors', label: 'Architecture + Interiors' },
-    { id: 'design-coordination', label: 'Design Coordination' },
-    { id: 'procurement-assistance', label: 'Procurement Assistance' },
-    { id: 'execution-coordination', label: 'Execution Coordination' },
-    { id: 'custom-furniture', label: 'Custom Furniture + Art' },
-    { id: 'project-management', label: 'Project Management' },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+
+        // Fetch services and intro content in parallel
+        const [servicesRes, introRes] = await Promise.all([
+          fetch(`${apiUrl}/services`).then(r => r.ok ? r.json() : []),
+          fetch(`${apiUrl}/pages/services-intro`).then(r => r.ok ? r.json() : null),
+        ]);
+
+        // Use dynamic services if available, otherwise fall back
+        if (servicesRes && servicesRes.length > 0) {
+          setServices(servicesRes);
+          setActiveSection(servicesRes[0].slug);
+        } else {
+          setServices(FALLBACK_SERVICES);
+          setActiveSection(FALLBACK_SERVICES[0].slug);
+        }
+
+        // Use dynamic intro if available
+        if (introRes && introRes.content) {
+          setIntroTitle(introRes.title || DEFAULT_INTRO.title);
+          // Split content by double newlines for paragraphs
+          setIntroContent(introRes.content.split('\n\n').filter((p: string) => p.trim()));
+        }
+      } catch {
+        setServices(FALLBACK_SERVICES);
+        setActiveSection(FALLBACK_SERVICES[0].slug);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const serviceItems = services.map(s => ({
+    id: s.slug,
+    label: s.title,
+  }));
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -34,22 +116,17 @@ export default function Services() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        'architecture-interiors',
-        'design-coordination',
-        'procurement-assistance',
-        'execution-coordination',
-        'custom-furniture',
-        'project-management'
-      ];
+    if (services.length === 0) return;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
+    const handleScroll = () => {
+      const slugs = services.map(s => s.slug);
+
+      for (const slug of slugs) {
+        const element = document.getElementById(slug);
         if (element) {
           const rect = element.getBoundingClientRect();
           if (rect.top >= 0 && rect.top <= 300) {
-            setActiveSection(section);
+            setActiveSection(slug);
             break;
           }
         }
@@ -58,7 +135,15 @@ export default function Services() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [services]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white pt-20 flex items-center justify-center">
+        <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-white pt-20">
@@ -70,14 +155,11 @@ export default function Services() {
       {/* Intro Section */}
       <section className="container mx-auto px-4 py-12 md:py-20">
         <div className="max-w-4xl">
-          <h1 className="text-fluid-h1 font-bold uppercase mb-8 font-agenda">Tao Architecture</h1>
+          <h1 className="text-fluid-h1 font-bold uppercase mb-8 font-agenda">{introTitle}</h1>
           <div className="text-lg font-agenda text-neutral-dark-grey space-y-6 leading-relaxed">
-            <p>
-              TAO is a spiritual journey that justifies the essence of man, nature and its built form to engage the Spirit of Space in tangible forms. This timelessness is encapsulated by TAO. Imbibing this spiritual approach to Spatial designs as a means of connecting man with himself & his environment... TAOStudiO was conceptualized in 1994!!
-            </p>
-            <p>
-              TAOStudiO intends to dissolve the barrier between the inside and outside to create free spirited and complimentary environment for its end users. Our attempt has always been to create tangible forms of architecture as stepping stones and also cater to the emotional and spiritual needs of the end users. Allowing them to find a co-existential bond with nature as an organic entity through intangible spaces as an experiential element of architecture. TAOStudiO stands out, for the holistic design approach in creating a spatial Climate for our clients.
-            </p>
+            {introContent.map((para, idx) => (
+              <p key={idx}>{para}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -87,180 +169,40 @@ export default function Services() {
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
           <div className="md:w-1/4">
-            <ServicesSidebar activeSection={activeSection} />
+            <ServicesSidebar activeSection={activeSection} items={serviceItems} />
           </div>
 
           {/* Content */}
           <div className="md:w-3/4">
-            
-            {/* Architecture + Interiors */}
-            <section id="architecture-interiors" className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative h-[300px] w-full">
-                  <Image
-                    src="/img/services/architecture-interiordesign.jpg"
-                    alt="Architecture + Interior Design"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+            {services.map((service) => (
+              <section key={service.slug || service.id} id={service.slug} className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="relative h-[300px] w-full">
+                    <Image
+                      src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
+                      alt={service.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">{service.title}</h2>
+                    {service.subtitle && (
+                      <p className="text-sm italic mb-4 font-agenda">{service.subtitle}</p>
+                    )}
+                    {service.description && (
+                      <p className="text-sm mb-4 font-agenda text-neutral-dark-grey">{service.description}</p>
+                    )}
+                    <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
+                      {(service.items || []).map((item: string, idx: number) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">Architecture + Interior Design</h2>
-                  <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
-                    <li>Design Brief Preparation</li>
-                    <li>Conceptualization of Design</li>
-                    <li>Engineering Integration & Coordination</li>
-                    <li>Design Finalization</li>
-                    <li>Tender Documentation</li>
-                    <li>Construction Documentation</li>
-                    <li>Onsite Design Verification</li>
-                    <li>Onsite design assistance</li>
-                    <li>Certification of Bills</li>
-                    <li>Project Closure Documentation</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Design Coordination */}
-            <section id="design-coordination" className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative h-[300px] w-full">
-                  <Image
-                    src="/img/services/design-coordination.jpg"
-                    alt="Design Coordination"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">Design Coordination</h2>
-                  <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
-                    <li>Design Brief Preparation</li>
-                    <li>Project Mapping</li>
-                    <li>Selection of Suitable Stakeholders</li>
-                    <li>Monitoring Design Outputs</li>
-                    <li>Engineering and services integration</li>
-                    <li>Structural integration</li>
-                    <li>Material and Methodology</li>
-                    <li>Finalization of Design</li>
-                    <li>Verifying Engineering Integration</li>
-                    <li>Certification & Tender Documents</li>
-                    <li>Onsite Design Assistance</li>
-                    <li>Certifying Project Closure Documents</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Procurement Assistance */}
-            <section id="procurement-assistance" className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative h-[300px] w-full">
-                  <Image
-                    src="/img/services/procurement-assistance.jpg"
-                    alt="Procurement Assistance"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">Procurement Assistance</h2>
-                  <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
-                    <li>Optional presentation of product samples as per specifications</li>
-                    <li>Quantification of products</li>
-                    <li>Visit to showrooms/factories for material selection</li>
-                    <li>Onsite mockup approval</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Execution Coordination */}
-            <section id="execution-coordination" className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative h-[300px] w-full">
-                  <Image
-                    src="/img/services/execution-coordination.jpg"
-                    alt="Execution Coordination"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">Execution Coordination</h2>
-                  <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
-                    <li>Project Mapping</li>
-                    <li>Sequential scheduling of project</li>
-                    <li>Selection of Suitable Stakeholders</li>
-                    <li>Cross checking products and work orders</li>
-                    <li>Onsite design assistance</li>
-                    <li>Verifying translation of drawings onsite</li>
-                    <li>Ensuring quality of work</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Custom Furniture + Art */}
-            <section id="custom-furniture" className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative h-[300px] w-full">
-                  <Image
-                    src="/img/services/customfurniture-art.jpg"
-                    alt="Custom Furniture + Art"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">Custom Furniture + Art</h2>
-                  <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
-                    <li>Design Brief and Ideology Preparation</li>
-                    <li>Conceptualization</li>
-                    <li>Selection of Artists/Skilled Resources</li>
-                    <li>Preparation of Technical Documents</li>
-                    <li>Approval of Mock-Up and Finishes</li>
-                    <li>Installation Schedule and Program</li>
-                    <li>Onsite Assistance</li>
-                    <li>Quality Certification</li>
-                    <li>Final Documentation</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Project Management */}
-            <section id="project-management" className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative h-[300px] w-full">
-                  <Image
-                    src="/img/services/project-management.jpg"
-                    alt="Project Management"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold uppercase mb-2 font-agenda text-primary-red">Project Management : To Be Outsourced</h2>
-                  <p className="text-sm italic mb-4 font-agenda">*At TAO, we work towards design and execution assistance whereas the below services are outsourced:</p>
-                  <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
-                    <li>Project Management</li>
-                    <li>Regular onsite supervision</li>
-                    <li>Onsite safety and sanitation</li>
-                    <li>Placement of orders for commercial transactions</li>
-                    <li>Management of agencies</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
+              </section>
+            ))}
           </div>
         </div>
       </div>

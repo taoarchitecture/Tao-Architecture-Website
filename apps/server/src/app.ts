@@ -12,6 +12,9 @@ import youtubeWebsubRoutes from './routes/youtube.websub.routes';
 import homeRoutes from './routes/home.routes';
 import studioRoutes from './routes/studio.routes';
 import mediaRoutes from './routes/media.routes';
+import settingsRoutes from './routes/settings.routes';
+import pageContentRoutes from './routes/page-content.routes';
+import servicesRoutes from './routes/services.routes';
 import path from 'path';
 
 dotenv.config();
@@ -37,6 +40,9 @@ app.use('/api/youtube/websub', youtubeWebsubRoutes);
 app.use('/api/home', homeRoutes);
 app.use('/api/studio', studioRoutes);
 app.use('/api/media', mediaRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/pages', pageContentRoutes);
+app.use('/api/services', servicesRoutes);
 
 // Health check
 app.get('/', (req, res) => {

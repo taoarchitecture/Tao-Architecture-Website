@@ -8,11 +8,14 @@ import MobilePageNav from '@/components/layout/MobilePageNav';
 import { getTeamMembers } from '@/lib/api';
 import { TeamMember } from '@/types';
 
+const DEFAULT_INTRO = "Led by Principal Architect Manish Banker, TAO Architecture Pvt. Ltd. comprises a team of driven professionals passionately working to enrich the lives of clients through user centric sustainable design solutions. Keeping to its name, the studio leads 'The Way' to a greener future, incorporating and promoting organic design principles.";
+
 export default function Studio() {
   const [activeSection, setActiveSection] = useState('team');
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [introText, setIntroText] = useState(DEFAULT_INTRO);
 
   const fetchTeam = async () => {
     setIsLoading(true);
@@ -30,6 +33,18 @@ export default function Studio() {
 
   useEffect(() => {
     fetchTeam();
+    // Fetch dynamic intro text
+    const fetchIntro = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const res = await fetch(`${apiUrl}/pages/studio-intro`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.content) setIntroText(data.content);
+        }
+      } catch { /* use default */ }
+    };
+    fetchIntro();
   }, []);
 
   if (isLoading) {
@@ -97,10 +112,7 @@ export default function Studio() {
               <div className="mb-12">
                 <h5 className="text-fluid-h1 uppercase font-bold mb-8 font-agenda">Tao Team</h5>
                 <p className="font-agenda text-lg leading-relaxed text-neutral-dark-grey">
-                  Led by Principal Architect Manish Banker, TAO Architecture Pvt. Ltd. comprises a team of
-                  driven professionals passionately working to enrich the lives of clients through user
-                  centric sustainable design solutions. Keeping to its name, the studio leads ‘The Way’ to
-                  a greener future, incorporating and promoting organic design principles.
+                  {introText}
                 </p>
               </div>
 

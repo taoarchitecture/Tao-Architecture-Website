@@ -66,4 +66,44 @@ export const getAwards = async () => {
   }
 };
 
+export const getSettings = async () => {
+  try {
+    const { data } = await api.get('/settings');
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch settings:', error);
+    return null;
+  }
+};
+
+export const getPageContent = async (slug: string) => {
+  try {
+    const { data } = await api.get(`/pages/${slug}`);
+    return data;
+  } catch (error) {
+    console.error(`Failed to fetch page content for ${slug}:`, error);
+    return null;
+  }
+};
+
+export const getServices = async () => {
+  try {
+    const { data } = await api.get('/services');
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch services:', error);
+    return [];
+  }
+};
+
+export const getContactSubmissions = async () => {
+  try {
+    const { data } = await api.get('/contact');
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch contact submissions:', error);
+    return [];
+  }
+};
+
 export default api;

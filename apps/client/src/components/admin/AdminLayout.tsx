@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText } from 'react-icons/fi';
+import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers } from 'react-icons/fi';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -19,6 +19,15 @@ const SidebarItem = ({ icon: Icon, label, href, active }: { icon: any, label: st
     <Icon className="w-4 h-4 mr-3" />
     <span className="font-bold">{label}</span>
   </Link>
+);
+
+const SidebarSection = ({ title, children }: { title: string, children: ReactNode }) => (
+  <div className="mb-2">
+    <div className="px-6 py-2 text-[9px] font-bold uppercase tracking-[0.25em] text-neutral-medium-grey">
+      {title}
+    </div>
+    {children}
+  </div>
 );
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
@@ -40,31 +49,72 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </h1>
         </div>
         
-        <nav className="flex-1 py-8 space-y-1">
-          <SidebarItem 
-            icon={FiHome} 
-            label="Dashboard" 
-            href="/admin/dashboard" 
-            active={pathname === '/admin/dashboard'} 
-          />
-          <SidebarItem 
-            icon={FiGrid} 
-            label="Projects" 
-            href="/admin/projects" 
-            active={pathname.startsWith('/admin/projects')} 
-          />
-          <SidebarItem 
-            icon={FiFileText} 
-            label="Applications" 
-            href="/admin/career" 
-            active={pathname.startsWith('/admin/career')} 
-          />
-          <SidebarItem 
-            icon={FiSettings} 
-            label="Settings" 
-            href="/admin/settings" 
-            active={pathname === '/admin/settings'} 
-          />
+        <nav className="flex-1 py-6 space-y-0 overflow-y-auto">
+          <SidebarSection title="Overview">
+            <SidebarItem 
+              icon={FiHome} 
+              label="Dashboard" 
+              href="/admin/dashboard" 
+              active={pathname === '/admin/dashboard'} 
+            />
+          </SidebarSection>
+
+          <SidebarSection title="Content">
+            <SidebarItem 
+              icon={FiGrid} 
+              label="Projects" 
+              href="/admin/projects" 
+              active={pathname.startsWith('/admin/projects')} 
+            />
+            <SidebarItem 
+              icon={FiLayers} 
+              label="Services" 
+              href="/admin/services" 
+              active={pathname.startsWith('/admin/services')} 
+            />
+            <SidebarItem 
+              icon={FiUsers} 
+              label="Studio / Team" 
+              href="/admin/studio" 
+              active={pathname.startsWith('/admin/studio')} 
+            />
+            <SidebarItem 
+              icon={FiEdit3} 
+              label="Page Content" 
+              href="/admin/pages" 
+              active={pathname.startsWith('/admin/pages')} 
+            />
+            <SidebarItem 
+              icon={FiHome} 
+              label="Home Config" 
+              href="/admin/home" 
+              active={pathname.startsWith('/admin/home')} 
+            />
+          </SidebarSection>
+
+          <SidebarSection title="Inbox">
+            <SidebarItem 
+              icon={FiFileText} 
+              label="Applications" 
+              href="/admin/career" 
+              active={pathname.startsWith('/admin/career')} 
+            />
+            <SidebarItem 
+              icon={FiMail} 
+              label="Messages" 
+              href="/admin/contact" 
+              active={pathname.startsWith('/admin/contact')} 
+            />
+          </SidebarSection>
+
+          <SidebarSection title="System">
+            <SidebarItem 
+              icon={FiSettings} 
+              label="Settings" 
+              href="/admin/settings" 
+              active={pathname === '/admin/settings'} 
+            />
+          </SidebarSection>
         </nav>
 
         <div className="p-4 border-t border-neutral-off-black bg-neutral-black">
