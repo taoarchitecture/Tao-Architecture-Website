@@ -6,8 +6,9 @@ import ServicesSidebar from '@/components/services/ServicesSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { Service } from '@/types';
 import { getImageUrl } from '@/utils/image';
+import ScrollReveal from '@/components/ScrollReveal';
 
-// Hardcoded fallback services — used when no services exist in the DB
+// Hardcoded fallback services
 const FALLBACK_SERVICES = [
   {
     id: 'architecture-interiors', slug: 'architecture-interiors',
@@ -63,13 +64,11 @@ export default function Services() {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
-        // Fetch services and intro content in parallel
         const [servicesRes, introRes] = await Promise.all([
           fetch(`${apiUrl}/services`).then(r => r.ok ? r.json() : []),
           fetch(`${apiUrl}/pages/services-intro`).then(r => r.ok ? r.json() : null),
         ]);
 
-        // Use dynamic services if available, otherwise fall back
         if (servicesRes && servicesRes.length > 0) {
           setServices(servicesRes);
           setActiveSection(servicesRes[0].slug);
@@ -78,10 +77,8 @@ export default function Services() {
           setActiveSection(FALLBACK_SERVICES[0].slug);
         }
 
-        // Use dynamic intro if available
         if (introRes && introRes.content) {
           setIntroTitle(introRes.title || DEFAULT_INTRO.title);
-          // Split content by double newlines for paragraphs
           setIntroContent(introRes.content.split('\n\n').filter((p: string) => p.trim()));
         }
       } catch {
@@ -120,86 +117,120 @@ export default function Services() {
 
     const handleScroll = () => {
       const slugs = services.map(s => s.slug);
-
+      let found = false;
       for (const slug of slugs) {
         const element = document.getElementById(slug);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= 300) {
+          if (rect.top >= 0 && rect.top <= 400) {
             setActiveSection(slug);
-            break;
+            found = true;
           }
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [services]);
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white pt-20 flex items-center justify-center">
-        <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+      <main className="min-h-screen bg-white pt-24 pb-20 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+           <div className="w-16 h-16 border-t-2 border-primary-red border-solid rounded-full animate-spinSlow"></div>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white pt-20">
+    <main className="min-h-screen bg-white pt-24 pb-20">
+      
+      {/* Page Header Banner */}
+      <div className="relative z-10 container mx-auto px-4 mt-8 mb-4">
+        <ScrollReveal variant="fade-up">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light font-agenda uppercase tracking-wider mb-2 text-neutral-dark-grey">
+            Our <span className="font-bold text-primary-gold">Services</span>
+          </h1>
+          <div className="w-16 h-[2px] bg-primary-red mb-8"></div>
+        </ScrollReveal>
+      </div>
+
       <MobilePageNav 
         items={serviceItems} 
         activeItem={activeSection} 
         onSelect={scrollToSection} 
       />
+
       {/* Intro Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20">
-        <div className="max-w-4xl">
-          <h1 className="text-fluid-h1 font-bold uppercase mb-8 font-agenda">{introTitle}</h1>
-          <div className="text-lg font-agenda text-neutral-dark-grey space-y-6 leading-relaxed">
+      <section className="container mx-auto px-4 py-8 md:py-12 relative overflow-hidden">
+        <ScrollReveal variant="fade-up" delay={100} className="max-w-4xl relative z-10">
+          <h2 className="text-2xl md:text-3xl font-light uppercase mb-8 font-agenda tracking-widest text-primary-gold">
+            {introTitle}
+          </h2>
+          <div className="text-base md:text-lg font-agenda text-neutral-dark-grey space-y-8 leading-relaxed font-light">
             {introContent.map((para, idx) => (
-              <p key={idx}>{para}</p>
+              <p key={idx} className="relative pl-6">
+                 {/* Decorative quote lines */}
+                 {idx === 0 && <span className="absolute left-0 top-2 bottom-2 w-1 bg-gradient-to-b from-primary-red to-transparent opacity-50"></span>}
+                 {para}
+              </p>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Main Content with Sidebar */}
-      <div className="container mx-auto px-4 pb-20">
-        <div className="flex flex-col md:flex-row gap-8">
+      <div className="container mx-auto px-4 pb-20 mt-12">
+        <div className="flex flex-col md:flex-row gap-0 md:gap-8">
           {/* Sidebar */}
-          <div className="md:w-1/4">
+          <div className="hidden md:block w-1/4 relative">
             <ServicesSidebar activeSection={activeSection} items={serviceItems} />
           </div>
 
           {/* Content */}
-          <div className="md:w-3/4">
-            {services.map((service) => (
-              <section key={service.slug || service.id} id={service.slug} className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="relative h-[300px] w-full">
-                    <Image
-                      src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
-                      alt={service.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">{service.title}</h2>
+          <div className="w-full md:w-3/4">
+            {services.map((service, index) => (
+              <section key={service.slug || service.id} id={service.slug} className="mb-32 relative">
+                
+                <ScrollReveal variant="fade-in" className="section-divider mb-12">
+                   <span className="text-[10px] font-bold tracking-[0.2em] text-primary-gold uppercase px-4">{service.title}</span>
+                </ScrollReveal>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                  <ScrollReveal variant="fade-up" delay={100} className="relative">
+                    <div className="img-zoom relative w-full aspect-[4/3] shadow-elegant overflow-hidden group">
+                      <Image
+                        src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.08]"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-neutral-black/0 group-hover:bg-neutral-black/10 transition-colors duration-500 ease-out-expo"></div>
+                    </div>
+                  </ScrollReveal>
+                  
+                  <ScrollReveal variant="fade-up" delay={200}>
+                    <h3 className="text-2xl lg:text-3xl font-bold uppercase mb-4 font-agenda text-neutral-dark-grey tracking-[-0.02em] leading-tight flex items-center gap-4">
+                      {service.title}
+                    </h3>
                     {service.subtitle && (
-                      <p className="text-sm italic mb-4 font-agenda">{service.subtitle}</p>
+                      <p className="text-[13px] italic mb-6 font-agenda text-primary-gold tracking-wide">{service.subtitle}</p>
                     )}
                     {service.description && (
-                      <p className="text-sm mb-4 font-agenda text-neutral-dark-grey">{service.description}</p>
+                      <p className="text-[15px] mb-8 font-agenda text-neutral-light-grey leading-relaxed">{service.description}</p>
                     )}
-                    <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
+                    <ul className="space-y-4 font-agenda text-neutral-dark-grey">
                       {(service.items || []).map((item: string, idx: number) => (
-                        <li key={idx}>{item}</li>
+                        <li key={idx} className="flex items-start gap-4 group">
+                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-gold flex-shrink-0 group-hover:scale-150 transition-transform duration-300 group-hover:bg-primary-red"></span>
+                          <span className="text-[15px] group-hover:text-neutral-black transition-colors duration-300 leading-relaxed">{item}</span>
+                        </li>
                       ))}
                     </ul>
-                  </div>
+                  </ScrollReveal>
                 </div>
               </section>
             ))}

@@ -1,158 +1,111 @@
-import Link from 'next/link';
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import ScrollReveal from '@/components/ScrollReveal';
 
-export interface PortfolioItem {
-  id: string;
-  category: string;
-  title: string;
-  titleLines?: string[]; // Manual line breaks for overlay style
-  subheading?: string;
-  image: string;
-  link: string;
-  heightClass?: string;
-  overlayStyle?: boolean;
-}
+const categories = [
+  {
+    id: 'residences',
+    title: 'Residences',
+    image: '/img/bunglow_b.jpg',
+    span: 'col-span-12 md:col-span-8',
+    height: 'h-[300px] md:h-[500px]',
+    link: '/work#residences',
+  },
+  {
+    id: 'commercial',
+    title: 'Commercial',
+    image: '/img/suzlononeearth.jpg',
+    span: 'col-span-12 md:col-span-4',
+    height: 'h-[300px] md:h-[500px]',
+    link: '/work#commercial',
+  },
+  {
+    id: 'work',
+    title: 'Work',
+    image: '/img/bkgd2.png',
+    span: 'col-span-12 md:col-span-4',
+    height: 'h-[300px] md:h-[400px]',
+    link: '/work',
+    isOverlay: true,
+  },
+  {
+    id: 'hospitality',
+    title: 'Hospitality',
+    image: '/img/building.jpg',
+    span: 'col-span-12 md:col-span-4',
+    height: 'h-[300px] md:h-[400px]',
+    link: '/work#hospitality',
+  },
+  {
+    id: 'housing',
+    title: 'Housing',
+    image: '/img/Solhavn-Unit-E_3200px.png',
+    span: 'col-span-12 md:col-span-4',
+    height: 'h-[300px] md:h-[400px]',
+    link: '/work#housing',
+  },
+];
 
-const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
-  // CORPORATE / OVERLAY STYLE
-  if (item.overlayStyle) {
-    // Use manual titleLines if available, otherwise fallback to simple split (though manual is preferred)
-    const lines = item.titleLines || [item.title];
-
-    return (
-      <div className="mb-16 group relative w-[90%] mx-auto">
-        <div className="relative border-t-[8px] border-[#222] pt-0">
-           {/* Badge on Top Left - Overlapping the border */}
-           <div className="absolute -top-[15px] left-0 z-30">
-             <div className="bg-[#222] text-white px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] shadow-sm">
-                {item.category}
-             </div>
-           </div>
-
-          {/* Image */}
-          <Link href={item.link} className="block relative overflow-hidden">
-            <div className={`relative w-full ${item.heightClass || 'h-[380px]'} overflow-hidden`}>
-               <Image
-                 src={item.image}
-                 alt={item.title}
-                 fill
-                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                 sizes="(max-width: 768px) 100vw, 50vw"
-                 quality={90}
-               />
+export default function PortfolioGrid() {
+  return (
+    <section className="bg-neutral-bg-warm py-4 md:py-8">
+      <div className="container-fluid mx-auto px-2 md:px-4">
+        <div className="grid grid-cols-12 gap-2 md:gap-4">
+          {categories.map((category, index) => (
+            <div 
+              key={category.id} 
+              className={`${category.span} relative group overflow-hidden bg-neutral-black`}
+            >
+              <ScrollReveal variant="fade-up" delay={index * 100} className="h-full w-full">
+                {category.isOverlay ? (
+                  <Link href={category.link} className={`block relative w-full ${category.height} bg-neutral-dark-grey hover:bg-neutral-black transition-colors duration-500 p-8 md:p-12 flex flex-col justify-center items-center text-center outline outline-1 -outline-offset-[16px] outline-white/20 group-hover:outline-primary-gold/70`}>
+                    <div className="absolute inset-0 opacity-15 bg-[url('/img/pattern.jpg')] bg-repeat mix-blend-overlay"></div>
+                    <div className="absolute inset-0 bg-transparent group-hover:bg-white/5 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div className="relative z-10 transform transition-transform duration-700 ease-out-expo group-hover:-translate-y-2">
+                      <h3 className="text-white text-3xl md:text-5xl font-light font-agenda mb-6 tracking-wide shadow-sm">
+                        View Our <br/><span className="font-bold text-primary-gold">Work</span>
+                      </h3>
+                      <div className="inline-flex items-center gap-4 text-white">
+                        <span className="w-8 h-[1px] bg-primary-gold block transform origin-left transition-transform duration-500 group-hover:scale-x-150"></span>
+                        <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-primary-gold group-hover:border-primary-gold transition-all duration-500 shadow-elegant group-hover:text-neutral-black">
+                           <span className="text-xl leading-none font-light">→</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  <Link href={category.link} className={`block relative w-full ${category.height} img-zoom`}>
+                    <Image
+                      src={category.image}
+                      alt={category.title}
+                      fill
+                      className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.06]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 66vw"
+                    />
+                    
+                    {/* Cinematic Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500 ease-out-expo"></div>
+                    
+                    {/* Content */}
+                    <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end items-start z-10 overflow-hidden">
+                      <div className="transform transition-transform duration-700 ease-out-expo translate-y-6 group-hover:translate-y-0">
+                        <span className="inline-block bg-primary-red text-white text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 mb-6 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          Portfolio
+                        </span>
+                        <h3 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold font-agenda tracking-[-0.02em] shadow-sm">
+                          {category.title}
+                        </h3>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </ScrollReveal>
             </div>
-          </Link>
-
-          {/* Overlay "Line Boxes" Content */}
-          <div className="absolute top-[12%] left-0 z-20 max-w-[85%] pointer-events-none">
-             <div className="flex flex-col items-start space-y-0 pointer-events-auto">
-               {lines.map((line, index) => (
-                 <div key={index} className="bg-white px-4 py-2 md:px-6 md:py-2.5 border-b border-[#cbd5e0] w-fit shadow-sm">
-                   <h3 className="text-[16px] md:text-[22px] font-light leading-none text-gray-800 whitespace-nowrap">
-                     <Link href={item.link} className="hover:text-gray-500 transition-colors">
-                        {line}
-                     </Link>
-                   </h3>
-                 </div>
-               ))}
-               
-               {/* Button */}
-               <div className="mt-4 ml-6">
-                 <Link 
-                   href={item.link}
-                   className="inline-block border border-white bg-white/10 backdrop-blur-[2px] text-white px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-sm"
-                   style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
-                 >
-                   See Projects
-                 </Link>
-               </div>
-             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // STANDARD STYLE (Commercial, Luxury Villas)
-  return (
-    <div className="mb-16 group w-[90%] mx-auto">
-      <div className="relative border-t-[8px] border-[#222] pt-0">
-        {/* Badge on Image */}
-        <div className="absolute top-4 left-4 z-10">
-          <div className="bg-[#222] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] shadow-sm">
-            {item.category}
-          </div>
-        </div>
-        
-        <Link href={item.link} className="block relative overflow-hidden focus-ring rounded-sm">
-          <div className={`relative w-full ${item.heightClass || 'h-[320px]'} overflow-hidden`}>
-             <Image
-               src={item.image}
-               alt={item.title}
-               fill
-               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-               sizes="(max-width: 768px) 100vw, 50vw"
-               quality={90}
-             />
-          </div>
-        </Link>
-      </div>
-      
-      <div className="mt-5 font-agenda pl-1">
-        {item.subheading && (
-          <h4 className="text-[10px] text-primary-red mb-2 font-bold uppercase tracking-widest">
-            {item.subheading}
-          </h4>
-        )}
-        <h3 className="text-xl md:text-2xl font-light leading-snug text-neutral-dark-grey mb-5 max-w-md">
-          <Link href={item.link} className="sliding-link hover:text-neutral-black transition-colors duration-300">
-            {item.title}
-          </Link>
-        </h3>
-        <div>
-          <Link 
-            href={item.link}
-            className="btn btn-outline hover:bg-neutral-black hover:text-white"
-          >
-            See Projects
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
-  if (!items || items.length === 0) {
-    return (
-      <div className="container mx-auto px-4 py-16 bg-white max-w-6xl text-center">
-        <p className="text-neutral-light-grey">No projects found.</p>
-      </div>
-    );
-  }
-
-  // Split items manually for 2-column masonry simulation
-  // Ensure we have enough items to split, otherwise just put all in left
-  const midPoint = Math.ceil(items.length / 2);
-  const leftCol = items.slice(0, midPoint);
-  const rightCol = items.slice(midPoint);
-
-  return (
-    <div className="container mx-auto px-4 py-16 bg-white max-w-6xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="flex flex-col">
-          {leftCol.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
-          ))}
-        </div>
-        <div className="flex flex-col md:pt-32"> {/* Staggered Right Column */}
-          {rightCol.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default PortfolioGrid;
+}

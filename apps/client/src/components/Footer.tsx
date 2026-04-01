@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { GlobalSettings } from '@/types';
 
-// Hardcoded defaults — used when API fails or settings not configured
 const DEFAULTS = {
   siteName: 'TAO Architecture Pvt. Ltd.',
   contactEmail: 'info@taoarchitecture.com',
@@ -41,7 +40,6 @@ const Footer = () => {
     fetchSettings();
   }, []);
 
-  // Reset click count after 2 seconds of inactivity
   useEffect(() => {
     const timer = setTimeout(() => setClickCount(0), 2000);
     return () => clearTimeout(timer);
@@ -50,7 +48,7 @@ const Footer = () => {
   const handleAdminTrigger = () => {
     setClickCount(prev => {
       const newCount = prev + 1;
-      if (newCount === 5) { // Trigger on 5th click
+      if (newCount === 5) {
         router.push('/admin/login');
         return 0;
       }
@@ -58,7 +56,6 @@ const Footer = () => {
     });
   };
 
-  // Helper to get value with fallback
   const val = (key: keyof typeof DEFAULTS) => {
     return (settings as any)?.[key] || DEFAULTS[key];
   };
@@ -70,7 +67,6 @@ const Footer = () => {
     { icon: FaYoutube, href: val('youtubeUrl'), label: 'YouTube' },
   ];
 
-  // Parse phone for display
   let displayPhone = '+91 98220 44555';
   try {
     const phones = JSON.parse(val('phoneNumbers'));
@@ -80,12 +76,17 @@ const Footer = () => {
   } catch { /* use default */ }
 
   return (
-    <footer className="bg-neutral-off-black text-white pt-16 pb-8 relative">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+    <footer className="bg-neutral-black text-white pt-20 pb-8 relative border-t border-neutral-border/20 z-10 font-agenda">
+      
+      {/* Decorative top border gradient */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary-red to-transparent opacity-30"></div>
+
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-20">
+          
           {/* Brand Column */}
-          <div className="space-y-6">
-            <Link href="/" className="block w-[180px] hover:opacity-90 transition-opacity">
+          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-12">
+            <Link href="/" className="block w-[180px] hover:opacity-90 transition-opacity mb-8">
               <Image 
                 src="/img/tao-logo-white.png" 
                 alt="TAO Architecture" 
@@ -94,28 +95,31 @@ const Footer = () => {
                 className="w-full h-auto"
               />
             </Link>
-            <p className="text-neutral-light-grey text-sm leading-relaxed max-w-xs">
+            <p className="text-neutral-light-grey text-[15px] leading-[1.8] font-light max-w-sm">
               {val('footerTagline')}
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Quick Links</h4>
+          <div className="lg:col-span-3">
+            <h4 className="text-[12px] font-bold uppercase tracking-[0.2em] mb-8 text-white relative inline-block before:absolute before:-bottom-3 before:left-0 before:w-8 before:h-[2px] before:bg-primary-red">
+              Company
+            </h4>
             <ul className="space-y-4">
               {[
-                { label: 'Work', href: '/work' },
-                { label: 'Studio', href: '/studio' },
+                { label: 'Our Work', href: '/work' },
+                { label: 'The Studio', href: '/studio' },
                 { label: 'Publications', href: '/media/publications' },
+                { label: 'Careers', href: '/career' },
                 { label: 'Contact', href: '/contact' }
               ].map((link) => (
                 <li key={link.label}>
                   <Link 
                     href={link.href}
-                    className="text-neutral-light-grey hover:text-primary-red transition-colors text-sm font-medium flex items-center group"
+                    className="text-neutral-light-grey hover:text-primary-gold transition-colors duration-300 text-[15px] font-light flex items-center group relative w-max"
                   >
-                    <span className="w-0 overflow-hidden group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-2 text-primary-red">→</span>
-                    {link.label}
+                    <span className="w-0 overflow-hidden group-hover:w-3 transition-all duration-300 mr-0 group-hover:mr-2 text-primary-gold -ml-3 group-hover:ml-0 opacity-0 group-hover:opacity-100">→</span>
+                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -123,35 +127,40 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Contact Us</h4>
-            <div className="space-y-4 text-sm text-neutral-light-grey">
-              <p className="leading-relaxed">
-                <strong className="block text-white mb-1">Pune Office:</strong>
+          <div className="lg:col-span-3">
+            <h4 className="text-[12px] font-bold uppercase tracking-[0.2em] mb-8 text-white relative inline-block before:absolute before:-bottom-3 before:left-0 before:w-8 before:h-[2px] before:bg-primary-red">
+              Reach Us
+            </h4>
+            <div className="space-y-6 text-[15px] text-neutral-light-grey font-light">
+              <p className="leading-[1.8]">
                 {val('address').split('\n').map((line: string, i: number) => (
                   <span key={i}>{line}<br/></span>
                 ))}
               </p>
-              <a href={`tel:${displayPhone.replace(/\s/g, '')}`} className="block hover:text-primary-red transition-colors">
-                {displayPhone}
-              </a>
-              <a href={`mailto:${val('contactEmail')}`} className="block hover:text-primary-red transition-colors">
-                {val('contactEmail')}
-              </a>
+              <div className="flex flex-col gap-2">
+                <a href={`tel:${displayPhone.replace(/\s/g, '')}`} className="hover:text-primary-gold transition-colors duration-300 sliding-link inline-block w-max">
+                  <span className="font-bold text-white tracking-widest mr-2 uppercase text-[10px]">T</span> {displayPhone}
+                </a>
+                <a href={`mailto:${val('contactEmail')}`} className="hover:text-primary-gold transition-colors duration-300 sliding-link inline-block w-max">
+                   <span className="font-bold text-white tracking-widest mr-2 uppercase text-[10px]">M</span> {val('contactEmail')}
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Social */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Follow Us</h4>
-            <div className="flex space-x-4">
+          <div className="lg:col-span-2">
+            <h4 className="text-[12px] font-bold uppercase tracking-[0.2em] mb-8 text-white relative inline-block before:absolute before:-bottom-3 before:left-0 before:w-8 before:h-[2px] before:bg-primary-red">
+              Social
+            </h4>
+            <div className="flex flex-wrap gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-neutral-medium-grey flex items-center justify-center text-white hover:bg-primary-red hover:border-primary-red transition-all duration-300"
+                  className="w-10 h-10 rounded-full border border-neutral-light-grey/30 flex items-center justify-center text-neutral-light-grey hover:bg-primary-gold hover:border-primary-gold hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-sm focus-ring"
                   aria-label={social.label}
                 >
                   <social.icon size={16} />
@@ -162,16 +171,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-neutral-medium-grey flex flex-col md:flex-row justify-between items-center text-xs text-neutral-light-grey">
+        <div className="pt-8 border-t border-neutral-border/20 flex flex-col md:flex-row justify-between items-center text-[12px] tracking-wider text-neutral-light-grey/70 uppercase">
           <p 
             onClick={handleAdminTrigger} 
             className="cursor-pointer hover:text-white transition-colors mb-4 md:mb-0 select-none"
           >
-            © {new Date().getFullYear()} {val('siteName')}. All rights reserved.
+            © {new Date().getFullYear()} {val('siteName')}. ALL RIGHTS RESERVED.
           </p>
           <div className="flex space-x-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+            <Link href="/privacy" className="hover:text-primary-gold transition-colors duration-300">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-primary-gold transition-colors duration-300">Terms of Use</Link>
           </div>
         </div>
       </div>

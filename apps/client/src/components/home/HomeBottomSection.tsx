@@ -1,41 +1,38 @@
-import Image from 'next/image';
+'use client';
+
 import Link from 'next/link';
+import ScrollReveal from '@/components/ScrollReveal';
 
-interface HomeBottomSectionProps {
-  config?: {
-    bottomCtaTitle?: string;
-    bottomCtaText?: string;
-    bottomCtaLink?: string;
-  } | null;
-}
-
-const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
+export default function HomeBottomSection() {
   return (
-    <section className="relative w-full h-[70vh] min-h-[500px]">
-      <Image
-        src="/img/portfolio/masonry/background.jpg"
-        alt="Background"
-        fill
-        className="object-cover"
-        priority
-      />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-light mb-6 font-agenda tracking-wide">
-          {config?.bottomCtaTitle || "Let's Create Something Extraordinary"}
-        </h2>
-        <p className="text-gray-200 text-lg md:text-xl max-w-2xl mb-10 font-agenda leading-relaxed">
-          {config?.bottomCtaText || "Touching intangible beauty of nature, through tangible forms of Architecture."}
-        </p>
-        <Link 
-          href={config?.bottomCtaLink || "/contact"}
-          className="inline-block border-2 border-white text-white px-8 py-3 text-sm font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300"
-        >
-          Start Your Project
-        </Link>
+    <section className="relative w-full h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-fixed w-full h-full transform scale-[1.02]"
+        style={{ backgroundImage: "url('/img/landing_back.jpg')" }}
+      >
+      </div>
+
+      {/* Cinematic Overlays */}
+      <div className="absolute inset-0 z-0 bg-neutral-black/40 mix-blend-multiply"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-neutral-black/80 via-transparent to-neutral-black/80"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <ScrollReveal variant="fade-up" delay={200}>
+          <div className="max-w-4xl mx-auto text-center border-y border-white/20 py-20 md:py-28 backdrop-blur-[4px] bg-black/10 shadow-elegant">
+            <h2 className="text-white text-4xl md:text-6xl lg:text-7xl font-light font-agenda leading-tight mb-12 tracking-tight">
+              Creating Spaces that <br className="hidden md:block"/>
+              <span className="font-bold text-primary-gold relative inline-block">
+                Inspire & Endure
+                <div className="absolute -bottom-2 left-[10%] w-[80%] h-[1px] bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-60"></div>
+              </span>
+            </h2>
+            <Link href="/contact" className="btn btn-red-outline text-white hover:text-white mt-4">
+              START A PROJECT
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
-};
-
-export default HomeBottomSection;
+}
