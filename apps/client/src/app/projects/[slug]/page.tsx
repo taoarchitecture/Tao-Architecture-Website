@@ -4,9 +4,10 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { projectDetails, projects } from '@/data/projects';
+import { notFound } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP, FaWhatsapp, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import ScrollReveal from '@/components/ScrollReveal';
+import { MdEmail } from 'react-icons/md';
 
 export default function ProjectDetail() {
   const params = useParams();
@@ -29,339 +30,281 @@ export default function ProjectDetail() {
     setLightboxIndex((prev) => (prev - 1 + project.gallery.length) % project.gallery.length);
   };
 
-  useEffect(() => {
-    if (isLightboxOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [isLightboxOpen]);
+  if (!project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
+            <p className="mb-8">The project you are looking for does not exist or has not been migrated yet.</p>
+            <Link href="/work" className="text-primary-red hover:underline">Back to Work</Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Find next/prev projects
+  // We use the 'projects' array to find the order
+  // Note: projects array uses 'link' which contains the slug, or 'id' which matches the slug
+  const currentIndex = projects.findIndex(p => p.id === project.id);
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
+  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
 
   const [currentUrl, setCurrentUrl] = useState('');
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setCurrentUrl(window.location.href);
     }
   }, []);
 
-  if (!project) {
-    return (
-      <div className="min-h-screen flex items-center justify-center pt-20 bg-neutral-bg-warm">
-        <div className="text-center">
-            <h1 className="text-5xl font-light font-agenda uppercase mb-6 text-neutral-dark-grey tracking-wider">Project Not Found</h1>
-            <p className="mb-8 font-agenda text-neutral-light-grey text-lg">The project you are looking for does not exist or has not been migrated yet.</p>
-            <Link href="/work" className="btn btn-outline">BACK TO WORK</Link>
-        </div>
-      </div>
-    );
-  }
-
-  const currentIndex = projects.findIndex(p => p.id === project.id);
-  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
-  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
-
   return (
     <main className="min-h-screen bg-white pt-20">
       
-      {/* Hero Section (Parallax base) */}
-      <section className="relative w-full h-[70vh] md:h-[85vh] bg-neutral-black mb-16 overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative w-full h-[60vh] md:h-[80vh] bg-gray-100 mb-12">
          {project.heroImage && (
              <Image 
                 src={project.heroImage} 
                 alt={project.title} 
                 fill 
-                className="object-cover opacity-90 img-zoom transition-transform duration-[1200ms] ease-out-expo hover:scale-[1.03]"
+                className="object-cover"
                 priority
              />
          )}
-         {/* Subtle overlay gradient */}
-         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80"></div>
-         
-         <div className="absolute bottom-12 left-0 w-full px-4 md:px-12 z-10 flex flex-col md:flex-row justify-between items-end">
-            <div className="text-white max-w-4xl animate-fadeInUp">
-                <h4 className="text-[11px] font-bold tracking-[0.25em] text-primary-gold uppercase mb-4 font-agenda">
-                    {project.category}
-                </h4>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase mb-2 font-agenda leading-none tracking-[-0.02em]">
-                    {project.title}
-                </h1>
-                {project.subtitle && (
-                    <h2 className="text-xl md:text-2xl font-light font-agenda text-neutral-light-grey tracking-wide">
-                        {project.subtitle}
-                    </h2>
-                )}
-            </div>
-
-            <div className="hidden md:flex gap-3 animate-fadeInUp delay-200">
-                <button 
-                    onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="w-12 h-12 border border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center rounded-full transition-all duration-300 group"
-                    aria-label="Scroll to Details"
-                >
-                    <svg className="w-5 h-5 transform group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                </button>
-            </div>
+         <div className="absolute top-0 right-0 p-4 md:p-8 flex gap-2">
+            <button 
+                onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-10 h-10 bg-white/80 hover:bg-white flex items-center justify-center rounded-full transition-all"
+            >
+                <span className="transform rotate-180">¶</span>
+            </button>
+            <button 
+                onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-10 h-10 bg-white/80 hover:bg-white flex items-center justify-center rounded-full transition-all"
+            >
+                <span className="grid grid-cols-2 gap-0.5 w-4 h-4">
+                    <span className="bg-black w-1.5 h-1.5"></span>
+                    <span className="bg-black w-1.5 h-1.5"></span>
+                    <span className="bg-black w-1.5 h-1.5"></span>
+                    <span className="bg-black w-1.5 h-1.5"></span>
+                </span>
+            </button>
          </div>
       </section>
 
       {/* Details Section */}
-      <section id="details" className="container mx-auto px-4 lg:px-12 mb-24">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+      <section id="details" className="container mx-auto px-4 mb-20">
+        <div className="flex flex-wrap md:flex-nowrap">
             {/* Main Content */}
-            <div className="w-full lg:w-[70%]">
-                <ScrollReveal variant="fade-up">
-                    <div className="bg-neutral-bg-warm p-8 md:p-12 mb-16 shadow-sm border border-neutral-border font-agenda">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                            {project.details.location && (
-                                <div>
-                                    <h5 className="text-[10px] uppercase font-bold tracking-widest text-primary-red mb-2">Location</h5>
-                                    <p className="text-[14px] text-neutral-dark-grey font-medium leading-snug">{project.details.location}</p>
-                                </div>
-                            )}
-                            {project.details.status && (
-                                <div>
-                                    <h5 className="text-[10px] uppercase font-bold tracking-widest text-primary-red mb-2">Status</h5>
-                                    <p className="text-[14px] text-neutral-dark-grey font-medium leading-snug">{project.details.status}</p>
-                                </div>
-                            )}
-                            {project.details.plotArea && (
-                                <div>
-                                    <h5 className="text-[10px] uppercase font-bold tracking-widest text-primary-red mb-2">Plot Area</h5>
-                                    <p className="text-[14px] text-neutral-dark-grey font-medium leading-snug">{project.details.plotArea}</p>
-                                </div>
-                            )}
-                            {project.details.builtUpArea && (
-                                <div>
-                                    <h5 className="text-[10px] uppercase font-bold tracking-widest text-primary-red mb-2">Built-up Area</h5>
-                                    <p className="text-[14px] text-neutral-dark-grey font-medium leading-snug">{project.details.builtUpArea}</p>
-                                </div>
-                            )}
+            <div className="w-full md:w-3/4 pr-0 md:pr-12">
+                <div className="mb-8">
+                    <h4 className="text-sm font-bold tracking-widest text-primary-red uppercase mb-4 font-agenda">
+                        {project.category}
+                    </h4>
+                    
+                    <div className="flex justify-between items-start">
+                        <h1 className="text-4xl md:text-5xl font-bold uppercase mb-4 font-agenda leading-tight">
+                            {project.title}
+                        </h1>
+                        
+                        {/* Social Share - Mobile/Tablet only, or sticky desktop */}
+                        <div className="hidden md:flex gap-2">
+                            {/* Share icons */}
                         </div>
                     </div>
-                </ScrollReveal>
 
-                <ScrollReveal variant="fade-up" delay={100}>
-                    <div className="prose max-w-none font-agenda text-[16px] md:text-[18px] text-neutral-dark-grey leading-[1.8] font-light">
+                    {project.subtitle && (
+                        <h2 className="text-2xl md:text-3xl font-light uppercase mb-8 font-agenda text-neutral-dark-grey">
+                            {project.subtitle}
+                        </h2>
+                    )}
+
+                    <div className="bg-gray-50 p-6 mb-8 border-l-4 border-black font-agenda">
+                        {project.details.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.details.location}</p>}
+                        {project.details.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.details.status}</p>}
+                        {project.details.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.details.plotArea}</p>}
+                        {project.details.builtUpArea && <p className="mb-1"><span className="font-bold">Built Up Area :</span> {project.details.builtUpArea}</p>}
+                    </div>
+
+                    <div className="prose max-w-none font-agenda text-lg text-neutral-dark-grey leading-relaxed">
                         {project.description.slice(0, showFullText ? undefined : 2).map((paragraph, idx) => (
-                            <p key={idx} className="mb-8">{paragraph}</p>
+                            <p key={idx} className="mb-6">{paragraph}</p>
                         ))}
                         
+                        {/* Hidden text for read more */}
                          {showFullText && project.description.slice(2).map((paragraph, idx) => (
-                            <p key={`more-${idx}`} className="mb-8 animate-fadeInUp">{paragraph}</p>
+                            <p key={`more-${idx}`} className="mb-6 animate-fadeIn">{paragraph}</p>
                         ))}
 
                         {project.description.length > 2 && (
                             <button 
                                 onClick={() => setShowFullText(!showFullText)}
-                                className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-red border-b border-primary-red pb-1 hover:text-black hover:border-black transition-colors duration-300 mt-4 inline-flex items-center gap-2"
+                                className="btn btn-stroke mt-4"
                             >
-                                {showFullText ? 'READ LESS' : 'READ MORE'}
-                                <span className={`transform transition-transform duration-300 ${showFullText ? 'rotate-180' : ''}`}>↓</span>
+                                {showFullText ? 'Read Less' : 'Read More'}
                             </button>
                         )}
                     </div>
-                </ScrollReveal>
+                </div>
             </div>
 
             {/* Share Sidebar */}
-            <div className="w-full lg:w-[30%]">
-                 <ScrollReveal variant="fade-up" delay={200} className="sticky top-32">
-                    <h5 className="text-[10px] uppercase tracking-[0.2em] font-bold mb-6 text-neutral-light-grey before:w-8 before:h-[1px] before:bg-primary-red before:inline-block before:align-middle before:mr-3">SHARE PROJECT</h5>
-                    <div className="flex lg:flex-wrap gap-3">
-                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-[42px] h-[42px] border border-neutral-border hover:bg-black hover:text-white flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md text-neutral-dark-grey">
-                            <FaFacebookF size={14} />
+            <div className="w-full md:w-1/4 mt-8 md:mt-0 md:border-l md:border-gray-100 md:pl-8">
+                 <div className="sticky top-32">
+                    <h5 className="text-xs uppercase tracking-widest font-bold mb-4">Share</h5>
+                    <div className="flex md:flex-col gap-4">
+                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#3b5998] hover:text-white flex items-center justify-center rounded-full transition-all">
+                            <FaFacebookF />
                         </a>
-                        <a href={`https://twitter.com/intent/tweet?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-[42px] h-[42px] border border-neutral-border hover:bg-[#1da1f2] hover:border-[#1da1f2] hover:text-white flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md text-neutral-dark-grey">
-                            <FaTwitter size={14} />
+                        <a href={`https://twitter.com/intent/tweet?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#1da1f2] hover:text-white flex items-center justify-center rounded-full transition-all">
+                            <FaTwitter />
                         </a>
-                        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-[42px] h-[42px] border border-neutral-border hover:bg-[#0077b5] hover:border-[#0077b5] hover:text-white flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md text-neutral-dark-grey">
-                            <FaLinkedinIn size={14} />
+                        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#0077b5] hover:text-white flex items-center justify-center rounded-full transition-all">
+                            <FaLinkedinIn />
                         </a>
-                        <a href={`https://pinterest.com/pin/create/button/?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-[42px] h-[42px] border border-neutral-border hover:bg-[#bd081c] hover:border-[#bd081c] hover:text-white flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md text-neutral-dark-grey">
-                            <FaPinterestP size={14} />
+                        <a href={`https://pinterest.com/pin/create/button/?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#bd081c] hover:text-white flex items-center justify-center rounded-full transition-all">
+                            <FaPinterestP />
                         </a>
-                         <a href={`whatsapp://send?text=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-[42px] h-[42px] border border-neutral-border hover:bg-[#25d366] hover:border-[#25d366] hover:text-white flex items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md text-neutral-dark-grey">
-                            <FaWhatsapp size={14} />
+                         <a href={`whatsapp://send?text=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#25d366] hover:text-white flex items-center justify-center rounded-full transition-all">
+                            <FaWhatsapp />
                         </a>
                     </div>
-                 </ScrollReveal>
+                 </div>
             </div>
         </div>
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="bg-neutral-bg py-24 border-t border-neutral-border">
-         <div className="container mx-auto px-4 lg:px-12">
-            <ScrollReveal variant="fade-up" className="mb-16">
-                 <h3 className="text-3xl font-light uppercase tracking-widest font-agenda text-neutral-dark-grey flex items-center gap-6">
-                    Gallery 
-                    <span className="flex-grow h-[1px] bg-neutral-border max-w-xs"></span>
-                 </h3>
-            </ScrollReveal>
+      <section id="gallery" className="bg-gray-50 py-20">
+         <div className="container mx-auto px-4">
+            <h3 className="text-center text-2xl font-light uppercase tracking-widest mb-12">- Image Gallery -</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {project.gallery.map((item, idx) => (
-                    <ScrollReveal key={idx} variant="fade-up" delay={(idx % 2) * 100}>
-                        <div 
-                          className="group relative cursor-pointer overflow-hidden border border-neutral-border/50 shadow-sm hover:shadow-elegant transition-all duration-500 ease-out-expo bg-white p-[2px]"
-                          onClick={() => openLightbox(idx)}
-                        >
-                            <div className="relative h-[300px] md:h-[450px] w-full overflow-hidden img-zoom bg-neutral-bg">
-                                <Image 
-                                    src={item.src} 
-                                    alt={item.title || `Gallery Image ${idx + 1}`}
-                                    fill
-                                    className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.05]"
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                />
-                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 ease-out-expo flex items-center justify-center">
-                                    <div className="w-14 h-14 rounded-full border border-white/50 bg-black/20 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-500 ease-out-expo">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                    </div>
+                    <div 
+                      key={idx} 
+                      className="group relative cursor-pointer"
+                      onClick={() => openLightbox(idx)}
+                    >
+                        <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
+                            <Image 
+                                src={item.src} 
+                                alt={item.title || `Gallery Image ${idx + 1}`}
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                                <div className="w-12 h-12 rounded-full border border-primary-red text-primary-red flex items-center justify-center mb-4">
+                                    <span className="text-2xl">+</span>
                                 </div>
+                                {item.title && <h4 className="text-xl font-bold uppercase mb-2">{item.title}</h4>}
+                                {item.description && <p className="text-sm font-light">{item.description}</p>}
                             </div>
                         </div>
-                    </ScrollReveal>
+                    </div>
                 ))}
             </div>
+            
+            {/* View More / View Less for gallery could go here if we had lots of images */}
          </div>
       </section>
 
       {/* Navigation & Related */}
-      <section className="py-24 bg-white border-t border-neutral-border">
-         <div className="container mx-auto px-4 lg:px-12">
-             
+      <section className="py-20 border-t border-gray-200">
+         <div className="container mx-auto px-4">
              {/* Navigation */}
-             <div className="flex justify-between items-center mb-32 border-b border-neutral-border pb-8">
+             <div className="flex justify-between items-center mb-20">
                 {prevProject ? (
-                    <Link href={prevProject.link} className="flex items-center gap-6 group flex-1">
-                        <div className="w-12 h-12 rounded-full border border-neutral-border flex items-center justify-center text-neutral-light-grey group-hover:border-primary-red group-hover:text-primary-red transition-colors duration-300">
-                            <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7"></path></svg>
+                    <Link href={prevProject.link} className="flex items-center gap-4 group">
+                        <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
+                            &lt;
                         </div>
-                        <div className="hidden md:flex flex-col">
-                            <span className="text-[10px] text-neutral-light-grey uppercase font-bold tracking-widest mb-1 font-agenda">PREVIOUS</span>
-                            <span className="uppercase font-bold text-[15px] tracking-wide text-neutral-dark-grey group-hover:text-primary-red transition-colors duration-300 font-agenda">{prevProject.title}</span>
-                        </div>
+                        <span className="uppercase font-bold text-sm tracking-wider hidden md:block">{prevProject.title}</span>
                     </Link>
-                ) : <div className="flex-1"></div>}
+                ) : <div></div>}
 
-                <div className="flex-1 flex justify-center">
-                    <Link href="/work" className="w-[50px] h-[50px] flex gap-1 flex-wrap items-center justify-center group p-2 hover:bg-neutral-bg transition-colors rounded-full">
-                        <span className="w-2.5 h-2.5 bg-neutral-light-grey group-hover:bg-primary-red transition-colors"></span>
-                        <span className="w-2.5 h-2.5 bg-neutral-light-grey group-hover:bg-primary-red transition-colors"></span>
-                        <span className="w-2.5 h-2.5 bg-neutral-light-grey group-hover:bg-primary-red transition-colors"></span>
-                        <span className="w-2.5 h-2.5 bg-neutral-light-grey group-hover:bg-primary-red transition-colors"></span>
-                    </Link>
-                </div>
+                <Link href="/work" className="uppercase font-bold text-sm tracking-wider border-b-2 border-black pb-1 hover:text-primary-red hover:border-primary-red transition-all">
+                    All Projects
+                </Link>
 
                 {nextProject ? (
-                    <Link href={nextProject.link} className="flex items-center justify-end gap-6 group flex-1">
-                        <div className="hidden md:flex flex-col text-right">
-                            <span className="text-[10px] text-neutral-light-grey uppercase font-bold tracking-widest mb-1 font-agenda">NEXT</span>
-                            <span className="uppercase font-bold text-[15px] tracking-wide text-neutral-dark-grey group-hover:text-primary-red transition-colors duration-300 font-agenda">{nextProject.title}</span>
-                        </div>
-                        <div className="w-12 h-12 rounded-full border border-neutral-border flex items-center justify-center text-neutral-light-grey group-hover:border-primary-red group-hover:text-primary-red transition-colors duration-300">
-                             <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7"></path></svg>
+                    <Link href={nextProject.link} className="flex items-center gap-4 group">
+                        <span className="uppercase font-bold text-sm tracking-wider hidden md:block">{nextProject.title}</span>
+                        <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-primary-red group-hover:border-primary-red group-hover:text-white transition-all">
+                            &gt;
                         </div>
                     </Link>
-                ) : <div className="flex-1"></div>}
+                ) : <div></div>}
              </div>
 
              {/* Related Projects */}
              {project.relatedProjects && project.relatedProjects.length > 0 && (
-                 <ScrollReveal variant="fade-up">
-                     <h3 className="text-center text-[10px] font-bold uppercase tracking-[0.2em] mb-12 text-primary-gold">RELATED PROJECTS</h3>
+                 <div>
+                     <h3 className="text-center text-2xl font-light uppercase tracking-widest mb-12">Related Projects</h3>
                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                         {project.relatedProjects.map((relatedId, rIdx) => {
+                         {project.relatedProjects.map(relatedId => {
                              const related = projects.find(p => p.id === relatedId);
                              if (!related) return null;
                              return (
-                                 <ScrollReveal key={related.id} variant="fade-up" delay={rIdx * 100}>
-                                     <div className="group text-center cursor-pointer">
-                                         <div className="relative h-[250px] w-full mb-6 overflow-hidden border border-neutral-border p-1 bg-white shadow-sm group-hover:shadow-elegant transition-all duration-500 ease-out-expo img-zoom">
-                                             <div className="relative w-full h-full overflow-hidden">
-                                                 <Link href={related.link}>
-                                                    <Image 
-                                                        src={related.image} 
-                                                        alt={related.title} 
-                                                        fill 
-                                                        className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.08]"
-                                                        sizes="(max-width: 768px) 100vw, 33vw"
-                                                    />
-                                                    <div className="absolute inset-0 bg-neutral-black/0 group-hover:bg-neutral-black/10 transition-colors duration-500 ease-out-expo"></div>
-                                                 </Link>
-                                             </div>
-                                         </div>
-                                         <h5 className="text-[15px] font-bold uppercase mb-2 font-agenda text-neutral-dark-grey group-hover:text-primary-red transition-colors duration-300">
-                                             <Link href={related.link}>{related.title}</Link>
-                                         </h5>
-                                         <p className="text-[11px] text-neutral-light-grey uppercase tracking-[0.1em] font-agenda">{related.description}</p>
+                                 <div key={related.id} className="group text-center">
+                                     <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-2 border-black">
+                                         <Link href={related.link}>
+                                            <Image 
+                                                src={related.image} 
+                                                alt={related.title} 
+                                                fill 
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                         </Link>
                                      </div>
-                                 </ScrollReveal>
+                                     <h5 className="text-sm font-bold uppercase mb-1 hover:text-primary-red transition-colors">
+                                         <Link href={related.link}>{related.title}</Link>
+                                     </h5>
+                                     <p className="text-xs text-neutral-dark-grey uppercase tracking-wider">{related.description}</p>
+                                 </div>
                              );
                          })}
                      </div>
-                 </ScrollReveal>
+                 </div>
              )}
          </div>
       </section>
 
       {/* Lightbox Modal */}
       {isLightboxOpen && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity duration-300 animate-fadeIn"
-          onClick={() => setIsLightboxOpen(false)}
-        >
-          <div className="absolute top-0 right-0 p-6 flex items-center justify-end z-[101]">
-            <button 
-              onClick={(e) => { e.stopPropagation(); setIsLightboxOpen(false); }}
-              className="text-white hover:text-primary-red uppercase text-xs font-bold tracking-widest font-agenda flex items-center gap-2 transition-colors ml-auto"
-            >
-              CLOSE
-              <div className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center hover:border-primary-red">
-                <FaTimes size={14} />
-              </div>
-            </button>
-          </div>
+        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+          <button 
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-6 right-6 text-white hover:text-primary-gold z-[101] transition-colors"
+          >
+            <FaTimes size={24} />
+          </button>
           
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-4 md:left-8 text-white/50 hover:text-white z-[101] transition-all duration-300 hover:-translate-x-1 p-4"
-            aria-label="Previous Image"
+            className="absolute left-4 md:left-8 text-white hover:text-primary-gold z-[101] transition-colors"
           >
-            <FaChevronLeft size={32} strokeWidth={1} />
+            <FaChevronLeft size={32} />
           </button>
           
-          <div 
-             className="relative w-full max-w-6xl h-[80vh] animate-scaleIn"
-             onClick={(e) => e.stopPropagation()}
-          >
+          <div className="relative w-full max-w-6xl h-[80vh]">
             <Image
               src={project.gallery[lightboxIndex].src}
-              alt={project.gallery[lightboxIndex].title || 'Gallery image'}
+              alt={project.gallery[lightboxIndex].title || ''}
               fill
               className="object-contain"
-              sizes="100vw"
-              priority
             />
             {project.gallery[lightboxIndex].title && (
-              <div className="absolute bottom-0 left-0 w-full text-center text-white p-6 bg-gradient-to-t from-black/80 to-transparent pb-8">
-                 <h4 className="text-xl font-bold uppercase tracking-wide font-agenda">{project.gallery[lightboxIndex].title}</h4>
-                 {project.gallery[lightboxIndex].description && <p className="text-sm mt-2 text-white/70 font-agenda font-light">{project.gallery[lightboxIndex].description}</p>}
+              <div className="absolute bottom-4 left-0 w-full text-center text-white bg-black/50 p-2">
+                 <h4 className="text-lg font-bold uppercase">{project.gallery[lightboxIndex].title}</h4>
+                 {project.gallery[lightboxIndex].description && <p className="text-sm">{project.gallery[lightboxIndex].description}</p>}
               </div>
             )}
-            
-            {/* Image Counter */}
-            <div className="absolute bottom-4 right-6 text-white/60 text-xs font-agenda tracking-widest">
-                {lightboxIndex + 1} / {project.gallery.length}
-            </div>
           </div>
 
           <button
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-4 md:right-8 text-white/50 hover:text-white z-[101] transition-all duration-300 hover:translate-x-1 p-4"
-            aria-label="Next Image"
+            className="absolute right-4 md:right-8 text-white hover:text-primary-gold z-[101] transition-colors"
           >
             <FaChevronRight size={32} />
           </button>

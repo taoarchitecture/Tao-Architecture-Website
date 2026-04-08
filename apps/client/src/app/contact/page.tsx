@@ -6,8 +6,8 @@ import MobilePageNav from '@/components/layout/MobilePageNav';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { GlobalSettings } from '@/types';
 import axios from 'axios';
-import ScrollReveal from '@/components/ScrollReveal';
 
+// Hardcoded defaults – used when API fails or settings not configured yet
 const DEFAULTS = {
   contactEmail: 'admin@taoarchitecture.com',
   phoneNumbers: '["+91-744-771-9343 / 44"]',
@@ -24,6 +24,7 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  // Form state
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -73,7 +74,7 @@ export default function Contact() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -95,6 +96,7 @@ export default function Contact() {
     }
   };
 
+  // Parse phone numbers
   let phones: string[] = [];
   try {
     phones = JSON.parse(val('phoneNumbers'));
@@ -102,163 +104,108 @@ export default function Contact() {
     phones = [val('phoneNumbers')];
   }
 
+  // Parse address lines
   const addressLines = (val('address') || '').split('\n');
 
   return (
     <main className="min-h-screen bg-white pt-24 pb-20">
-      
-      {/* Page Header Banner */}
-      <div className="relative z-10 container mx-auto px-4 mt-8 mb-4">
-        <ScrollReveal variant="fade-up">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light font-agenda uppercase tracking-wider mb-2 text-neutral-dark-grey">
-            Contact <span className="font-bold text-primary-gold">Us</span>
-          </h1>
-          <div className="w-16 h-[2px] bg-primary-red mb-8"></div>
-        </ScrollReveal>
-      </div>
-
       <MobilePageNav 
         items={[
-          { id: 'contact-details', label: 'Contact details' },
+          { id: 'contact-details', label: 'Contact us' },
           { id: 'email-form', label: 'Email us' }
         ]}
         activeItem={activeSection}
         onSelect={scrollToSection}
       />
-      
       <div className="container mx-auto px-4">
-        <div className="flex gap-8">
+        <div className="flex">
           {/* Sidebar */}
           <div className="w-1/4 hidden md:block relative">
              <ContactSidebar activeSection={activeSection} />
           </div>
 
           {/* Main Content */}
-          <div className="w-full md:w-3/4">
+          <div className="w-full md:w-3/4 pl-0 md:pl-8">
             
-            <section id="contact-details" className="pt-8">
-              <ScrollReveal variant="fade-up" delay={100} className="mb-12 shadow-elegant transition-shadow duration-500 hover:shadow-xl">
+            {/* Contact Details Section */}
+            <section id="contact-details" className="mb-20 pt-8">
+              <div className="border-t-[10px] border-neutral-dark-grey mb-8">
                 <iframe 
                   src={val('googleMapsUrl')} 
                   width="100%" 
-                  height="400" 
+                  height="310" 
                   style={{ border: 0 }} 
                   allowFullScreen 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full relative z-10 filter grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out-expo"
+                  className="w-full"
                 ></iframe>
-              </ScrollReveal>
+              </div>
 
-              <ScrollReveal variant="fade-up" delay={200} className="pl-4 md:pl-8 border-l pb-2 border-primary-gold mb-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div>
-                    <h4 className="text-[14px] uppercase font-bold tracking-[0.15em] text-primary-gold mb-4 font-agenda">Office</h4>
-                    <p className="font-agenda text-[16px] md:text-[18px] text-neutral-dark-grey leading-relaxed">
-                      <strong className="font-bold">TAO ARCHITECTURE PVT. LTD.</strong><br/>
-                      {addressLines.map((line: string, i: number) => (
-                        <span key={i} className="text-neutral-light-grey block mt-2">{line}</span>
-                      ))}
-                    </p>
-                  </div>
+              <div className="pl-4">
+                <p className="font-agenda text-lg mb-6">
+                  <strong className="font-bold">TAO ARCHITECTURE PVT LTD</strong>,<br/>
+                  {addressLines.map((line: string, i: number) => (
+                    <span key={i}>{line}<br/></span>
+                  ))}
+                </p>
 
-                  <div>
-                    <h4 className="text-[14px] uppercase font-bold tracking-[0.15em] text-primary-gold mb-4 font-agenda">Connect</h4>
-                    <p className="font-agenda text-[16px] md:text-[18px] text-neutral-light-grey mb-8 flex flex-col gap-2">
-                      <span className="flex items-center gap-2">
-                         <strong className="font-bold text-neutral-dark-grey w-16">Call:</strong> 
-                         <a href={`tel:${phones[0]}`} className="hover:text-primary-red transition-colors inline-block sliding-link text-neutral-light-grey">{phones.join(' / ')}</a>
-                      </span>
-                      <span className="flex items-center gap-2">
-                         <strong className="font-bold text-neutral-dark-grey w-16">Email:</strong> 
-                         <a href={`mailto:${val('contactEmail')}`} className="hover:text-primary-red transition-colors inline-block sliding-link text-neutral-light-grey">{val('contactEmail')}</a>
-                      </span>
-                    </p>
+                <p className="font-agenda text-lg mb-8">
+                  <strong className="font-bold">Call</strong> {phones.join(' / ')}<br/>
+                  <strong className="font-bold">Email</strong> {val('contactEmail')}
+                </p>
 
-                    <div className="flex gap-4">
-                      <a href={val('linkedinUrl')} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" className="w-[44px] h-[44px] border border-neutral-border flex items-center justify-center text-neutral-dark-grey hover:bg-neutral-dark-grey hover:border-neutral-dark-grey hover:text-white hover:-translate-y-1 transition-all duration-300 rounded-full shadow-sm hover:shadow-lg focus-ring">
-                        <FaLinkedinIn size={16} />
-                      </a>
-                      <a href={val('facebookUrl')} aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="w-[44px] h-[44px] border border-neutral-border flex items-center justify-center text-neutral-dark-grey hover:bg-neutral-dark-grey hover:border-neutral-dark-grey hover:text-white hover:-translate-y-1 transition-all duration-300 rounded-full shadow-sm hover:shadow-lg focus-ring">
-                        <FaFacebookF size={16} />
-                      </a>
-                      <a href={val('instagramUrl')} aria-label="Instagram" target="_blank" rel="noopener noreferrer" className="w-[44px] h-[44px] border border-neutral-border flex items-center justify-center text-neutral-dark-grey hover:bg-neutral-dark-grey hover:border-neutral-dark-grey hover:text-white hover:-translate-y-1 transition-all duration-300 rounded-full shadow-sm hover:shadow-lg focus-ring">
-                        <FaInstagram size={16} />
-                      </a>
-                    </div>
-                  </div>
+                <div className="flex gap-3">
+                  <a href={val('linkedinUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                    <FaLinkedinIn size={14} />
+                  </a>
+                  <a href={val('facebookUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                    <FaFacebookF size={14} />
+                  </a>
+                  <a href={val('instagramUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                    <FaInstagram size={14} />
+                  </a>
                 </div>
-              </ScrollReveal>
+              </div>
             </section>
 
             {/* Email Form Section */}
-            <section id="email-form" className="mb-20 pt-16">
-              <ScrollReveal variant="fade-up">
-                <div className="bg-neutral-bg-warm p-8 md:p-12 shadow-sm border border-neutral-border">
-                  <h2 className="text-3xl font-light mb-10 font-agenda uppercase text-neutral-dark-grey tracking-wider">Email us</h2>
-                  
-                  {submitted ? (
-                    <div className="py-16 text-center animate-fadeInUp">
-                      <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                      </div>
-                      <p className="text-xl font-bold font-agenda text-neutral-dark-grey mb-2 uppercase tracking-wide">Thank you for your message!</p>
-                      <p className="text-base text-neutral-light-grey mb-8 font-agenda">We&apos;ll get back to you as soon as possible.</p>
-                      <button
-                        onClick={() => setSubmitted(false)}
-                        className="btn btn-outline"
-                      >
-                        SEND ANOTHER MESSAGE
-                      </button>
-                    </div>
-                  ) : (
-                    <form className="space-y-8" onSubmit={handleSubmit}>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="relative group">
-                          <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent border-b border-neutral-border py-3 px-0 focus:border-primary-red transition-colors duration-300 outline-none font-agenda text-neutral-dark-grey placeholder-transparent peer" placeholder="First Name*" required />
-                          <label htmlFor="firstName" className="absolute left-0 -top-3.5 text-xs font-bold tracking-widest text-neutral-light-grey transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-placeholder-shown:font-normal peer-focus:-top-3.5 peer-focus:text-xs peer-focus:font-bold peer-focus:text-primary-red uppercase">First Name*</label>
-                        </div>
-                        <div className="relative group">
-                          <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent border-b border-neutral-border py-3 px-0 focus:border-primary-red transition-colors duration-300 outline-none font-agenda text-neutral-dark-grey placeholder-transparent peer" placeholder="Last Name*" required />
-                          <label htmlFor="lastName" className="absolute left-0 -top-3.5 text-xs font-bold tracking-widest text-neutral-light-grey transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-placeholder-shown:font-normal peer-focus:-top-3.5 peer-focus:text-xs peer-focus:font-bold peer-focus:text-primary-red uppercase">Last Name*</label>
-                        </div>
-                      </div>
-                      
-                      <div className="relative group">
-                        <input type="text" id="companyName" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-transparent border-b border-neutral-border py-3 px-0 focus:border-primary-red transition-colors duration-300 outline-none font-agenda text-neutral-dark-grey placeholder-transparent peer" placeholder="Company Name" />
-                        <label htmlFor="companyName" className="absolute left-0 -top-3.5 text-xs font-bold tracking-widest text-neutral-light-grey transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-placeholder-shown:font-normal peer-focus:-top-3.5 peer-focus:text-xs peer-focus:font-bold peer-focus:text-primary-red uppercase">Company Name</label>
-                      </div>
-
-                      <div className="relative group">
-                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-b border-neutral-border py-3 px-0 focus:border-primary-red transition-colors duration-300 outline-none font-agenda text-neutral-dark-grey placeholder-transparent peer" placeholder="Email ID*" required />
-                        <label htmlFor="email" className="absolute left-0 -top-3.5 text-xs font-bold tracking-widest text-neutral-light-grey transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-placeholder-shown:font-normal peer-focus:-top-3.5 peer-focus:text-xs peer-focus:font-bold peer-focus:text-primary-red uppercase">Email ID*</label>
-                      </div>
-
-                      <div className="relative group">
-                        <input type="text" id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-transparent border-b border-neutral-border py-3 px-0 focus:border-primary-red transition-colors duration-300 outline-none font-agenda text-neutral-dark-grey placeholder-transparent peer" placeholder="Subject*" required />
-                        <label htmlFor="subject" className="absolute left-0 -top-3.5 text-xs font-bold tracking-widest text-neutral-light-grey transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-placeholder-shown:font-normal peer-focus:-top-3.5 peer-focus:text-xs peer-focus:font-bold peer-focus:text-primary-red uppercase">Subject*</label>
-                      </div>
-                      
-                      <div className="relative group">
-                        <textarea id="message" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-b border-neutral-border py-3 px-0 focus:border-primary-red transition-colors duration-300 outline-none font-agenda text-neutral-dark-grey placeholder-transparent peer resize-none" placeholder="Message"></textarea>
-                        <label htmlFor="message" className="absolute left-0 -top-3.5 text-xs font-bold tracking-widest text-neutral-light-grey transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-placeholder-shown:font-normal peer-focus:-top-3.5 peer-focus:text-xs peer-focus:font-bold peer-focus:text-primary-red uppercase">Message</label>
-                      </div>
-                      
-                      <div className="flex justify-end pt-4">
-                        <button type="submit" disabled={submitting} className={`btn btn-primary min-w-[160px] ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}>
-                          {submitting ? (
-                            <span className="flex items-center gap-2">
-                               <div className="w-4 h-4 border-2 border-white/30 border-t-white border-solid rounded-full animate-spinSlow"></div>
-                               SENDING
-                            </span>
-                          ) : 'SEND MESSAGE'}
-                        </button>
-                      </div>
-                    </form>
-                  )}
+            <section id="email-form" className="mb-20 border-t-[10px] border-neutral-dark-grey pt-10 px-8 bg-white">
+              <h2 className="text-fluid-h1 font-light mb-8 font-agenda">Email us</h2>
+              
+              {submitted ? (
+                <div className="py-12 text-center">
+                  <p className="text-lg font-agenda text-neutral-dark-grey mb-4">Thank you for your message!</p>
+                  <p className="text-sm text-neutral-light-grey mb-6">We&apos;ll get back to you as soon as possible.</p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white"
+                  >
+                    Send Another Message
+                  </button>
                 </div>
-              </ScrollReveal>
+              ) : (
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  </div>
+                  
+                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" />
+                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  
+                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda"></textarea>
+                  
+                  <div className="flex justify-end">
+                    <button type="submit" disabled={submitting} className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white disabled:opacity-50">
+                      {submitting ? 'Sending...' : 'Send'}
+                    </button>
+                  </div>
+                </form>
+              )}
             </section>
+
           </div>
         </div>
       </div>

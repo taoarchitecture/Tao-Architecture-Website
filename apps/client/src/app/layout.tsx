@@ -3,7 +3,6 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
-import BackToTop from '@/components/BackToTop'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://taoarchitecture.com'),
@@ -102,7 +101,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body className="font-agenda antialiased text-neutral-medium-grey">
         <script
           type="application/ld+json"
@@ -112,7 +111,6 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-        <BackToTop />
       </body>
     </html>
   )
