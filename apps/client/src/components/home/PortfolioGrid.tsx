@@ -15,6 +15,7 @@ export interface PortfolioItem {
   link: string;
   heightClass?: string;
   overlayStyle?: boolean;
+  overlayCtaClass?: string;
   disciplines?: string; // e.g. "ARCHITECTURE • INTERIORS • LANDSCAPE"
 }
 
@@ -39,7 +40,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
   return (
     <motion.div variants={cardVariants} className="mb-14 group">
       {/* Image wrapper with overlay */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden w-full inline-block">
         {/* Category Badge — overlaid on top-left of image */}
         <div className="absolute top-0 left-0 z-20">
           <span className="portfolio-badge shadow-premium-sm">
@@ -49,7 +50,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
 
         {/* Image */}
         <Link href={item.link} className="block relative focus-ring" aria-label={`View ${item.title}`}>
-          <div className={`relative w-full ${item.heightClass || 'h-[390px]'} overflow-hidden`}>
+          <div className={`relative w-full ${item.heightClass || 'min-h-[460px]'} overflow-hidden`}>
             <Image
               src={item.image}
               alt={item.title}
@@ -59,12 +60,12 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
               quality={90}
             />
             {/* Subtle gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40 transition-opacity duration-500 group-hover:opacity-90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/30 transition-opacity duration-500 group-hover:opacity-60" />
           </div>
         </Link>
 
         {/* Text overlay — stacked white line boxes on top of image */}
-        <div className="absolute top-[14%] left-0 z-10 max-w-[85%] pointer-events-none">
+        <div className="absolute top-[12%] left-0 z-10 max-w-[85%] pointer-events-none">
           <div className="flex flex-col items-start pointer-events-auto">
             {lines.map((line, index) => (
               <div
@@ -82,30 +83,17 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
                 </h3>
               </div>
             ))}
+            
+            {/* OVERLAY CTA BUTTON */}
+            <div className="mt-5 pl-4 md:pl-5">
+              <Link
+                href={item.link}
+                className={`inline-block border px-3.5 py-1 text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] transition-colors duration-300 glass-subtle ${item.overlayCtaClass || 'border-white text-white hover:bg-white hover:text-neutral-dark-grey'}`}
+              >
+                See Projects
+              </Link>
+            </div>
           </div>
-        </div>
-      </div>
-
-      {/* Below-image: disciplines + description + CTA */}
-      <div className="mt-4 pl-0">
-        {item.disciplines && (
-          <p className="tao-fs-sub font-bold font-agenda uppercase tracking-[0.1em] text-primary-red mb-1.5 opacity-90">
-            {item.disciplines}
-          </p>
-        )}
-        <div className="mt-3 overflow-hidden">
-          <Magnetic>
-            <Link
-              href={item.link}
-              className="group/btn inline-flex items-center gap-2 tao-fs-sub font-normal font-agenda text-neutral-dark-grey hover:text-primary-red transition-colors duration-300 relative"
-            >
-              <span className="relative z-10">See Projects</span>
-              <svg className="w-3 h-3 relative z-10 transform transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-              <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-primary-red scale-x-0 origin-left transition-transform duration-300 group-hover/btn:scale-x-100" />
-            </Link>
-          </Magnetic>
         </div>
       </div>
     </motion.div>
@@ -116,7 +104,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
 const StandardCard = ({ item }: { item: PortfolioItem }) => (
   <motion.div variants={cardVariants} className="mb-14 group">
     {/* Image with category badge */}
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden w-full inline-block">
       {/* Category Badge — top-left of image */}
       <div className="absolute top-0 left-0 z-10">
         <span className="portfolio-badge shadow-premium-sm">
@@ -126,7 +114,7 @@ const StandardCard = ({ item }: { item: PortfolioItem }) => (
 
       {/* Image */}
       <Link href={item.link} className="block relative focus-ring" aria-label={`View ${item.title}`}>
-        <div className={`relative w-full ${item.heightClass || 'h-[280px]'} overflow-hidden`}>
+        <div className={`relative w-full ${item.heightClass || 'min-h-[320px] aspect-[4/3]'} overflow-hidden`}>
           <Image
             src={item.image}
             alt={item.title}
@@ -148,24 +136,18 @@ const StandardCard = ({ item }: { item: PortfolioItem }) => (
           {item.disciplines}
         </p>
       )}
-      <h3 className="tao-fs-thumb-h font-normal font-agenda leading-snug text-neutral-dark-grey mb-3 max-w-md transition-colors duration-300 group-hover:text-primary-gold">
+      <h3 className="tao-fs-thumb-h font-normal font-agenda leading-snug text-neutral-dark-grey mb-3 transition-colors duration-300">
         <Link href={item.link} className="hover:text-primary-red transition-colors duration-300">
           {item.title}
         </Link>
       </h3>
-      <div className="overflow-hidden">
-        <Magnetic>
-          <Link
+      <div className="mt-1">
+         <Link
             href={item.link}
-            className="group/btn inline-flex items-center gap-2 tao-fs-sub font-normal font-agenda text-neutral-dark-grey hover:text-primary-red transition-colors duration-300 relative"
-          >
-            <span className="relative z-10">See Projects</span>
-            <svg className="w-3 h-3 relative z-10 transform transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-primary-red scale-x-0 origin-left transition-transform duration-300 group-hover/btn:scale-x-100" />
-          </Link>
-        </Magnetic>
+            className="inline-block border border-neutral-dark-grey text-neutral-dark-grey px-3.5 py-[5px] text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] hover:bg-neutral-dark-grey hover:text-white transition-colors duration-300"
+         >
+            See Projects
+         </Link>
       </div>
     </div>
   </motion.div>

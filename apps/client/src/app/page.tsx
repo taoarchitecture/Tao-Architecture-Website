@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import HeroSlider from '@/components/home/HeroSlider';
-import { getHomeConfig, getProjects } from '@/lib/api';
-import { Project } from '@/types';
+import { getHomeConfig } from '@/lib/api';
 import { PortfolioItem } from '@/components/home/PortfolioGrid';
 
 const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
@@ -28,37 +27,103 @@ const defaultSlides = [
 ];
 
 export default async function Home() {
-  const [homeConfig, projects] = await Promise.all([
-    getHomeConfig(),
-    getProjects()
+  const [homeConfig] = await Promise.all([
+    getHomeConfig()
   ]);
 
-  const featuredProjectsRaw = (projects as Project[])
-    .filter(p => p.isFeatured)
-    .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
-
-  const midPoint = Math.ceil(featuredProjectsRaw.length / 2);
-
-  const featuredProjects = featuredProjectsRaw.map((p, idx) => ({
-    id: String(p.id),
-    category: p.category,
-    title: p.title,
-    titleLines: p.title.split(' ').length > 4
-      ? [p.title.split(' ').slice(0, Math.ceil(p.title.split(' ').length / 2)).join(' '),
-         p.title.split(' ').slice(Math.ceil(p.title.split(' ').length / 2)).join(' ')]
-      : [p.title],
-    subheading: p.category,
-    disciplines: p.category ? p.category.toUpperCase() : undefined,
-    image: p.coverImage || '/img/placeholder.jpg',
-    link: `/projects/${p.slug}`,
-    // Left column (indices 0..midPoint-1) get overlay style, right column gets standard
-    overlayStyle: idx < midPoint,
-  } as PortfolioItem));
+  // Exact data from the mockup to recreate the Category Grid
+  const homeGridItems: PortfolioItem[] = [
+    // --- LEFT COLUMN (5 items) ---
+    {
+      id: 'corporate',
+      category: 'CORPORATE',
+      title: 'Creating collaborative and contemporary work culture',
+      titleLines: ['Creating collaborative', 'and contemporary', 'work culture'],
+      image: '/img/corporate/nyati-unitree/3unitree-facade-bg.jpg',
+      link: '/work#corporate',
+      overlayStyle: true,
+      overlayCtaClass: 'border-white text-white bg-white/10 hover:bg-white hover:text-black',
+    },
+    {
+      id: 'commercial',
+      category: 'COMMERCIAL',
+      disciplines: 'ARCHITECTURE • RETAIL • RECREATION',
+      title: 'Formulating energetic architecture to blend commerce and recreation',
+      image: '/img/commercial/manikchand-plaza/manikchand-plaza-bg.jpg',
+      link: '/work#commercial',
+      overlayStyle: false,
+    },
+    {
+      id: 'institutional',
+      category: 'INSTITUTIONAL',
+      disciplines: 'ARCHITECTURE • INTERIORS • LANDSCAPE • ART INSTALLATION',
+      title: 'Nurturing learning through interactive spaces',
+      image: '/img/institution/suzlon-corporate-learning-centre/suzlon-corporate-learning-centre-bg.jpg',
+      link: '/work#institutional',
+      overlayStyle: false,
+    },
+    {
+      id: 'tao-the-way',
+      category: 'TAO - THE WAY',
+      disciplines: 'SUSTAINABLE • ECO-CONSCIOUS',
+      title: 'Breaking barriers between indoors and outdoors',
+      image: '/img/villa/vrindavan/vrindavan-bg.jpg',
+      link: '/work#luxuryvillas',
+      overlayStyle: false,
+    },
+    {
+      id: 'products',
+      category: 'PRODUCTS',
+      title: 'Productive and social surfaces',
+      image: '/img/products/desking-and-tables/desking-and-tables-bg.jpg',
+      link: '/work#products',
+      overlayStyle: false,
+    },
+    
+    // --- RIGHT COLUMN (4 items) ---
+    {
+      id: 'luxury-villas',
+      category: 'LUXURY VILLAS',
+      disciplines: 'ARCHITECTURE • INTERIORS • LANDSCAPE • ART INSTALLATION',
+      title: 'Rendering homes as personal resorts',
+      image: '/img/villa/azaan/10-bg.jpg',
+      link: '/work#luxuryvillas',
+      overlayStyle: false,
+    },
+    {
+      id: 'cozy-homes',
+      category: 'COZY HOMES',
+      disciplines: 'ARCHITECTURE • INTERIORS • CRAFT • LANDSCAPE',
+      title: 'Nourishing lives through intimate and sensitive spaces',
+      image: '/img/cozy_homes/garden-villa/garden-villa-bg.jpg',
+      link: '/work#cozyhomes',
+      overlayStyle: false,
+    },
+    {
+      id: 'luxury-apartments',
+      category: 'LUXURY APARTMENTS',
+      disciplines: 'INTERIORS • FURNITURE • ART INSTALLATION',
+      title: 'Forming nests around the sky',
+      image: '/img/luxuryappartments/aurum/aurum-bg.jpg',
+      link: '/work#apartments',
+      overlayStyle: false,
+    },
+    {
+      id: 'housing',
+      category: 'HOUSING',
+      title: 'Formulating cohesive and socio-culture environments',
+      titleLines: ['Formulating cohesive', 'and socio-culture', 'environments'],
+      image: '/img/housing/pinewood/pinewood-bg.jpg',
+      link: '/work#housing',
+      overlayStyle: true,
+      overlayCtaClass: 'border-neutral-dark-grey text-neutral-dark-grey bg-white/20 hover:bg-neutral-dark-grey hover:text-white',
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-white">
       <HeroSlider slides={homeConfig?.heroSlides?.length ? homeConfig.heroSlides : defaultSlides} />
-      <PortfolioGrid items={featuredProjects} />
+      <PortfolioGrid items={homeGridItems} />
       <HomeBottomSection config={homeConfig} />
     </main>
   );

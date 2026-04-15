@@ -284,9 +284,9 @@ const Navbar = () => {
                 placeholder="Type to search projects, sectors, categories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xl md:text-3xl border-b-2 border-neutral-medium-grey/30 pb-4 focus:outline-none focus:border-primary-red transition-colors bg-transparent font-light text-neutral-dark-grey"
+                className="w-full text-xl md:text-3xl border-x-0 border-t-0 border-b-2 border-neutral-medium-grey/30 px-0 pb-4 pr-12 focus:ring-0 ring-0 focus:outline-none focus-visible:outline-none focus:shadow-none focus:border-primary-red transition-colors bg-transparent font-light text-neutral-dark-grey"
              />
-             <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-medium-grey/50" size={24} />
+             <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-medium-grey/50 hover:text-primary-red transition-colors cursor-pointer" size={24} />
           </div>
 
           {/* Autocomplete Results */}
