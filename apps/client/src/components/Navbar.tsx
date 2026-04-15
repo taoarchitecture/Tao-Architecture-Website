@@ -4,20 +4,43 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaTimes } from 'react-icons/fa';
+import { projects } from '@/data/projects';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Close mobile menu on route change
+  // Close mobile menu and search on route change
   useEffect(() => {
     setIsOpen(false);
     setOpenDropdown(null);
+    setIsSearchOpen(false);
+    setSearchQuery('');
   }, [pathname]);
+
+  // Focus search input when opened
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+        setTimeout(() => searchInputRef.current?.focus(), 100);
+    }
+  }, [isSearchOpen]);
+
+  // Autocomplete matching
+  const searchResults = searchQuery.trim() !== '' 
+      ? projects.filter(p => 
+          p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (p.description && p.description.toLowerCase().includes(searchQuery.toLowerCase()))
+        )
+      : [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -152,9 +175,10 @@ const Navbar = () => {
               </li>
             ))}
 
-            {/* Search icon */}
+              {/* Search icon */}
             <li className="pl-5 border-l border-neutral-border">
               <button
+                onClick={() => setIsSearchOpen(true)}
                 className="text-neutral-medium-grey hover:text-primary-red transition-colors duration-200 p-1"
                 aria-label="Search"
               >
@@ -170,7 +194,16 @@ const Navbar = () => {
         ref={mobileMenuRef}
         className={`mobile-menu md:hidden ${isOpen ? 'open' : ''}`}
       >
-        <div className="bg-white border-t border-neutral-border px-4 py-3">
+        <div className="bg-white border-t border-neutral-border px-4 py-3 pb-8">
+          {/* Mobile Search Button */}
+          <button 
+             onClick={() => setIsSearchOpen(true)}
+             className="w-full flex items-center justify-between py-3.5 mb-2 border-b border-neutral-border text-neutral-medium-grey hover:text-primary-red transition-colors"
+          >
+             <span className="font-agenda font-bold tracking-[0.05em]">SEARCH</span>
+             <FaSearch size={14} />
+          </button>
+
           <ul className="font-agenda tao-fs-menu font-bold tracking-[0.05em] space-y-0">
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -224,6 +257,68 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      {/* Fullscreen Search Overlay */}
+      <div 
+        className={`fixed inset-0 bg-white z-[100] transition-all duration-300 flex flex-col ${isSearchOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      >
+        <div className="container mx-auto px-4 py-8 max-w-5xl flex-1 flex flex-col mt-4 md:mt-10">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-xl md:text-2xl font-agenda font-bold tracking-widest text-[#a68a56] uppercase">Search Projects</h2>
+            <button 
+                onClick={() => setIsSearchOpen(false)}
+                className="text-neutral-medium-grey hover:text-primary-red transition-colors p-2 bg-gray-50 rounded-full"
+            >
+                <FaTimes size={20} />
+            </button>
+          </div>
+          
+          {/* Search Input */}
+          <div className="relative mb-8">
+             <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Type to search projects, sectors, categories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full text-xl md:text-3xl border-b-2 border-neutral-medium-grey/30 pb-4 focus:outline-none focus:border-primary-red transition-colors bg-transparent font-light text-neutral-dark-grey"
+             />
+             <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-medium-grey/50" size={24} />
+          </div>
+
+          {/* Autocomplete Results */}
+          <div className="flex-1 overflow-y-auto pb-8 custom-scrollbar">
+            {searchQuery.trim() !== '' && searchResults.length === 0 && (
+                <div className="text-center mt-16 text-neutral-medium-grey">
+                    <FaSearch className="mx-auto mb-4 opacity-20" size={40} />
+                    <p className="text-lg">No projects found for "{searchQuery}"</p>
+                </div>
+            )}
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+               {searchResults.slice(0, 12).map(project => (
+                   <Link 
+                        key={project.id} 
+                        href={project.link}
+                        className="group flex flex-col"
+                   >
+                        <div className="relative w-full aspect-[4/3] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                           <Image 
+                               src={project.image} 
+                               alt={project.title} 
+                               fill 
+                               className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                           />
+                        </div>
+                        <h4 className="font-bold text-sm tracking-widest uppercase text-neutral-dark-grey group-hover:text-primary-red transition-colors font-agenda">{project.title}</h4>
+                        <p className="text-[10px] text-neutral-medium-grey/80 tracking-widest uppercase mt-1">{project.category}</p>
+                   </Link>
+               ))}
+            </div>
+          </div>
         </div>
       </div>
     </nav>

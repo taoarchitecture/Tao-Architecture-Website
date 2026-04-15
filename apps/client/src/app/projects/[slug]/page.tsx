@@ -287,17 +287,19 @@ export default function ProjectDetail() {
             <FaChevronLeft size={32} />
           </button>
           
-          <div className="relative w-full max-w-6xl h-[80vh]">
-            <Image
-              src={project.gallery[lightboxIndex].src}
-              alt={project.gallery[lightboxIndex].title || ''}
-              fill
-              className="object-contain"
-            />
-            {project.gallery[lightboxIndex].title && (
-              <div className="absolute bottom-4 left-0 w-full text-center text-white bg-black/50 p-2">
-                 <h4 className="text-lg font-bold uppercase">{project.gallery[lightboxIndex].title}</h4>
-                 {project.gallery[lightboxIndex].description && <p className="text-sm">{project.gallery[lightboxIndex].description}</p>}
+          <div className="relative w-full max-w-6xl h-[85vh] flex flex-col justify-center">
+            <div className="relative w-full h-[75vh] mb-4">
+              <Image
+                src={project.gallery[lightboxIndex].src}
+                alt={project.gallery[lightboxIndex].title || ''}
+                fill
+                className="object-contain"
+              />
+            </div>
+            {(project.gallery[lightboxIndex].title || project.gallery[lightboxIndex].description) && (
+              <div className="w-full text-center text-white mt-2 px-4 shrink-0">
+                 {project.gallery[lightboxIndex].title && <h4 className="text-lg font-bold uppercase tracking-wider">{project.gallery[lightboxIndex].title}</h4>}
+                 {project.gallery[lightboxIndex].description && <p className="text-sm font-light text-gray-300 mt-1 max-w-3xl mx-auto">{project.gallery[lightboxIndex].description}</p>}
               </div>
             )}
           </div>
