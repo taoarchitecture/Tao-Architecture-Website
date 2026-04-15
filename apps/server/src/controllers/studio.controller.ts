@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import prisma from '../prisma';
+import { deleteUploadedFile } from '../middleware/upload.middleware';
 
 // --- Team Members ---
 
@@ -52,6 +53,8 @@ export const updateTeamMember = async (req: Request, res: Response) => {
 
     let image = existing.image;
     if (file) {
+      // Delete old photo from Cloudinary or local disk
+      if (existing.image) await deleteUploadedFile(existing.image);
       image = file.path.includes('http') ? file.path : `/uploads/${file.filename}`;
     }
 

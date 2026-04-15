@@ -1,157 +1,217 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import Magnetic from '@/components/ui/Magnetic';
 
 export interface PortfolioItem {
   id: string;
   category: string;
   title: string;
-  titleLines?: string[]; // Manual line breaks for overlay style
+  titleLines?: string[];
   subheading?: string;
   image: string;
   link: string;
   heightClass?: string;
   overlayStyle?: boolean;
+  disciplines?: string; // e.g. "ARCHITECTURE • INTERIORS • LANDSCAPE"
 }
 
-const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
-  // CORPORATE / OVERLAY STYLE
-  if (item.overlayStyle) {
-    // Use manual titleLines if available, otherwise fallback to simple split (though manual is preferred)
-    const lines = item.titleLines || [item.title];
-
-    return (
-      <div className="mb-16 group relative w-[90%] mx-auto">
-        <div className="relative border-t-[8px] border-[#222] pt-0">
-           {/* Badge on Top Left - Overlapping the border */}
-           <div className="absolute -top-[15px] left-0 z-30">
-             <div className="bg-[#222] text-white px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] shadow-sm">
-                {item.category}
-             </div>
-           </div>
-
-          {/* Image */}
-          <Link href={item.link} className="block relative overflow-hidden">
-            <div className={`relative w-full ${item.heightClass || 'h-[380px]'} overflow-hidden`}>
-               <Image
-                 src={item.image}
-                 alt={item.title}
-                 fill
-                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                 sizes="(max-width: 768px) 100vw, 50vw"
-                 quality={90}
-               />
-            </div>
-          </Link>
-
-          {/* Overlay "Line Boxes" Content */}
-          <div className="absolute top-[12%] left-0 z-20 max-w-[85%] pointer-events-none">
-             <div className="flex flex-col items-start space-y-0 pointer-events-auto">
-               {lines.map((line, index) => (
-                 <div key={index} className="bg-white px-4 py-2 md:px-6 md:py-2.5 border-b border-[#cbd5e0] w-fit shadow-sm">
-                   <h3 className="text-[16px] md:text-[22px] font-light leading-none text-gray-800 whitespace-nowrap">
-                     <Link href={item.link} className="hover:text-gray-500 transition-colors">
-                        {line}
-                     </Link>
-                   </h3>
-                 </div>
-               ))}
-               
-               {/* Button */}
-               <div className="mt-4 ml-6">
-                 <Link 
-                   href={item.link}
-                   className="inline-block border border-white bg-white/10 backdrop-blur-[2px] text-white px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-sm"
-                   style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
-                 >
-                   See Projects
-                 </Link>
-               </div>
-             </div>
-          </div>
-        </div>
-      </div>
-    );
+// Animation variants
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number] // easeOutExpo
+    } 
   }
+};
 
-  // STANDARD STYLE (Commercial, Luxury Villas)
+// ─── Large Overlay Card (left column main cards) ──────────────────────────────
+// Category badge on image bottom-left, title overlay on top, SEE PROJECTS below
+const OverlayCard = ({ item }: { item: PortfolioItem }) => {
+  const lines = item.titleLines || [item.title];
+
   return (
-    <div className="mb-16 group w-[90%] mx-auto">
-      <div className="relative border-t-[8px] border-[#222] pt-0">
-        {/* Badge on Image */}
-        <div className="absolute top-4 left-4 z-10">
-          <div className="bg-[#222] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] shadow-sm">
+    <motion.div variants={cardVariants} className="mb-14 group">
+      {/* Image wrapper with overlay */}
+      <div className="relative overflow-hidden">
+        {/* Category Badge — overlaid on top-left of image */}
+        <div className="absolute top-0 left-0 z-20">
+          <span className="portfolio-badge shadow-premium-sm">
             {item.category}
-          </div>
+          </span>
         </div>
-        
-        <Link href={item.link} className="block relative overflow-hidden focus-ring rounded-sm">
-          <div className={`relative w-full ${item.heightClass || 'h-[320px]'} overflow-hidden`}>
-             <Image
-               src={item.image}
-               alt={item.title}
-               fill
-               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-               sizes="(max-width: 768px) 100vw, 50vw"
-               quality={90}
-             />
+
+        {/* Image */}
+        <Link href={item.link} className="block relative focus-ring" aria-label={`View ${item.title}`}>
+          <div className={`relative w-full ${item.heightClass || 'h-[390px]'} overflow-hidden`}>
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-cover img-hover-zoom"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={90}
+            />
+            {/* Subtle gradient */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40 transition-opacity duration-500 group-hover:opacity-90" />
           </div>
         </Link>
-      </div>
-      
-      <div className="mt-5 font-agenda pl-1">
-        {item.subheading && (
-          <h4 className="text-[10px] text-primary-red mb-2 font-bold uppercase tracking-widest">
-            {item.subheading}
-          </h4>
-        )}
-        <h3 className="text-xl md:text-2xl font-light leading-snug text-neutral-dark-grey mb-5 max-w-md">
-          <Link href={item.link} className="sliding-link hover:text-neutral-black transition-colors duration-300">
-            {item.title}
-          </Link>
-        </h3>
-        <div>
-          <Link 
-            href={item.link}
-            className="btn btn-outline hover:bg-neutral-black hover:text-white"
-          >
-            See Projects
-          </Link>
+
+        {/* Text overlay — stacked white line boxes on top of image */}
+        <div className="absolute top-[14%] left-0 z-10 max-w-[85%] pointer-events-none">
+          <div className="flex flex-col items-start pointer-events-auto">
+            {lines.map((line, index) => (
+              <div
+                key={index}
+                className="bg-white px-4 py-2 md:px-5 md:py-2.5 border-b border-gray-100 w-fit shadow-premium-sm relative overflow-hidden"
+              >
+                <div 
+                  className="absolute inset-0 bg-neutral-black/5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                />
+                <h3 className="tao-fs-ovr-h font-normal leading-none font-agenda text-neutral-dark-grey whitespace-nowrap relative z-10">
+                  <Link href={item.link} className="hover:text-primary-red transition-colors duration-300">
+                    {line}
+                  </Link>
+                </h3>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Below-image: disciplines + description + CTA */}
+      <div className="mt-4 pl-0">
+        {item.disciplines && (
+          <p className="tao-fs-sub font-bold font-agenda uppercase tracking-[0.1em] text-primary-red mb-1.5 opacity-90">
+            {item.disciplines}
+          </p>
+        )}
+        <div className="mt-3 overflow-hidden">
+          <Magnetic>
+            <Link
+              href={item.link}
+              className="group/btn inline-flex items-center gap-2 tao-fs-sub font-normal font-agenda text-neutral-dark-grey hover:text-primary-red transition-colors duration-300 relative"
+            >
+              <span className="relative z-10">See Projects</span>
+              <svg className="w-3 h-3 relative z-10 transform transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+              <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-primary-red scale-x-0 origin-left transition-transform duration-300 group-hover/btn:scale-x-100" />
+            </Link>
+          </Magnetic>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
+// ─── Standard Card (right column / smaller cards) ────────────────────────────
+const StandardCard = ({ item }: { item: PortfolioItem }) => (
+  <motion.div variants={cardVariants} className="mb-14 group">
+    {/* Image with category badge */}
+    <div className="relative overflow-hidden">
+      {/* Category Badge — top-left of image */}
+      <div className="absolute top-0 left-0 z-10">
+        <span className="portfolio-badge shadow-premium-sm">
+          {item.category}
+        </span>
+      </div>
+
+      {/* Image */}
+      <Link href={item.link} className="block relative focus-ring" aria-label={`View ${item.title}`}>
+        <div className={`relative w-full ${item.heightClass || 'h-[280px]'} overflow-hidden`}>
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover img-hover-zoom"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={90}
+          />
+          {/* Subtle hover overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-700" />
+        </div>
+      </Link>
+    </div>
+
+    {/* Below-image content */}
+    <div className="mt-4 pl-0">
+      {item.disciplines && (
+        <p className="tao-fs-sub font-bold font-agenda uppercase tracking-[0.1em] text-primary-red mb-1.5 opacity-90">
+          {item.disciplines}
+        </p>
+      )}
+      <h3 className="tao-fs-thumb-h font-normal font-agenda leading-snug text-neutral-dark-grey mb-3 max-w-md transition-colors duration-300 group-hover:text-primary-gold">
+        <Link href={item.link} className="hover:text-primary-red transition-colors duration-300">
+          {item.title}
+        </Link>
+      </h3>
+      <div className="overflow-hidden">
+        <Magnetic>
+          <Link
+            href={item.link}
+            className="group/btn inline-flex items-center gap-2 tao-fs-sub font-normal font-agenda text-neutral-dark-grey hover:text-primary-red transition-colors duration-300 relative"
+          >
+            <span className="relative z-10">See Projects</span>
+            <svg className="w-3 h-3 relative z-10 transform transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-primary-red scale-x-0 origin-left transition-transform duration-300 group-hover/btn:scale-x-100" />
+          </Link>
+        </Magnetic>
+      </div>
+    </div>
+  </motion.div>
+);
+
+// ─── Grid ─────────────────────────────────────────────────────────────────────
 const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
   if (!items || items.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-16 bg-white max-w-6xl text-center">
-        <p className="text-neutral-light-grey">No projects found.</p>
+      <div className="container mx-auto px-4 py-20 bg-white max-w-6xl text-center">
+        <p className="text-neutral-light-grey text-sm tracking-wide">No projects found.</p>
       </div>
     );
   }
 
-  // Split items manually for 2-column masonry simulation
-  // Ensure we have enough items to split, otherwise just put all in left
   const midPoint = Math.ceil(items.length / 2);
-  const leftCol = items.slice(0, midPoint);
+  const leftCol  = items.slice(0, midPoint);
   const rightCol = items.slice(midPoint);
 
   return (
-    <div className="container mx-auto px-4 py-16 bg-white max-w-6xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <section className="container mx-auto px-4 py-16 bg-white max-w-6xl">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ staggerChildren: 0.2 }}
+      >
+        {/* Left Column */}
         <div className="flex flex-col">
-          {leftCol.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
-          ))}
+          {leftCol.map((item) =>
+            item.overlayStyle
+              ? <OverlayCard key={item.id} item={item} />
+              : <StandardCard key={item.id} item={item} />
+          )}
         </div>
-        <div className="flex flex-col md:pt-32"> {/* Staggered Right Column */}
-          {rightCol.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
-          ))}
+        {/* Right Column — staggered down */}
+        <div className="flex flex-col md:pt-24">
+          {rightCol.map((item) =>
+            item.overlayStyle
+              ? <OverlayCard key={item.id} item={item} />
+              : <StandardCard key={item.id} item={item} />
+          )}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 };
 

@@ -13,16 +13,20 @@ interface MobilePageNavProps {
 
 const MobilePageNav = ({ items, activeItem, onSelect }: MobilePageNavProps) => {
   return (
-    <div className="md:hidden sticky top-[62px] z-40 bg-white border-b border-gray-100 shadow-sm overflow-x-auto transition-all duration-300">
-      <div className="flex px-4 py-4 space-x-6 min-w-max">
+    <div className="md:hidden sticky top-[62px] z-40 bg-white border-b border-neutral-border shadow-premium-sm">
+      {/* Scrollable row — scrollbar hidden */}
+      <div
+        className="flex px-4 py-0 space-x-5 overflow-x-auto"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
         {items.map((item) => (
           <button
             key={item.id}
             onClick={() => onSelect(item.id)}
-            className={`text-xs font-agenda uppercase tracking-widest whitespace-nowrap transition-colors duration-300 min-h-[44px] flex items-center ${
-              activeItem === item.id 
-                ? 'text-primary-gold font-bold border-b-2 border-primary-gold pb-1' 
-                : 'text-neutral-dark-grey hover:text-primary-gold'
+            className={`font-agenda font-bold uppercase whitespace-nowrap transition-all duration-200 shrink-0 py-3.5 border-b-2 tao-fs-input ${
+              activeItem === item.id
+                ? 'text-primary-red border-primary-red'
+                : 'text-neutral-medium-grey border-transparent hover:text-primary-red'
             }`}
           >
             {item.label}

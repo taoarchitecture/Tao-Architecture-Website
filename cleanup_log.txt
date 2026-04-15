@@ -1,0 +1,1302 @@
+Cleanup Log - 2026-04-14T11:45:58.146Z
+
+=== Unused Assets Removed ===
+[Deleted Unused] apps\client\public\img\bkgd.png
+[Deleted Unused] apps\client\public\img\bkgd1.png
+[Deleted Unused] apps\client\public\img\bkgd2.png
+[Deleted Unused] apps\client\public\img\bkgd3.png
+[Deleted Unused] apps\client\public\img\bookshelf.svg
+[Deleted Unused] apps\client\public\img\bunglow_b.jpg
+[Deleted Unused] apps\client\public\img\chef.jpg
+[Deleted Unused] apps\client\public\img\chef2.png
+[Deleted Unused] apps\client\public\img\chef3.png
+[Deleted Unused] apps\client\public\img\commercial\manikchand-plaza\manikchand-plaza-thumb.jpg
+[Deleted Unused] apps\client\public\img\commercial\nyati-unitree-commercial\nyati-unitree-commercial-thumb.jpg
+[Deleted Unused] apps\client\public\img\commercial\nyati_commercial.jpg
+[Deleted Unused] apps\client\public\img\commercial\sky-max\sky-max-thumb.jpg
+[Deleted Unused] apps\client\public\img\commercial\sky-station\sky-station-thumb.jpg
+[Deleted Unused] apps\client\public\img\commercial\skymax.jpg
+[Deleted Unused] apps\client\public\img\commercial\skystation.jpg
+[Deleted Unused] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\suyog-navkaar-thumb.jpg
+[Deleted Unused] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar-thumb.jpg
+[Deleted Unused] apps\client\public\img\contact_title_bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\bhansali-landmarks\bhansali-landmarks-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\corporate-office-at-kolhapur\corporate-office-at-kolhapur-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\corporate-office-suhana-masala\corporate-office-suhana-masala-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\design-studio\design-studio-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\ghodawat.jpg
+[Deleted Unused] apps\client\public\img\corporate\goyal-group\goyal-group-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\k-f-bioplant\k-f-bioplant-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\kfbio.jpg
+[Deleted Unused] apps\client\public\img\corporate\landing9.jpg
+[Deleted Unused] apps\client\public\img\corporate\manisha-constructions\manisha-constructions-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\11private-cabin-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\11private-cabin-thumb2.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\12synergetic-inclusive-team-zone-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\12synergetic-inclusive-team-zone-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\13transparent-partitions-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\13transparent-partitions-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\14social-spaces-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\14social-spaces-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\15vibrant-artwork-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\15vibrant-artwork-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\16board-room-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\16board-room-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\17private-double-height-cabin-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\17private-double-height-cabin-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\18intexterior-work-zone-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\18intexterior-work-zone-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\19incidental-social-spaces-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\19incidental-social-spaces-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\20interactive-atrium-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\20interactive-atrium-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\21engaging-passages-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\21engaging-passages-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\22executive-cabin-custom-furniture-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\22executive-cabin-custom-furniture-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\23workspace-furniture-design-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\23workspace-furniture-design-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\24perennial-blessings-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\24perennial-blessings-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\25branching-facade-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\25branching-facade-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\26a-gem-against-the-pune-skyline-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\26a-gem-against-the-pune-skyline-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\27zoning-concept-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\27zoning-concept-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\28upper-ground-floor-plan-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\28upper-ground-floor-plan-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\29typical-floor-plan-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\29typical-floor-plan-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\30section-cc-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\30section-cc-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati-unitree\nyati-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati1.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati10.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati2.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati3.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati4.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati5.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati6.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati7.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati8.jpg
+[Deleted Unused] apps\client\public\img\corporate\nyati9.jpg
+[Deleted Unused] apps\client\public\img\corporate\one-suhana\one-suhana-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\pbap-credai-office\pbap-credai-office-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\44-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\45-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\46-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\47-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\48-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\49-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\50-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\51-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\52-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\53-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\54-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\55-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\56-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\57-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\58-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\59-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\60-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\61-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\62-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\63-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\64-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\65-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\66-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\67-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\44-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\45-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\46-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\47-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\48-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\49-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\50-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\51-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\52-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\53-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\54-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\55-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\56-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\57-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\58-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\59-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\60-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\61-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\62-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\63-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\64-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\65-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\66-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\67-bg.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\suzlon-one-earth-thumb.jpg
+[Deleted Unused] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth-thumb.jpg
+[Deleted Unused] apps\client\public\img\cozy_homes\blue-bird\blue-bird-thumb.jpg
+[Deleted Unused] apps\client\public\img\cozy_homes\bungalow-at-baner\bungalow-at-baner-thumb.jpg
+[Deleted Unused] apps\client\public\img\cozy_homes\bungalow-at-national-society\bungalow-at-national-society-thumb.jpg
+[Deleted Unused] apps\client\public\img\cozy_homes\garden-villa\garden-villa-thumb.jpg
+[Deleted Unused] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\sujin-residence-thumb.jpg
+[Deleted Unused] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence-thumb.jpg
+[Deleted Unused] apps\client\public\img\diagram.jpg
+[Deleted Unused] apps\client\public\img\exterior\10mm-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\3a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\80-thum.jpg
+[Deleted Unused] apps\client\public\img\exterior\abhimanshree-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\anand-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\architectural_elem.jpg
+[Deleted Unused] apps\client\public\img\exterior\a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\corpoffice-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\country_hus.jpg
+[Deleted Unused] apps\client\public\img\exterior\douglas-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior1.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior_small.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior_small1.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior_small2.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior_small3.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior_small4.jpg
+[Deleted Unused] apps\client\public\img\exterior\exaterior_small5.jpg
+[Deleted Unused] apps\client\public\img\exterior\ForestTrails-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\johri-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\kfbioplant-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\mahalaxmi-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\manikchand-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\1a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\2a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\3a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\4a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\5a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\6a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\7a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\nest\8a_nest.jpg
+[Deleted Unused] apps\client\public\img\exterior\papillon-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\pinewood-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\platinum-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\pp_main.jpg
+[Deleted Unused] apps\client\public\img\exterior\queens-tn1.jpg
+[Deleted Unused] apps\client\public\img\exterior\salisbury-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\savgaonkar-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\shrikant-paranjpe-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\shunyam-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\skymax-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\station-tn.jpg
+[Deleted Unused] apps\client\public\img\exterior\_DSC2485.jpg
+[Deleted Unused] apps\client\public\img\favicon.png
+[Deleted Unused] apps\client\public\img\fiora-shelf-clear.png
+[Deleted Unused] apps\client\public\img\flowerpot.svg
+[Deleted Unused] apps\client\public\img\flowerpot2.svg
+[Deleted Unused] apps\client\public\img\handshake.svg
+[Deleted Unused] apps\client\public\img\hospitality\azaan\azaan-thumb.jpg
+[Deleted Unused] apps\client\public\img\hospitality\holistik-wellness-retreat\holistik-wellness-retreat-thumb.jpg
+[Deleted Unused] apps\client\public\img\hospitality\sujin-residence\sujin-residence-thumb.jpg
+[Deleted Unused] apps\client\public\img\hospitality\swastik\swastik-thumb.jpg
+[Deleted Unused] apps\client\public\img\housing\kumar-pacific\kumar-pacific\kumar-pacific-bg.jpg
+[Deleted Unused] apps\client\public\img\housing\kumar-pacific\kumar-pacific-bg.jpg
+[Deleted Unused] apps\client\public\img\housing\kumar-papillon\kumar-papillon-bg.jpg
+[Deleted Unused] apps\client\public\img\housing\kumar-platinum\kumar-platinum-thumb.jpg
+[Deleted Unused] apps\client\public\img\housing\pinewood\pinewood-thumb.jpg
+[Deleted Unused] apps\client\public\img\housing\shiloh\shiloh-thumb.jpg
+[Deleted Unused] apps\client\public\img\icon1.png
+[Deleted Unused] apps\client\public\img\icon2.png
+[Deleted Unused] apps\client\public\img\icon3.png
+[Deleted Unused] apps\client\public\img\icon4.png
+[Deleted Unused] apps\client\public\img\iconb.png
+[Deleted Unused] apps\client\public\img\installations\artwork\artwork\artwork-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\artwork\artwork-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\entrance-gates\entrance-gates-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\lighting\lighting-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\murals\murals\murals-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\murals\murals-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\sculpture\sculpture\sculpture-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\sculpture\sculpture-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\seating\seating\seating-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\seating\seating-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\staircases\staircases-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\water-features\water-features\water-features-thumb.jpg
+[Deleted Unused] apps\client\public\img\installations\water-features\water-features-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\gujarathi.jpg
+[Deleted Unused] apps\client\public\img\institution\gujarati-bandhu-samaj-campus\gujarati-bandhu-samaj-campus-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\mahalaxmi-hospital\mahalaxmi-hospital-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suyog-kinder-brook-high-school\suyog-kinder-brook-high-school-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-corporate-learning-centre\suzlon-corporate-learning-centre-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\32-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\33-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\34-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\35-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\36-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\37-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\38-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\39-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\40-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\41-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\42-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\43-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\44-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\44-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\45-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\45-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\46-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\46-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\47-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\47-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\48-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\48-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\49-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\49-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\50-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\50-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\51-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\51-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\52-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\52-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\53-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\53-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\54-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\54-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\55-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\55-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\56-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\56-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\57-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\57-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\58-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\58-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\59-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\59-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\60-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\60-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\61-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\61-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\62-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\62-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\63-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\63-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\64-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\64-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\65-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\65-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\66-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\66-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\67-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\67-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\suzlon-excellence-academy-bg.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon-excellence-academy\suzlon-excellence-academy-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlonenergy.jpg
+[Deleted Unused] apps\client\public\img\institution\suzlon_2.jpg
+[Deleted Unused] apps\client\public\img\institution\veerayatan\veerayatan-thumb.jpg
+[Deleted Unused] apps\client\public\img\institution\wind-dunes\wind-dunes-thumb.jpg
+[Deleted Unused] apps\client\public\img\landing_back.jpg
+[Deleted Unused] apps\client\public\img\landscape\l11.jpg
+[Deleted Unused] apps\client\public\img\landscape\l12.jpg
+[Deleted Unused] apps\client\public\img\landscape\l13.jpg
+[Deleted Unused] apps\client\public\img\landscape\l14.jpg
+[Deleted Unused] apps\client\public\img\landscape\l15.jpg
+[Deleted Unused] apps\client\public\img\landscape\l16.jpg
+[Deleted Unused] apps\client\public\img\landscape\l17.jpg
+[Deleted Unused] apps\client\public\img\landscape\l18.jpg
+[Deleted Unused] apps\client\public\img\landscape\l19.jpg
+[Deleted Unused] apps\client\public\img\landscape\l2.jpg
+[Deleted Unused] apps\client\public\img\landscape\l20.jpg
+[Deleted Unused] apps\client\public\img\landscape\l21.jpg
+[Deleted Unused] apps\client\public\img\landscape\l22.jpg
+[Deleted Unused] apps\client\public\img\landscape\l23.jpg
+[Deleted Unused] apps\client\public\img\landscape\l24.jpg
+[Deleted Unused] apps\client\public\img\landscape\l25.jpg
+[Deleted Unused] apps\client\public\img\landscape\l26.jpg
+[Deleted Unused] apps\client\public\img\landscape\l27.jpg
+[Deleted Unused] apps\client\public\img\landscape\l28.jpg
+[Deleted Unused] apps\client\public\img\landscape\l29.jpg
+[Deleted Unused] apps\client\public\img\landscape\l3.jpg
+[Deleted Unused] apps\client\public\img\landscape\l30.jpg
+[Deleted Unused] apps\client\public\img\landscape\l31.jpg
+[Deleted Unused] apps\client\public\img\landscape\l32.jpg
+[Deleted Unused] apps\client\public\img\landscape\l33.jpg
+[Deleted Unused] apps\client\public\img\landscape\l34.jpg
+[Deleted Unused] apps\client\public\img\landscape\l35.jpg
+[Deleted Unused] apps\client\public\img\landscape\l36.jpg
+[Deleted Unused] apps\client\public\img\landscape\l37.jpg
+[Deleted Unused] apps\client\public\img\landscape\l38.jpg
+[Deleted Unused] apps\client\public\img\landscape\l39.jpg
+[Deleted Unused] apps\client\public\img\landscape\l4.jpg
+[Deleted Unused] apps\client\public\img\landscape\l40.jpg
+[Deleted Unused] apps\client\public\img\landscape\l41.jpg
+[Deleted Unused] apps\client\public\img\landscape\l42.jpg
+[Deleted Unused] apps\client\public\img\landscape\l43.jpg
+[Deleted Unused] apps\client\public\img\landscape\l44.jpg
+[Deleted Unused] apps\client\public\img\landscape\l45.jpg
+[Deleted Unused] apps\client\public\img\landscape\l5.jpg
+[Deleted Unused] apps\client\public\img\landscape\l6.jpg
+[Deleted Unused] apps\client\public\img\landscape\l8.jpg
+[Deleted Unused] apps\client\public\img\location-map.png
+[Deleted Unused] apps\client\public\img\logo_big.png
+[Deleted Unused] apps\client\public\img\logo_dark.png
+[Deleted Unused] apps\client\public\img\luxuryappartments\ajmera-aria\ajmera-aria-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\aurum\aurum-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\castel-royale\apartment-at-castel-royale-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\deshpande-durg\deshpande-durg-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\gods-blessing\gods-blessing-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\konark\konark-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\kumar-platinum\kumar-platinum-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\manhattan\manhattan-thumb.jpg
+[Deleted Unused] apps\client\public\img\luxuryappartments\palkhi\palkhi-thumb.jpg
+[Deleted Unused] apps\client\public\img\man-white-icon-hi.png
+[Deleted Unused] apps\client\public\img\map_pin.png
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery1.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery2.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery3.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery4.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery5.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery6.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery7.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\gallery8.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\image1.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail1.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail2.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail3.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail4.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail5.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail6.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail7.jpg
+[Deleted Unused] apps\client\public\img\news\chinathailand\thumbnail8.jpg
+[Deleted Unused] apps\client\public\img\news\italy\image1.jpg
+[Deleted Unused] apps\client\public\img\news\japan\image1.jpg
+[Deleted Unused] apps\client\public\img\news\kaasvalley\image1.jpg
+[Deleted Unused] apps\client\public\img\news\kaasvalley\image2.jpg
+[Deleted Unused] apps\client\public\img\news\kaasvalley\image3.jpg
+[Deleted Unused] apps\client\public\img\news\mehrangadhfort\image1.jpg
+[Deleted Unused] apps\client\public\img\pdf\Design Today Magazine.pdf
+[Deleted Unused] apps\client\public\img\pdf\Inside Outside 2013.pdf
+[Deleted Unused] apps\client\public\img\pencil.jpg
+[Deleted Unused] apps\client\public\img\pent_house\godblessing.jpg
+[Deleted Unused] apps\client\public\img\pent_house\jain.jpg
+[Deleted Unused] apps\client\public\img\pent_house\lavasa.jpg
+[Deleted Unused] apps\client\public\img\pent_house\savgaonkar.jpg
+[Deleted Unused] apps\client\public\img\photo-corner.png
+[Deleted Unused] apps\client\public\img\plus_down.png
+[Deleted Unused] apps\client\public\img\portfolio\10_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\1_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\2_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\3_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\4_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\5_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\6_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\7_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\8_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\9_big.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b10.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b11.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b12.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b13.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b16.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b18.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b19.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b20.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b21.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b22.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b23.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b24.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b25.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b3.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b4.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b6.jpg
+[Deleted Unused] apps\client\public\img\portfolio\b7.jpg
+[Deleted Unused] apps\client\public\img\portfolio\big1.png
+[Deleted Unused] apps\client\public\img\portfolio\big2.png
+[Deleted Unused] apps\client\public\img\portfolio\big3.png
+[Deleted Unused] apps\client\public\img\portfolio\big4.png
+[Deleted Unused] apps\client\public\img\portfolio\favicon.ico
+[Deleted Unused] apps\client\public\img\portfolio\favicon.png
+[Deleted Unused] apps\client\public\img\portfolio\logo_dark.png
+[Deleted Unused] apps\client\public\img\portfolio\masonry\aparments.jpg
+[Deleted Unused] apps\client\public\img\portfolio\masonry\artinstallation.jpg
+[Deleted Unused] apps\client\public\img\portfolio\masonry\b3.jpg
+[Deleted Unused] apps\client\public\img\portfolio\masonry\b4.jpg
+[Deleted Unused] apps\client\public\img\portfolio\single_project_1.jpg
+[Deleted Unused] apps\client\public\img\portfolio\single_project_2.jpg
+[Deleted Unused] apps\client\public\img\portfolio\slide_1.jpg
+[Deleted Unused] apps\client\public\img\portfolio\slide_2.jpg
+[Deleted Unused] apps\client\public\img\portfolio\slide_3.jpg
+[Deleted Unused] apps\client\public\img\portfolio\slide_4.jpg
+[Deleted Unused] apps\client\public\img\portfolio\slide_5.jpg
+[Deleted Unused] apps\client\public\img\portfolio\slide_6.jpg
+[Deleted Unused] apps\client\public\img\portfolio\t1.jpg
+[Deleted Unused] apps\client\public\img\portfolio\t4.jpg
+[Deleted Unused] apps\client\public\img\portfolio\t5.jpg
+[Deleted Unused] apps\client\public\img\portfolio\t6.jpg
+[Deleted Unused] apps\client\public\img\portfolio\t7.jpg
+[Deleted Unused] apps\client\public\img\portfolio\test-img.jpg
+[Deleted Unused] apps\client\public\img\portfolio\_DSC2334-1.jpg
+[Deleted Unused] apps\client\public\img\products\desking-and-tables\desking-and-tables-thumb.jpg
+[Deleted Unused] apps\client\public\img\products\doors\doors\doors-thumb.jpg
+[Deleted Unused] apps\client\public\img\products\doors\doors-thumb.jpg
+[Deleted Unused] apps\client\public\img\products\sleeping-unit\sleeping-unit-thumb.jpg
+[Deleted Unused] apps\client\public\img\products\wall-unit\wall-unit\wall-unit-thumb.jpg
+[Deleted Unused] apps\client\public\img\products\wall-unit\wall-unit-thumb.jpg
+[Deleted Unused] apps\client\public\img\profile1.jpg
+[Deleted Unused] apps\client\public\img\project-landing.jpg
+[Deleted Unused] apps\client\public\img\projects_categories.jpg
+[Deleted Unused] apps\client\public\img\publication\pub1.png
+[Deleted Unused] apps\client\public\img\publication\pub10.png
+[Deleted Unused] apps\client\public\img\publication\pub2.png
+[Deleted Unused] apps\client\public\img\publication\pub3.png
+[Deleted Unused] apps\client\public\img\publication\pub4.png
+[Deleted Unused] apps\client\public\img\publication\pub5.png
+[Deleted Unused] apps\client\public\img\publication\pub6.png
+[Deleted Unused] apps\client\public\img\publication\pub7.png
+[Deleted Unused] apps\client\public\img\publication\pub8.png
+[Deleted Unused] apps\client\public\img\publication\pub9.png
+[Deleted Unused] apps\client\public\img\publication\publication1.png
+[Deleted Unused] apps\client\public\img\publication\publication10.png
+[Deleted Unused] apps\client\public\img\publication\publication11.png
+[Deleted Unused] apps\client\public\img\publication\publication12.png
+[Deleted Unused] apps\client\public\img\publication\publication13.png
+[Deleted Unused] apps\client\public\img\publication\publication14.png
+[Deleted Unused] apps\client\public\img\publication\publication15.png
+[Deleted Unused] apps\client\public\img\publication\publication16.png
+[Deleted Unused] apps\client\public\img\publication\publication2.png
+[Deleted Unused] apps\client\public\img\publication\publication3.png
+[Deleted Unused] apps\client\public\img\publication\publication5.png
+[Deleted Unused] apps\client\public\img\publication\publication6.png
+[Deleted Unused] apps\client\public\img\publication\publication9.png
+[Deleted Unused] apps\client\public\img\publication\scan01.jpg
+[Deleted Unused] apps\client\public\img\publication\scan02.jpg
+[Deleted Unused] apps\client\public\img\publication\scan03.jpg
+[Deleted Unused] apps\client\public\img\publication\scan04.jpg
+[Deleted Unused] apps\client\public\img\publication\scan05.jpg
+[Deleted Unused] apps\client\public\img\publication1.png
+[Deleted Unused] apps\client\public\img\restaurant\about_us_title_bg.jpg
+[Deleted Unused] apps\client\public\img\restaurant\chef.jpg
+[Deleted Unused] apps\client\public\img\restaurant\cooking_1.jpg
+[Deleted Unused] apps\client\public\img\restaurant\cooking_2.jpg
+[Deleted Unused] apps\client\public\img\restaurant\food_slide_1.jpg
+[Deleted Unused] apps\client\public\img\restaurant\food_slide_2.jpg
+[Deleted Unused] apps\client\public\img\restaurant\food_slide_3.jpg
+[Deleted Unused] apps\client\public\img\restaurant\food_slide_4.jpg
+[Deleted Unused] apps\client\public\img\restaurant\food_slide_5.jpg
+[Deleted Unused] apps\client\public\img\restaurant\menu_img.jpg
+[Deleted Unused] apps\client\public\img\restaurant\menu_title_bg.jpg
+[Deleted Unused] apps\client\public\img\restaurant\opening_hours.jpg
+[Deleted Unused] apps\client\public\img\restaurant\reservation.jpg
+[Deleted Unused] apps\client\public\img\restaurant\reservation_1.jpg
+[Deleted Unused] apps\client\public\img\restaurant\reservation_2.jpg
+[Deleted Unused] apps\client\public\img\restaurant\reservation_title_bg.jpg
+[Deleted Unused] apps\client\public\img\restaurant\restaurant_saying.jpg
+[Deleted Unused] apps\client\public\img\restaurant\signature.jpg
+[Deleted Unused] apps\client\public\img\restaurant\story_img.jpg
+[Deleted Unused] apps\client\public\img\review-us-on-google-button.png
+[Deleted Unused] apps\client\public\img\revolution\home_1_slide_1.jpg
+[Deleted Unused] apps\client\public\img\revolution\home_1_slide_3.jpg
+[Deleted Unused] apps\client\public\img\revolution\home_2_slide_1.jpg
+[Deleted Unused] apps\client\public\img\revolution\home_3_hero.jpg
+[Deleted Unused] apps\client\public\img\revolution\home_4_hero.jpg
+[Deleted Unused] apps\client\public\img\revolution\restaurant_hero.jpg
+[Deleted Unused] apps\client\public\img\revolution\restaurant_op_hero.jpg
+[Deleted Unused] apps\client\public\img\revolution\youtube_placeholder.jpg
+[Deleted Unused] apps\client\public\img\right-arrow.png
+[Deleted Unused] apps\client\public\img\social1.png
+[Deleted Unused] apps\client\public\img\social2.png
+[Deleted Unused] apps\client\public\img\social3.png
+[Deleted Unused] apps\client\public\img\social4.png
+[Deleted Unused] apps\client\public\img\social5.png
+[Deleted Unused] apps\client\public\img\social6.png
+[Deleted Unused] apps\client\public\img\social7.png
+[Deleted Unused] apps\client\public\img\Solhavn-Unit-E_3200px.png
+[Deleted Unused] apps\client\public\img\spinner.gif
+[Deleted Unused] apps\client\public\img\sprite.png
+[Deleted Unused] apps\client\public\img\studio\shailesh-untawale.jpg
+[Deleted Unused] apps\client\public\img\studio\tao-team.jpg
+[Deleted Unused] apps\client\public\img\suzlononeearth.jpg
+[Deleted Unused] apps\client\public\img\tao_back.jpg
+[Deleted Unused] apps\client\public\img\team2.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\01.-Colourful-composition-of-Architectural-Elements.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\02.-Entry-Court.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\03.-Lush-Landscape.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\04.-Built-mass-set-around-manicured-gardens.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\05.-Windows-and-private-courts-overlooking-green-lawns.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\06.-Private-sitout.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\07.-Earthy-living-spaces-overlooking-natural-greenery.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\08.-Floating-feature-staircase.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\09.-Earthy-tones-interrupted-by-bursts-of-colour.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\10.-Daylight-filtering-into-living-space.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\11.-Evening-view-towards-the-outside-greens.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\12.-Cozy-Private-spaces.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\13.-Bay-windows-overlooking-the-garden.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\14.-Master-Bathroom-space.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\15.-Soft-Furnishings-and-raw-finishes.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\16.-Cutouts-and-openings.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\17.-View-from-access-road.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\18.-Concept-sketch-1.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\19.-Concept-sketch-2.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\20.-Concept-sketch-3.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\21.-Ground-floor.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\21apulki.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\22.-first-floor.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\22apulki.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\23.-Section-Q.jpg
+[Deleted Unused] apps\client\public\img\villa\aapulki\23apulki.jpg
+[Deleted Unused] apps\client\public\img\villa\azaan\azaan-thumb.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\01.-Outdoor-living.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\02.-Entrance-Loggia.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\03.-Cozy-Living-Room.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\04.-Transitional-Space.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\05.-Courtyard-as-a-contemplative-retreat.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\06.-Parents-room.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\07.-Staircase.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\08.-Connecting-bridge-sitout.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\09.-Red-Stucco-connecting-wall.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\10.-Breezy-sitout.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\10conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\11.-Ethnnic-and-earthy.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\11conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\12.-Exterior.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\12conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\13.-Ground-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\13conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\14.-First-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\15.-Terrace-Level-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\15conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\16.-Section-3.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\16conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\1conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\2conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\3conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\4conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\5conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\6conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\7conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\8conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\courtyard-house-bkp\9conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\forest1.jpg
+[Deleted Unused] apps\client\public\img\villa\forest2.jpg
+[Deleted Unused] apps\client\public\img\villa\inella.jpg
+[Deleted Unused] apps\client\public\img\villa\napier-road-bungalow\napier-road-bungalow-thumb.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest-main-thum.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest1.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest10.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest11.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest12.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest13.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest14.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest15.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest16.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest17.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest18.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest19.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest2.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest20.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest21.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest22.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest23.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest24.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest25.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest26.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest27.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest28.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest29.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest3.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest4.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest5.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest6.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest7.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest8.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\nest9.jpg
+[Deleted Unused] apps\client\public\img\villa\Nest\Thumbnail and Background image.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\09onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\10onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\11onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\12onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\13onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\14onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\15onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\16onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\17onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\18onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\19onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\1onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\20onell.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\21onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\22onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\23onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\24onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\25onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\26onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\27onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\28onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\29onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\2onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\30onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\31onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\32onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\33onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\34onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\3onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\4onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\5onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\6onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\7onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\8onella.jpg
+[Deleted Unused] apps\client\public\img\villa\onella\onella1.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\10paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\11paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\12-Central-Courtyard-welcomes-the-sky's-ever-evolving-existential-energy.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\12paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\13paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\14paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\15paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\16paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\17paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\18paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\19paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\1paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\20paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\21paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\22paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\23paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\24paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\25paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\26paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\27paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\28paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\29-Section-CC'-Daylighting.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\29paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\2paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\30-Section-DD'.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\30paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\31paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\32paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\3paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\4paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\5paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\6paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\7paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\8paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\9paradiso.jpg
+[Deleted Unused] apps\client\public\img\villa\paradiso\paradiso1.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\01.-The-curving-roof-forms-a-key-design-element-defining-the-interior-spaces.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\02.-Entrance-Porch-defined-by-sinuous-overhangs-and-angular-walls.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\03.-Hand-blown-glass-pendant-lights-adorn-the-entrance-foyer.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\04.-Daylit-central-lobby.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\05.-Formal-Living.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\06.-Dining-overlooking-the-lush-lawns.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\07.-Framed-garden-views.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\08.-Manicured-lawns-with-water-feature.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\09.-Flow-of-Space---Daylit-lobby.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\10.-Monochromes-and-pastels.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\11.-Vibrant-artwork-gives-the-formal-living-a-subtle-yet-classy-character.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\12.-Conceptual-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\13.-Conceptual-Section.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\14.-Ground-floor-plan.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\15.-First-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\queen-garden\16.-Section-C-C'.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\01.-Approach-road-adorned-with-welcoming-arches.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\02.-Exteriors---rustic-visual-language.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\03.-Temple-adorned-with-Warli-Art.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\04.-Interior-Layouts-celebrate-and-orient-toward-scenic-surrounding-views.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\05.-Living-spaces---A-blend-of-ethnic-and-contemporary.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\06.-Borrowing-the-external-landscape.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\07.-Juxtaposition-of-Crafts-and-Culture-into-modern-space.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\08.-Rajasthani-camel-wool-dhaga-as-railing---an-artistic-feature-in-the-stairwell.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\09.-Stained-glass-embedded-in-doors-allows-a-play-of-light-and-colour.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\10.-Cozy-Bedroom-space-with-a-traditional-vibe.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\11.-Bedroom-windows-oriented-to-capture-scenic-views.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\12.-Of-textiles-and-textures.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\13.-Private-spaces---A-touch-of-Tradition.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\14.-Infinity-pool---overlooking-the-Khadakwasla-Dam.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\15.-Swimming-pool-deck.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\16.-Twillight-charm.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\17.-Evening-Landscape.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\18.-Ground-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\18saj.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\19.-First-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\19saj.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\20.-Section.jpg
+[Deleted Unused] apps\client\public\img\villa\saj\20saj.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\01.-Journeying-through-Jodhpur---an-exploration-of-local-crafts-and-culture.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\02.-Composition-of-building-elements.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\03.-Welcoming-Entrance-Porch.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\04.-Sandstone-Arches-giving-a-glimpse-of-the-entrance.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\05.-Pergolas-and-Jaalis.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\06.-Verandahs-connect-private-spaces-with-the-outdoors.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\07.-A-shaded-sit-out-forms-the-outdoor-extension-of-the-formal-living-space.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\08.-Entrance-Foyer.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\09.-Family-Living-space-flanked-by-twin-courtyards.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\10.-Informal-Living-with-interactive-seating-staircase.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\11.-Dining-room---Interspersed-with-daylight-and-greenery.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\12.-Formal-Living-with-exposed-I-Girders-and-bare-stone-ceiling.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\13.-Daylit-connecting-corridor.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\14.-Hobby-Room,-Ground-floor.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\15.-Bedroom-space---a-burst-of-colour-against-raw-monochrome-finishes.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\16.-Dressing-lobby-bathed-in-natural-light.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\17.-Bedroom-incorporating-traditional-Architectural-elements.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\18.-Dynamic-roofscape---cooling-tower,-Meditation-room,-Machan-seating.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\19.-Shapes-and-patterns-cast-in-Beige-sandstone.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\20.-Intimate-rooftop-machaan-seating.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\21.-Ethnic-fabrics-and-traditional-furniture-integrated-with-modern-minimalism.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\22.-A-living-laboratory-fusing-the-traditional-and-contemporary.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\23.-Family-portrait---A-composition-of-shapes-and-patterns-cast-in-sandstone.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\24.-Evening-view.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\25.-Set-amidst-picturesque-hilly-views-and-preserved-fruit-orchards.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\26.-Site-Plan-and-Section.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\27.-Ground-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\27shunyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\28.-First-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\28shuyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\29.-Terrace-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\29shunyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\30.-North-elevation.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\31.-East-elevation.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\31shunyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\32.-West-elevation.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\32shunyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\33.-Section-A-A.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\34.-Section-B-B.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\34shunyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\35.-Section-C-C.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\35shunyam.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam\36.-Passive-Cross-Ventilation-mechanism.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\01.-Exterior-View.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\02.-Light-admitted-through-offset-walls.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\03.-Minimalist-Aesthetic.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\04.-Dining-and-living-areas-fused-with-their-natural-environment.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\05.-Interior-exterior-interconnection.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\06.-Landscape-elements.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\07.-Landscape-water-feature.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\08.-Earthy-interior-palette.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\09.-Fusing-interiors-with-landscape.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\10.-Private-spaces.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\11.-Structural-aesthetics.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\12.-Ground-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\12conyard.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\13.-First-Floor-Plan.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\14.-Section-3.jpg
+[Deleted Unused] apps\client\public\img\villa\shunyam-pune\15.-3D-Concept-Drawing.jpg
+[Deleted Unused] apps\client\public\img\villa\villa-at-forest-trails\villa-at-forest-trails-thumb.jpg
+[Deleted Unused] apps\client\public\img\villa\villa-at-wagholi\villa-at-wagholi-thumb.jpg
+[Deleted Unused] apps\client\public\img\villa\vitaan\vitaan-thumb.jpg
+[Deleted Unused] apps\client\public\img\villa\vitan.jpg
+[Deleted Unused] apps\client\public\img\villa\vrindavan\vrindavan-thumb.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\1-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\10-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\2-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\3-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\4-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\5-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\6-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\7-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\8-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\9-big.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\ghodawat.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\kfbio.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\landing9.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati1.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati10.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati2.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati3.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati4.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati5.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati6.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati7.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati8.jpg
+[Deleted Unused] apps\client\public\img\work\nyati\nyati9.jpg
+
+=== Duplicate Assets Identified (Not deleted if used) ===
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\1-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\1-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\1-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\1-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\10-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\10-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\10-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\10-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\11-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\11-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\11-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\11-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\12-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\12-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\12-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\12-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\2-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\2-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\2-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\2-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\3-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\3-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\3-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\3-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\4-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\4-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\4-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\4-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\5-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\5-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\5-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\5-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\6-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\6-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\6-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\6-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\7-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\7-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\7-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\7-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\8-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\8-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\8-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\8-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\9-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\9-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\9-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\9-thumb.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar-bg.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\suyog-navkaar-bg.jpg
+[Duplicate] apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar-thumb.jpg is identical to apps\client\public\img\commercial\suyog-navkaar\suyog-navkaar\suyog-navkaar-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\15-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\15-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\16-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\16-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\17-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\17-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\1-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\1-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\1-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\1-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\10-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\10-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\10-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\10-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\11-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\11-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\11-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\11-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\12-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\12-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\12-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\12-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\13-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\13-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\13-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\13-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\14-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\14-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\14-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\14-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\15-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\15-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\15-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\15-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\16-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\16-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\16-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\16-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\17-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\17-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\17-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\17-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\2-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\2-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\2-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\2-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\3-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\3-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\3-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\3-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\4-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\4-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\4-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\4-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\5-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\5-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\5-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\5-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\6-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\6-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\6-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\6-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\7-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\7-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\7-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\7-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\8-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\8-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\8-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\8-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\9-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\9-bg.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\9-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\9-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\corporate-office-suhana-masala-bg.jpg
+[Duplicate] apps\client\public\img\corporate\nyati-unitree\1street-view-bg.jpg is identical to apps\client\public\img\commercial\nyati-unitree-commercial\1-bg.jpg
+[Duplicate] apps\client\public\img\corporate\nyati.jpg is identical to apps\client\public\img\corporate\nyati-unitree\nyati-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\1-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\1-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\10-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\10-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\11-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\11-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\12-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\12-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\13-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\13-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\14-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\14-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\15-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\15-bg.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\15-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\15-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\16-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\16-bg.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\16-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\16-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\17-bg.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\17-bg.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\17-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala\17-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\2-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\2-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\3-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\3-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\4-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\4-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\5-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\5-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\6-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\6-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\7-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\7-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\8-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\8-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\one-suhana\9-thumb.jpg is identical to apps\client\public\img\corporate\corporate-office-suhana-masala-v2\9-thumb.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\01-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\01-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\01.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\01.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\02-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\02-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\02.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\02.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\03-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\03-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\03.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\03.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\04-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\04-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\04.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\04.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\05-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\05-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\05.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\05.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\06-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\06-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\06.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\06.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\07-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\07-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\07.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\07.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\08-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\08-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\08.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\08.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\09-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\09-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\09.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\09.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\10-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\10-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\10.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\10.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\11-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\11-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\11.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\11.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\12-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\12-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\12.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\12.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\13-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\13-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\13.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\13.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\14-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\14-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\14.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\14.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\15-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\15-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\15.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\15.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\16-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\16-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\16.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\16.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\17-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\17-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\17.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\17.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\18-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\18-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\18.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\18.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\19-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\19-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\19.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\19.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\20-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\20-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\20.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\20.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\21-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\21-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\21.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\21.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\22-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\22-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\22.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\22.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\23-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\23-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\23.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\23.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\24-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\24-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\24.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\24.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\25-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\25-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\25.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\25.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\26-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\26-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\26.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\26.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\27-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\27-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\27.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\27.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\28-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\28-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\28.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\28.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\29-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\29-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\29.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\29.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\30-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\30-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\30.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\30.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\31-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\31-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\31.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\31.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\32-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\32-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\32.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\32.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\33-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\33-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\33.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\33.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\34-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\34-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\34.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\34.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\35-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\35-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\35.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\35.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\36-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\36-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\36.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\36.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\37-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\37-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\37.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\37.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\38-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\38-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\38.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\38.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\39-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\39-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\39.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\39.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\40-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\40-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\40.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\40.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\41-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\41-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\41.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\41.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\42-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\42-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\42.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\42.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\43-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\43-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\43.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\43.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\44-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\44-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\44.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\44.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\45-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\45-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\45.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\45.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\46-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\46-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\46.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\46.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\47-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\47-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\47.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\47.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\48-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\48-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\48.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\48.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\49-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\49-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\49.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\49.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\50-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\50-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\50.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\50.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\51-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\51-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\51.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\51.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\52-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\52-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\52.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\52.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\53-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\53-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\53.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\53.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\54-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\54-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\54.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\54.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\55-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\55-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\55.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\55.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\56-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\56-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\56.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\56.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\57-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\57-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\57.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\57.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\58-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\58-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\58.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\58.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\59-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\59-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\59.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\59.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\60-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\60-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\60.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\60.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\61-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\61-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\61.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\61.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\62-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\62-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\62.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\62.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\63-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\63-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\63.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\63.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\64-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\64-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\64.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\64.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\65-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\65-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\65.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\65.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\66-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\66-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\66.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\66.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\67-bg.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\67-bg.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth\67.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\67.jpg
+[Duplicate] apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth-thumb.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\1-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\1-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\1-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\1-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\10-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\10-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\10-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\10-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\11-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\11-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\11-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\11-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\12-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\12-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\12-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\12-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\2-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\2-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\2-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\2-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\3-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\3-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\3-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\3-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\4-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\4-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\4-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\4-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\5-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\5-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\5-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\5-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\6-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\6-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\6-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\6-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\7-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\7-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\7-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\7-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\8-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\8-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\8-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\8-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\9-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\9-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\9-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\9-thumb.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\sujin-residence-bg.jpg
+[Duplicate] apps\client\public\img\cozy_homes\sujin-residence\sujin-residence-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\sujin-residence-thumb.jpg
+[Duplicate] apps\client\public\img\exterior\_DSC2485.jpg is identical to apps\client\public\img\corporate\nyati-unitree\2breakout-Balcony-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\1-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\1-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\1-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\1-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\10-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\10-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\11-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\11-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\11-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\11-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\12-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\12-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\12-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\12-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\2-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\2-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\2-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\2-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\3-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\3-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\3-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\3-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\4-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\4-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\5-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\5-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\6-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\6-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\7-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\7-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\7-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\7-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\8-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\8-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\8-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\8-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\9-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\9-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\9-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\9-thumb.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\sujin-residence-bg.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\sujin-residence-bg.jpg
+[Duplicate] apps\client\public\img\hospitality\sujin-residence\sujin-residence-thumb.jpg is identical to apps\client\public\img\cozy_homes\sujin-residence\sujin-residence\sujin-residence-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\1-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\1-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\1-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\1-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\2-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\2-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\2-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\2-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\3-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\3-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\3-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\3-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\4-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\4-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\4-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\4-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\5-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\5-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\5-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\5-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\6-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\6-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\6-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\6-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\7-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\7-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\7-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\7-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\8-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\8-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\8-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\8-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\9-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\9-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific\9-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\9-thumb.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific-bg.jpg is identical to apps\client\public\img\housing\kumar-pacific\kumar-pacific\kumar-pacific-bg.jpg
+[Duplicate] apps\client\public\img\housing\kumar-pacific\kumar-pacific-thumb.jpg is identical to apps\client\public\img\housing\kumar-pacific\kumar-pacific\kumar-pacific-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\1-bg.jpg is identical to apps\client\public\img\installations\artwork\1-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\1-thumb.jpg is identical to apps\client\public\img\installations\artwork\1-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\10-bg.jpg is identical to apps\client\public\img\installations\artwork\10-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\10-thumb.jpg is identical to apps\client\public\img\installations\artwork\10-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\11-bg.jpg is identical to apps\client\public\img\installations\artwork\11-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\11-thumb.jpg is identical to apps\client\public\img\installations\artwork\11-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\2-bg.jpg is identical to apps\client\public\img\installations\artwork\2-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\2-thumb.jpg is identical to apps\client\public\img\installations\artwork\2-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\3-bg.jpg is identical to apps\client\public\img\installations\artwork\3-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\3-thumb.jpg is identical to apps\client\public\img\installations\artwork\3-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\4-bg.jpg is identical to apps\client\public\img\installations\artwork\4-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\4-thumb.jpg is identical to apps\client\public\img\installations\artwork\4-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\5-bg.jpg is identical to apps\client\public\img\installations\artwork\5-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\5-thumb.jpg is identical to apps\client\public\img\installations\artwork\5-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\6-bg.jpg is identical to apps\client\public\img\installations\artwork\6-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\6-thumb.jpg is identical to apps\client\public\img\installations\artwork\6-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\7-bg.jpg is identical to apps\client\public\img\installations\artwork\7-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\7-thumb.jpg is identical to apps\client\public\img\installations\artwork\7-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\8-bg.jpg is identical to apps\client\public\img\installations\artwork\8-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\8-thumb.jpg is identical to apps\client\public\img\installations\artwork\8-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\9-bg.jpg is identical to apps\client\public\img\installations\artwork\9-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork\9-thumb.jpg is identical to apps\client\public\img\installations\artwork\9-thumb.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork-bg.jpg is identical to apps\client\public\img\installations\artwork\artwork\artwork-bg.jpg
+[Duplicate] apps\client\public\img\installations\artwork\artwork-thumb.jpg is identical to apps\client\public\img\installations\artwork\artwork\artwork-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\1-bg.jpg is identical to apps\client\public\img\installations\murals\1-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\1-thumb.jpg is identical to apps\client\public\img\installations\murals\1-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\2-bg.jpg is identical to apps\client\public\img\installations\murals\2-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\2-thumb.jpg is identical to apps\client\public\img\installations\murals\2-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\3-bg.jpg is identical to apps\client\public\img\installations\murals\3-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\3-thumb.jpg is identical to apps\client\public\img\installations\murals\3-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\4-bg.jpg is identical to apps\client\public\img\installations\murals\4-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\4-thumb.jpg is identical to apps\client\public\img\installations\murals\4-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\5-bg.jpg is identical to apps\client\public\img\installations\murals\5-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\5-thumb.jpg is identical to apps\client\public\img\installations\murals\5-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\6-bg.jpg is identical to apps\client\public\img\installations\murals\6-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals\6-thumb.jpg is identical to apps\client\public\img\installations\murals\6-thumb.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals-bg.jpg is identical to apps\client\public\img\installations\murals\murals\murals-bg.jpg
+[Duplicate] apps\client\public\img\installations\murals\murals-thumb.jpg is identical to apps\client\public\img\installations\murals\murals\murals-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\1-bg.jpg is identical to apps\client\public\img\installations\sculpture\1-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\1-thumb.jpg is identical to apps\client\public\img\installations\sculpture\1-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\2-bg.jpg is identical to apps\client\public\img\installations\sculpture\2-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\2-thumb.jpg is identical to apps\client\public\img\installations\sculpture\2-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\3-bg.jpg is identical to apps\client\public\img\installations\sculpture\3-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\3-thumb.jpg is identical to apps\client\public\img\installations\sculpture\3-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\4-bg.jpg is identical to apps\client\public\img\installations\sculpture\4-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\4-thumb.jpg is identical to apps\client\public\img\installations\sculpture\4-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\5-bg.jpg is identical to apps\client\public\img\installations\sculpture\5-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\5-thumb.jpg is identical to apps\client\public\img\installations\sculpture\5-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\6-bg.jpg is identical to apps\client\public\img\installations\sculpture\6-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture\6-thumb.jpg is identical to apps\client\public\img\installations\sculpture\6-thumb.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture-bg.jpg is identical to apps\client\public\img\installations\sculpture\sculpture\sculpture-bg.jpg
+[Duplicate] apps\client\public\img\installations\sculpture\sculpture-thumb.jpg is identical to apps\client\public\img\installations\sculpture\sculpture\sculpture-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\1-bg.jpg is identical to apps\client\public\img\installations\seating\1-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\1-thumb.jpg is identical to apps\client\public\img\installations\seating\1-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\2-bg.jpg is identical to apps\client\public\img\installations\seating\2-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\2-thumb.jpg is identical to apps\client\public\img\installations\seating\2-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\3-bg.jpg is identical to apps\client\public\img\installations\seating\3-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\3-thumb.jpg is identical to apps\client\public\img\installations\seating\3-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\4-bg.jpg is identical to apps\client\public\img\installations\seating\4-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\4-thumb.jpg is identical to apps\client\public\img\installations\seating\4-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\5-bg.jpg is identical to apps\client\public\img\installations\seating\5-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\5-thumb.jpg is identical to apps\client\public\img\installations\seating\5-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\6-bg.jpg is identical to apps\client\public\img\installations\seating\6-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\6-thumb.jpg is identical to apps\client\public\img\installations\seating\6-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\7-bg.jpg is identical to apps\client\public\img\installations\seating\7-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating\7-thumb.jpg is identical to apps\client\public\img\installations\seating\7-thumb.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating-bg.jpg is identical to apps\client\public\img\installations\seating\seating\seating-bg.jpg
+[Duplicate] apps\client\public\img\installations\seating\seating-thumb.jpg is identical to apps\client\public\img\installations\seating\seating\seating-thumb.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\1-bg.jpg is identical to apps\client\public\img\installations\water-features\1-bg.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\1-thumb.jpg is identical to apps\client\public\img\installations\water-features\1-thumb.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\2-bg.jpg is identical to apps\client\public\img\installations\water-features\2-bg.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\2-thumb.jpg is identical to apps\client\public\img\installations\water-features\2-thumb.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\3-bg.jpg is identical to apps\client\public\img\installations\water-features\3-bg.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\3-thumb.jpg is identical to apps\client\public\img\installations\water-features\3-thumb.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\4-bg.jpg is identical to apps\client\public\img\installations\water-features\4-bg.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\4-thumb.jpg is identical to apps\client\public\img\installations\water-features\4-thumb.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\5-bg.jpg is identical to apps\client\public\img\installations\water-features\5-bg.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features\5-thumb.jpg is identical to apps\client\public\img\installations\water-features\5-thumb.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features-bg.jpg is identical to apps\client\public\img\installations\water-features\water-features\water-features-bg.jpg
+[Duplicate] apps\client\public\img\installations\water-features\water-features-thumb.jpg is identical to apps\client\public\img\installations\water-features\water-features\water-features-thumb.jpg
+[Duplicate] apps\client\public\img\institution\suzlon_2.jpg is identical to apps\client\public\img\institution\suzlon.jpg
+[Duplicate] apps\client\public\img\portfolio\10.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\1_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\2.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\2_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\3.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\3_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\4.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\4_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\5.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\5_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\6.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\6_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\7.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\7_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\8.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\8_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\9.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\9_big.jpg is identical to apps\client\public\img\portfolio\10_big.jpg
+[Duplicate] apps\client\public\img\portfolio\masonry\10.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\masonry\5.jpg is identical to apps\client\public\img\exterior\furniture.jpg
+[Duplicate] apps\client\public\img\portfolio\masonry\6.jpg is identical to apps\client\public\img\exterior\art.jpg
+[Duplicate] apps\client\public\img\portfolio\masonry\8.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\masonry\9.jpg is identical to apps\client\public\img\portfolio\1.jpg
+[Duplicate] apps\client\public\img\portfolio\single_project_2.jpg is identical to apps\client\public\img\portfolio\single_project_1.jpg
+[Duplicate] apps\client\public\img\portfolio\slide_2.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\portfolio\slide_3.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\portfolio\slide_4.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\portfolio\slide_5.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\portfolio\slide_6.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\portfolio\t5.jpg is identical to apps\client\public\img\corporate\nyati-unitree\20interactive-atrium-bg.jpg
+[Duplicate] apps\client\public\img\products\doors\doors\1-bg.jpg is identical to apps\client\public\img\products\doors\1-bg.jpg
+[Duplicate] apps\client\public\img\products\doors\doors\1-thumb.jpg is identical to apps\client\public\img\products\doors\1-thumb.jpg
+[Duplicate] apps\client\public\img\products\doors\doors\2-bg.jpg is identical to apps\client\public\img\products\doors\2-bg.jpg
+[Duplicate] apps\client\public\img\products\doors\doors\2-thumb.jpg is identical to apps\client\public\img\products\doors\2-thumb.jpg
+[Duplicate] apps\client\public\img\products\doors\doors\3-bg.jpg is identical to apps\client\public\img\products\doors\3-bg.jpg
+[Duplicate] apps\client\public\img\products\doors\doors\3-thumb.jpg is identical to apps\client\public\img\products\doors\3-thumb.jpg
+[Duplicate] apps\client\public\img\products\doors\doors-bg.jpg is identical to apps\client\public\img\products\doors\doors\doors-bg.jpg
+[Duplicate] apps\client\public\img\products\doors\doors-thumb.jpg is identical to apps\client\public\img\products\doors\doors\doors-thumb.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\1-bg.jpg is identical to apps\client\public\img\products\wall-unit\1-bg.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\1-thumb.jpg is identical to apps\client\public\img\products\wall-unit\1-thumb.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\2-bg.jpg is identical to apps\client\public\img\products\wall-unit\2-bg.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\2-thumb.jpg is identical to apps\client\public\img\products\wall-unit\2-thumb.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\3-bg.jpg is identical to apps\client\public\img\products\wall-unit\3-bg.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\3-thumb.jpg is identical to apps\client\public\img\products\wall-unit\3-thumb.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\4-bg.jpg is identical to apps\client\public\img\products\wall-unit\4-bg.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit\4-thumb.jpg is identical to apps\client\public\img\products\wall-unit\4-thumb.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit-bg.jpg is identical to apps\client\public\img\products\wall-unit\wall-unit\wall-unit-bg.jpg
+[Duplicate] apps\client\public\img\products\wall-unit\wall-unit-thumb.jpg is identical to apps\client\public\img\products\wall-unit\wall-unit\wall-unit-thumb.jpg
+[Duplicate] apps\client\public\img\publication1.png is identical to apps\client\public\img\publication\publication1.png
+[Duplicate] apps\client\public\img\restaurant\about_us_title_bg.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\cooking_2.jpg is identical to apps\client\public\img\restaurant\cooking_1.jpg
+[Duplicate] apps\client\public\img\restaurant\food_slide_1.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\restaurant\food_slide_2.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\restaurant\food_slide_3.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\restaurant\food_slide_4.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\restaurant\food_slide_5.jpg is identical to apps\client\public\img\portfolio\slide_1.jpg
+[Duplicate] apps\client\public\img\restaurant\fresh.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\3.jpg is identical to apps\client\public\img\restaurant\gallery\2.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\4.jpg is identical to apps\client\public\img\restaurant\gallery\2.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\5.jpg is identical to apps\client\public\img\restaurant\gallery\1.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\6.jpg is identical to apps\client\public\img\restaurant\gallery\2.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\7.jpg is identical to apps\client\public\img\restaurant\gallery\1.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\8.jpg is identical to apps\client\public\img\restaurant\gallery\2.jpg
+[Duplicate] apps\client\public\img\restaurant\gallery\9.jpg is identical to apps\client\public\img\restaurant\gallery\2.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\10.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\11.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\12.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\13.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\14.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\15.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\16.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\2.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\3.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\4.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\5.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\6.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\7.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\8.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu\9.jpg is identical to apps\client\public\img\restaurant\menu\1.jpg
+[Duplicate] apps\client\public\img\restaurant\menu_title_bg.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\opening_hours.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\promo.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\reservation.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\reservation_2.jpg is identical to apps\client\public\img\restaurant\reservation_1.jpg
+[Duplicate] apps\client\public\img\restaurant\reservation_title_bg.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\restaurant_saying.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\restaurant\special.jpg is identical to apps\client\public\img\contact_title_bg.jpg
+[Duplicate] apps\client\public\img\revolution\home_1_slide_3.jpg is identical to apps\client\public\img\revolution\home_1_slide_1.jpg
+[Duplicate] apps\client\public\img\revolution\home_2_slide_1.jpg is identical to apps\client\public\img\revolution\home_1_slide_1.jpg
+[Duplicate] apps\client\public\img\revolution\home_3_hero.jpg is identical to apps\client\public\img\revolution\home_1_slide_1.jpg
+[Duplicate] apps\client\public\img\revolution\restaurant_hero.jpg is identical to apps\client\public\img\revolution\home_1_slide_1.jpg
+[Duplicate] apps\client\public\img\revolution\restaurant_op_hero.jpg is identical to apps\client\public\img\revolution\home_1_slide_1.jpg
+[Duplicate] apps\client\public\img\revolution\youtube_placeholder.jpg is identical to apps\client\public\img\revolution\home_1_slide_1.jpg
+[Duplicate] apps\client\public\img\suzlon.jpg is identical to apps\client\public\img\corporate\suzlon.jpg
+[Duplicate] apps\client\public\img\suzlononeearth.jpg is identical to apps\client\public\img\corporate\suzlon-one-earth\suzlon-one-earth-bg.jpg
+[Duplicate] apps\client\public\img\villa\courtyard-house-bkp\conyard-bg.jpg is identical to apps\client\public\img\villa\courtyard-house\conyard-bg.jpg
+[Duplicate] apps\client\public\img\villa\onella.jpg is identical to apps\client\public\img\villa\inella.jpg
+[Duplicate] apps\client\public\img\villa\shunyam.jpg is identical to apps\client\public\img\villa\shunyam\shunyam.jpg
+[Duplicate] apps\client\public\img\work\nyati\1-big.jpg is identical to apps\client\public\img\commercial\nyati-unitree-commercial\1-bg.jpg
+[Duplicate] apps\client\public\img\work\nyati\2-big.jpg is identical to apps\client\public\img\corporate\nyati-unitree\2breakout-Balcony-bg.jpg
+[Duplicate] apps\client\public\img\work\nyati\bhansali.jpg is identical to apps\client\public\img\corporate\bhansali.jpg
+[Duplicate] apps\client\public\img\work\nyati\ghodawat.jpg is identical to apps\client\public\img\corporate\ghodawat.jpg
+[Duplicate] apps\client\public\img\work\nyati\goyal.jpg is identical to apps\client\public\img\corporate\goyal.jpg
+[Duplicate] apps\client\public\img\work\nyati\kfbio.jpg is identical to apps\client\public\img\corporate\kfbio.jpg
+[Duplicate] apps\client\public\img\work\nyati\landing9.jpg is identical to apps\client\public\img\corporate\landing9.jpg
+[Duplicate] apps\client\public\img\work\nyati\manisha.jpg is identical to apps\client\public\img\corporate\manisha.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati.jpg is identical to apps\client\public\img\corporate\nyati-unitree\nyati-thumb.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati1.jpg is identical to apps\client\public\img\corporate\nyati1.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati10.jpg is identical to apps\client\public\img\corporate\nyati10.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati2.jpg is identical to apps\client\public\img\corporate\nyati2.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati3.jpg is identical to apps\client\public\img\corporate\nyati3.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati4.jpg is identical to apps\client\public\img\corporate\nyati4.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati5.jpg is identical to apps\client\public\img\corporate\nyati5.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati6.jpg is identical to apps\client\public\img\corporate\nyati6.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati7.jpg is identical to apps\client\public\img\corporate\nyati7.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati8.jpg is identical to apps\client\public\img\corporate\nyati8.jpg
+[Duplicate] apps\client\public\img\work\nyati\nyati9.jpg is identical to apps\client\public\img\corporate\nyati9.jpg
+[Duplicate] apps\client\public\img\work\nyati\pbap.jpg is identical to apps\client\public\img\corporate\pbap.jpg
+[Duplicate] apps\client\public\img\work\nyati\suhana.jpg is identical to apps\client\public\img\corporate\suhana.jpg
+[Duplicate] apps\client\public\img\work\nyati\suzlon.jpg is identical to apps\client\public\img\corporate\suzlon.jpg
+
+=== Cache & Build Artifacts Removed ===
+[Deleted Cache] apps\client\.next\cache
+[Deleted Cache] apps\client\node_modules\.cache
+[Deleted Cache] apps\server\node_modules\.cache
+
+Total items removed: 802

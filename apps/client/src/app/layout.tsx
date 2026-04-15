@@ -3,6 +3,8 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
+import SmoothScroll from '@/components/layout/SmoothScroll'
+import PageTransition from '@/components/layout/PageTransition'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://taoarchitecture.com'),
@@ -101,16 +103,20 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className="font-agenda antialiased text-neutral-medium-grey">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Loader />
-        <Navbar />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <Loader />
+          <Navbar />
+          <PageTransition>
+            {children}
+          </PageTransition>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   )

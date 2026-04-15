@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -11,7 +11,7 @@ export const getProjects = async () => {
     const { data } = await api.get('/projects');
     return data;
   } catch (error) {
-    console.error('Failed to fetch projects:', error);
+    console.error('Failed to fetch projects:', error instanceof Error ? error.message : String(error));
     return [];
   }
 };
@@ -21,7 +21,7 @@ export const getProjectBySlug = async (slug: string) => {
     const { data } = await api.get(`/projects/${slug}`);
     return data;
   } catch (error) {
-    console.error(`Failed to fetch project ${slug}:`, error);
+    console.error(`Failed to fetch project ${slug}:`, error instanceof Error ? error.message : String(error));
     return null;
   }
 };
@@ -31,7 +31,7 @@ export const getHomeConfig = async () => {
     const { data } = await api.get('/home');
     return data;
   } catch (error) {
-    console.error('Failed to fetch home config:', error);
+    console.error('Failed to fetch home config:', error instanceof Error ? error.message : String(error));
     return null;
   }
 };
@@ -41,7 +41,7 @@ export const getTeamMembers = async () => {
     const { data } = await api.get('/studio/team');
     return data;
   } catch (error) {
-    console.error('Failed to fetch team members:', error);
+    console.error('Failed to fetch team members:', error instanceof Error ? error.message : String(error));
     return [];
   }
 };
@@ -51,7 +51,7 @@ export const getPublications = async () => {
     const { data } = await api.get('/media/publications');
     return data;
   } catch (error) {
-    console.error('Failed to fetch publications:', error);
+    console.error('Failed to fetch publications:', error instanceof Error ? error.message : String(error));
     return [];
   }
 };
@@ -61,7 +61,7 @@ export const getAwards = async () => {
     const { data } = await api.get('/media/awards');
     return data;
   } catch (error) {
-    console.error('Failed to fetch awards:', error);
+    console.error('Failed to fetch awards:', error instanceof Error ? error.message : String(error));
     return [];
   }
 };
@@ -71,7 +71,7 @@ export const getSettings = async () => {
     const { data } = await api.get('/settings');
     return data;
   } catch (error) {
-    console.error('Failed to fetch settings:', error);
+    console.error('Failed to fetch settings:', error instanceof Error ? error.message : String(error));
     return null;
   }
 };
@@ -81,7 +81,7 @@ export const getPageContent = async (slug: string) => {
     const { data } = await api.get(`/pages/${slug}`);
     return data;
   } catch (error) {
-    console.error(`Failed to fetch page content for ${slug}:`, error);
+    console.error(`Failed to fetch page content for ${slug}:`, error instanceof Error ? error.message : String(error));
     return null;
   }
 };
@@ -91,7 +91,7 @@ export const getServices = async () => {
     const { data } = await api.get('/services');
     return data;
   } catch (error) {
-    console.error('Failed to fetch services:', error);
+    console.error('Failed to fetch services:', error instanceof Error ? error.message : String(error));
     return [];
   }
 };
@@ -101,7 +101,7 @@ export const getContactSubmissions = async () => {
     const { data } = await api.get('/contact');
     return data;
   } catch (error) {
-    console.error('Failed to fetch contact submissions:', error);
+    console.error('Failed to fetch contact submissions:', error instanceof Error ? error.message : String(error));
     return [];
   }
 };

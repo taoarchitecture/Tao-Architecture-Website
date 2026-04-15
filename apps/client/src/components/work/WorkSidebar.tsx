@@ -28,7 +28,7 @@ const WorkSidebar = ({ activeCategory }: WorkSidebarProps) => {
     <div className="hidden md:block sticky top-24 h-[calc(100vh-100px)] overflow-y-auto pl-8 pt-10">
       <div className="flex flex-col space-y-4 border-l border-neutral-light-grey pl-4">
         <button 
-          className={`text-left text-sm font-agenda uppercase tracking-wider transition-colors duration-300 ${activeCategory === 'all' ? 'text-primary-red font-bold' : 'text-neutral-dark-grey hover:text-primary-red'}`}
+          className={`text-left tao-fs-sidebar font-bold font-agenda uppercase tracking-wide transition-colors duration-300 ${activeCategory === 'all' ? 'text-primary-red' : 'text-neutral-dark-grey hover:text-primary-red'}`}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           All
@@ -37,9 +37,9 @@ const WorkSidebar = ({ activeCategory }: WorkSidebarProps) => {
           <button
             key={category.id}
             onClick={() => scrollToCategory(category.id)}
-            className={`text-left text-sm font-agenda uppercase tracking-wider transition-colors duration-300 ${
+            className={`text-left tao-fs-sidebar font-bold font-agenda uppercase tracking-wide transition-colors duration-300 ${
               activeCategory === category.id 
-                ? 'text-primary-red font-bold border-l-4 border-primary-red -ml-[21px] pl-4' 
+                ? 'text-primary-red border-l-4 border-primary-red -ml-[21px] pl-4' 
                 : 'text-neutral-dark-grey hover:text-primary-red'
             }`}
           >

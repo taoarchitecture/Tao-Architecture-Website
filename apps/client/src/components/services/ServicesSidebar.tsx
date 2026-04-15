@@ -38,9 +38,9 @@ export default function ServicesSidebar({ activeSection, items }: ServicesSideba
           <button
             key={item.id}
             onClick={() => scrollToSection(item.id)}
-            className={`text-left text-sm font-agenda uppercase tracking-wider transition-colors duration-300 ${
+            className={`text-left tao-fs-svc-side font-bold font-agenda uppercase tracking-wide transition-colors duration-300 ${
               activeSection === item.id 
-                ? 'text-primary-red font-bold border-l-4 border-primary-red -ml-[21px] pl-4' 
+                ? 'text-primary-red border-l-4 border-primary-red -ml-[21px] pl-4' 
                 : 'text-neutral-dark-grey hover:text-primary-red'
             }`}
           >

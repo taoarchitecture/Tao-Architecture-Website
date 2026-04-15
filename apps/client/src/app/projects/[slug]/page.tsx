@@ -98,12 +98,12 @@ export default function ProjectDetail() {
             {/* Main Content */}
             <div className="w-full md:w-3/4 pr-0 md:pr-12">
                 <div className="mb-8">
-                    <h4 className="text-sm font-bold tracking-widest text-primary-red uppercase mb-4 font-agenda">
+                    <h4 className="tao-fs-highlight font-bold tracking-widest text-primary-red uppercase mb-4 font-agenda">
                         {project.category}
                     </h4>
                     
                     <div className="flex justify-between items-start">
-                        <h1 className="text-4xl md:text-5xl font-bold uppercase mb-4 font-agenda leading-tight">
+                        <h1 className="tao-fs-proj-main font-bold uppercase mb-4 font-agenda leading-tight">
                             {project.title}
                         </h1>
                         
@@ -114,19 +114,19 @@ export default function ProjectDetail() {
                     </div>
 
                     {project.subtitle && (
-                        <h2 className="text-2xl md:text-3xl font-light uppercase mb-8 font-agenda text-neutral-dark-grey">
+                        <h2 className="tao-fs-big-sub font-bold uppercase mb-8 font-agenda text-neutral-dark-grey">
                             {project.subtitle}
                         </h2>
                     )}
 
-                    <div className="bg-gray-50 p-6 mb-8 border-l-4 border-black font-agenda">
+                    <div className="bg-gray-50 p-6 mb-8 border-l-4 border-black font-agenda tao-fs-details font-bold">
                         {project.details.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.details.location}</p>}
                         {project.details.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.details.status}</p>}
                         {project.details.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.details.plotArea}</p>}
                         {project.details.builtUpArea && <p className="mb-1"><span className="font-bold">Built Up Area :</span> {project.details.builtUpArea}</p>}
                     </div>
 
-                    <div className="prose max-w-none font-agenda text-lg text-neutral-dark-grey leading-relaxed">
+                    <div className="prose max-w-none font-agenda tao-fs-desc font-normal text-neutral-dark-grey leading-relaxed">
                         {project.description.slice(0, showFullText ? undefined : 2).map((paragraph, idx) => (
                             <p key={idx} className="mb-6">{paragraph}</p>
                         ))}

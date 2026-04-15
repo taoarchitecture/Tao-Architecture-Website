@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { FaSearch } from 'react-icons/fa';
 
@@ -10,31 +10,44 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+    setOpenDropdown(null);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const toggleDropdown = (name: string) => {
-    if (openDropdown === name) {
-      setOpenDropdown(null);
-    } else {
-      setOpenDropdown(name);
-    }
+    setOpenDropdown(prev => prev === name ? null : name);
   };
 
   const navLinks = [
     { name: 'WORK', href: '/work' },
     { name: 'SERVICES', href: '/services' },
     { name: 'STUDIO', href: '/studio' },
-    { 
-      name: 'MEDIA & AWARDS', 
+    {
+      name: 'MEDIA & AWARDS',
       href: '#',
       dropdown: [
         { name: 'VIDEOS', href: '/media/videos' },
@@ -47,106 +60,169 @@ const Navbar = () => {
   ];
 
   return (
-    <nav 
-      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 py-4'}`}
+    <nav
+      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${
+        isScrolled ? 'navbar-scrolled py-2' : 'navbar-glass py-4'
+      }`}
       role="navigation"
       aria-label="Main Navigation"
     >
-      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
-        <Link href="/" className="flex items-center focus-ring rounded-sm">
-          <div className="relative h-[35px] w-[140px] md:h-[45px] md:w-[180px] transition-all duration-300">
-             <Image 
-                src="/img/tao-logo.png" 
-                alt="Tao Architecture - Home" 
-                fill
-                className="object-contain object-left"
-                priority
-             />
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center rounded-sm flex-shrink-0">
+          <div className={`relative transition-all duration-300 ${
+            isScrolled ? 'h-[32px] w-[130px]' : 'h-[40px] w-[160px] md:h-[44px] md:w-[180px]'
+          }`}>
+            <Image
+              src="/img/tao-logo.png"
+              alt="Tao Architecture - Home"
+              fill
+              className="object-contain object-left"
+              priority
+              sizes="(max-width: 768px) 160px, 180px"
+            />
           </div>
         </Link>
-        
+
+        {/* Mobile Hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          type="button"
-          aria-expanded={isOpen}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-neutral-dark-grey rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus-ring"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          className="inline-flex items-center justify-center w-10 h-10 text-neutral-dark-grey rounded-sm md:hidden hover:bg-black/5 transition-colors duration-200"
         >
-          <span className="sr-only">Open main menu</span>
-          {isOpen ? (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          ) : (
-            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-          )}
+          <span className="sr-only">Toggle menu</span>
+          <span className="relative w-5 h-4 flex flex-col justify-between overflow-hidden">
+            <span className={`block h-[1.5px] bg-current rounded-full transform transition-all duration-300 origin-left ${isOpen ? 'rotate-45 translate-y-[0px] translate-x-[2px]' : ''}`} />
+            <span className={`block h-[1.5px] bg-current rounded-full transition-all duration-200 ${isOpen ? 'opacity-0 translate-x-2' : ''}`} />
+            <span className={`block h-[1.5px] bg-current rounded-full transform transition-all duration-300 origin-left ${isOpen ? '-rotate-45 -translate-y-[0px] translate-x-[2px]' : ''}`} />
+          </span>
         </button>
 
-        <div className={`${isOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`}>
-          <ul className="font-agenda text-[13px] font-bold tracking-widest flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent items-center">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center">
+          <ul className="font-agenda tao-fs-menu font-bold tracking-[0.05em] flex items-center space-x-7">
             {navLinks.map((link) => (
-              <li key={link.name} className="relative group w-full md:w-auto text-center md:text-left">
+              <li key={link.name} className="relative group">
                 {link.dropdown ? (
                   <>
-                    <button 
-                      onClick={() => toggleDropdown(link.name)}
+                    <button
                       aria-haspopup="true"
-                      aria-expanded={openDropdown === link.name}
-                      className={`block w-full py-3 px-3 rounded md:bg-transparent md:p-0 hover:text-primary-red transition-colors duration-200 flex items-center justify-center md:justify-start gap-1 focus-ring`}
+                      aria-expanded={false}
+                      className={`flex items-center gap-1 py-2 transition-colors duration-200 hover:text-primary-red ${
+                        link.dropdown.some(d => pathname === d.href) ? 'text-primary-red' : 'text-neutral-medium-grey'
+                      }`}
                     >
                       {link.name}
-                      <span className="md:hidden text-[10px]">{openDropdown === link.name ? '▲' : '▼'}</span>
+                      <svg className="w-2.5 h-2.5 mt-[1px] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
                     </button>
-                    
+
                     {/* Desktop Dropdown */}
-                    <div 
-                      className="hidden md:group-hover:block absolute left-0 mt-0 w-48 bg-white shadow-lg rounded-sm overflow-hidden pt-2 z-50"
+                    <div
+                      className="nav-dropdown absolute left-0 top-full w-52 bg-white border-t-[2px] border-primary-gold shadow-premium-lg z-50 mt-0"
                       role="menu"
                     >
-                       <div className="bg-white border-t-2 border-primary-gold">
-                        {link.dropdown.map((sublink) => (
-                          <Link 
-                            key={sublink.name}
-                            href={sublink.href}
-                            role="menuitem"
-                            className="block px-4 py-3 text-xs text-neutral-medium-grey hover:bg-gray-50 hover:text-primary-gold border-b border-gray-100 last:border-0 text-left focus:bg-gray-50 focus:text-primary-gold outline-none"
-                          >
-                            {sublink.name}
-                          </Link>
-                        ))}
-                       </div>
-                    </div>
-
-                    {/* Mobile Accordion */}
-                    <div className={`${openDropdown === link.name ? 'block' : 'hidden'} md:hidden w-full bg-gray-50 mt-2 rounded`}>
-                        {link.dropdown.map((sublink) => (
-                          <Link 
-                            key={sublink.name}
-                            href={sublink.href}
-                            onClick={() => setIsOpen(false)}
-                            className="block px-4 py-3 text-xs text-neutral-medium-grey hover:text-primary-gold border-b border-gray-100 last:border-0"
-                          >
-                            {sublink.name}
-                          </Link>
-                        ))}
+                      {link.dropdown.map((sublink) => (
+                        <Link
+                          key={sublink.name}
+                          href={sublink.href}
+                          role="menuitem"
+                          className={`block px-5 py-3 text-[10.5px] tracking-[0.14em] border-b border-neutral-border last:border-0 transition-all duration-200 hover:bg-neutral-bg hover:text-primary-gold hover:pl-6 ${
+                            pathname === sublink.href ? 'text-primary-gold bg-neutral-bg' : 'text-neutral-medium-grey'
+                          }`}
+                        >
+                          {sublink.name}
+                        </Link>
+                      ))}
                     </div>
                   </>
                 ) : (
-                  <Link 
-                    href={link.href} 
-                    onClick={() => setIsOpen(false)}
-                    className={`block py-3 px-3 rounded md:bg-transparent md:p-0 transition-colors duration-200 ${pathname === link.href ? 'text-primary-red' : 'text-neutral-medium-grey'} hover:text-primary-red`}
+                  <Link
+                    href={link.href}
+                    className={`block py-2 transition-colors duration-200 hover:text-primary-red relative after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-primary-red after:transition-all after:duration-300 ${
+                      pathname === link.href
+                        ? 'text-primary-red after:w-full'
+                        : 'text-neutral-medium-grey after:w-0 hover:after:w-full'
+                    }`}
                   >
                     {link.name}
                   </Link>
                 )}
               </li>
             ))}
-            <li className="hidden md:block pl-4 border-l border-gray-300">
-               <button className="text-neutral-dark-grey hover:text-primary-red transition-colors">
-                 <FaSearch size={14} />
-               </button>
+
+            {/* Search icon */}
+            <li className="pl-5 border-l border-neutral-border">
+              <button
+                className="text-neutral-medium-grey hover:text-primary-red transition-colors duration-200 p-1"
+                aria-label="Search"
+              >
+                <FaSearch size={13} />
+              </button>
             </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        ref={mobileMenuRef}
+        className={`mobile-menu md:hidden ${isOpen ? 'open' : ''}`}
+      >
+        <div className="bg-white border-t border-neutral-border px-4 py-3">
+          <ul className="font-agenda tao-fs-menu font-bold tracking-[0.05em] space-y-0">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                {link.dropdown ? (
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown(link.name)}
+                      aria-haspopup="true"
+                      aria-expanded={openDropdown === link.name}
+                      className="flex items-center justify-between w-full py-3.5 border-b border-neutral-border text-neutral-medium-grey hover:text-primary-red transition-colors"
+                    >
+                      <span>{link.name}</span>
+                      <svg
+                        className={`w-3 h-3 transition-transform duration-300 ${openDropdown === link.name ? 'rotate-180' : ''}`}
+                        fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+
+                    {/* Mobile Sub-menu */}
+                    <div
+                      className="overflow-hidden transition-all duration-400 ease-in-out"
+                      style={{ maxHeight: openDropdown === link.name ? '300px' : '0px', opacity: openDropdown === link.name ? 1 : 0, transition: 'max-height 0.35s cubic-bezier(0.85,0,0.15,1), opacity 0.25s ease' }}
+                    >
+                      <div className="bg-neutral-bg pl-4">
+                        {link.dropdown.map((sublink) => (
+                          <Link
+                            key={sublink.name}
+                            href={sublink.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block py-3 text-[11px] text-neutral-medium-grey hover:text-primary-gold border-b border-neutral-border last:border-0 transition-colors"
+                          >
+                            {sublink.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block py-3.5 border-b border-neutral-border transition-colors ${
+                      pathname === link.href ? 'text-primary-red' : 'text-neutral-medium-grey hover:text-primary-red'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </div>

@@ -41,21 +41,22 @@ const Footer = () => {
     fetchSettings();
   }, []);
 
-  // Reset click count after 2 seconds of inactivity
+  // Handle click count and reset
   useEffect(() => {
+    if (clickCount === 0) return;
+    
+    if (clickCount >= 5) {
+      router.push('/admin/login');
+      setClickCount(0);
+      return;
+    }
+
     const timer = setTimeout(() => setClickCount(0), 2000);
     return () => clearTimeout(timer);
-  }, [clickCount]);
+  }, [clickCount, router]);
 
   const handleAdminTrigger = () => {
-    setClickCount(prev => {
-      const newCount = prev + 1;
-      if (newCount === 5) { // Trigger on 5th click
-        router.push('/admin/login');
-        return 0;
-      }
-      return newCount;
-    });
+    setClickCount(prev => prev + 1);
   };
 
   // Helper to get value with fallback
@@ -80,29 +81,35 @@ const Footer = () => {
   } catch { /* use default */ }
 
   return (
-    <footer className="bg-neutral-off-black text-white pt-16 pb-8 relative">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+    <footer className="bg-neutral-off-black text-white relative overflow-hidden">
+      {/* Gold accent line at top */}
+      <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-60" />
+
+      <div className="container mx-auto px-4 pt-14 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link href="/" className="block w-[180px] hover:opacity-90 transition-opacity">
-              <Image 
-                src="/img/tao-logo-white.png" 
-                alt="TAO Architecture" 
-                width={180} 
-                height={45}
+            <Link href="/" className="block w-[170px] hover:opacity-85 transition-opacity duration-200">
+              <Image
+                src="/img/tao-logo-white.png"
+                alt="TAO Architecture"
+                width={170}
+                height={43}
                 className="w-full h-auto"
               />
             </Link>
-            <p className="text-neutral-light-grey text-sm leading-relaxed max-w-xs">
+            <p className="text-neutral-light-grey text-[13px] leading-relaxed max-w-[240px]">
               {val('footerTagline')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Quick Links</h4>
-            <ul className="space-y-4">
+            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit">
+              Quick Links
+            </h6>
+            <ul className="space-y-3.5">
               {[
                 { label: 'Work', href: '/work' },
                 { label: 'Studio', href: '/studio' },
@@ -110,11 +117,11 @@ const Footer = () => {
                 { label: 'Contact', href: '/contact' }
               ].map((link) => (
                 <li key={link.label}>
-                  <Link 
+                  <Link
                     href={link.href}
-                    className="text-neutral-light-grey hover:text-primary-red transition-colors text-sm font-medium flex items-center group"
+                    className="text-neutral-light-grey text-[13px] font-medium flex items-center gap-0 group hover:text-white transition-colors duration-200"
                   >
-                    <span className="w-0 overflow-hidden group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-2 text-primary-red">→</span>
+                    <span className="inline-block w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-primary-gold text-sm leading-none">›</span>
                     {link.label}
                   </Link>
                 </li>
@@ -124,18 +131,26 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Contact Us</h4>
-            <div className="space-y-4 text-sm text-neutral-light-grey">
+            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit">
+              Contact Us
+            </h6>
+            <div className="space-y-3.5 text-[13px] text-neutral-light-grey">
               <p className="leading-relaxed">
-                <strong className="block text-white mb-1">Pune Office:</strong>
+                <strong className="block text-white mb-1 font-semibold">Pune Office:</strong>
                 {val('address').split('\n').map((line: string, i: number) => (
-                  <span key={i}>{line}<br/></span>
+                  <span key={i}>{line}<br /></span>
                 ))}
               </p>
-              <a href={`tel:${displayPhone.replace(/\s/g, '')}`} className="block hover:text-primary-red transition-colors">
+              <a
+                href={`tel:${displayPhone.replace(/\s/g, '')}`}
+                className="block hover:text-white transition-colors duration-200"
+              >
                 {displayPhone}
               </a>
-              <a href={`mailto:${val('contactEmail')}`} className="block hover:text-primary-red transition-colors">
+              <a
+                href={`mailto:${val('contactEmail')}`}
+                className="block hover:text-white transition-colors duration-200"
+              >
                 {val('contactEmail')}
               </a>
             </div>
@@ -143,18 +158,20 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-white border-b border-neutral-medium-grey pb-2 w-fit">Follow Us</h4>
-            <div className="flex space-x-4">
+            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit">
+              Follow Us
+            </h6>
+            <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-neutral-medium-grey flex items-center justify-center text-white hover:bg-primary-red hover:border-primary-red transition-all duration-300"
                   aria-label={social.label}
+                  className="w-9 h-9 border border-neutral-medium-grey flex items-center justify-center text-neutral-light-grey hover:bg-primary-gold hover:border-primary-gold hover:text-white transition-all duration-300"
                 >
-                  <social.icon size={16} />
+                  <social.icon size={14} />
                 </a>
               ))}
             </div>
@@ -162,16 +179,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-neutral-medium-grey flex flex-col md:flex-row justify-between items-center text-xs text-neutral-light-grey">
-          <p 
-            onClick={handleAdminTrigger} 
-            className="cursor-pointer hover:text-white transition-colors mb-4 md:mb-0 select-none"
+        <div className="pt-6 border-t border-neutral-medium-grey flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-neutral-light-grey tracking-wide">
+          <p
+            onClick={handleAdminTrigger}
+            className="cursor-pointer hover:text-white transition-colors duration-200 select-none"
           >
             © {new Date().getFullYear()} {val('siteName')}. All rights reserved.
           </p>
-          <div className="flex space-x-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-white transition-colors duration-200">Privacy Policy</Link>
+            <Link href="/terms"   className="hover:text-white transition-colors duration-200">Terms of Use</Link>
           </div>
         </div>
       </div>

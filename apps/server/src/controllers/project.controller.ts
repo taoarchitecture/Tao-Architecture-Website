@@ -1,208 +1,71 @@
 import { Request, Response } from 'express';
-import prisma from '../prisma';
-import path from 'path';
-import fs from 'fs';
+import { CreateProjectInput, UpdateProjectInput } from '../schemas/project.schemas';
+import {
+  createProjectService,
+  deleteProjectService,
+  getProjectByIdService,
+  getProjectBySlugService,
+  listProjects,
+  updateProjectService,
+} from '../services/project.service';
+import { AppError } from '../utils/app-error';
+import { asyncHandler } from '../utils/async-handler';
 
-// Helper to delete file
-const deleteFile = (filePath: string) => {
-  if (!filePath) return;
-  const fullPath = path.join(__dirname, '../../../uploads', path.basename(filePath));
-  if (fs.existsSync(fullPath)) {
-    fs.unlinkSync(fullPath);
+const parseIdParam = (value: string) => {
+  const id = Number(value);
+  if (!Number.isInteger(id) || id <= 0) {
+    throw new AppError('Invalid project id', 400);
   }
+  return id;
 };
 
-export const getProjects = async (req: Request, res: Response) => {
-  try {
-    const projects = await prisma.project.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-    // Parse JSON strings back to objects
-    const parsedProjects = projects.map(p => ({
-      ...p,
-      description: p.description ? JSON.parse(p.description) : null,
-      gallery: p.gallery ? JSON.parse(p.gallery) : [],
-    }));
-    res.json(parsedProjects);
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-    res.status(500).json({ message: 'Error fetching projects' });
+const parsePositiveInteger = (value?: string) => {
+  if (!value) return undefined;
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new AppError('Pagination values must be positive integers', 400);
   }
+  return parsed;
 };
 
-export const getProjectBySlug = async (req: Request, res: Response) => {
-  const { slug } = req.params;
-  try {
-    const project = await prisma.project.findUnique({
-      where: { slug },
-    });
-    if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
-    }
-    const parsedProject = {
-      ...project,
-      description: project.description ? JSON.parse(project.description) : null,
-      gallery: project.gallery ? JSON.parse(project.gallery) : [],
-    };
-    res.json(parsedProject);
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching project' });
-  }
-};
+export const getProjects = asyncHandler(async (req: Request, res: Response) => {
+  const limit = parsePositiveInteger(req.query.limit?.toString());
+  const cursor = parsePositiveInteger(req.query.cursor?.toString());
+  const response = await listProjects(limit, cursor);
+  res.json(response);
+});
 
-export const getProjectById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const project = await prisma.project.findUnique({
-      where: { id: Number(id) },
-    });
-    if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
-    }
-    const parsedProject = {
-      ...project,
-      description: project.description ? JSON.parse(project.description) : null,
-      gallery: project.gallery ? JSON.parse(project.gallery) : [],
-    };
-    res.json(parsedProject);
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching project' });
-  }
-};
+export const getProjectBySlug = asyncHandler(async (req: Request, res: Response) => {
+  const project = await getProjectBySlugService(req.params.slug);
+  res.json(project);
+});
 
-export const createProject = async (req: Request, res: Response) => {
-  try {
-    const { title, slug, category, location, status, plotArea, builtUpArea, description, seoTitle, seoDesc, isPublished, isFeatured, order, relatedProjects } = req.body;
-    
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-    const coverImageFile = files['coverImage']?.[0];
-    const galleryFiles = files['gallery'] || [];
+export const getProjectById = asyncHandler(async (req: Request, res: Response) => {
+  const id = parseIdParam(req.params.id);
+  const project = await getProjectByIdService(id);
+  res.json(project);
+});
 
-    const isUrl = (path: string) => {
-      try {
-        new URL(path);
-        return true;
-      } catch {
-        return false;
-      }
-    };
+export const createProject = asyncHandler(async (req: Request, res: Response) => {
+  const created = await createProjectService(
+    req.body as CreateProjectInput,
+    req.files as { [fieldname: string]: Express.Multer.File[] } | undefined
+  );
+  res.status(201).json(created);
+});
 
-    const coverImageUrl = coverImageFile 
-      ? (isUrl(coverImageFile.path) ? coverImageFile.path : `/uploads/${coverImageFile.filename}`)
-      : null;
-    
-    // Process gallery images
-    const galleryData = galleryFiles.map((file, index) => ({
-      url: isUrl(file.path) ? file.path : `/uploads/${file.filename}`,
-      caption: '',
-      order: index
-    }));
+export const updateProject = asyncHandler(async (req: Request, res: Response) => {
+  const id = parseIdParam(req.params.id);
+  const updated = await updateProjectService(
+    id,
+    req.body as UpdateProjectInput,
+    req.files as { [fieldname: string]: Express.Multer.File[] } | undefined
+  );
+  res.json(updated);
+});
 
-    const project = await prisma.project.create({
-      data: {
-        title,
-        slug,
-        category,
-        location,
-        status,
-        plotArea,
-        builtUpArea,
-        description: description ? description : '[]',
-        seoTitle,
-        seoDesc,
-        isPublished: isPublished === 'true',
-        isFeatured: isFeatured === 'true',
-        order: Number(order || 0),
-        relatedProjects: relatedProjects || '[]',
-        coverImage: coverImageUrl,
-        gallery: JSON.stringify(galleryData),
-      },
-    });
-
-    res.status(201).json(project);
-  } catch (error) {
-    console.error('Error creating project:', error);
-    res.status(500).json({ message: 'Error creating project' });
-  }
-};
-
-export const updateProject = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const { title, slug, category, location, status, plotArea, builtUpArea, description, seoTitle, seoDesc, isPublished, existingGallery } = req.body;
-    
-    const project = await prisma.project.findUnique({ where: { id: Number(id) } });
-    if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
-    }
-
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-    const coverImageFile = files['coverImage']?.[0];
-    const newGalleryFiles = files['gallery'] || [];
-
-    let coverImageUrl = project.coverImage;
-    if (coverImageFile) {
-      // Delete old cover image
-      if (project.coverImage) deleteFile(project.coverImage);
-      coverImageUrl = `/uploads/${coverImageFile.filename}`;
-    }
-
-    // Handle Gallery
-    // Combine existing gallery (parsed from JSON string) with new files
-    let galleryData = existingGallery ? JSON.parse(existingGallery) : [];
-    
-    const newGalleryItems = newGalleryFiles.map(file => ({
-      url: `/uploads/${file.filename}`,
-      caption: '',
-      order: galleryData.length // Append to end
-    }));
-
-    galleryData = [...galleryData, ...newGalleryItems];
-
-    const updatedProject = await prisma.project.update({
-      where: { id: Number(id) },
-      data: {
-        title,
-        slug,
-        category,
-        location,
-        status,
-        plotArea,
-        builtUpArea,
-        description: description || project.description,
-        seoTitle,
-        seoDesc,
-        isPublished: isPublished === 'true',
-        coverImage: coverImageUrl,
-        gallery: JSON.stringify(galleryData),
-      },
-    });
-
-    res.json(updatedProject);
-  } catch (error) {
-    console.error('Error updating project:', error);
-    res.status(500).json({ message: 'Error updating project' });
-  }
-};
-
-export const deleteProject = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const project = await prisma.project.findUnique({ where: { id: Number(id) } });
-    if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
-    }
-
-    // Delete images
-    if (project.coverImage) deleteFile(project.coverImage);
-    if (project.gallery) {
-      const gallery = JSON.parse(project.gallery);
-      gallery.forEach((item: any) => deleteFile(item.url));
-    }
-
-    await prisma.project.delete({ where: { id: Number(id) } });
-    res.json({ message: 'Project deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting project' });
-  }
-};
+export const deleteProject = asyncHandler(async (req: Request, res: Response) => {
+  const id = parseIdParam(req.params.id);
+  await deleteProjectService(id);
+  res.json({ message: 'Project deleted successfully' });
+});

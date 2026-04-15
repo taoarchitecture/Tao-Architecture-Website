@@ -143,14 +143,14 @@ export default function Contact() {
               </div>
 
               <div className="pl-4">
-                <p className="font-agenda text-lg mb-6">
+                <p className="font-agenda tao-fs-addr mb-6">
                   <strong className="font-bold">TAO ARCHITECTURE PVT LTD</strong>,<br/>
                   {addressLines.map((line: string, i: number) => (
                     <span key={i}>{line}<br/></span>
                   ))}
                 </p>
 
-                <p className="font-agenda text-lg mb-8">
+                <p className="font-agenda tao-fs-addr mb-8">
                   <strong className="font-bold">Call</strong> {phones.join(' / ')}<br/>
                   <strong className="font-bold">Email</strong> {val('contactEmail')}
                 </p>
@@ -171,7 +171,7 @@ export default function Contact() {
 
             {/* Email Form Section */}
             <section id="email-form" className="mb-20 border-t-[10px] border-neutral-dark-grey pt-10 px-8 bg-white">
-              <h2 className="text-fluid-h1 font-light mb-8 font-agenda">Email us</h2>
+              <h2 className="tao-fs-form-h font-normal mb-8 font-agenda">Email us</h2>
               
               {submitted ? (
                 <div className="py-12 text-center">
@@ -187,15 +187,15 @@ export default function Contact() {
               ) : (
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
-                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
+                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
                   </div>
                   
-                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" />
-                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
-                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda" required />
+                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" />
+                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
+                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
                   
-                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda"></textarea>
+                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input"></textarea>
                   
                   <div className="flex justify-end">
                     <button type="submit" disabled={submitting} className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white disabled:opacity-50">

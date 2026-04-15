@@ -7,6 +7,7 @@ import StudioSidebar from '@/components/studio/StudioSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { getTeamMembers } from '@/lib/api';
 import { TeamMember } from '@/types';
+import { getImageUrl } from '@/utils/image';
 
 const DEFAULT_INTRO = "Led by Principal Architect Manish Banker, TAO Architecture Pvt. Ltd. comprises a team of driven professionals passionately working to enrich the lives of clients through user centric sustainable design solutions. Keeping to its name, the studio leads 'The Way' to a greener future, incorporating and promoting organic design principles.";
 
@@ -47,6 +48,14 @@ export default function Studio() {
     fetchIntro();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Simple check since we only have one section now
+      setActiveSection('team');
+    };
+    // No scroll listener needed really if only one section, but keeping structure for safety
+  }, []);
+
   if (isLoading) {
     return (
       <main className="min-h-screen bg-white pt-24 pb-20 flex justify-center items-center">
@@ -82,13 +91,10 @@ export default function Studio() {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Simple check since we only have one section now
-      setActiveSection('team');
-    };
-    // No scroll listener needed really if only one section, but keeping structure for safety
-  }, []);
+  const resolveMemberImage = (image: string | null | undefined): string | null => {
+    const src = getImageUrl(image);
+    return src.trim() ? src : null;
+  };
 
   return (
     <main className="min-h-screen bg-white pt-24 pb-20">
@@ -117,17 +123,23 @@ export default function Studio() {
               </div>
 
               <div className="space-y-16">
-                {teamMembers.map((member) => (
+                {teamMembers.map((member) => {
+                  const memberImageSrc = resolveMemberImage(member.image);
+                  return (
                     <div key={member.id} className="grid grid-cols-1 md:grid-cols-12 gap-8">
                         <div className="md:col-span-4 relative">
                             <div className="relative w-full aspect-[3/4] overflow-hidden">
-                                <Image 
-                                    src={member.image} 
-                                    alt={member.name} 
-                                    fill 
-                                    className="object-cover object-top"
-                                    sizes="(max-width: 768px) 100vw, 33vw"
-                                />
+                                {memberImageSrc ? (
+                                  <Image
+                                      src={memberImageSrc}
+                                      alt={member.name}
+                                      fill
+                                      className="object-cover object-top"
+                                      sizes="(max-width: 768px) 100vw, 33vw"
+                                  />
+                                ) : (
+                                  <div className="h-full w-full bg-neutral-100" aria-hidden="true" />
+                                )}
                             </div>
                         </div>
                         <div className="md:col-span-8">
@@ -142,7 +154,8 @@ export default function Studio() {
                             </div>
                         </div>
                     </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           </div>

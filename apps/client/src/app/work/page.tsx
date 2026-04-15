@@ -56,6 +56,7 @@ export default function Work() {
           fill
           className="object-cover opacity-5"
           priority
+          sizes="100vw"
         />
       </div>
       <div className="relative z-10">
@@ -95,11 +96,11 @@ export default function Work() {
                             </div>
                           </Link>
                         </div>
-                        <h3 className="text-sm font-agenda uppercase tracking-wide font-bold mb-1 group-hover:text-primary-red transition-colors">
+                        <h3 className="tao-fs-proj-h font-bold font-agenda uppercase tracking-wide mb-1 group-hover:text-primary-red transition-colors">
                           <Link href={project.link}>{project.title}</Link>
                         </h3>
                         {project.description && (
-                          <p className="text-xs font-agenda text-neutral-light-grey uppercase tracking-wider">
+                          <p className="tao-fs-proj-sub font-bold font-agenda text-neutral-light-grey uppercase tracking-wider">
                             {project.description}
                           </p>
                         )}

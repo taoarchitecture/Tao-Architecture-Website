@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Magnetic from '@/components/ui/Magnetic';
 
 interface HomeBottomSectionProps {
   config?: {
@@ -18,6 +19,7 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
         fill
         className="object-cover"
         priority
+        sizes="100vw"
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4">
@@ -27,12 +29,14 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
         <p className="text-gray-200 text-lg md:text-xl max-w-2xl mb-10 font-agenda leading-relaxed">
           {config?.bottomCtaText || "Touching intangible beauty of nature, through tangible forms of Architecture."}
         </p>
-        <Link 
-          href={config?.bottomCtaLink || "/contact"}
-          className="inline-block border-2 border-white text-white px-8 py-3 text-sm font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300"
-        >
-          Start Your Project
-        </Link>
+        <Magnetic>
+          <Link 
+            href={config?.bottomCtaLink || "/contact"}
+            className="inline-block border-2 border-white text-white px-8 py-3 text-sm font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Start Your Project
+          </Link>
+        </Magnetic>
       </div>
     </section>
   );

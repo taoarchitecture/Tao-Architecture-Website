@@ -16,6 +16,7 @@ import settingsRoutes from './routes/settings.routes';
 import pageContentRoutes from './routes/page-content.routes';
 import servicesRoutes from './routes/services.routes';
 import path from 'path';
+import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 
 dotenv.config();
 
@@ -48,5 +49,8 @@ app.use('/api/services', servicesRoutes);
 app.get('/', (req, res) => {
   res.json({ message: 'Tao Architecture API' });
 });
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 export default app;

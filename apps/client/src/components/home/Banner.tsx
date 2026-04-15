@@ -2,27 +2,32 @@ import Link from 'next/link';
 
 const Banner = () => {
   return (
-    <div className="container mx-auto px-4 py-12 md:py-20">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+    <section className="container mx-auto px-4 py-14 md:py-20">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12">
+
+        {/* Tagline */}
         <div className="max-w-3xl">
-          <h1 className="text-fluid-h1 font-light leading-tight font-agenda">
-            <span className="border-b-2 border-black pb-1">
-              Touching intangible beauty of nature,
-              <br className="hidden md:block" />
-              through tangible forms of Architecture
-            </span>
+          <span className="section-divider" />
+          <h1 className="tao-fs-banner font-bold leading-tight font-agenda text-neutral-dark-grey">
+            Touching intangible beauty of nature,{' '}
+            <br className="hidden md:block" />
+            through tangible forms of{' '}
+            <span className="font-bold">Architecture</span>
           </h1>
         </div>
-        <div>
-          <Link 
+
+        {/* CTA */}
+        <div className="flex-shrink-0">
+          <Link
             href="/studio"
-            className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white"
+            className="btn btn-outline-red"
           >
             Know About Us
           </Link>
         </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 

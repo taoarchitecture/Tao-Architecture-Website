@@ -147,16 +147,17 @@ export default function Services() {
 
   return (
     <main className="min-h-screen bg-white pt-20">
-      <MobilePageNav 
-        items={serviceItems} 
-        activeItem={activeSection} 
-        onSelect={scrollToSection} 
+      <MobilePageNav
+        items={serviceItems}
+        activeItem={activeSection}
+        onSelect={scrollToSection}
       />
-      {/* Intro Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20">
+
+      {/* ── Intro Section ── */}
+      <section className="container mx-auto px-4 py-10 md:py-20">
         <div className="max-w-4xl">
-          <h1 className="text-fluid-h1 font-bold uppercase mb-8 font-agenda">{introTitle}</h1>
-          <div className="text-lg font-agenda text-neutral-dark-grey space-y-6 leading-relaxed">
+          <h1 className="tao-fs-svc-h font-bold uppercase mb-6 font-agenda">{introTitle}</h1>
+          <div className="tao-fs-desc font-agenda text-neutral-dark-grey space-y-5 leading-relaxed">
             {introContent.map((para, idx) => (
               <p key={idx}>{para}</p>
             ))}
@@ -164,37 +165,55 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Main Content with Sidebar */}
+      {/* ── Main Content with Sidebar ── */}
       <div className="container mx-auto px-4 pb-20">
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Sidebar */}
-          <div className="md:w-1/4">
+
+          {/* Sidebar — desktop only (hidden on mobile, MobilePageNav used instead) */}
+          <div className="md:w-1/4 hidden md:block">
             <ServicesSidebar activeSection={activeSection} items={serviceItems} />
           </div>
 
-          {/* Content */}
-          <div className="md:w-3/4">
+          {/* Service cards */}
+          <div className="w-full md:w-3/4">
             {services.map((service) => (
-              <section key={service.slug || service.id} id={service.slug} className="mb-20 pt-8 border-t-2 border-neutral-dark-grey">
+              <section
+                key={service.slug || service.id}
+                id={service.slug}
+                className="mb-16 pt-8 border-t-2 border-neutral-dark-grey scroll-mt-32"
+              >
+                {/* Desktop: Grid / Mobile: Stack */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="relative h-[300px] w-full">
-                    <Image
-                      src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
-                      alt={service.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
+                  {/* Image — responsive, no overflow on mobile */}
+                  <div className="relative w-full mb-4 md:mb-0 overflow-hidden rounded-sm">
+                    <div className="relative w-full h-[240px] sm:h-[300px] md:h-[350px] lg:h-[400px]">
+                      <Image
+                        src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
+                        alt={service.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-xl font-bold uppercase mb-4 font-agenda text-primary-red">{service.title}</h2>
+
+                  {/* Text Content */}
+                  <div className="space-y-5">
+                    <h2 className="tao-fs-svc-rh font-bold uppercase font-agenda text-primary-red leading-snug">
+                      {service.title}
+                    </h2>
+
                     {service.subtitle && (
-                      <p className="text-sm italic mb-4 font-agenda">{service.subtitle}</p>
+                      <p className="tao-fs-input italic font-agenda text-neutral-medium-grey">
+                        {service.subtitle}
+                      </p>
                     )}
+
                     {service.description && (
-                      <p className="text-sm mb-4 font-agenda text-neutral-dark-grey">{service.description}</p>
+                      <p className="tao-fs-desc font-agenda text-neutral-dark-grey">{service.description}</p>
                     )}
-                    <ul className="list-disc pl-5 space-y-2 font-agenda text-neutral-dark-grey marker:text-primary-red">
+
+                    <ul className="list-disc pl-5 space-y-2 font-agenda tao-fs-desc text-neutral-dark-grey marker:text-primary-red">
                       {(service.items || []).map((item: string, idx: number) => (
                         <li key={idx}>{item}</li>
                       ))}
@@ -204,6 +223,7 @@ export default function Services() {
               </section>
             ))}
           </div>
+
         </div>
       </div>
     </main>
