@@ -287,8 +287,8 @@ export default function ProjectDetail() {
             <FaChevronLeft size={32} />
           </button>
           
-          <div className="relative w-full max-w-6xl h-[85vh] flex flex-col justify-center">
-            <div className="relative w-full h-[75vh] mb-4">
+          <div className="relative w-full max-w-6xl h-[90vh] flex flex-col items-center justify-center pt-8">
+            <div className="relative w-full flex-1 min-h-0 mb-6">
               <Image
                 src={project.gallery[lightboxIndex].src}
                 alt={project.gallery[lightboxIndex].title || ''}
@@ -297,9 +297,17 @@ export default function ProjectDetail() {
               />
             </div>
             {(project.gallery[lightboxIndex].title || project.gallery[lightboxIndex].description) && (
-              <div className="w-full text-center text-white mt-2 px-4 shrink-0">
-                 {project.gallery[lightboxIndex].title && <h4 className="text-lg font-bold uppercase tracking-wider">{project.gallery[lightboxIndex].title}</h4>}
-                 {project.gallery[lightboxIndex].description && <p className="text-sm font-light text-gray-300 mt-1 max-w-3xl mx-auto">{project.gallery[lightboxIndex].description}</p>}
+              <div className="w-full text-center mt-2 px-4 shrink-0 pb-4">
+                 {project.gallery[lightboxIndex].title && (
+                   <h4 className="text-white text-xl font-bold uppercase tracking-widest mb-2 font-agenda">
+                     {project.gallery[lightboxIndex].title}
+                   </h4>
+                 )}
+                 {project.gallery[lightboxIndex].description && (
+                   <p className="text-gray-300 text-sm font-light tracking-wide max-w-4xl mx-auto font-agenda">
+                     {project.gallery[lightboxIndex].description}
+                   </p>
+                 )}
               </div>
             )}
           </div>
