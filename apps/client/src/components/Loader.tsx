@@ -7,15 +7,13 @@ import Image from 'next/image';
 
 export default function Loader() {
   const [loading, setLoading] = useState(true);
-  const pathname = usePathname();
-
   useEffect(() => {
-    setLoading(true);
+    // Only show the preloader once when the site is first opened
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, []);
 
   return (
     <AnimatePresence>

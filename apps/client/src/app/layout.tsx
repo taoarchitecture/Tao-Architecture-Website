@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
 import SmoothScroll from '@/components/layout/SmoothScroll'
-import PageTransition from '@/components/layout/PageTransition'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://taoarchitecture.com'),
@@ -112,9 +111,7 @@ export default function RootLayout({
         <SmoothScroll>
           <Loader />
           <Navbar />
-          <PageTransition>
-            {children}
-          </PageTransition>
+          {children}
           <Footer />
         </SmoothScroll>
       </body>
