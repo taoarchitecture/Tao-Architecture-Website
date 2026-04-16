@@ -64,36 +64,36 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
           </div>
         </Link>
 
-        {/* Text overlay — stacked white line boxes on top of image */}
-        <div className="absolute top-[12%] left-0 z-10 max-w-[85%] pointer-events-none">
-          <div className="flex flex-col items-start pointer-events-auto">
+        {/* Text overlay — each line is its own floating box, separated by visible gaps */}
+        <div className="absolute top-[8%] left-0 z-10 max-w-[90%] pointer-events-none">
+          <div className="flex flex-col items-start gap-2 pointer-events-auto">
             {lines.map((line, index) => (
               <div
                 key={index}
-                className="bg-white px-4 py-2 md:px-5 md:py-2.5 border-b border-gray-100 w-fit shadow-premium-sm relative overflow-hidden"
+                className="bg-white/55 backdrop-blur-sm px-5 py-1.5 md:px-7 md:py-2 w-fit shadow-premium-sm relative overflow-hidden"
               >
                 <div 
                   className="absolute inset-0 bg-neutral-black/5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"
                   style={{ transitionDelay: `${index * 50}ms` }}
                 />
-                <h3 className="tao-fs-ovr-h font-normal leading-none font-agenda text-neutral-dark-grey whitespace-nowrap relative z-10">
+                <h3 className="tao-fs-ovr-h font-normal leading-none font-agenda text-neutral-dark-grey tracking-tight whitespace-nowrap relative z-10">
                   <Link href={item.link} className="hover:text-primary-red transition-colors duration-300">
                     {line}
                   </Link>
                 </h3>
               </div>
             ))}
-            
-            {/* OVERLAY CTA BUTTON */}
-            <div className="mt-5 pl-4 md:pl-5">
-              <Link
-                href={item.link}
-                className={`inline-block border px-3.5 py-1 text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] transition-colors duration-300 glass-subtle ${item.overlayCtaClass || 'border-white text-white hover:bg-white hover:text-neutral-dark-grey'}`}
-              >
-                See Projects
-              </Link>
-            </div>
           </div>
+        </div>
+
+        {/* SEE PROJECTS CTA — anchored to bottom-left of the image */}
+        <div className="absolute bottom-6 left-0 z-10 pl-6 md:pl-8 pointer-events-auto">
+          <Link
+            href={item.link}
+            className={`inline-block border px-3.5 py-1.5 text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] transition-colors duration-300 glass-subtle ${item.overlayCtaClass || 'border-white text-white hover:bg-white hover:text-neutral-dark-grey'}`}
+          >
+            See Projects
+          </Link>
         </div>
       </div>
     </motion.div>
