@@ -179,16 +179,16 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
         <h3 className="text-sm font-bold uppercase tracking-widest mb-8 border-b border-neutral-border pb-4 text-neutral-dark-grey">Essentials</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Title</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Title</label>
             <input {...register('title', { required: true })} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
             {errors.title && <span className="text-primary-red text-xs mt-1 block">Required</span>}
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Slug</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Slug</label>
             <input {...register('slug', { required: true })} className="w-full border border-neutral-border p-3 bg-neutral-bg text-neutral-medium-grey focus:outline-none" />
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Category</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Category</label>
             <select {...register('category')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors appearance-none bg-white">
               <option value="luxuryvillas">Luxury Villas</option>
               <option value="hospitality">Hospitality</option>
@@ -203,14 +203,14 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
             </select>
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Status</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Status</label>
             <select {...register('status')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors appearance-none bg-white">
               <option value="Ongoing">Ongoing</option>
               <option value="Completed">Completed</option>
             </select>
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Order</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Order</label>
             <input type="number" {...register('order')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
           <div className="flex items-center mt-8">
@@ -225,15 +225,15 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
         <h3 className="text-sm font-bold uppercase tracking-widest mb-8 border-b border-neutral-border pb-4 text-neutral-dark-grey">Project Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Location</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Location</label>
             <input {...register('location')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Plot Area</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Plot Area</label>
             <input {...register('plotArea')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-2">Built-up Area</label>
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Built-up Area</label>
             <input {...register('builtUpArea')} className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors" />
           </div>
         </div>
@@ -256,12 +256,12 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
                 className="w-full border border-neutral-border p-4 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors resize-y"
                 placeholder="Enter paragraph text..."
               />
-              <button type="button" onClick={() => removeDesc(index)} className="absolute top-2 right-2 text-neutral-light-grey hover:text-primary-red transition-colors p-2">
+              <button type="button" onClick={() => removeDesc(index)} className="absolute top-2 right-2 text-neutral-medium-grey hover:text-primary-red transition-colors p-2">
                 <FiTrash size={14} />
               </button>
             </div>
           ))}
-          {descFields.length === 0 && <p className="text-neutral-light-grey italic text-sm border border-dashed border-neutral-border p-8 text-center">No content added yet. Click "Add Paragraph" to start.</p>}
+          {descFields.length === 0 && <p className="text-neutral-medium-grey italic text-sm border border-dashed border-neutral-border p-8 text-center">No content added yet. Click "Add Paragraph" to start.</p>}
         </div>
       </div>
 
@@ -269,7 +269,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
       <div className="bg-white p-8 shadow-sm border border-neutral-border">
         <div className="flex justify-between items-center mb-8 border-b border-neutral-border pb-4">
           <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-dark-grey">Media Manager</h3>
-          <div className="flex items-center gap-2 text-xs text-emerald-600 font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-xs text-primary-red font-bold uppercase tracking-wider">
             <FiCloud size={14} />
             <span>Cloudinary CDN</span>
           </div>
@@ -277,12 +277,12 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
 
         {/* Cover Image Drop Zone */}
         <div className="mb-10">
-          <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider mb-4">Cover Image</label>
+          <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-4">Cover Image</label>
           <div className="flex items-start gap-6">
             {/* Drop zone */}
             <div
               ref={coverDropRef}
-              className={`relative flex-shrink-0 w-56 h-36 border-2 border-dashed overflow-hidden transition-all duration-200 cursor-pointer ${isDraggingCover ? 'border-primary-red bg-red-50 scale-[1.02]' : coverPreview ? 'border-neutral-border' : 'border-neutral-border hover:border-neutral-black'}`}
+              className={`relative flex-shrink-0 w-56 h-36 border-2 border-dashed overflow-hidden transition-all duration-200 cursor-pointer ${isDraggingCover ? 'border-primary-red bg-primary-red/5 scale-[1.02]' : coverPreview ? 'border-neutral-border' : 'border-neutral-border hover:border-neutral-black'}`}
               onDragOver={(e) => { e.preventDefault(); setIsDraggingCover(true); }}
               onDragLeave={() => setIsDraggingCover(false)}
               onDrop={handleCoverDrop}
@@ -296,7 +296,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
                   </div>
                 </>
               ) : (
-                <div className="flex flex-col items-center justify-center h-full text-neutral-light-grey gap-2">
+                <div className="flex flex-col items-center justify-center h-full text-neutral-medium-grey gap-2">
                   <FiImage size={24} />
                   <span className="text-xs uppercase tracking-wider text-center px-2">{isDraggingCover ? 'Drop it!' : 'Drag & Drop or Click'}</span>
                 </div>
@@ -307,9 +307,9 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
               <label htmlFor="coverImage" className="cursor-pointer inline-flex items-center px-6 py-3 border border-neutral-black text-neutral-black text-xs font-bold uppercase tracking-widest hover:bg-neutral-black hover:text-white transition-all duration-300">
                 <FiUpload className="mr-2" /> Upload Cover
               </label>
-              <p className="text-xs text-neutral-light-grey">Drag & drop or click to upload.</p>
-              <p className="text-xs text-neutral-light-grey">Auto-optimized to WebP on Cloudinary CDN.</p>
-              {coverFile && <p className="text-xs text-emerald-600 font-bold flex items-center gap-1"><FiCheck size={12}/> {coverFile.name} ready</p>}
+              <p className="text-xs text-neutral-medium-grey">Drag & drop or click to upload.</p>
+              <p className="text-xs text-neutral-medium-grey">Auto-optimized to WebP on Cloudinary CDN.</p>
+              {coverFile && <p className="flex items-center gap-1 text-xs font-bold text-primary-red"><FiCheck size={12}/> {coverFile.name} ready</p>}
             </div>
           </div>
         </div>
@@ -317,7 +317,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
         {/* Gallery Drop Zone */}
         <div>
           <div className="flex justify-between items-center mb-4">
-            <label className="block text-xs font-bold text-neutral-light-grey uppercase tracking-wider">
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider">
               Gallery ({galleryPreviews.length} image{galleryPreviews.length !== 1 ? 's' : ''})
             </label>
             <div>
@@ -331,23 +331,23 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
           {/* Drag & drop zone for gallery */}
           <div
             ref={galleryDropRef}
-            className={`border-2 border-dashed p-4 transition-all duration-200 mb-4 ${isDraggingGallery ? 'border-primary-red bg-red-50' : 'border-neutral-border hover:border-neutral-300'}`}
+            className={`border-2 border-dashed p-4 transition-all duration-200 mb-4 ${isDraggingGallery ? 'border-primary-red bg-primary-red/5' : 'border-neutral-border hover:border-neutral-medium-grey/40'}`}
             onDragOver={(e) => { e.preventDefault(); setIsDraggingGallery(true); }}
             onDragLeave={() => setIsDraggingGallery(false)}
             onDrop={handleGalleryDrop}
           >
             {galleryPreviews.length === 0 ? (
-              <div className="py-8 text-center text-neutral-light-grey">
+              <div className="py-8 text-center text-neutral-medium-grey">
                 <FiImage size={24} className="mx-auto mb-2 opacity-50" />
                 <p className="text-sm italic">{isDraggingGallery ? 'Drop images here!' : 'Drag & drop multiple images here, or click "Add Images" above.'}</p>
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 {galleryPreviews.map((img, idx) => (
-                  <div key={idx} className={`relative group aspect-square overflow-hidden border ${img.isNew ? 'border-emerald-400' : 'border-neutral-border'}`}>
+                  <div key={idx} className={`relative group aspect-square overflow-hidden border ${img.isNew ? 'border-primary-red/40' : 'border-neutral-border'}`}>
                     <Image src={getImageUrl(img.url)} alt="" fill className="object-cover" />
                     {img.isNew && (
-                      <div className="absolute top-1 left-1 bg-emerald-500 text-white text-[9px] font-bold px-1 py-0.5 uppercase tracking-wider">New</div>
+                      <div className="absolute top-1 left-1 bg-primary-red text-white text-[9px] font-bold px-1 py-0.5 uppercase tracking-wider">New</div>
                     )}
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <button
@@ -371,7 +371,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-8 py-4 border border-transparent text-neutral-light-grey text-xs font-bold uppercase tracking-widest hover:text-neutral-black transition-colors"
+          className="px-8 py-4 border border-transparent text-neutral-medium-grey text-xs font-bold uppercase tracking-widest hover:text-neutral-black transition-colors"
         >
           Cancel
         </button>

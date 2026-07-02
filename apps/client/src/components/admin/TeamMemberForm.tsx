@@ -95,12 +95,12 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 border border-neutral-border bg-white p-6 shadow-sm">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-lg font-bold text-gray-800">
+        <h2 className="font-agenda text-lg font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">
           {initialData ? 'Edit Team Member' : 'Add New Team Member'}
         </h2>
-        <button type="button" onClick={onCancel} className="text-gray-400 hover:text-gray-600">
+        <button type="button" onClick={onCancel} className="text-neutral-medium-grey transition-colors hover:text-neutral-dark-grey">
           <FiX size={20} />
         </button>
       </div>
@@ -108,42 +108,42 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
       {/* Top row: Name / Role / Order */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-1">
-          <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase tracking-wider">Name *</label>
+          <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Name *</label>
           <input
             {...register('name', { required: 'Name is required' })}
             placeholder="e.g. Ar. Manish Banker"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-red/30 focus:border-primary-red transition"
+            className="w-full border border-neutral-border px-3 py-2 text-sm text-neutral-dark-grey transition focus:border-primary-red focus:outline-none focus:ring-2 focus:ring-primary-red/20"
           />
-          {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>}
+          {errors.name && <p className="mt-1 text-xs text-primary-red">{errors.name.message}</p>}
         </div>
 
         <div className="md:col-span-1">
-          <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase tracking-wider">Role / Designation *</label>
+          <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Role / Designation *</label>
           <input
             {...register('role', { required: 'Role is required' })}
             placeholder="e.g. Principal Architect"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-red/30 focus:border-primary-red transition"
+            className="w-full border border-neutral-border px-3 py-2 text-sm text-neutral-dark-grey transition focus:border-primary-red focus:outline-none focus:ring-2 focus:ring-primary-red/20"
           />
-          {errors.role && <p className="text-xs text-red-500 mt-1">{errors.role.message}</p>}
+          {errors.role && <p className="mt-1 text-xs text-primary-red">{errors.role.message}</p>}
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1 uppercase tracking-wider">Display Order</label>
+          <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Display Order</label>
           <input
             type="number"
             {...register('order')}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-red/30 focus:border-primary-red transition"
+            className="w-full border border-neutral-border px-3 py-2 text-sm text-neutral-dark-grey transition focus:border-primary-red focus:outline-none focus:ring-2 focus:ring-primary-red/20"
           />
         </div>
       </div>
 
       {/* Image Upload with Preview */}
       <div>
-        <label className="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wider">Photo</label>
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Photo</label>
         <div className="flex items-start gap-4">
           {/* Preview Box */}
           <div
-            className="relative w-28 h-36 rounded-lg overflow-hidden border-2 border-dashed border-gray-300 bg-gray-50 flex items-center justify-center cursor-pointer hover:border-primary-red transition-colors group flex-shrink-0"
+            className="relative flex h-36 w-28 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden border-2 border-dashed border-neutral-border bg-neutral-bg transition-colors hover:border-primary-red group"
             onClick={() => fileInputRef.current?.click()}
           >
             {imagePreview ? (
@@ -155,8 +155,8 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
               </>
             ) : (
               <div className="text-center p-2">
-                <FiUploadCloud className="mx-auto text-gray-400 mb-1" size={24} />
-                <span className="text-xs text-gray-400">Click to upload</span>
+                <FiUploadCloud className="mx-auto mb-1 text-neutral-medium-grey" size={24} />
+                <span className="text-xs text-neutral-medium-grey">Click to upload</span>
               </div>
             )}
           </div>
@@ -165,12 +165,12 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition"
+              className="flex items-center gap-2 border border-neutral-border px-4 py-2 text-sm text-neutral-medium-grey transition hover:bg-neutral-bg"
             >
               <FiUploadCloud size={14} />
               {imagePreview ? 'Change Photo' : 'Upload Photo'}
             </button>
-            <p className="text-xs text-gray-400">Recommended: portrait ratio (3:4), min 400×500px. JPG or PNG.</p>
+            <p className="text-xs text-neutral-medium-grey">Recommended: portrait ratio (3:4), min 400x500px. JPG or PNG.</p>
             <input
               ref={fileInputRef}
               type="file"
@@ -185,16 +185,16 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
       {/* Bio / Description Paragraphs */}
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">
             Biography / Description
           </label>
-          <span className="text-xs text-gray-400 italic">Each block = one paragraph on the Studio page</span>
+          <span className="text-xs italic text-neutral-medium-grey">Each block = one paragraph on the Studio page</span>
         </div>
 
         <div className="space-y-3">
           {bioParagraphs.map((para, idx) => (
             <div key={idx} className="flex items-start gap-2">
-              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gray-100 text-gray-500 text-xs flex items-center justify-center mt-2 font-semibold">
+              <div className="mt-2 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-neutral-bg text-xs font-semibold text-neutral-medium-grey">
                 {idx + 1}
               </div>
               <textarea
@@ -202,13 +202,13 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
                 value={para}
                 onChange={(e) => updateParagraph(idx, e.target.value)}
                 placeholder={`Paragraph ${idx + 1}…`}
-                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm resize-y focus:outline-none focus:ring-2 focus:ring-primary-red/30 focus:border-primary-red transition"
+                className="flex-1 resize-y border border-neutral-border px-3 py-2 text-sm text-neutral-dark-grey transition focus:border-primary-red focus:outline-none focus:ring-2 focus:ring-primary-red/20"
               />
               {bioParagraphs.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeParagraph(idx)}
-                  className="mt-2 text-gray-400 hover:text-red-500 transition"
+                  className="mt-2 text-neutral-medium-grey transition hover:text-primary-red"
                   title="Remove paragraph"
                 >
                   <FiTrash2 size={16} />
@@ -236,24 +236,24 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
           {...register('active')}
           className="w-4 h-4 accent-primary-red rounded cursor-pointer"
         />
-        <label htmlFor="activeToggle" className="text-sm text-gray-600 cursor-pointer">
+        <label htmlFor="activeToggle" className="cursor-pointer text-sm text-neutral-medium-grey">
           Show this member on the Studio page
         </label>
       </div>
 
       {/* Actions */}
-      <div className="flex justify-end gap-3 pt-2 border-t border-gray-100">
+      <div className="flex justify-end gap-3 border-t border-neutral-border pt-2">
         <button
           type="button"
           onClick={onCancel}
-          className="px-5 py-2 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+          className="border border-neutral-border px-5 py-2 text-sm text-neutral-medium-grey transition hover:bg-neutral-bg"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={submitting}
-          className="px-6 py-2 text-sm bg-primary-red text-white rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
+          className="bg-primary-red px-6 py-2 text-sm font-semibold text-white transition hover:bg-neutral-dark-grey disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? 'Saving…' : initialData ? 'Save Changes' : 'Create Member'}
         </button>

@@ -7,6 +7,27 @@
    Modern polish layer on top of the brand's architectural identity.
    ============================================================ */
 
+/* ─── 0. FONT FACE DECLARATIONS ────────────────────────────── */
+@font-face {
+  font-family: 'Agenda';
+  src: url('/fonts/AgendaLight.woff2') format('woff2'),
+       url('/fonts/Agenda-Light.woff') format('woff'),
+       url('/fonts/Agenda-Light.ttf') format('truetype');
+  font-weight: 100 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Agenda';
+  src: url('/fonts/AgendaBold.woff2') format('woff2'),
+       url('/fonts/Agenda-Bold.woff') format('woff'),
+       url('/fonts/Agenda-Bold.ttf') format('truetype');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── 1. CSS CUSTOM PROPERTIES ─────────────────────────────── */
 :root {
   /* Brand Colors */
@@ -18,8 +39,8 @@
   --neutral-off-black: #1d1d1d;
   --neutral-dark-grey: #231f20;
   --neutral-medium-grey: #333333;
-  --neutral-light-grey: #929292;
-  --neutral-date-grey: #acb0b8;
+  --neutral-light-grey: #6b7280;
+  --neutral-date-grey: #7b8490;
   --neutral-border: #ededed;
   --neutral-bg: #f7f7f7;
 
@@ -67,11 +88,29 @@ html {
 body {
   font-family: 'Agenda', sans-serif;
   color: var(--neutral-medium-grey);
-  background-color: #ffffff;
+  background-color: #FEFEFE;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
   overflow-x: hidden;
+}
+
+/* Global scrollbar for desktop */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--neutral-border);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-light-grey);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-medium-grey);
 }
 
 /* Headings */
@@ -79,16 +118,18 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Agenda', sans-serif;
   color: var(--neutral-dark-grey);
   font-weight: 700;
-  margin-bottom: 0.5em;
-  line-height: 1.15;
+  margin-bottom: 0.6em;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
 }
 
-h1 { font-size: 2.5rem; letter-spacing: -0.025em; }
-h2 { font-size: 2rem;   letter-spacing: -0.02em; }
-h3 { font-size: 1.75rem; letter-spacing: -0.01em; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+/* Base Headings with Responsive Typography */
+h1 { font-size: clamp(28px, 1.5rem + 1vw, 32px); font-weight: 700; }
+h2 { font-size: clamp(20px, 1.25rem + 0.5vw, 24px); font-weight: 500; }
+h3 { font-size: clamp(16px, 1rem + 0.25vw, 18px); font-weight: 500; }
+h4 { font-size: 1.125rem; font-weight: 500; }
+h5 { font-size: 1rem; font-weight: 500; }
+h6 { font-size: 0.875rem; text-transform: uppercase; }
 
 /* Links */
 a {
@@ -186,6 +227,7 @@ select:focus-visible {
   min-height: 44px;
   border-radius: 0;
   position: relative;
+  z-index: 1;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -195,6 +237,7 @@ select:focus-visible {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: -1;
   transform: translateX(-101%);
   transition: transform 0.35s var(--ease-out-expo);
 }
@@ -245,6 +288,29 @@ select:focus-visible {
 }
 
 .btn-outline:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Stroke Button */
+.btn-stroke {
+  background-color: transparent;
+  border-color: var(--neutral-dark-grey);
+  color: var(--neutral-dark-grey);
+}
+
+.btn-stroke::before {
+  background-color: var(--neutral-dark-grey);
+}
+
+.btn-stroke:hover {
+  color: #ffffff;
+  border-color: var(--neutral-dark-grey);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-stroke:active {
   transform: translateY(0);
   box-shadow: none;
 }
@@ -410,13 +476,13 @@ input::placeholder, textarea::placeholder {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 5px 14px;
+  padding: 4px 12px;
   line-height: 1;
 }
 
 /* ─── 12. SECTION DIVIDER ────────────────────────────────────── */
 .section-divider {
-  width: 40px;
+  width: 48px;
   height: 2px;
   background: var(--primary-red);
   display: block;

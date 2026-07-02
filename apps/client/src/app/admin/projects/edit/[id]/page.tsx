@@ -28,12 +28,29 @@ export default function EditProjectPage() {
     }
   }, [params.id]);
 
-  if (loading) return <AdminLayout><div>Loading...</div></AdminLayout>;
-  if (!project) return <AdminLayout><div>Project not found</div></AdminLayout>;
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="h-64 text-center text-xs uppercase tracking-widest text-neutral-medium-grey">
+          Loading project...
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (!project) {
+    return (
+      <AdminLayout>
+        <div className="h-64 text-center text-xs uppercase tracking-widest text-neutral-medium-grey">
+          Project not found
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
-      <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Edit Project</h1>
+      <h1 className="mb-6 font-agenda text-2xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Edit Project</h1>
       <ProjectForm initialData={project} isEditing={true} />
     </AdminLayout>
   );

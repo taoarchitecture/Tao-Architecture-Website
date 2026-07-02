@@ -20,11 +20,14 @@ const config: Config = {
           'medium-grey': '#333333',
           'light-grey': '#929292',
           'date-grey': '#acb0b8',
+          border: '#ededed',
           'border-grey': '#ededed',
+          bg: '#f7f7f7',
           'bg-light': '#f7f7f7',
         }
       },
       fontFamily: {
+        sans: ['Agenda', 'sans-serif'],
         agenda: ['Agenda', 'sans-serif'],
       },
       backgroundImage: {

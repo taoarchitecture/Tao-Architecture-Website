@@ -3,26 +3,38 @@
 ## 1. Typography
 
 ### Primary Font: Agenda
-Used for headings, navigation, and primary body text.
+Exclusively applied to all textual elements across the website to ensure a consistent architectural identity.
 
 **Font Family**: `Agenda`
 - **Weights**:
-  - Light (300)
-  - Regular (400)
-  - Bold (700)
+  - Light (300) / Regular (400 / 500)
+  - Bold (600 / 700)
+- **Fallback**: `sans-serif`
 
-**Fallback**: `sans-serif`
+### Global Typographic Specifications
 
-### Secondary Font: Poppins
-Used for specific section headings as per legacy variables.
+**Body Text**
+- **Font Size**: `16px`
+- **Line Height**: `1.5`
+- **Letter Spacing**: `0.02em`
+- **Font Weight**: `400` / `500`
 
-**Font Family**: `Poppins`
-- **Weights**: 400, 500, 600, 700
+**Headings**
+- **Line Height**: `1.2`
+- **Letter Spacing**: `0.05em`
+- **Font Weight**: `500` / `700`
 
-### Tertiary Font: Merriweather
-Used for body text in blog/article sections (serif).
+#### Responsive Heading Sizes
+- **H1**: `32px` (Mobile scales down via `clamp(28px, 1.5rem + 1vw, 32px)`)
+- **H2**: `24px` (Mobile scales down via `clamp(20px, 1.25rem + 0.5vw, 24px)`)
+- **H3**: `18px` (Mobile scales down via `clamp(16px, 1rem + 0.25vw, 18px)`)
+- **H4**: `18px` (`1.125rem`)
+- **H5**: `16px` (`1rem`)
+- **H6**: `14px` (`0.875rem`, uppercase)
 
-**Font Family**: `Merriweather`
+### Deprecated Fonts
+- **Poppins** (Removed)
+- **Merriweather** (Removed)
 
 ## 2. Color Palette
 

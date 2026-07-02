@@ -123,7 +123,7 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center">
-          <ul className="font-agenda tao-fs-menu font-bold tracking-[0.05em] flex items-center space-x-7">
+          <ul className="font-agenda tao-fs-menu font-bold tracking-[0.05em] flex items-center space-x-8">
             {navLinks.map((link) => (
               <li key={link.name} className="relative group">
                 {link.dropdown ? (
@@ -143,7 +143,7 @@ const Navbar = () => {
 
                     {/* Desktop Dropdown */}
                     <div
-                      className="nav-dropdown absolute left-0 top-full w-52 bg-white border-t-[2px] border-primary-gold shadow-premium-lg z-50 mt-0"
+                      className="nav-dropdown absolute left-0 top-full w-52 bg-white border-t-[3px] border-primary-gold shadow-premium-lg z-50 mt-0"
                       role="menu"
                     >
                       {link.dropdown.map((sublink) => (
@@ -151,8 +151,8 @@ const Navbar = () => {
                           key={sublink.name}
                           href={sublink.href}
                           role="menuitem"
-                          className={`block px-5 py-3 text-[10.5px] tracking-[0.14em] border-b border-neutral-border last:border-0 transition-all duration-200 hover:bg-neutral-bg hover:text-primary-gold hover:pl-6 ${
-                            pathname === sublink.href ? 'text-primary-gold bg-neutral-bg' : 'text-neutral-medium-grey'
+                          className={`block px-5 py-3 text-[10.5px] tracking-[0.11em] border-b border-neutral-border last:border-0 transition-all duration-200 hover:bg-neutral-bg hover:text-primary-red hover:pl-7 ${
+                            pathname === sublink.href ? 'text-primary-red bg-neutral-bg' : 'text-neutral-medium-grey'
                           }`}
                         >
                           {sublink.name}
@@ -163,10 +163,10 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={link.href}
-                    className={`block py-2 transition-colors duration-200 hover:text-primary-red relative after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-primary-red after:transition-all after:duration-300 ${
+                    className={`block py-2 transition-colors duration-200 hover:text-primary-red relative after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-primary-red after:transition-all after:duration-300 before:absolute before:-bottom-1.5 before:left-1/2 before:-translate-x-1/2 before:w-[3px] before:h-[3px] before:rounded-full before:bg-primary-gold before:transition-all before:duration-300 ${
                       pathname === link.href
-                        ? 'text-primary-red after:w-full'
-                        : 'text-neutral-medium-grey after:w-0 hover:after:w-full'
+                        ? 'text-primary-red after:w-full before:opacity-100 before:translate-y-0'
+                        : 'text-neutral-medium-grey after:w-0 hover:after:w-full before:opacity-0 before:translate-y-1'
                     }`}
                   >
                     {link.name}
@@ -194,7 +194,7 @@ const Navbar = () => {
         ref={mobileMenuRef}
         className={`mobile-menu md:hidden ${isOpen ? 'open' : ''}`}
       >
-        <div className="bg-white border-t border-neutral-border px-4 py-3 pb-8">
+        <div className="bg-white border-t border-neutral-border/80 px-4 py-3 pb-8">
           {/* Mobile Search Button */}
           <button 
              onClick={() => setIsSearchOpen(true)}
@@ -235,7 +235,7 @@ const Navbar = () => {
                             key={sublink.name}
                             href={sublink.href}
                             onClick={() => setIsOpen(false)}
-                            className="block py-3 text-[11px] text-neutral-medium-grey hover:text-primary-gold border-b border-neutral-border last:border-0 transition-colors"
+                            className="block py-3 text-[11px] text-neutral-medium-grey hover:text-primary-red border-b border-neutral-border last:border-0 transition-colors"
                           >
                             {sublink.name}
                           </Link>
@@ -267,10 +267,10 @@ const Navbar = () => {
         <div className="container mx-auto px-4 py-8 max-w-5xl flex-1 flex flex-col mt-4 md:mt-10">
           {/* Header */}
           <div className="flex justify-between items-center mb-10">
-            <h2 className="text-xl md:text-2xl font-agenda font-bold tracking-widest text-[#a68a56] uppercase">Search Projects</h2>
+            <h2 className="text-xl md:text-2xl font-agenda font-bold tracking-widest text-primary-red uppercase">Search Projects</h2>
             <button 
                 onClick={() => setIsSearchOpen(false)}
-                className="text-neutral-medium-grey hover:text-primary-red transition-colors p-2 bg-gray-50 rounded-full"
+                className="rounded-full bg-neutral-bg p-2 text-neutral-medium-grey transition-colors hover:text-primary-red"
             >
                 <FaTimes size={20} />
             </button>
@@ -305,7 +305,7 @@ const Navbar = () => {
                         href={project.link}
                         className="group flex flex-col"
                    >
-                        <div className="relative w-full aspect-[4/3] overflow-hidden mb-3 bg-gray-100 rounded-sm">
+                        <div className="relative mb-3 w-full aspect-[4/3] overflow-hidden rounded-sm bg-neutral-bg">
                            <Image 
                                src={project.image} 
                                alt={project.title} 

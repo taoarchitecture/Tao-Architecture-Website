@@ -83,20 +83,20 @@ const Footer = () => {
   return (
     <footer className="bg-neutral-off-black text-white relative overflow-hidden">
       {/* Gold accent line at top */}
-      <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-60" />
+      <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-80" />
 
       <div className="container mx-auto px-4 pt-14 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
 
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link href="/" className="block w-[170px] hover:opacity-85 transition-opacity duration-200">
+            <Link href="/" className="block w-[190px] hover:opacity-85 transition-opacity duration-200">
               <Image
-                src="/img/tao-logo-white.png"
-                alt="TAO Architecture"
-                width={170}
-                height={43}
-                className="w-full h-auto"
+                src="/img/tao-logo.png"
+                alt="TAO Studio Logo"
+                width={190}
+                height={48}
+                className="h-auto w-full brightness-0 invert"
               />
             </Link>
             <p className="text-neutral-light-grey text-[13px] leading-relaxed max-w-[240px]">
@@ -106,7 +106,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit">
+            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
               Quick Links
             </h6>
             <ul className="space-y-3.5">
@@ -131,7 +131,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit">
+            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
               Contact Us
             </h6>
             <div className="space-y-3.5 text-[13px] text-neutral-light-grey">
@@ -158,7 +158,7 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit">
+            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
               Follow Us
             </h6>
             <div className="flex flex-wrap gap-3">
@@ -169,7 +169,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-9 h-9 border border-neutral-medium-grey flex items-center justify-center text-neutral-light-grey hover:bg-primary-gold hover:border-primary-gold hover:text-white transition-all duration-300"
+                  className="w-9 h-9 border border-neutral-medium-grey flex items-center justify-center text-neutral-light-grey hover:bg-primary-gold hover:border-primary-gold hover:text-neutral-black transition-all duration-300"
                 >
                   <social.icon size={14} />
                 </a>
@@ -179,7 +179,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-neutral-medium-grey flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-neutral-light-grey tracking-wide">
+        <div className="pt-6 border-t border-neutral-medium-grey flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-neutral-light-grey tracking-[0.08em]">
           <p
             onClick={handleAdminTrigger}
             className="cursor-pointer hover:text-white transition-colors duration-200 select-none"

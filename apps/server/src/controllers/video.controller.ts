@@ -9,7 +9,12 @@ export async function listVideos(req: Request, res: Response) {
   const sort = (req.query.sort as 'date' | 'views') || 'date';
   const page = parseInt((req.query.page as string) || '1', 10);
   const pageSize = parseInt((req.query.pageSize as string) || '24', 10);
-  const data = await searchVideos({ q, category, tag, sort, page, pageSize });
+  
+  let isShort: boolean | undefined = undefined;
+  if (req.query.isShort === 'true') isShort = true;
+  else if (req.query.isShort === 'false') isShort = false;
+
+  const data = await searchVideos({ q, category, tag, sort, isShort, page, pageSize });
   res.json(data);
 }
 

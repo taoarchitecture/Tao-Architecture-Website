@@ -35,8 +35,8 @@ const ContactSidebar = ({ activeSection }: ContactSidebarProps) => {
             onClick={() => scrollToSection(section.id)}
             className={`text-left tao-fs-sidebar font-bold font-agenda uppercase tracking-wide transition-colors duration-300 ${
               activeSection === section.id 
-                ? 'text-primary-gold border-l-4 border-primary-gold -ml-[21px] pl-4' 
-                : 'text-neutral-dark-grey hover:text-primary-gold'
+                ? 'text-primary-red border-l-4 border-primary-red -ml-[21px] pl-4' 
+                : 'text-neutral-dark-grey hover:text-primary-red'
             }`}
           >
             {section.label}

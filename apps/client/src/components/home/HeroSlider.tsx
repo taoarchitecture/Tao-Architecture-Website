@@ -52,8 +52,8 @@ const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subti
 
       {/* White text-box overlay — bottom-left, sits on top of slider */}
       <div className="absolute bottom-0 left-0 z-20 pointer-events-none" style={{ maxWidth: 'clamp(280px, 42%, 500px)' }}>
-        <div className="bg-white px-6 py-5 md:px-8 md:py-6 shadow-premium-lg pointer-events-auto">
-          <h1 className="tao-fs-banner font-bold leading-tight font-agenda text-neutral-dark-grey mb-4">
+        <div className="bg-neutral-bg border-l-[3px] border-primary-gold px-6 py-5 md:px-8 md:py-6 shadow-premium-lg border border-neutral-border/30 pointer-events-auto">
+          <h1 className="tao-fs-banner font-bold leading-tight tracking-tight font-agenda text-neutral-dark-grey mb-4">
             Touching intangible beauty of nature,{' '}
             through tangible forms of{' '}
             <span className="font-bold">Architecture</span>
@@ -61,7 +61,7 @@ const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subti
           <Magnetic>
             <Link
               href="/studio"
-              className="btn btn-outline text-[11px] px-4 py-2 tracking-[0.18em]"
+              className="btn btn-outline text-[11px] px-6 py-2.5 tracking-[0.18em]"
               style={{ minHeight: '36px' }}
             >
               Know About Us

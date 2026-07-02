@@ -26,7 +26,7 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
         <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-light mb-6 font-agenda tracking-wide">
           {config?.bottomCtaTitle || "Let's Create Something Extraordinary"}
         </h2>
-        <p className="text-gray-200 text-lg md:text-xl max-w-2xl mb-10 font-agenda leading-relaxed">
+        <p className="mb-10 max-w-2xl font-agenda text-lg leading-relaxed text-white/85 md:text-xl">
           {config?.bottomCtaText || "Touching intangible beauty of nature, through tangible forms of Architecture."}
         </p>
         <Magnetic>

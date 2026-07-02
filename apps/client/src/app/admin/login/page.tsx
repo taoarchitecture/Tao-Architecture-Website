@@ -35,7 +35,7 @@ export default function AdminLogin() {
           <Link href="/" className="inline-block text-4xl font-bold tracking-widest text-neutral-dark-grey hover:opacity-80 transition-opacity mb-4">
             TAO<span className="text-primary-red">ARC</span>
           </Link>
-          <h2 className="text-sm uppercase tracking-[0.2em] text-neutral-light-grey">Admin Dashboard</h2>
+          <h2 className="text-sm uppercase tracking-[0.2em] text-neutral-medium-grey">Admin Dashboard</h2>
         </div>
 
         <form className="space-y-6" onSubmit={handleLogin}>
@@ -75,7 +75,7 @@ export default function AdminLogin() {
           </div>
           
           <div className="text-center">
-             <Link href="/" className="text-xs uppercase tracking-widest text-neutral-light-grey hover:text-primary-red transition-colors">
+             <Link href="/" className="text-xs uppercase tracking-widest text-neutral-medium-grey hover:text-primary-red transition-colors">
                 Back to Website
              </Link>
           </div>

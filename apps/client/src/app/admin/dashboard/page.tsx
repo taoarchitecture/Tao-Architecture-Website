@@ -64,18 +64,18 @@ export default function Dashboard() {
   return (
     <AdminLayout>
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-neutral-dark-grey dark:text-white font-agenda">DASHBOARD</h1>
-        <p className="text-neutral-light-grey mt-2 text-sm tracking-wide uppercase">Welcome back to Tao Architecture Admin</p>
+        <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Dashboard</h1>
+        <p className="mt-2 text-sm uppercase tracking-wide text-neutral-medium-grey">Welcome back to Tao Architecture Admin</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {statCards.map((card) => (
           <Link key={card.label} href={card.href} className="group">
             <div className={`bg-white p-6 shadow-sm border-l-2 ${card.color} transition-all duration-300 group-hover:shadow-md group-hover:translate-y-[-2px]`}>
-              <h3 className="text-neutral-light-grey text-[10px] font-bold uppercase tracking-[0.2em] mb-3">{card.label}</h3>
+              <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-medium-grey">{card.label}</h3>
               <div className="flex items-end justify-between">
                 <p className="text-3xl font-bold text-neutral-black">{card.value}</p>
-                <FiArrowRight className="text-neutral-light-grey group-hover:text-primary-red transition-colors" size={16} />
+                <FiArrowRight className="text-neutral-medium-grey transition-colors group-hover:text-primary-red" size={16} />
               </div>
             </div>
           </Link>

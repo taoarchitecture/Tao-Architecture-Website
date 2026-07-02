@@ -126,7 +126,7 @@ export default function AdminPagesPage() {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+          <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading...</div>
         </div>
       </AdminLayout>
     );
@@ -136,8 +136,8 @@ export default function AdminPagesPage() {
     <AdminLayout>
       <div className="mb-10 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-dark-grey font-agenda">PAGE CONTENT</h1>
-          <p className="text-neutral-light-grey mt-2 text-sm tracking-wide uppercase">
+          <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Page Content</h1>
+          <p className="mt-2 text-sm uppercase tracking-wide text-neutral-medium-grey">
             Edit static text sections across the website
           </p>
         </div>
@@ -151,12 +151,12 @@ export default function AdminPagesPage() {
 
       {/* Custom Section Form */}
       {showCustomForm && (
-        <div className="bg-white p-8 shadow-sm border-l-2 border-primary-gold mb-8">
+        <div className="mb-8 border-l-2 border-primary-red bg-white p-8 shadow-sm">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Add Custom Page Section</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Slug (unique identifier) *</label>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Slug (unique identifier) *</label>
                 <input
                   type="text" value={customSlug} onChange={(e) => setCustomSlug(e.target.value)}
                   placeholder="e.g. about-intro"
@@ -164,7 +164,7 @@ export default function AdminPagesPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Title</label>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Title</label>
                 <input
                   type="text" value={customTitle} onChange={(e) => setCustomTitle(e.target.value)}
                   className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
@@ -172,7 +172,7 @@ export default function AdminPagesPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Content</label>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Content</label>
               <textarea
                 value={customContent} onChange={(e) => setCustomContent(e.target.value)} rows={5}
                 className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
@@ -184,7 +184,7 @@ export default function AdminPagesPage() {
                 {saving ? 'Saving...' : 'Save Section'}
               </button>
               <button onClick={() => setShowCustomForm(false)}
-                className="border border-neutral-border-grey text-neutral-dark-grey px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 transition-all duration-300">
+                className="border border-neutral-border-grey text-neutral-dark-grey px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-neutral-bg transition-all duration-300">
                 Cancel
               </button>
             </div>
@@ -204,36 +204,36 @@ export default function AdminPagesPage() {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="font-bold text-sm text-neutral-dark-grey font-agenda uppercase tracking-wider">{page.label}</h3>
-                    <p className="text-xs text-neutral-light-grey mt-1">{page.description}</p>
+                    <p className="mt-1 text-xs text-neutral-medium-grey">{page.description}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     {content && (
-                      <span className="text-[10px] uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 font-bold">Customized</span>
+                      <span className="bg-primary-red/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-red">Customized</span>
                     )}
                     {!content && (
-                      <span className="text-[10px] uppercase tracking-wider bg-gray-100 text-gray-500 px-2 py-0.5 font-bold">Default</span>
+                      <span className="bg-neutral-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-medium-grey">Default</span>
                     )}
                   </div>
                 </div>
 
                 {content && !isEditing && (
-                  <div className="mt-4 p-4 bg-gray-50 text-sm text-neutral-dark-grey font-agenda leading-relaxed">
+                  <div className="mt-4 bg-neutral-bg p-4 text-sm font-agenda leading-relaxed text-neutral-dark-grey">
                     <p className="line-clamp-3">{content.content}</p>
-                    <p className="text-[10px] text-neutral-light-grey mt-2">Last updated: {formatDate(content.updatedAt)}</p>
+                    <p className="mt-2 text-[10px] text-neutral-medium-grey">Last updated: {formatDate(content.updatedAt)}</p>
                   </div>
                 )}
 
                 {isEditing && (
                   <div className="mt-4 space-y-3">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-1">Title (optional)</label>
+                      <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Title (optional)</label>
                       <input
                         type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)}
                         className="w-full border border-neutral-border-grey p-2 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-1">Content</label>
+                      <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Content</label>
                       <textarea
                         value={editContent} onChange={(e) => setEditContent(e.target.value)} rows={6}
                         className="w-full border border-neutral-border-grey p-2 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
@@ -250,19 +250,19 @@ export default function AdminPagesPage() {
                         <FiSave size={12} /> {saving ? 'Saving...' : 'Save'}
                       </button>
                       <button onClick={() => setEditingSlug(null)}
-                        className="border border-neutral-border-grey text-neutral-dark-grey px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 transition-all duration-300">
+                        className="border border-neutral-border-grey text-neutral-dark-grey px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-neutral-bg transition-all duration-300">
                         Cancel
                       </button>
                     </>
                   ) : (
                     <>
                       <button onClick={() => startEditing(page.slug)}
-                        className="flex items-center gap-1 text-neutral-light-grey hover:text-primary-red transition-colors text-xs font-bold uppercase tracking-widest">
+                        className="flex items-center gap-1 text-neutral-medium-grey hover:text-primary-red transition-colors text-xs font-bold uppercase tracking-widest">
                         <FiEdit size={12} /> Edit
                       </button>
                       {content && (
                         <button onClick={() => handleDelete(page.slug)}
-                          className="flex items-center gap-1 text-neutral-light-grey hover:text-red-500 transition-colors text-xs font-bold uppercase tracking-widest ml-4">
+                          className="ml-4 flex items-center gap-1 text-neutral-medium-grey hover:text-primary-red transition-colors text-xs font-bold uppercase tracking-widest">
                           <FiTrash2 size={12} /> Reset to Default
                         </button>
                       )}
@@ -283,18 +283,18 @@ export default function AdminPagesPage() {
             {pages
               .filter(p => !KNOWN_PAGES.find(k => k.slug === p.pageSlug))
               .map((page) => (
-                <div key={page.id} className="bg-white p-6 shadow-sm border-l-2 border-primary-gold flex justify-between items-center">
+                <div key={page.id} className="flex items-center justify-between border-l-2 border-primary-red bg-white p-6 shadow-sm">
                   <div>
                     <h3 className="font-bold text-sm text-neutral-dark-grey font-agenda">{page.pageSlug}</h3>
-                    <p className="text-xs text-neutral-light-grey mt-1 line-clamp-1">{page.content}</p>
+                    <p className="mt-1 line-clamp-1 text-xs text-neutral-medium-grey">{page.content}</p>
                   </div>
                   <div className="flex gap-2">
                     <button onClick={() => startEditing(page.pageSlug)}
-                      className="p-2 text-neutral-light-grey hover:text-primary-red transition-colors">
+                      className="p-2 text-neutral-medium-grey hover:text-primary-red transition-colors">
                       <FiEdit size={16} />
                     </button>
                     <button onClick={() => handleDelete(page.pageSlug)}
-                      className="p-2 text-neutral-light-grey hover:text-red-500 transition-colors">
+                      className="p-2 text-neutral-medium-grey hover:text-primary-red transition-colors">
                       <FiTrash2 size={16} />
                     </button>
                   </div>

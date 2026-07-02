@@ -32,89 +32,106 @@ const CareerPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Career Application</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-2xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">First Name</label>
-            <input
-              {...register('firstName', { required: true })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border p-2"
-            />
-            {errors.firstName && <span className="text-red-500 text-sm">Required</span>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Last Name</label>
-            <input
-              {...register('lastName', { required: true })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border p-2"
-            />
-            {errors.lastName && <span className="text-red-500 text-sm">Required</span>}
-          </div>
+    <main className="min-h-screen bg-white pt-28 pb-20">
+      <div className="container mx-auto max-w-4xl px-4">
+        <div className="mb-12 border-b border-neutral-border pb-8">
+          <h1 className="text-fluid-h1 font-agenda font-bold uppercase text-neutral-dark-grey">
+            Career Application
+          </h1>
+          <p className="mt-4 max-w-2xl font-agenda tao-fs-desc text-neutral-medium-grey">
+            Join the TAO Architecture team. Share your background, the role you are applying for,
+            and your supporting documents using the form below.
+          </p>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            {...register('email', { required: true })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border p-2"
-          />
-          {errors.email && <span className="text-red-500 text-sm">Required</span>}
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 border border-neutral-border bg-neutral-bg px-6 py-8 md:px-10">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-neutral-medium-grey">
+                First Name
+              </label>
+              <input
+                {...register('firstName', { required: true })}
+                className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+              />
+              {errors.firstName && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
+            </div>
+            <div>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-neutral-medium-grey">
+                Last Name
+              </label>
+              <input
+                {...register('lastName', { required: true })}
+                className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+              />
+              {errors.lastName && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
+            </div>
+          </div>
 
-        <div>
-            <label className="block text-sm font-medium text-gray-700">Position Applying For</label>
+          <div>
+            <label className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-neutral-medium-grey">
+              Email
+            </label>
+            <input
+              type="email"
+              {...register('email', { required: true })}
+              className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+            />
+            {errors.email && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
+          </div>
+
+          <div>
+            <label className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-neutral-medium-grey">
+              Position Applying For
+            </label>
             <select
-                {...register('positionApply', { required: true })}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border p-2"
+              {...register('positionApply', { required: true })}
+              className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
             >
-                <option value="">Select Position</option>
-                <option value="Architect">Architect</option>
-                <option value="Interior Designer">Interior Designer</option>
-                <option value="Intern">Intern</option>
+              <option value="">Select Position</option>
+              <option value="Architect">Architect</option>
+              <option value="Interior Designer">Interior Designer</option>
+              <option value="Intern">Intern</option>
             </select>
-            {errors.positionApply && <span className="text-red-500 text-sm">Required</span>}
-        </div>
+            {errors.positionApply && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Resume (PDF/Doc)</label>
-          <input
-            type="file"
-            {...register('resume', { required: true })}
-            className="mt-1 block w-full text-sm text-gray-500
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-full file:border-0
-              file:text-sm file:font-semibold
-              file:bg-indigo-50 file:text-indigo-700
-              hover:file:bg-indigo-100"
-          />
-          {errors.resume && <span className="text-red-500 text-sm">Required</span>}
-        </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-neutral-medium-grey">
+                Resume (PDF/DOC)
+              </label>
+              <input
+                type="file"
+                {...register('resume', { required: true })}
+                className="block w-full text-sm text-neutral-medium-grey file:mr-4 file:border file:border-neutral-dark-grey file:bg-transparent file:px-4 file:py-2 file:text-xs file:font-bold file:uppercase file:tracking-[0.14em] file:text-neutral-dark-grey hover:file:bg-neutral-dark-grey hover:file:text-white"
+              />
+              {errors.resume && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
+            </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Portfolio (PDF/Images)</label>
-          <input
-            type="file"
-            {...register('portfolio')}
-            className="mt-1 block w-full text-sm text-gray-500
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-full file:border-0
-              file:text-sm file:font-semibold
-              file:bg-indigo-50 file:text-indigo-700
-              hover:file:bg-indigo-100"
-          />
-        </div>
+            <div>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-neutral-medium-grey">
+                Portfolio (Optional)
+              </label>
+              <input
+                type="file"
+                {...register('portfolio')}
+                className="block w-full text-sm text-neutral-medium-grey file:mr-4 file:border file:border-neutral-dark-grey file:bg-transparent file:px-4 file:py-2 file:text-xs file:font-bold file:uppercase file:tracking-[0.14em] file:text-neutral-dark-grey hover:file:bg-neutral-dark-grey hover:file:text-white"
+              />
+            </div>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
-        >
-          Submit Application
-        </button>
-      </form>
-    </div>
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              className="btn btn-outline-red"
+            >
+              Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
   );
 };
 

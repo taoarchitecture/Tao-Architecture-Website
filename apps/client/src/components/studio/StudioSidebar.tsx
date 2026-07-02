@@ -27,7 +27,7 @@ const StudioSidebar: React.FC<StudioSidebarProps> = ({ activeSection }) => {
   };
 
   return (
-    <div className="sticky top-24 left-0 h-[calc(100vh-6rem)] border-r border-gray-100 hidden md:flex flex-col items-end pr-8 pt-12">
+    <div className="sticky left-0 top-24 hidden h-[calc(100vh-6rem)] flex-col items-end border-r border-neutral-border pr-8 pt-12 md:flex">
       <ul className="text-right space-y-4 font-agenda">
         {menuItems.map((item) => (
           <li key={item.id}>

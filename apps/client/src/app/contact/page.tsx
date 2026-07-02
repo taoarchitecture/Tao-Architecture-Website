@@ -129,7 +129,7 @@ export default function Contact() {
             
             {/* Contact Details Section */}
             <section id="contact-details" className="mb-20 pt-8">
-              <div className="border-t-[10px] border-neutral-dark-grey mb-8">
+              <div className="border-t-[3px] border-primary-gold mb-8">
                 <iframe 
                   src={val('googleMapsUrl')} 
                   width="100%" 
@@ -156,13 +156,13 @@ export default function Contact() {
                 </p>
 
                 <div className="flex gap-3">
-                  <a href={val('linkedinUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                  <a href={val('linkedinUrl')} target="_blank" rel="noopener noreferrer" className="w-[34px] h-[34px] border border-neutral-border flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:border-primary-gold hover:text-neutral-black transition-all duration-300 rounded-sm">
                     <FaLinkedinIn size={14} />
                   </a>
-                  <a href={val('facebookUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                  <a href={val('facebookUrl')} target="_blank" rel="noopener noreferrer" className="w-[34px] h-[34px] border border-neutral-border flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:border-primary-gold hover:text-neutral-black transition-all duration-300 rounded-sm">
                     <FaFacebookF size={14} />
                   </a>
-                  <a href={val('instagramUrl')} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px] bg-neutral-light-grey flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:text-white transition-all duration-300 rounded-full">
+                  <a href={val('instagramUrl')} target="_blank" rel="noopener noreferrer" className="w-[34px] h-[34px] border border-neutral-border flex items-center justify-center text-neutral-dark-grey hover:bg-primary-gold hover:border-primary-gold hover:text-neutral-black transition-all duration-300 rounded-sm">
                     <FaInstagram size={14} />
                   </a>
                 </div>
@@ -170,16 +170,16 @@ export default function Contact() {
             </section>
 
             {/* Email Form Section */}
-            <section id="email-form" className="mb-20 border-t-[10px] border-neutral-dark-grey pt-10 px-8 bg-white">
+            <section id="email-form" className="mb-20 border-t-[3px] border-primary-gold pt-10 px-8 bg-neutral-bg">
               <h2 className="tao-fs-form-h font-normal mb-8 font-agenda">Email us</h2>
               
               {submitted ? (
                 <div className="py-12 text-center">
                   <p className="text-lg font-agenda text-neutral-dark-grey mb-4">Thank you for your message!</p>
-                  <p className="text-sm text-neutral-light-grey mb-6">We&apos;ll get back to you as soon as possible.</p>
+                  <p className="text-sm text-neutral-medium-grey mb-6">We&apos;ll get back to you as soon as possible.</p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white"
+                    className="btn btn-outline-red"
                   >
                     Send Another Message
                   </button>
@@ -187,19 +187,19 @@ export default function Contact() {
               ) : (
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
-                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
+                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input" required />
+                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input" required />
                   </div>
                   
-                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" />
-                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
-                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input" required />
+                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input" />
+                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input" required />
+                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input" required />
                   
-                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-gray-100 p-3 focus:outline-none focus:ring-1 focus:ring-primary-red font-agenda tao-fs-input"></textarea>
+                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input"></textarea>
                   
                   <div className="flex justify-end">
-                    <button type="submit" disabled={submitting} className="btn border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white disabled:opacity-50">
-                      {submitting ? 'Sending...' : 'Send'}
+                    <button type="submit" disabled={submitting} className="btn btn-outline-red disabled:opacity-50">
+                      {submitting ? 'Sending...' : 'Send Message'}
                     </button>
                   </div>
                 </form>

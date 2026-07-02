@@ -59,7 +59,7 @@ export default function Studio() {
   if (isLoading) {
     return (
       <main className="min-h-screen bg-white pt-24 pb-20 flex justify-center items-center">
-        <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading...</div>
       </main>
     );
   }
@@ -67,7 +67,7 @@ export default function Studio() {
   if (error) {
     return (
       <main className="min-h-screen bg-white pt-24 pb-20 flex flex-col justify-center items-center">
-        <div className="text-red-600 uppercase tracking-widest text-xs mb-4">{error}</div>
+        <div className="text-primary-red uppercase tracking-widest text-xs mb-4">{error}</div>
         <button 
           onClick={fetchTeam}
           className="px-6 py-2 border border-neutral-dark-grey text-xs font-bold uppercase tracking-widest hover:bg-neutral-dark-grey hover:text-white transition-colors"

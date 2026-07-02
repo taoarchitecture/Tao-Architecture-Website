@@ -34,23 +34,25 @@ const cardVariants = {
 
 // ─── Large Overlay Card (left column main cards) ──────────────────────────────
 // Category badge on image bottom-left, title overlay on top, SEE PROJECTS below
-const OverlayCard = ({ item }: { item: PortfolioItem }) => {
+const OverlayCard = ({ item, index = 0 }: { item: PortfolioItem, index?: number }) => {
   const lines = item.titleLines || [item.title];
 
   return (
-    <motion.div variants={cardVariants} className="mb-14 group">
+    <motion.div variants={cardVariants} className="mb-16 group">
       {/* Image wrapper with overlay */}
       <div className="relative overflow-hidden w-full inline-block">
-        {/* Category Badge — overlaid on top-left of image */}
-        <div className="absolute top-0 left-0 z-20">
-          <span className="portfolio-badge shadow-premium-sm">
+        {/* Top Black Bar */}
+        <div className="absolute top-0 left-0 w-full h-[12px] bg-neutral-black z-20 pointer-events-none" />
+        {/* Category Badge — hanging from the bar, inset from left */}
+        <div className="absolute top-[12px] left-8 md:left-12 z-20 pointer-events-none">
+          <span className="portfolio-badge block !pt-2.5 !pb-3 shadow-none">
             {item.category}
           </span>
         </div>
 
         {/* Image */}
         <Link href={item.link} className="block relative focus-ring" aria-label={`View ${item.title}`}>
-          <div className={`relative w-full ${item.heightClass || 'min-h-[460px]'} overflow-hidden`}>
+          <div className={`relative w-full ${item.heightClass || (index % 2 === 0 ? 'aspect-square' : 'aspect-[4/5]')} overflow-hidden`}>
             <Image
               src={item.image}
               alt={item.title}
@@ -59,18 +61,19 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
               sizes="(max-width: 768px) 100vw, 50vw"
               quality={90}
             />
-            {/* Subtle gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/30 transition-opacity duration-500 group-hover:opacity-60" />
+            {/* Premium hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/50 opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-700" />
           </div>
         </Link>
 
-        {/* Text overlay — each line is its own floating box, separated by visible gaps */}
-        <div className="absolute top-[8%] left-0 z-10 max-w-[90%] pointer-events-none">
-          <div className="flex flex-col items-start gap-2 pointer-events-auto">
+        {/* Text overlay — uniform block sliced by gaps */}
+        <div className="absolute top-[15%] left-0 z-10 max-w-[90%] pointer-events-none">
+          <div className="flex flex-col items-stretch gap-[2px] pointer-events-auto w-max">
             {lines.map((line, index) => (
               <div
                 key={index}
-                className="bg-white/55 backdrop-blur-sm px-5 py-1.5 md:px-7 md:py-2 w-fit shadow-premium-sm relative overflow-hidden"
+                className="bg-white/85 px-4 py-1.5 md:px-6 md:py-2 w-full relative overflow-hidden"
               >
                 <div 
                   className="absolute inset-0 bg-neutral-black/5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"
@@ -87,10 +90,10 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
         </div>
 
         {/* SEE PROJECTS CTA — anchored to bottom-left of the image */}
-        <div className="absolute bottom-6 left-0 z-10 pl-6 md:pl-8 pointer-events-auto">
+        <div className="absolute bottom-8 left-0 z-10 pl-6 md:pl-8 pointer-events-auto">
           <Link
             href={item.link}
-            className={`inline-block border px-3.5 py-1.5 text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] transition-colors duration-300 glass-subtle ${item.overlayCtaClass || 'border-white text-white hover:bg-white hover:text-neutral-dark-grey'}`}
+            className={`inline-block border px-3.5 py-1.5 text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] hover:tracking-[0.16em] transition-all duration-300 glass-subtle ${item.overlayCtaClass || 'border-white text-white hover:bg-white hover:text-neutral-dark-grey'}`}
           >
             See Projects
           </Link>
@@ -101,20 +104,22 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
 };
 
 // ─── Standard Card (right column / smaller cards) ────────────────────────────
-const StandardCard = ({ item }: { item: PortfolioItem }) => (
-  <motion.div variants={cardVariants} className="mb-14 group">
+const StandardCard = ({ item, index = 0 }: { item: PortfolioItem, index?: number }) => (
+  <motion.div variants={cardVariants} className="mb-16 group">
     {/* Image with category badge */}
     <div className="relative overflow-hidden w-full inline-block">
-      {/* Category Badge — top-left of image */}
-      <div className="absolute top-0 left-0 z-10">
-        <span className="portfolio-badge shadow-premium-sm">
+      {/* Top Black Bar */}
+      <div className="absolute top-0 left-0 w-full h-[10px] bg-neutral-black z-20 pointer-events-none" />
+      {/* Category Badge — hanging from the bar, inset from left */}
+      <div className="absolute top-[10px] left-6 md:left-8 z-20 pointer-events-none">
+        <span className="portfolio-badge block !pt-2 !pb-2.5 shadow-none">
           {item.category}
         </span>
       </div>
 
       {/* Image */}
       <Link href={item.link} className="block relative focus-ring" aria-label={`View ${item.title}`}>
-        <div className={`relative w-full ${item.heightClass || 'min-h-[320px] aspect-[4/3]'} overflow-hidden`}>
+        <div className={`relative w-full ${item.heightClass || (index % 2 === 0 ? 'aspect-square' : 'aspect-[4/5]')} overflow-hidden`}>
           <Image
             src={item.image}
             alt={item.title}
@@ -123,8 +128,9 @@ const StandardCard = ({ item }: { item: PortfolioItem }) => (
             sizes="(max-width: 768px) 100vw, 50vw"
             quality={90}
           />
-          {/* Subtle hover overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-700" />
+          {/* Premium hover overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-700" />
         </div>
       </Link>
     </div>
@@ -144,7 +150,7 @@ const StandardCard = ({ item }: { item: PortfolioItem }) => (
       <div className="mt-1">
          <Link
             href={item.link}
-            className="inline-block border border-neutral-dark-grey text-neutral-dark-grey px-3.5 py-[5px] text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] hover:bg-neutral-dark-grey hover:text-white transition-colors duration-300"
+            className="inline-block border border-neutral-dark-grey text-neutral-dark-grey px-3.5 py-[5px] text-[10px] md:text-[11px] uppercase font-bold tracking-[0.12em] hover:tracking-[0.16em] hover:bg-neutral-dark-grey hover:text-white transition-all duration-300"
          >
             See Projects
          </Link>
@@ -158,7 +164,7 @@ const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
   if (!items || items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-20 bg-white max-w-6xl text-center">
-        <p className="text-neutral-light-grey text-sm tracking-wide">No projects found.</p>
+        <p className="text-neutral-medium-grey text-sm tracking-wide">No projects found.</p>
       </div>
     );
   }
@@ -178,18 +184,18 @@ const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
       >
         {/* Left Column */}
         <div className="flex flex-col">
-          {leftCol.map((item) =>
+          {leftCol.map((item, index) =>
             item.overlayStyle
-              ? <OverlayCard key={item.id} item={item} />
-              : <StandardCard key={item.id} item={item} />
+              ? <OverlayCard key={item.id} item={item} index={index} />
+              : <StandardCard key={item.id} item={item} index={index} />
           )}
         </div>
         {/* Right Column — staggered down */}
         <div className="flex flex-col md:pt-24">
-          {rightCol.map((item) =>
+          {rightCol.map((item, index) =>
             item.overlayStyle
-              ? <OverlayCard key={item.id} item={item} />
-              : <StandardCard key={item.id} item={item} />
+              ? <OverlayCard key={item.id} item={item} index={index + 1} />
+              : <StandardCard key={item.id} item={item} index={index + 1} />
           )}
         </div>
       </motion.div>

@@ -13,7 +13,7 @@ const SidebarItem = ({ icon: Icon, label, href, active }: { icon: any, label: st
     className={`flex items-center px-6 py-4 transition-all duration-300 font-agenda uppercase tracking-widest text-xs ${
       active 
         ? 'bg-neutral-off-black text-white border-r-2 border-primary-red' 
-        : 'text-neutral-light-grey hover:bg-neutral-off-black hover:text-white'
+        : 'text-neutral-medium-grey hover:bg-neutral-off-black hover:text-white'
     }`}
   >
     <Icon className="w-4 h-4 mr-3" />
@@ -120,7 +120,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="p-4 border-t border-neutral-off-black bg-neutral-black">
           <button 
             onClick={handleLogout}
-            className="flex items-center justify-center w-full px-4 py-3 text-xs font-bold uppercase tracking-widest text-neutral-light-grey hover:text-primary-red transition-colors border border-transparent hover:border-neutral-off-black"
+            className="flex items-center justify-center w-full px-4 py-3 text-xs font-bold uppercase tracking-widest text-neutral-medium-grey hover:text-primary-red transition-colors border border-transparent hover:border-neutral-off-black"
           >
             <FiLogOut className="w-4 h-4 mr-2" />
             Sign Out
@@ -129,7 +129,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-10 overflow-y-auto min-h-screen bg-[#f7f7f7]">
+      <main className="flex-1 min-h-screen overflow-y-auto bg-neutral-bg p-10 md:ml-64">
         {children}
       </main>
     </div>

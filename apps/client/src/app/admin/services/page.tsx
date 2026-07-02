@@ -158,7 +158,7 @@ export default function AdminServicesPage() {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading services...</div>
+          <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading services...</div>
         </div>
       </AdminLayout>
     );
@@ -168,8 +168,8 @@ export default function AdminServicesPage() {
     <AdminLayout>
       <div className="mb-10 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-dark-grey font-agenda">SERVICES</h1>
-          <p className="text-neutral-light-grey mt-2 text-sm tracking-wide uppercase">
+          <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Services</h1>
+          <p className="mt-2 text-sm uppercase tracking-wide text-neutral-medium-grey">
             Manage your firm&apos;s services displayed on the website
           </p>
         </div>
@@ -185,35 +185,35 @@ export default function AdminServicesPage() {
 
       {/* Create/Edit Form */}
       {isCreating && (
-        <div className="bg-white p-8 shadow-sm border-l-2 border-primary-red mb-8">
+        <div className="mb-8 border-l-2 border-primary-red bg-white p-8 shadow-sm">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">
             {editingService ? 'Edit Service' : 'New Service'}
           </h3>
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Title *</label>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Title *</label>
                 <input
                   type="text" value={formTitle} onChange={(e) => handleTitleChange(e.target.value)}
                   className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Slug *</label>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Slug *</label>
                 <input
                   type="text" value={formSlug} onChange={(e) => setFormSlug(e.target.value)}
                   className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Subtitle</label>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Subtitle</label>
                 <input
                   type="text" value={formSubtitle} onChange={(e) => setFormSubtitle(e.target.value)}
                   className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Order</label>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Order</label>
                 <input
                   type="number" value={formOrder} onChange={(e) => setFormOrder(Number(e.target.value))}
                   className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
@@ -221,24 +221,24 @@ export default function AdminServicesPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Description</label>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Description</label>
               <textarea
                 value={formDescription} onChange={(e) => setFormDescription(e.target.value)} rows={3}
                 className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Cover Image</label>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Cover Image</label>
               <input
                 type="file" accept="image/*" onChange={(e) => setFormImage(e.target.files?.[0] || null)}
-                className="text-sm font-agenda"
+                className="text-sm font-agenda text-neutral-medium-grey file:mr-4 file:border file:border-neutral-dark-grey file:bg-transparent file:px-4 file:py-2 file:text-xs file:font-bold file:uppercase file:tracking-[0.14em] file:text-neutral-dark-grey hover:file:bg-neutral-dark-grey hover:file:text-white"
               />
               {editingService?.image && !formImage && (
-                <p className="text-xs text-neutral-light-grey mt-1">Current: {editingService.image}</p>
+                <p className="mt-1 text-xs text-neutral-medium-grey">Current: {editingService.image}</p>
               )}
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Service Items (Bullet Points)</label>
+              <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Service Items (Bullet Points)</label>
               <div className="space-y-2">
                 {formItems.map((item, idx) => (
                   <div key={idx} className="flex gap-2">
@@ -247,7 +247,7 @@ export default function AdminServicesPage() {
                       placeholder={`Item ${idx + 1}`}
                       className="flex-1 border border-neutral-border-grey p-2 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
                     />
-                    <button onClick={() => handleRemoveItem(idx)} className="text-red-400 hover:text-red-600 px-2" type="button">
+                    <button onClick={() => handleRemoveItem(idx)} className="px-2 text-neutral-medium-grey transition-colors hover:text-primary-red" type="button">
                       <FiTrash2 size={14} />
                     </button>
                   </div>
@@ -277,7 +277,7 @@ export default function AdminServicesPage() {
               </button>
               <button
                 onClick={resetForm}
-                className="border border-neutral-border-grey text-neutral-dark-grey px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 transition-all duration-300"
+                className="border border-neutral-border-grey text-neutral-dark-grey px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-neutral-bg transition-all duration-300"
               >
                 Cancel
               </button>
@@ -291,7 +291,7 @@ export default function AdminServicesPage() {
         {services.map((service) => (
           <div
             key={service.id}
-            className={`bg-white p-6 shadow-sm flex items-center gap-6 transition-all duration-200 ${
+            className={`flex items-center gap-6 bg-white p-6 shadow-sm transition-all duration-200 ${
               !service.isActive ? 'opacity-60' : ''
             }`}
           >
@@ -304,22 +304,22 @@ export default function AdminServicesPage() {
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-bold text-sm text-neutral-dark-grey font-agenda uppercase tracking-wider">{service.title}</h3>
                 {!service.isActive && (
-                  <span className="text-[9px] uppercase tracking-wider bg-gray-200 text-gray-500 px-2 py-0.5 font-bold">Inactive</span>
+                  <span className="bg-neutral-bg px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-neutral-medium-grey">Inactive</span>
                 )}
               </div>
-              <p className="text-xs text-neutral-light-grey">{(service.items || []).length} items · Order: {service.order}</p>
+              <p className="text-xs text-neutral-medium-grey">{(service.items || []).length} items · Order: {service.order}</p>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => openEditForm(service)}
-                className="p-2 text-neutral-light-grey hover:text-primary-red transition-colors"
+                className="p-2 text-neutral-medium-grey hover:text-primary-red transition-colors"
                 title="Edit"
               >
                 <FiEdit size={16} />
               </button>
               <button
                 onClick={() => handleDelete(service.id)}
-                className="p-2 text-neutral-light-grey hover:text-red-500 transition-colors"
+                className="p-2 text-neutral-medium-grey transition-colors hover:text-primary-red"
                 title="Delete"
               >
                 <FiTrash2 size={16} />
@@ -330,7 +330,7 @@ export default function AdminServicesPage() {
       </div>
 
       {services.length === 0 && !isCreating && (
-        <div className="text-center py-20 text-neutral-light-grey">
+        <div className="py-20 text-center text-neutral-medium-grey">
           <p className="text-sm mb-4">No services configured yet</p>
           <button
             onClick={openCreateForm}

@@ -58,7 +58,7 @@ export default function AdminContactPage() {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading messages...</div>
+          <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading messages...</div>
         </div>
       </AdminLayout>
     );
@@ -67,17 +67,17 @@ export default function AdminContactPage() {
   return (
     <AdminLayout>
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-neutral-dark-grey font-agenda">MESSAGES</h1>
-        <p className="text-neutral-light-grey mt-2 text-sm tracking-wide uppercase">
+        <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Messages</h1>
+        <p className="mt-2 text-sm uppercase tracking-wide text-neutral-medium-grey">
           {submissions.length} contact {submissions.length === 1 ? 'submission' : 'submissions'}
         </p>
       </div>
 
       <div className="flex gap-6 h-[calc(100vh-220px)]">
         {/* Message List */}
-        <div className="w-full md:w-2/5 bg-white shadow-sm overflow-y-auto">
+        <div className="w-full overflow-y-auto border border-neutral-border bg-white shadow-sm md:w-2/5">
           {submissions.length === 0 ? (
-            <div className="flex items-center justify-center h-full text-neutral-light-grey text-sm">
+            <div className="flex h-full items-center justify-center text-sm text-neutral-medium-grey">
               No messages yet
             </div>
           ) : (
@@ -85,37 +85,37 @@ export default function AdminContactPage() {
               <div
                 key={msg.id}
                 onClick={() => setSelectedMessage(msg)}
-                className={`p-5 border-b border-gray-100 cursor-pointer transition-all duration-200 ${
+                className={`cursor-pointer border-b border-neutral-border p-5 transition-all duration-200 ${
                   selectedMessage?.id === msg.id
-                    ? 'bg-gray-50 border-l-2 border-l-primary-red'
-                    : 'hover:bg-gray-50 border-l-2 border-l-transparent'
+                    ? 'border-l-2 border-l-primary-red bg-neutral-bg'
+                    : 'border-l-2 border-l-transparent hover:bg-neutral-bg'
                 }`}
               >
                 <div className="flex justify-between items-start mb-2">
                   <span className="font-bold text-sm text-neutral-dark-grey font-agenda">
                     {msg.firstName} {msg.lastName}
                   </span>
-                  <span className="text-[10px] text-neutral-light-grey">
+                  <span className="text-[10px] text-neutral-medium-grey">
                     {formatDate(msg.createdAt)}
                   </span>
                 </div>
                 <p className="text-xs font-bold text-neutral-dark-grey uppercase tracking-wider mb-1">{msg.subject}</p>
-                <p className="text-xs text-neutral-light-grey truncate">{msg.message}</p>
+                <p className="truncate text-xs text-neutral-medium-grey">{msg.message}</p>
               </div>
             ))
           )}
         </div>
 
         {/* Message Detail */}
-        <div className="hidden md:block flex-1 bg-white shadow-sm p-8 overflow-y-auto">
+        <div className="hidden flex-1 overflow-y-auto border border-neutral-border bg-white p-8 shadow-sm md:block">
           {selectedMessage ? (
             <div>
               <div className="flex justify-between items-start mb-8">
                 <div>
-                  <h2 className="text-xl font-bold text-neutral-dark-grey font-agenda mb-1">
+                  <h2 className="mb-1 font-agenda text-xl font-bold uppercase tracking-[0.08em] text-neutral-dark-grey">
                     {selectedMessage.subject}
                   </h2>
-                  <div className="flex items-center gap-4 text-xs text-neutral-light-grey">
+                  <div className="flex items-center gap-4 text-xs text-neutral-medium-grey">
                     <span className="flex items-center gap-1">
                       <FiUser size={12} /> {selectedMessage.firstName} {selectedMessage.lastName}
                     </span>
@@ -127,25 +127,25 @@ export default function AdminContactPage() {
                     </span>
                   </div>
                   {selectedMessage.companyName && (
-                    <p className="text-xs text-neutral-light-grey mt-1">Company: {selectedMessage.companyName}</p>
+                    <p className="mt-1 text-xs text-neutral-medium-grey">Company: {selectedMessage.companyName}</p>
                   )}
                 </div>
                 <button
                   onClick={() => handleDelete(selectedMessage.id)}
-                  className="text-neutral-light-grey hover:text-red-500 transition-colors p-2"
+                  className="p-2 text-neutral-medium-grey transition-colors hover:text-primary-red"
                   title="Delete message"
                 >
                   <FiTrash2 size={16} />
                 </button>
               </div>
 
-              <div className="border-t border-gray-100 pt-6">
+              <div className="border-t border-neutral-border pt-6">
                 <p className="text-sm text-neutral-dark-grey font-agenda leading-relaxed whitespace-pre-wrap">
                   {selectedMessage.message}
                 </p>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-gray-100">
+              <div className="mt-8 border-t border-neutral-border pt-6">
                 <a
                   href={`mailto:${selectedMessage.email}?subject=Re: ${selectedMessage.subject}`}
                   className="inline-block bg-neutral-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300"
@@ -155,7 +155,7 @@ export default function AdminContactPage() {
               </div>
             </div>
           ) : (
-            <div className="flex items-center justify-center h-full text-neutral-light-grey text-sm">
+            <div className="flex h-full items-center justify-center text-sm text-neutral-medium-grey">
               Select a message to read
             </div>
           )}

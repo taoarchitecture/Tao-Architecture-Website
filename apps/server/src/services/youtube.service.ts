@@ -41,70 +41,102 @@ export async function listUploadsPage(playlistId: string, pageToken?: string) {
   return apiGet(url);
 }
 
-export async function getVideoStats(videoIds: string[]) {
+export async function getVideoDetails(videoIds: string[]) {
   if (videoIds.length === 0) return {};
   const key = process.env.YOUTUBE_API_KEY!;
   const ids = videoIds.join(',');
-  const url = `${API_BASE}/videos?part=statistics&id=${ids}&key=${key}`;
+  const url = `${API_BASE}/videos?part=statistics,contentDetails&id=${ids}&key=${key}`;
   const data = await apiGet(url);
-  const map: Record<string, number> = {};
+  const map: Record<string, { viewCount: number; duration: string }> = {};
   for (const item of data.items || []) {
-    map[item.id] = parseInt(item.statistics?.viewCount || '0', 10);
+    map[item.id] = {
+      viewCount: parseInt(item.statistics?.viewCount || '0', 10),
+      duration: item.contentDetails?.duration || '',
+    };
   }
   return map;
 }
 
+export function isVideoShort(durationStr: string | null | undefined): boolean {
+  if (!durationStr) return false;
+  // Parse ISO 8601 duration, e.g., PT1M5S, PT59S
+  const match = durationStr.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return false;
+  const hours = parseInt(match[1] || '0', 10);
+  const minutes = parseInt(match[2] || '0', 10);
+  const seconds = parseInt(match[3] || '0', 10);
+  const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+  return totalSeconds <= 60;
+}
+
 export async function fetchAndStoreAllVideos(channelHandle: string) {
-  const channelId = await resolveChannelIdFromHandle(channelHandle);
-  const uploadsId = await getUploadsPlaylistId(channelId);
-  let pageToken: string | undefined = undefined;
-  const allItems: any[] = [];
-  for (;;) {
-    const page = await listUploadsPage(uploadsId, pageToken);
-    allItems.push(...(page.items || []));
-    if (!page.nextPageToken) break;
-    pageToken = page.nextPageToken;
+  console.log(`[YouTube Sync] Starting sync for handle: ${channelHandle}`);
+  try {
+    const channelId = await resolveChannelIdFromHandle(channelHandle);
+    const uploadsId = await getUploadsPlaylistId(channelId);
+    let pageToken: string | undefined = undefined;
+    const allItems: any[] = [];
+    for (;;) {
+      const page = await listUploadsPage(uploadsId, pageToken);
+      allItems.push(...(page.items || []));
+      if (!page.nextPageToken) break;
+      pageToken = page.nextPageToken;
+    }
+    const ids = allItems.map((i) => i.contentDetails?.videoId).filter(Boolean);
+    console.log(`[YouTube Sync] Found ${ids.length} videos. Fetching details...`);
+    
+    const details = await getVideoDetails(ids.slice(0, 50));
+    for (let i = 50; i < ids.length; i += 50) {
+      Object.assign(details, await getVideoDetails(ids.slice(i, i + 50)));
+    }
+    
+    let updatedCount = 0;
+    for (const item of allItems) {
+      const vid = item.contentDetails.videoId;
+      const sn = item.snippet;
+      const thumb =
+        sn.thumbnails?.maxres?.url ||
+        sn.thumbnails?.standard?.url ||
+        sn.thumbnails?.high?.url ||
+        sn.thumbnails?.medium?.url ||
+        sn.thumbnails?.default?.url ||
+        '';
+      const videoDetail = details[vid] || { viewCount: 0, duration: null };
+      await prisma.video.upsert({
+        where: { videoId: vid },
+        update: {
+          title: sn.title,
+          description: sn.description || null,
+          thumbnailUrl: thumb,
+          publishedAt: new Date(sn.publishedAt),
+          viewCount: videoDetail.viewCount,
+          channelId,
+          duration: videoDetail.duration,
+          isShort: isVideoShort(videoDetail.duration),
+          lastSyncedAt: new Date(), 
+        },
+        create: {
+          videoId: vid,
+          title: sn.title,
+          description: sn.description || null,
+          thumbnailUrl: thumb,
+          publishedAt: new Date(sn.publishedAt),
+          viewCount: videoDetail.viewCount,
+          channelId,
+          duration: videoDetail.duration,
+          isShort: isVideoShort(videoDetail.duration),
+          etag: item.etag || null,
+          lastSyncedAt: new Date(),
+        },
+      });
+      updatedCount++;
+    }
+    console.log(`[YouTube Sync] Successfully synced ${updatedCount} videos.`);
+    return { count: allItems.length, channelId };
+  } catch (error: any) {
+    console.error(`[YouTube Sync] Error during sync:`, error.message);
+    throw error;
   }
-  const ids = allItems.map((i) => i.contentDetails?.videoId).filter(Boolean);
-  const stats = await getVideoStats(ids.slice(0, 50));
-  for (let i = 50; i < ids.length; i += 50) {
-    Object.assign(stats, await getVideoStats(ids.slice(i, i + 50)));
-  }
-  for (const item of allItems) {
-    const vid = item.contentDetails.videoId;
-    const sn = item.snippet;
-    const thumb =
-      sn.thumbnails?.maxres?.url ||
-      sn.thumbnails?.standard?.url ||
-      sn.thumbnails?.high?.url ||
-      sn.thumbnails?.medium?.url ||
-      sn.thumbnails?.default?.url ||
-      '';
-    await prisma.video.upsert({
-      where: { videoId: vid },
-      update: {
-        title: sn.title,
-        description: sn.description || null,
-        thumbnailUrl: thumb,
-        publishedAt: new Date(sn.publishedAt),
-        viewCount: stats[vid] ?? null,
-        channelId,
-        lastSyncedAt: new Date(),
-      },
-      create: {
-        videoId: vid,
-        title: sn.title,
-        description: sn.description || null,
-        thumbnailUrl: thumb,
-        publishedAt: new Date(sn.publishedAt),
-        viewCount: stats[vid] ?? null,
-        channelId,
-        etag: item.etag || null,
-        lastSyncedAt: new Date(),
-      },
-    });
-  }
-  return { count: allItems.length, channelId };
 }
 
 export async function searchVideos(params: {
@@ -112,6 +144,7 @@ export async function searchVideos(params: {
   category?: string;
   tag?: string;
   sort?: 'date' | 'views';
+  isShort?: boolean;
   page?: number;
   pageSize?: number;
 }) {
@@ -130,6 +163,9 @@ export async function searchVideos(params: {
   }
   if (params.category) {
     where.categories = { some: { category: { name: { equals: params.category } } } };
+  }
+  if (params.isShort !== undefined) {
+    where.isShort = params.isShort;
   }
   const orderBy: Prisma.VideoOrderByWithRelationInput | Prisma.VideoOrderByWithRelationInput[] =
     params.sort === 'views'

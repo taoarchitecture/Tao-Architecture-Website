@@ -61,7 +61,7 @@ export default function ProjectDetail() {
     <main className="min-h-screen bg-white pt-20">
       
       {/* Hero Section */}
-      <section className="relative w-full h-[60vh] md:h-[80vh] bg-gray-100 mb-12">
+      <section className="relative mb-12 h-[60vh] w-full bg-neutral-bg md:h-[80vh]">
          {project.heroImage && (
              <Image 
                 src={project.heroImage} 
@@ -76,7 +76,10 @@ export default function ProjectDetail() {
                 onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
                 className="w-10 h-10 bg-white/80 hover:bg-white flex items-center justify-center rounded-full transition-all"
             >
-                <span className="transform rotate-180">¶</span>
+                <div className="flex flex-col items-center">
+                    <span className="w-px h-3 bg-black mb-0.5"></span>
+                    <span className="border-solid border-t-black border-t-[4px] border-x-transparent border-x-[4px] border-b-0 w-0 h-0"></span>
+                </div>
             </button>
             <button 
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
@@ -119,7 +122,7 @@ export default function ProjectDetail() {
                         </h2>
                     )}
 
-                    <div className="bg-gray-50 p-6 mb-8 border-l-4 border-black font-agenda tao-fs-details font-bold">
+                    <div className="bg-neutral-bg p-6 mb-8 border-l-[3px] border-primary-gold font-agenda tao-fs-details font-bold">
                         {project.details.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.details.location}</p>}
                         {project.details.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.details.status}</p>}
                         {project.details.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.details.plotArea}</p>}
@@ -149,23 +152,23 @@ export default function ProjectDetail() {
             </div>
 
             {/* Share Sidebar */}
-            <div className="w-full md:w-1/4 mt-8 md:mt-0 md:border-l md:border-gray-100 md:pl-8">
+            <div className="mt-8 w-full md:mt-0 md:w-1/4 md:border-l md:border-neutral-border md:pl-8">
                  <div className="sticky top-32">
                     <h5 className="text-xs uppercase tracking-widest font-bold mb-4">Share</h5>
                     <div className="flex md:flex-col gap-4">
-                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#3b5998] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#3b5998] hover:text-white flex items-center justify-center rounded-full transition-all">
                             <FaFacebookF />
                         </a>
-                        <a href={`https://twitter.com/intent/tweet?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#1da1f2] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://twitter.com/intent/tweet?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#1da1f2] hover:text-white flex items-center justify-center rounded-full transition-all">
                             <FaTwitter />
                         </a>
-                        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#0077b5] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#0077b5] hover:text-white flex items-center justify-center rounded-full transition-all">
                             <FaLinkedinIn />
                         </a>
-                        <a href={`https://pinterest.com/pin/create/button/?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#bd081c] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://pinterest.com/pin/create/button/?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#bd081c] hover:text-white flex items-center justify-center rounded-full transition-all">
                             <FaPinterestP />
                         </a>
-                         <a href={`whatsapp://send?text=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 hover:bg-[#25d366] hover:text-white flex items-center justify-center rounded-full transition-all">
+                         <a href={`whatsapp://send?text=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#25d366] hover:text-white flex items-center justify-center rounded-full transition-all">
                             <FaWhatsapp />
                         </a>
                     </div>
@@ -175,9 +178,13 @@ export default function ProjectDetail() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="bg-gray-50 py-20">
+      <section id="gallery" className="bg-neutral-bg py-20">
          <div className="container mx-auto px-4">
-            <h3 className="text-center text-2xl font-light uppercase tracking-widest mb-12">- Image Gallery -</h3>
+            <div className="flex items-center justify-center gap-4 mb-12">
+                <span className="w-12 h-px bg-neutral-border"></span>
+                <h3 className="text-center text-[13px] font-light uppercase tracking-[0.22em]">Image Gallery</h3>
+                <span className="w-12 h-px bg-neutral-border"></span>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {project.gallery.map((item, idx) => (
@@ -210,14 +217,14 @@ export default function ProjectDetail() {
       </section>
 
       {/* Navigation & Related */}
-      <section className="py-20 border-t border-gray-200">
+      <section className="border-t border-neutral-border py-20">
          <div className="container mx-auto px-4">
              {/* Navigation */}
              <div className="flex justify-between items-center mb-20">
                 {prevProject ? (
                     <Link href={prevProject.link} className="flex items-center gap-4 group">
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
-                            &lt;
+                            <FaChevronLeft size={12} />
                         </div>
                         <span className="uppercase font-bold text-sm tracking-wider hidden md:block">{prevProject.title}</span>
                     </Link>
@@ -231,7 +238,7 @@ export default function ProjectDetail() {
                     <Link href={nextProject.link} className="flex items-center gap-4 group">
                         <span className="uppercase font-bold text-sm tracking-wider hidden md:block">{nextProject.title}</span>
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-primary-red group-hover:border-primary-red group-hover:text-white transition-all">
-                            &gt;
+                            <FaChevronRight size={12} />
                         </div>
                     </Link>
                 ) : <div></div>}
@@ -247,7 +254,7 @@ export default function ProjectDetail() {
                              if (!related) return null;
                              return (
                                  <div key={related.id} className="group text-center">
-                                     <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-2 border-black">
+                                     <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-[3px] border-primary-gold">
                                          <Link href={related.link}>
                                             <Image 
                                                 src={related.image} 
@@ -275,14 +282,14 @@ export default function ProjectDetail() {
         <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
           <button 
             onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 text-white hover:text-primary-gold z-[101] transition-colors"
+            className="absolute top-6 right-6 z-[101] text-white transition-colors hover:text-primary-red"
           >
             <FaTimes size={24} />
           </button>
           
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-4 md:left-8 text-white hover:text-primary-gold z-[101] transition-colors"
+            className="absolute left-4 z-[101] text-white transition-colors hover:text-primary-red md:left-8"
           >
             <FaChevronLeft size={32} />
           </button>
@@ -304,7 +311,7 @@ export default function ProjectDetail() {
                    </h4>
                  )}
                  {project.gallery[lightboxIndex].description && (
-                   <p className="text-gray-300 text-sm font-light tracking-wide max-w-4xl mx-auto font-agenda">
+                   <p className="mx-auto max-w-4xl font-agenda text-sm font-light tracking-wide text-white/75">
                      {project.gallery[lightboxIndex].description}
                    </p>
                  )}
@@ -314,7 +321,7 @@ export default function ProjectDetail() {
 
           <button
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-4 md:right-8 text-white hover:text-primary-gold z-[101] transition-colors"
+            className="absolute right-4 z-[101] text-white transition-colors hover:text-primary-red md:right-8"
           >
             <FaChevronRight size={32} />
           </button>

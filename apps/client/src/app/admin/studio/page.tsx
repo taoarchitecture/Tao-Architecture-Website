@@ -48,15 +48,15 @@ export default function AdminStudioPage() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Studio Team</h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <h1 className="font-agenda text-2xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Studio Team</h1>
+            <p className="mt-1 text-sm text-neutral-medium-grey">
               Manage team members shown on the Studio page — including photos, roles, and full biographies.
             </p>
           </div>
           {!showForm && (
             <button
               onClick={() => { setEditingMember(null); setIsCreating(true); }}
-              className="flex items-center gap-2 bg-primary-red text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition"
+              className="flex items-center gap-2 bg-primary-red px-4 py-2 text-sm font-semibold text-white transition hover:bg-neutral-dark-grey"
             >
               <FiPlus size={16} />
               Add Member
@@ -84,26 +84,26 @@ export default function AdminStudioPage() {
 
         {/* Team Members Table */}
         {members.length === 0 ? (
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-            <FiUser className="mx-auto text-gray-300 mb-3" size={40} />
-            <p className="text-gray-500 text-sm">No team members yet. Click "Add Member" to get started.</p>
+          <div className="border border-neutral-border bg-white p-12 text-center">
+            <FiUser className="mx-auto mb-3 text-neutral-medium-grey" size={40} />
+            <p className="text-sm text-neutral-medium-grey">No team members yet. Click "Add Member" to get started.</p>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="overflow-hidden border border-neutral-border bg-white shadow-sm">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="border-b border-neutral-border bg-neutral-bg">
                 <tr>
-                  <th className="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-16">Photo</th>
-                  <th className="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name & Role</th>
-                  <th className="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-64">
+                  <th className="w-16 p-4 text-left text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Photo</th>
+                  <th className="p-4 text-left text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Name & Role</th>
+                  <th className="w-64 p-4 text-left text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">
                     <span className="flex items-center gap-1"><FiAlignLeft size={12} /> Biography Preview</span>
                   </th>
-                  <th className="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-20">Order</th>
-                  <th className="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-20">Status</th>
-                  <th className="p-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider w-24">Actions</th>
+                  <th className="w-20 p-4 text-left text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Order</th>
+                  <th className="w-20 p-4 text-left text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Status</th>
+                  <th className="w-24 p-4 text-right text-xs font-semibold uppercase tracking-wider text-neutral-medium-grey">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-neutral-border">
                 {members.map(member => {
                   const bioPreview = member.bio && member.bio.length > 0
                     ? member.bio[0].slice(0, 120) + (member.bio[0].length > 120 ? '…' : '')
@@ -112,15 +112,15 @@ export default function AdminStudioPage() {
                   const imgUrl = getImageUrl(member.image);
 
                   return (
-                    <tr key={member.id} className="hover:bg-gray-50 transition-colors">
+                    <tr key={member.id} className="transition-colors hover:bg-neutral-bg">
                       {/* Photo */}
                       <td className="p-4">
-                        <div className="relative w-12 h-14 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                        <div className="relative h-14 w-12 overflow-hidden border border-neutral-border bg-neutral-bg">
                           {imgUrl ? (
                             <Image src={imgUrl} alt={member.name} fill className="object-cover object-top" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center">
-                              <FiUser className="text-gray-300" size={20} />
+                              <FiUser className="text-neutral-medium-grey" size={20} />
                             </div>
                           )}
                         </div>
@@ -128,13 +128,13 @@ export default function AdminStudioPage() {
 
                       {/* Name & Role */}
                       <td className="p-4">
-                        <div className="font-semibold text-gray-900">{member.name}</div>
-                        <div className="text-xs text-gray-500 mt-0.5">{member.role}</div>
+                        <div className="font-semibold text-neutral-dark-grey">{member.name}</div>
+                        <div className="mt-0.5 text-xs text-neutral-medium-grey">{member.role}</div>
                       </td>
 
                       {/* Bio Preview */}
                       <td className="p-4">
-                        <p className="text-xs text-gray-500 leading-relaxed italic">
+                        <p className="text-xs italic leading-relaxed text-neutral-medium-grey">
                           {bioPreview}
                         </p>
                         {member.bio && member.bio.length > 1 && (
@@ -145,14 +145,14 @@ export default function AdminStudioPage() {
                       </td>
 
                       {/* Order */}
-                      <td className="p-4 text-gray-700 font-mono">{member.order}</td>
+                      <td className="p-4 font-mono text-neutral-dark-grey">{member.order}</td>
 
                       {/* Status */}
                       <td className="p-4">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                           member.active
                             ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 text-gray-500'
+                            : 'bg-neutral-bg text-neutral-medium-grey'
                         }`}>
                           {member.active ? 'Visible' : 'Hidden'}
                         </span>
@@ -164,14 +164,14 @@ export default function AdminStudioPage() {
                           <button
                             onClick={() => { setIsCreating(false); setEditingMember(member); }}
                             title="Edit member"
-                            className="text-blue-500 hover:text-blue-700 transition"
+                            className="text-neutral-medium-grey transition hover:text-primary-red"
                           >
                             <FiEdit size={16} />
                           </button>
                           <button
                             onClick={() => handleDelete(member.id)}
                             title="Delete member"
-                            className="text-red-400 hover:text-red-600 transition"
+                            className="text-neutral-medium-grey transition hover:text-primary-red"
                           >
                             <FiTrash size={16} />
                           </button>

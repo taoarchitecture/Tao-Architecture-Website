@@ -55,7 +55,7 @@ export default function AdminSettingsPage() {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading settings...</div>
+          <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading settings...</div>
         </div>
       </AdminLayout>
     );
@@ -64,8 +64,8 @@ export default function AdminSettingsPage() {
   return (
     <AdminLayout>
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-neutral-dark-grey font-agenda">GLOBAL SETTINGS</h1>
-        <p className="text-neutral-light-grey mt-2 text-sm tracking-wide uppercase">
+        <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Global Settings</h1>
+        <p className="mt-2 text-sm tracking-wide uppercase text-neutral-medium-grey">
           Manage site-wide information visible across the website
         </p>
       </div>
@@ -76,7 +76,7 @@ export default function AdminSettingsPage() {
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Firm Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Site / Firm Name</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Site / Firm Name</label>
               <input
                 type="text"
                 value={settings?.siteName || ''}
@@ -85,7 +85,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Contact Email</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Contact Email</label>
               <input
                 type="email"
                 value={settings?.contactEmail || ''}
@@ -94,7 +94,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Phone Numbers (JSON Array)</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Phone Numbers (JSON Array)</label>
               <input
                 type="text"
                 value={settings?.phoneNumbers || ''}
@@ -104,7 +104,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Google Maps Embed URL</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Google Maps Embed URL</label>
               <input
                 type="text"
                 value={settings?.googleMapsUrl || ''}
@@ -113,7 +113,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div className="col-span-full">
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Office Address</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Office Address</label>
               <textarea
                 value={settings?.address || ''}
                 onChange={(e) => handleChange('address', e.target.value)}
@@ -125,11 +125,11 @@ export default function AdminSettingsPage() {
         </div>
 
         {/* Social Links */}
-        <div className="bg-white p-8 shadow-sm border-l-2 border-primary-gold">
+        <div className="bg-white p-8 shadow-sm border-l-2 border-primary-red">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Social Media Links</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Facebook URL</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Facebook URL</label>
               <input
                 type="url"
                 value={settings?.facebookUrl || ''}
@@ -138,7 +138,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Instagram URL</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Instagram URL</label>
               <input
                 type="url"
                 value={settings?.instagramUrl || ''}
@@ -147,7 +147,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">LinkedIn URL</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">LinkedIn URL</label>
               <input
                 type="url"
                 value={settings?.linkedinUrl || ''}
@@ -156,7 +156,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">YouTube URL</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">YouTube URL</label>
               <input
                 type="url"
                 value={settings?.youtubeUrl || ''}
@@ -171,7 +171,7 @@ export default function AdminSettingsPage() {
         <div className="bg-white p-8 shadow-sm border-l-2 border-neutral-dark-grey">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Footer</h3>
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-light-grey mb-2">Footer Tagline</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Footer Tagline</label>
             <textarea
               value={settings?.footerTagline || ''}
               onChange={(e) => handleChange('footerTagline', e.target.value)}

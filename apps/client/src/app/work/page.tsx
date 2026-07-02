@@ -79,11 +79,14 @@ export default function Work() {
               // We'll render a min-height section to allow scrolling
               
               return (
-                <section key={category.id} id={category.id} className="mb-20 min-h-[300px] border-t-2 border-neutral-dark-grey pt-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <section key={category.id} id={category.id} className="mb-20 min-h-[300px] border-t-[1px] border-neutral-border pt-8 relative">
+                  <div className="absolute top-0 right-0 bg-primary-gold text-white text-[10px] tracking-[0.15em] font-bold uppercase px-3 py-1">
+                    {category.label}
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {categoryProjects.map((project) => (
                       <div key={project.id} className="group mb-8">
-                        <div className="relative w-full overflow-hidden border-t-2 border-black mb-4">
+                        <div className="relative w-full overflow-hidden border-t-[2px] border-primary-gold mb-4 group/img">
                           <Link href={project.link} className="block w-full">
                             <div className="relative w-full h-[250px]">
                               <Image
@@ -93,6 +96,7 @@ export default function Work() {
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                               />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500 pointer-events-none" />
                             </div>
                           </Link>
                         </div>
@@ -100,7 +104,7 @@ export default function Work() {
                           <Link href={project.link}>{project.title}</Link>
                         </h3>
                         {project.description && (
-                          <p className="tao-fs-proj-sub font-bold font-agenda text-neutral-light-grey uppercase tracking-wider">
+                          <p className="tao-fs-proj-sub font-bold font-agenda text-neutral-medium-grey uppercase tracking-wider">
                             {project.description}
                           </p>
                         )}
@@ -108,7 +112,7 @@ export default function Work() {
                     ))}
                     {/* If no projects, maybe show a "Coming Soon" or just empty space to maintain layout structure */}
                     {categoryProjects.length === 0 && (
-                      <div className="col-span-3 py-10 text-neutral-light-grey italic">
+                      <div className="col-span-3 py-10 text-neutral-medium-grey italic">
                         Projects coming soon...
                       </div>
                     )}

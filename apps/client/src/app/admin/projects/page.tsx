@@ -62,7 +62,7 @@ export default function ProjectsList() {
       </div>
 
       <div className="mb-8 relative">
-        <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-neutral-light-grey" />
+        <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-neutral-medium-grey" />
         <input
           type="text"
           placeholder="SEARCH PROJECTS..."
@@ -73,16 +73,16 @@ export default function ProjectsList() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-20 text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+        <div className="py-20 text-center text-xs uppercase tracking-widest text-neutral-medium-grey">Loading...</div>
       ) : (
         <div className="bg-white border border-neutral-border shadow-sm">
           <table className="min-w-full divide-y divide-neutral-border">
             <thead className="bg-neutral-bg-light">
               <tr>
-                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Project</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Category</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Status</th>
-                <th className="px-6 py-4 text-right text-xs font-bold text-neutral-light-grey uppercase tracking-[0.15em]">Actions</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Project</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Category</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Status</th>
+                <th className="px-6 py-4 text-right text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-border">
@@ -99,7 +99,7 @@ export default function ProjectsList() {
                       </div>
                       <div className="ml-6">
                         <div className="text-sm font-bold text-neutral-dark-grey uppercase tracking-wide">{project.title}</div>
-                        <div className="text-xs text-neutral-light-grey mt-1">{project.location}</div>
+                        <div className="mt-1 text-xs text-neutral-medium-grey">{project.location}</div>
                       </div>
                     </div>
                   </td>
@@ -112,7 +112,7 @@ export default function ProjectsList() {
                     <span className={`px-3 py-1 inline-flex text-xs leading-5 font-bold uppercase tracking-wider ${
                       project.status === 'Completed' 
                         ? 'text-success' 
-                        : 'text-primary-gold'
+                        : 'text-primary-red'
                     }`}>
                       {project.status || 'Ongoing'}
                     </span>
@@ -121,7 +121,7 @@ export default function ProjectsList() {
                     <Link href={`/admin/projects/edit/${project.id}`} className="text-neutral-dark-grey hover:text-primary-red mr-6 transition-colors inline-block">
                       <FiEdit2 className="w-4 h-4" />
                     </Link>
-                    <button onClick={() => handleDelete(project.id)} className="text-neutral-light-grey hover:text-primary-red transition-colors" aria-label="Delete project">
+                    <button onClick={() => handleDelete(project.id)} className="text-neutral-medium-grey hover:text-primary-red transition-colors" aria-label="Delete project">
                       <FiTrash2 className="w-4 h-4" />
                     </button>
                   </td>

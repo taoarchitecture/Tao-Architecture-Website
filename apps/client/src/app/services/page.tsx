@@ -140,7 +140,7 @@ export default function Services() {
   if (loading) {
     return (
       <main className="min-h-screen bg-white pt-20 flex items-center justify-center">
-        <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading...</div>
       </main>
     );
   }

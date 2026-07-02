@@ -139,6 +139,8 @@ model Video {
   publishedAt   DateTime
   viewCount     Int?
   channelId     String
+  duration      String?   // ISO 8601 duration
+  isShort       Boolean   @default(false)
   etag          String?
   lastSyncedAt  DateTime? @default(now())
   createdAt     DateTime  @default(now())

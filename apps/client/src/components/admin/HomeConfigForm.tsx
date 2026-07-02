@@ -82,61 +82,63 @@ export default function HomeConfigForm() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return <div className="text-xs uppercase tracking-widest text-neutral-medium-grey">Loading...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 max-w-4xl">
-      <div className="bg-white p-6 rounded shadow">
-        <h3 className="text-lg font-bold mb-4">Hero Slides</h3>
+      <div className="border border-neutral-border bg-white p-6 shadow-sm">
+        <h3 className="mb-4 font-agenda text-lg font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Hero Slides</h3>
         <div className="space-y-4">
             {slides.map((field, index) => (
-                <div key={field.id} className="border p-4 rounded relative">
-                    <button type="button" onClick={() => remove(index)} className="absolute top-2 right-2 text-red-500"><FiTrash /></button>
+                <div key={field.id} className="relative border border-neutral-border p-4">
+                    <button type="button" onClick={() => remove(index)} className="absolute right-2 top-2 text-neutral-medium-grey transition-colors hover:text-primary-red"><FiTrash /></button>
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-xs mb-1">Image URL (Upload not supported in this simplified view)</label>
-                            <input {...register(`heroSlides.${index}.image`)} className="w-full border p-1" />
+                            <label className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-medium-grey">Image URL</label>
+                            <input {...register(`heroSlides.${index}.image`)} className="w-full border border-neutral-border p-2 text-sm font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none" />
                         </div>
                         <div>
-                             <label className="block text-xs mb-1">Title</label>
-                             <input {...register(`heroSlides.${index}.title`)} className="w-full border p-1" />
+                             <label className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-medium-grey">Title</label>
+                             <input {...register(`heroSlides.${index}.title`)} className="w-full border border-neutral-border p-2 text-sm font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none" />
                         </div>
                     </div>
                 </div>
             ))}
-            <button type="button" onClick={() => append({ image: '', title: '', subtitle: '' })} className="flex items-center text-primary-red">
+            <button type="button" onClick={() => append({ image: '', title: '', subtitle: '' })} className="flex items-center text-xs font-bold uppercase tracking-wider text-primary-red">
                 <FiPlus className="mr-1" /> Add Slide
             </button>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded shadow">
-        <h3 className="text-lg font-bold mb-4">Banner Section</h3>
+      <div className="border border-neutral-border bg-white p-6 shadow-sm">
+        <h3 className="mb-4 font-agenda text-lg font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Banner Section</h3>
         <div>
-            <label className="block text-sm font-medium mb-1">Banner Text</label>
-            <textarea {...register('bannerText')} className="w-full border rounded p-2" rows={3} />
+            <label className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-medium-grey">Banner Text</label>
+            <textarea {...register('bannerText')} className="w-full border border-neutral-border p-2 text-sm font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none" rows={3} />
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded shadow">
-        <h3 className="text-lg font-bold mb-4">Bottom CTA</h3>
+      <div className="border border-neutral-border bg-white p-6 shadow-sm">
+        <h3 className="mb-4 font-agenda text-lg font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Bottom CTA</h3>
         <div className="grid grid-cols-2 gap-4">
             <div>
-                <label className="block text-sm font-medium mb-1">Title</label>
-                <input {...register('bottomCtaTitle')} className="w-full border rounded p-2" />
+                <label className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-medium-grey">Title</label>
+                <input {...register('bottomCtaTitle')} className="w-full border border-neutral-border p-2 text-sm font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none" />
             </div>
             <div>
-                <label className="block text-sm font-medium mb-1">Link</label>
-                <input {...register('bottomCtaLink')} className="w-full border rounded p-2" />
+                <label className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-medium-grey">Link</label>
+                <input {...register('bottomCtaLink')} className="w-full border border-neutral-border p-2 text-sm font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none" />
             </div>
             <div className="col-span-2">
-                <label className="block text-sm font-medium mb-1">Text</label>
-                <textarea {...register('bottomCtaText')} className="w-full border rounded p-2" rows={2} />
+                <label className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-medium-grey">Text</label>
+                <textarea {...register('bottomCtaText')} className="w-full border border-neutral-border p-2 text-sm font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none" rows={2} />
             </div>
         </div>
       </div>
 
-      <button disabled={submitting} className="bg-primary-red text-white px-6 py-2 rounded">
+      <button disabled={submitting} className="bg-primary-red px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-neutral-dark-grey disabled:opacity-70">
         {submitting ? 'Saving...' : 'Save Configuration'}
       </button>
     </form>

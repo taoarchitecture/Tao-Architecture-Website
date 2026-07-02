@@ -6,11 +6,12 @@ import Link from 'next/link';
 import { getPublications } from '@/lib/api';
 import { Publication } from '@/types';
 
-const PublicationCard = ({ pub }: { pub: Publication }) => (
+const PublicationCard = ({ pub, index }: { pub: Publication, index: number }) => (
   <div className="flex flex-col h-full group">
-    {/* Image Container with Border */}
-    <div className="border border-gray-800 p-4 mb-5">
-      <div className="relative aspect-[3/4] w-full overflow-hidden">
+    {/* Image Container with Frame Appearance */}
+    <div className="border-[1.5px] border-neutral-dark-grey p-[14px] mb-5 bg-white shadow-sm transition-shadow duration-500 hover:shadow-premium-md">
+      {/* Dynamic Aspect Ratios to give a masonry feel like the mockup */}
+      <div className={`relative ${index % 2 === 0 ? 'aspect-[3/4]' : 'aspect-[4/5]'} w-full overflow-hidden`}>
         <Image
           src={pub.image}
           alt={pub.title}
@@ -21,29 +22,29 @@ const PublicationCard = ({ pub }: { pub: Publication }) => (
       </div>
     </div>
 
-    {/* Content */}
-    <div className="flex flex-col flex-grow">
+    {/* Text Content */}
+    <div className="flex flex-col flex-grow px-1">
       {/* Category */}
-      <h4 className="text-[10px] text-red-600 font-bold uppercase tracking-widest mb-3 leading-relaxed">
+      <h4 className="text-[11px] md:text-sm text-primary-red font-bold uppercase tracking-[0.15em] mb-2 leading-relaxed">
         {pub.category}
       </h4>
 
       {/* Title */}
-      <h3 className="text-xl font-light text-gray-800 leading-snug mb-6 flex-grow">
+      <h3 className="text-[17px] md:text-xl font-normal font-agenda text-neutral-dark-grey leading-[1.4] mb-5 flex-grow">
         {pub.title}
       </h3>
 
-      {/* Button */}
+      {/* CTA Button */}
       <div>
         {pub.link ? (
           <Link
             href={pub.link}
-            className="inline-block border border-gray-800 text-gray-800 px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 hover:text-white transition-all duration-300"
+            className="inline-block border-[1.5px] border-neutral-dark-grey text-neutral-dark-grey px-4 py-[6px] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.16em] hover:bg-neutral-dark-grey hover:text-white transition-all duration-300"
           >
             See Projects
           </Link>
         ) : (
-          <span className="inline-block border border-gray-400 text-gray-400 px-6 py-2 text-[10px] font-bold uppercase tracking-widest cursor-not-allowed">
+          <span className="inline-block border-[1.5px] border-neutral-medium-grey text-neutral-medium-grey px-4 py-[6px] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.16em] cursor-not-allowed">
             Coming Soon
           </span>
         )}
@@ -101,7 +102,7 @@ export default function Publications() {
   if (isLoading) {
     return (
       <main className="min-h-screen bg-white pt-32 pb-20 flex justify-center items-center">
-        <div className="text-neutral-light-grey uppercase tracking-widest text-xs">Loading...</div>
+        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading...</div>
       </main>
     );
   }
@@ -109,7 +110,7 @@ export default function Publications() {
   if (error) {
     return (
       <main className="min-h-screen bg-white pt-32 pb-20 flex flex-col justify-center items-center">
-        <div className="text-red-600 uppercase tracking-widest text-xs mb-4">{error}</div>
+        <div className="text-primary-red uppercase tracking-widest text-xs mb-4">{error}</div>
         <button 
           onClick={fetchPublications}
           className="px-6 py-2 border border-neutral-dark-grey text-xs font-bold uppercase tracking-widest hover:bg-neutral-dark-grey hover:text-white transition-colors"
@@ -125,17 +126,25 @@ export default function Publications() {
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Page Title */}
         <div className="text-center mb-20">
-          <h1 className="text-4xl md:text-5xl font-bold text-red-600 uppercase tracking-wide">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-red uppercase tracking-wide">
             Publications
           </h1>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-          {publications.map((pub) => (
-            <PublicationCard key={pub.id} pub={pub} />
-          ))}
-        </div>
+        {publications.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+            {publications.map((pub, index) => (
+              <PublicationCard key={pub.id} pub={pub} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="border border-neutral-border bg-neutral-bg px-6 py-12 text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.16em] text-neutral-medium-grey">
+              Publications will appear here once the content service is available.
+            </p>
+          </div>
+        )}
       </div>
     </main>
   );
