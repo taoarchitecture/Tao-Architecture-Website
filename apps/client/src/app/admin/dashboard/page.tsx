@@ -90,6 +90,7 @@ export default function Dashboard() {
             { label: 'Add New Project', href: '/admin/projects/new' },
             { label: 'Manage Services', href: '/admin/services' },
             { label: 'Edit Page Content', href: '/admin/pages' },
+            { label: 'Observability Overview', href: '/admin/observability' },
             { label: 'Update Settings', href: '/admin/settings' },
           ].map((action) => (
             <Link

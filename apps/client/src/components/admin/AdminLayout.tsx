@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers } from 'react-icons/fi';
+import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers, FiBarChart2 } from 'react-icons/fi';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -108,6 +108,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </SidebarSection>
 
           <SidebarSection title="System">
+            <SidebarItem 
+              icon={FiBarChart2} 
+              label="Observability" 
+              href="/admin/observability" 
+              active={pathname.startsWith('/admin/observability')} 
+            />
             <SidebarItem 
               icon={FiSettings} 
               label="Settings" 

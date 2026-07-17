@@ -15,6 +15,7 @@ import mediaRoutes from './routes/media.routes';
 import settingsRoutes from './routes/settings.routes';
 import pageContentRoutes from './routes/page-content.routes';
 import servicesRoutes from './routes/services.routes';
+import observabilityRoutes from './routes/observability.routes';
 import path from 'path';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 
@@ -44,6 +45,7 @@ app.use('/api/media', mediaRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/pages', pageContentRoutes);
 app.use('/api/services', servicesRoutes);
+app.use('/api/observability', observabilityRoutes);
 
 // Health check
 app.get('/', (req, res) => {

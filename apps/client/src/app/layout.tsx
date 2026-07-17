@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Loader from '@/components/Loader'
 import AppShell from '@/components/layout/AppShell'
+import VercelObservability from '@/components/observability/VercelObservability'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://taoarchitecture.com'),
@@ -108,6 +109,7 @@ export default function RootLayout({
         />
         <Loader />
         <AppShell>{children}</AppShell>
+        <VercelObservability />
       </body>
     </html>
   )

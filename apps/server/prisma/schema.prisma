@@ -164,6 +164,7 @@ model VideoTagOnVideo {
   tag     VideoTag @relation(fields: [tagId], references: [id])
 
   @@id([videoId, tagId])
+  @@index([tagId])
 }
 
 model VideoCategory {
@@ -179,6 +180,7 @@ model VideoCategoryOnVideo {
   category   VideoCategory @relation(fields: [categoryId], references: [id])
 
   @@id([videoId, categoryId])
+  @@index([categoryId])
 }
 
 model GlobalSettings {

@@ -6,12 +6,45 @@ import { PortfolioItem } from '@/components/home/PortfolioGrid';
 const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
   ssr: true,
   loading: () => (
-    <div className="container mx-auto px-4 py-16 bg-white max-w-6xl animate-pulse">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-        <div className="h-[390px] bg-neutral-border rounded"></div>
-        <div className="h-[280px] bg-neutral-border rounded md:mt-24"></div>
+    <section className="container mx-auto max-w-6xl bg-white px-4 pb-16 pt-32 sm:px-6 md:pb-20 md:pt-36 lg:px-8 lg:pt-40">
+      <div className="space-y-12 md:hidden animate-pulse">
+        <div className="space-y-4">
+          <div className="aspect-[10/11] bg-neutral-border" />
+          <div className="h-4 w-3/4 bg-neutral-border" />
+          <div className="h-4 w-1/2 bg-neutral-border" />
+        </div>
+        <div className="space-y-4">
+          <div className="aspect-[10/6] bg-neutral-border" />
+          <div className="h-3 w-2/3 bg-neutral-border" />
+          <div className="h-5 w-4/5 bg-neutral-border" />
+        </div>
       </div>
-    </div>
+      <div className="hidden animate-pulse md:grid md:grid-cols-2 md:gap-x-7 lg:gap-x-10">
+        <div className="space-y-20 lg:space-y-24">
+          <div className="space-y-4">
+            <div className="aspect-[10/11] bg-neutral-border" />
+            <div className="h-4 w-2/3 bg-neutral-border" />
+          </div>
+          <div className="space-y-4">
+            <div className="aspect-[10/6] bg-neutral-border" />
+            <div className="h-3 w-3/5 bg-neutral-border" />
+            <div className="h-5 w-4/5 bg-neutral-border" />
+          </div>
+        </div>
+        <div className="space-y-20 pt-14 lg:space-y-24 lg:pt-20">
+          <div className="space-y-4">
+            <div className="aspect-[10/6] bg-neutral-border" />
+            <div className="h-3 w-2/3 bg-neutral-border" />
+            <div className="h-5 w-3/4 bg-neutral-border" />
+          </div>
+          <div className="space-y-4">
+            <div className="aspect-[10/6] bg-neutral-border" />
+            <div className="h-3 w-3/5 bg-neutral-border" />
+            <div className="h-5 w-4/5 bg-neutral-border" />
+          </div>
+        </div>
+      </div>
+    </section>
   ),
 });
 
@@ -31,93 +64,109 @@ export default async function Home() {
     getHomeConfig()
   ]);
 
-  // Exact data from the mockup to recreate the Category Grid
+  // Category grid content and ordering match the homepage reference composition.
   const homeGridItems: PortfolioItem[] = [
-    // --- LEFT COLUMN (5 items) ---
     {
       id: 'corporate',
-      category: 'CORPORATE ARCHITECTURE',
-      title: 'Designing sustainable corporate headquarters with a collaborative work culture',
-      titleLines: ['Designing sustainable', 'corporate headquarters', '& work culture'],
-      image: '/img/corporate/nyati-unitree/3unitree-facade-bg.jpg',
+      category: 'CORPORATE',
+      title: 'Creating collaborative and contemporary work culture',
+      titleLines: ['Creating collaborative', 'and contemporary', 'work culture'],
+      image: '/img/portfolio/masonry/1.jpg',
       link: '/work#corporate',
       overlayStyle: true,
       overlayCtaClass: 'border-white text-white bg-white/10 hover:bg-white hover:text-black',
+      desktopColumn: 'left',
+      heightClass: 'aspect-[10/11]',
+    },
+    {
+      id: 'luxury-villas',
+      category: 'LUXURY VILLAS',
+      disciplines: 'ARCHITECTURE • INTERIORS • LANDSCAPE • ART INSTALLATION',
+      title: 'Rendering homes as personal resorts',
+      image: '/img/portfolio/masonry/luxury.jpg',
+      link: '/work#luxuryvillas',
+      overlayStyle: false,
+      desktopColumn: 'right',
+      heightClass: 'aspect-[10/5.9]',
     },
     {
       id: 'commercial',
-      category: 'COMMERCIAL DESIGN',
-      disciplines: 'PREMIUM ARCHITECTURE • RETAIL SPACES • RECREATION',
-      title: 'Formulating energetic commercial architecture to blend high-end retail and modern recreation',
-      image: '/img/commercial/manikchand-plaza/manikchand-plaza-bg.jpg',
+      category: 'COMMERCIAL',
+      disciplines: 'ARCHITECTURE • RETAIL • RECREATION',
+      title: 'Formulating energetic architecture to blend commerce and recreation',
+      image: '/img/portfolio/masonry/commercial.jpg',
       link: '/work#commercial',
       overlayStyle: false,
+      desktopColumn: 'left',
+      heightClass: 'aspect-[10/6.1]',
+    },
+    {
+      id: 'cozy-homes',
+      category: 'COZY HOMES',
+      disciplines: 'ARCHITECTURE • INTERIORS • CRAFT • LANDSCAPE',
+      title: 'Nourishing lives through intimate and sensitive spaces',
+      image: '/img/portfolio/masonry/cozyhomes.jpg',
+      link: '/work#cozyhomes',
+      overlayStyle: false,
+      desktopColumn: 'right',
+      heightClass: 'aspect-[10/6.1]',
     },
     {
       id: 'institutional',
-      category: 'INSTITUTIONAL SPACES',
-      disciplines: 'EDUCATIONAL ARCHITECTURE • INTERIORS • LANDSCAPE',
-      title: 'Nurturing progressive learning through eco-conscious and interactive educational spaces',
-      image: '/img/institution/suzlon-corporate-learning-centre/suzlon-corporate-learning-centre-bg.jpg',
+      category: 'INSTITUTIONAL',
+      disciplines: 'ARCHITECTURE • INTERIORS • LANDSCAPE • ART INSTALLATION',
+      title: 'Nurturing learning through interactive spaces',
+      image: '/img/portfolio/masonry/institutional.jpg',
       link: '/work#institutional',
       overlayStyle: false,
+      desktopColumn: 'left',
+      heightClass: 'aspect-[10/6.1]',
+    },
+    {
+      id: 'luxury-apartments',
+      category: 'LUXURY APARTMENTS',
+      disciplines: 'INTERIORS • FURNITURE • ART INSTALLATION',
+      title: 'Forming nests around the sky',
+      image: '/img/portfolio/masonry/pent.jpg',
+      link: '/work#apartments',
+      overlayStyle: false,
+      desktopColumn: 'right',
+      heightClass: 'aspect-[10/6.1]',
     },
     {
       id: 'tao-the-way',
       category: 'SUSTAINABLE DESIGN',
       disciplines: 'BIOPHILIC ARCHITECTURE • ECO-CONSCIOUS',
-      title: 'Breaking barriers between indoors and outdoors with sustainable biophilic architecture',
-      image: '/img/villa/vrindavan/vrindavan-bg.jpg',
-      link: '/work#luxuryvillas',
+      title: 'Breaking barriers between indoors and outdoors',
+      image: '/img/portfolio/masonry/landscape.jpg',
+      link: '/studio',
       overlayStyle: false,
-    },
-    {
-      id: 'products',
-      category: 'PRODUCT DESIGN',
-      title: 'Crafting bespoke furniture and functional interactive surfaces for modern interiors',
-      image: '/img/products/desking-and-tables/desking-and-tables-bg.jpg',
-      link: '/work#products',
-      overlayStyle: false,
-    },
-    
-    // --- RIGHT COLUMN (4 items) ---
-    {
-      id: 'luxury-villas',
-      category: 'LUXURY VILLAS',
-      disciplines: 'HIGH-END RESIDENTIAL • INTERIORS • LANDSCAPE',
-      title: 'Rendering bespoke luxury villas and expansive homes as private wellness resorts',
-      image: '/img/villa/azaan/10-bg.jpg',
-      link: '/work#luxuryvillas',
-      overlayStyle: false,
-    },
-    {
-      id: 'cozy-homes',
-      category: 'RESIDENTIAL HAVENS',
-      disciplines: 'INTIMATE ARCHITECTURE • BESPOKE INTERIORS • CRAFT',
-      title: 'Nourishing contemporary lifestyles through intimate, sensitive residential architecture',
-      image: '/img/cozy_homes/garden-villa/garden-villa-bg.jpg',
-      link: '/work#cozyhomes',
-      overlayStyle: false,
-    },
-    {
-      id: 'luxury-apartments',
-      category: 'PREMIUM APARTMENTS',
-      disciplines: 'MODERN INTERIORS • CUSTOM FURNITURE • INSTALLATIONS',
-      title: 'Designing high-altitude luxury apartments with panoramic architectural layouts',
-      image: '/img/luxuryappartments/aurum/aurum-bg.jpg',
-      link: '/work#apartments',
-      overlayStyle: false,
+      desktopColumn: 'left',
+      heightClass: 'aspect-[10/6.1]',
     },
     {
       id: 'housing',
-      category: 'URBAN HOUSING',
-      title: 'Formulating cohesive socio-cultural urban housing and sustainable environments',
-      titleLines: ['Formulating cohesive', 'socio-cultural urban', 'housing environments'],
+      category: 'HOUSING',
+      title: 'Formulating cohesive and socio-cultural environments',
+      titleLines: ['Formulating cohesive', 'and socio-cultural', 'environments'],
       image: '/img/housing/pinewood/pinewood-bg.jpg',
       link: '/work#housing',
       overlayStyle: true,
       overlayCtaClass: 'border-neutral-dark-grey text-neutral-dark-grey bg-white/20 hover:bg-neutral-dark-grey hover:text-white',
-    }
+      desktopColumn: 'right',
+      heightClass: 'aspect-[10/9.4]',
+    },
+    {
+      id: 'products',
+      category: 'PRODUCTS',
+      disciplines: 'CREATIVITY • INTERIORS',
+      title: 'Carving functional sculptures as integral part of architecture',
+      image: '/img/portfolio/masonry/furniture.jpg',
+      link: '/work#products',
+      overlayStyle: false,
+      desktopColumn: 'left',
+      heightClass: 'aspect-[10/6.1]',
+    },
   ];
 
   return (

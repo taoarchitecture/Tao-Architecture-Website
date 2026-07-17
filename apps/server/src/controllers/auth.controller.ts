@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '../prisma';
+import { AuthRequest } from '../middleware/auth.middleware';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
 
@@ -32,21 +33,41 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const register = async (req: Request, res: Response) => {
-    // This should be protected or disabled in production after initial setup
-    const { email, password } = req.body;
+export const register = async (req: AuthRequest, res: Response) => {
+  const { email, password } = req.body;
 
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await prisma.user.create({
-            data: {
-                email,
-                password: hashedPassword,
-                role: 'admin'
-            }
-        });
-        res.status(201).json({ message: 'User created', userId: user.id });
-    } catch (error) {
-        res.status(500).json({ message: 'Error creating user' });
+  if (process.env.ALLOW_ADMIN_REGISTRATION !== 'true') {
+    return res.status(403).json({
+      message: 'Admin registration is disabled. Enable ALLOW_ADMIN_REGISTRATION=true for controlled bootstrap.',
+    });
+  }
+
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Admin access required' });
+  }
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
+  try {
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+    if (existingUser) {
+      return res.status(409).json({ message: 'A user with this email already exists' });
     }
-}
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        role: 'admin',
+      },
+    });
+
+    res.status(201).json({ message: 'User created', userId: user.id });
+  } catch (error) {
+    console.error('Error creating admin user:', error);
+    res.status(500).json({ message: 'Error creating user' });
+  }
+};

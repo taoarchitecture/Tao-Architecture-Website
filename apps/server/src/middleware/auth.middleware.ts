@@ -1,8 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
+export interface AuthenticatedUser {
+  id: number;
+  email: string;
+  role: string;
+}
+
 export interface AuthRequest extends Request {
-  user?: any;
+  user?: AuthenticatedUser;
 }
 
 export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -20,4 +26,12 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
     req.user = user;
     next();
   });
+};
+
+export const requireAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Admin access required' });
+  }
+
+  next();
 };
