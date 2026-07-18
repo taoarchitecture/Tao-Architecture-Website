@@ -1,13 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const LEGACY_HIDE_DELAY_MS = 350;
 const LEGACY_FADE_DURATION_MS = 600;
 const MIN_VISIBLE_MS = 300;
 const DOM_IDLE_MS = 180;
 const DOM_IDLE_MAX_WAIT_MS = 5000;
+const IMAGE_WAIT_MAX_MS = 4000;
 
 function waitForAnimationFrame() {
   return new Promise<void>((resolve) => {
@@ -22,9 +23,24 @@ function waitForImage(img: HTMLImageElement) {
       return;
     }
 
-    const done = () => resolve();
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const cleanup = () => {
+      img.removeEventListener('load', done);
+      img.removeEventListener('error', done);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+
+    const done = () => {
+      cleanup();
+      resolve();
+    };
+
     img.addEventListener('load', done, { once: true });
     img.addEventListener('error', done, { once: true });
+    timeoutId = setTimeout(done, IMAGE_WAIT_MAX_MS);
   });
 }
 
@@ -38,6 +54,11 @@ function shouldWaitForImage(img: HTMLImageElement) {
   }
 
   const rect = img.getBoundingClientRect();
+  const isRendered = img.getClientRects().length > 0 && rect.width > 0 && rect.height > 0;
+  if (!isRendered) {
+    return false;
+  }
+
   const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
   const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
@@ -136,6 +157,7 @@ function isInternalNavigation(anchor: HTMLAnchorElement) {
 
 export default function Loader() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isVisible, setIsVisible] = useState(true);
   const [isFading, setIsFading] = useState(false);
   const isMountedRef = useRef(false);
@@ -143,6 +165,7 @@ export default function Loader() {
   const shownAtRef = useRef(Date.now());
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const routeKey = `${pathname}?${searchParams.toString()}`;
 
   useEffect(() => {
     isVisibleRef.current = isVisible;
@@ -211,7 +234,7 @@ export default function Loader() {
     }
 
     void hideLoader();
-  }, [hideLoader, pathname, showLoader]);
+  }, [hideLoader, routeKey, showLoader]);
 
   useEffect(() => {
     const handleClickCapture = (event: MouseEvent) => {

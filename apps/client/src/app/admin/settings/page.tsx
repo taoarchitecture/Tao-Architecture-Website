@@ -14,7 +14,11 @@ export default function AdminSettingsPage() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) { router.push('/admin/login'); return; }
+    if (!token) {
+      setLoading(false);
+      router.replace('/admin/login');
+      return;
+    }
 
     const fetchSettings = async () => {
       try {

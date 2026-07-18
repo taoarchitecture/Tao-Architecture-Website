@@ -72,7 +72,8 @@ export default function AdminObservabilityPage() {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      router.push('/admin/login');
+      setLoading(false);
+      router.replace('/admin/login');
       return;
     }
 
@@ -103,7 +104,7 @@ export default function AdminObservabilityPage() {
         }
       } catch (error) {
         console.error(error);
-        router.push('/admin/login');
+        router.replace('/admin/login');
       } finally {
         setLoading(false);
       }

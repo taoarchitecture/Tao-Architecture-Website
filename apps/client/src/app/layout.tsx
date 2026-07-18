@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 import Loader from '@/components/Loader'
 import AppShell from '@/components/layout/AppShell'
@@ -107,7 +108,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Loader />
+        <Suspense fallback={null}>
+          <Loader />
+        </Suspense>
         <AppShell>{children}</AppShell>
         <VercelObservability />
       </body>

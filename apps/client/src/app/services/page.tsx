@@ -51,6 +51,26 @@ const DEFAULT_INTRO = {
   ]
 };
 
+const FETCH_TIMEOUT_MS = 10000;
+
+async function fetchJsonWithTimeout<T>(url: string, fallback: T) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) {
+      return fallback;
+    }
+
+    return (await response.json()) as T;
+  } catch {
+    return fallback;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 export default function Services() {
   const [activeSection, setActiveSection] = useState('');
   const [services, setServices] = useState<any[]>([]);
@@ -61,12 +81,12 @@ export default function Services() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
 
         // Fetch services and intro content in parallel
         const [servicesRes, introRes] = await Promise.all([
-          fetch(`${apiUrl}/services`).then(r => r.ok ? r.json() : []),
-          fetch(`${apiUrl}/pages/services-intro`).then(r => r.ok ? r.json() : null),
+          fetchJsonWithTimeout<any[]>(`${apiUrl}/services`, []),
+          fetchJsonWithTimeout<{ title?: string; content?: string } | null>(`${apiUrl}/pages/services-intro`, null),
         ]);
 
         // Use dynamic services if available, otherwise fall back

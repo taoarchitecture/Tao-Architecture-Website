@@ -29,7 +29,11 @@ export default function AdminServicesPage() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) { router.push('/admin/login'); return; }
+    if (!token) {
+      setLoading(false);
+      router.replace('/admin/login');
+      return;
+    }
     fetchServices();
   }, [router]);
 
