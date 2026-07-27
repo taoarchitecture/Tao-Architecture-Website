@@ -1,9 +1,27 @@
 import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
+import localFont from 'next/font/local'
 import './globals.css'
 import Loader from '@/components/Loader'
 import AppShell from '@/components/layout/AppShell'
 import VercelObservability from '@/components/observability/VercelObservability'
+
+const agenda = localFont({
+  src: [
+    {
+      path: '../../public/fonts/AgendaLight.woff2',
+      weight: '100 500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/AgendaBold.woff2',
+      weight: '600 900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-agenda',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://taoarchitecture.com'),
@@ -109,7 +127,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className="font-agenda antialiased text-neutral-medium-grey">
+      <body className={`${agenda.variable} font-agenda antialiased text-neutral-medium-grey`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

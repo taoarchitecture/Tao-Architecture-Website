@@ -7,26 +7,7 @@
    Modern polish layer on top of the brand's architectural identity.
    ============================================================ */
 
-/* ─── 0. FONT FACE DECLARATIONS ────────────────────────────── */
-@font-face {
-  font-family: 'Agenda';
-  src: url('/fonts/AgendaLight.woff2') format('woff2'),
-       url('/fonts/Agenda-Light.woff') format('woff'),
-       url('/fonts/Agenda-Light.ttf') format('truetype');
-  font-weight: 100 500;
-  font-style: normal;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: 'Agenda';
-  src: url('/fonts/AgendaBold.woff2') format('woff2'),
-       url('/fonts/Agenda-Bold.woff') format('woff'),
-       url('/fonts/Agenda-Bold.ttf') format('truetype');
-  font-weight: 600 900;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ─── 1. CSS CUSTOM PROPERTIES ─────────────────────────────── */
 :root {

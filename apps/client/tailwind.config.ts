@@ -27,8 +27,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Agenda', 'sans-serif'],
-        agenda: ['Agenda', 'sans-serif'],
+        sans: ['var(--font-agenda)', 'sans-serif'],
+        agenda: ['var(--font-agenda)', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
