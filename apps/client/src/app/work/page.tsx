@@ -76,13 +76,7 @@ export default function Work() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-white pt-24 pb-20 flex items-center justify-center">
-        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs animate-pulse">Loading Projects...</div>
-      </main>
-    );
-  }
+
 
   return (
     <main className="min-h-screen bg-white pt-24 pb-20 relative">
@@ -150,8 +144,14 @@ export default function Work() {
                         )}
                       </div>
                     ))}
-                    {/* If no projects, maybe show a "Coming Soon" or just empty space to maintain layout structure */}
-                    {categoryProjects.length === 0 && (
+                    {/* If loading, show inline loader */}
+                    {loading && categoryProjects.length === 0 && (
+                      <div className="col-span-3 py-10 text-neutral-medium-grey animate-pulse uppercase tracking-widest text-xs">
+                        Loading Projects...
+                      </div>
+                    )}
+                    {/* If no projects after loading, show empty state */}
+                    {!loading && categoryProjects.length === 0 && (
                       <div className="col-span-3 py-10 text-neutral-medium-grey italic">
                         Projects coming soon...
                       </div>

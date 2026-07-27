@@ -72,8 +72,8 @@ async function fetchJsonWithTimeout<T>(url: string, fallback: T) {
 }
 
 export default function Services() {
-  const [activeSection, setActiveSection] = useState('');
-  const [services, setServices] = useState<any[]>([]);
+  const [activeSection, setActiveSection] = useState(FALLBACK_SERVICES[0].slug);
+  const [services, setServices] = useState<any[]>(FALLBACK_SERVICES);
   const [introTitle, setIntroTitle] = useState(DEFAULT_INTRO.title);
   const [introContent, setIntroContent] = useState<string[]>(DEFAULT_INTRO.content);
   const [loading, setLoading] = useState(true);
@@ -157,13 +157,7 @@ export default function Services() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [services]);
 
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-white pt-20 flex items-center justify-center">
-        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading...</div>
-      </main>
-    );
-  }
+
 
   return (
     <main className="min-h-screen bg-white pt-20">
