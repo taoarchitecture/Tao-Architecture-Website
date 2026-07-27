@@ -139,6 +139,7 @@ export default function ProjectDetail() {
             <button 
                 onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
                 className="w-10 h-10 bg-white/80 hover:bg-white flex items-center justify-center rounded-full transition-all"
+                aria-label="Scroll to details"
             >
                 <div className="flex flex-col items-center">
                     <span className="w-px h-3 bg-black mb-0.5"></span>
@@ -148,6 +149,7 @@ export default function ProjectDetail() {
             <button 
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
                 className="w-10 h-10 bg-white/80 hover:bg-white flex items-center justify-center rounded-full transition-all"
+                aria-label="Scroll to gallery"
             >
                 <span className="grid grid-cols-2 gap-0.5 w-4 h-4">
                     <span className="bg-black w-1.5 h-1.5"></span>
@@ -224,19 +226,19 @@ export default function ProjectDetail() {
                  <div className="sticky top-32">
                     <h5 className="text-xs uppercase tracking-widest font-bold mb-4">Share</h5>
                     <div className="flex md:flex-col gap-4">
-                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#3b5998] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#3b5998] hover:text-white flex items-center justify-center rounded-full transition-all" aria-label="Share on Facebook">
                             <FaFacebookF />
                         </a>
-                        <a href={`https://twitter.com/intent/tweet?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#1da1f2] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://twitter.com/intent/tweet?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#1da1f2] hover:text-white flex items-center justify-center rounded-full transition-all" aria-label="Share on Twitter">
                             <FaTwitter />
                         </a>
-                        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#0077b5] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#0077b5] hover:text-white flex items-center justify-center rounded-full transition-all" aria-label="Share on LinkedIn">
                             <FaLinkedinIn />
                         </a>
-                        <a href={`https://pinterest.com/pin/create/button/?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#bd081c] hover:text-white flex items-center justify-center rounded-full transition-all">
+                        <a href={`https://pinterest.com/pin/create/button/?url=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#bd081c] hover:text-white flex items-center justify-center rounded-full transition-all" aria-label="Share on Pinterest">
                             <FaPinterestP />
                         </a>
-                         <a href={`whatsapp://send?text=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#25d366] hover:text-white flex items-center justify-center rounded-full transition-all">
+                         <a href={`whatsapp://send?text=${currentUrl}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-neutral-bg hover:bg-[#25d366] hover:text-white flex items-center justify-center rounded-full transition-all" aria-label="Share on WhatsApp">
                             <FaWhatsapp />
                         </a>
                     </div>
@@ -292,7 +294,7 @@ export default function ProjectDetail() {
              {/* Navigation */}
              <div className="flex justify-between items-center mb-20">
                 {prevProject ? (
-                    <Link href={`/projects/${prevProject.slug || prevProject.id}`} className="flex items-center gap-4 group">
+                    <Link href={`/projects/${prevProject.slug || prevProject.id}`} className="flex items-center gap-4 group" aria-label={`Previous project: ${prevProject.title}`}>
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
                             <FaChevronLeft size={12} />
                         </div>
@@ -305,7 +307,7 @@ export default function ProjectDetail() {
                 </Link>
 
                 {nextProject ? (
-                    <Link href={`/projects/${nextProject.slug || nextProject.id}`} className="flex items-center gap-4 group">
+                    <Link href={`/projects/${nextProject.slug || nextProject.id}`} className="flex items-center gap-4 group" aria-label={`Next project: ${nextProject.title}`}>
                         <span className="uppercase font-bold text-sm tracking-wider hidden md:block">{nextProject.title}</span>
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-primary-red group-hover:border-primary-red group-hover:text-white transition-all">
                             <FaChevronRight size={12} />
