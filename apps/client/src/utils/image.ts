@@ -6,15 +6,18 @@
 export const getImageUrl = (path: string | null | undefined): string => {
   if (!path) return '';
 
-  if (path.startsWith('blob:') || path.startsWith('data:')) {
-    return path; // Local preview URL
+  if (path.startsWith('blob:') || path.startsWith('data:') || path.startsWith('http')) {
+    return path; // Local preview URL or absolute URL
   }
 
-  if (path.startsWith('/uploads/')) {
+  // Normalize path to ensure it has a leading slash
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  if (normalizedPath.startsWith('/uploads/')) {
     const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000';
-    return `${serverUrl}${path}`;
+    return `${serverUrl}${normalizedPath}`;
   }
 
   // Assume it's a static asset in Next.js public folder (e.g., /img/...)
-  return path;
+  return normalizedPath;
 };

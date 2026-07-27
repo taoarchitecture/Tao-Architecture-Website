@@ -81,7 +81,7 @@ export default function Services() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
 
         // Fetch services and intro content in parallel
         const [servicesRes, introRes] = await Promise.all([

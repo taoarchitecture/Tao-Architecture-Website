@@ -20,7 +20,7 @@ export default function Studio() {
     // Fetch dynamic intro text
     const fetchIntro = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
         const res = await fetch(`${apiUrl}/pages/studio-intro`);
         if (res.ok) {
           const data = await res.json();
@@ -32,7 +32,7 @@ export default function Studio() {
     // Fetch team members
     const fetchTeam = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
         const res = await fetch(`${apiUrl}/studio`);
         if (res.ok) {
           const data = await res.json();

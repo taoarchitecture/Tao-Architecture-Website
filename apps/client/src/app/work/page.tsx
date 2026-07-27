@@ -48,7 +48,7 @@ export default function Work() {
 
     const fetchProjects = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
         const res = await fetch(`${apiUrl}/projects`);
         if (res.ok) {
           const data = await res.json();
