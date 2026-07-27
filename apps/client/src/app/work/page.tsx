@@ -5,10 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import WorkSidebar from '@/components/work/WorkSidebar';
-import { projects, workCategories } from '@/data/projects';
+import { workCategories, Project as StaticProject } from '@/data/projects';
+import { getImageUrl } from '@/utils/image';
 
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState<string>('luxuryvillas');
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const scrollToCategory = (id: string) => {
     const element = document.getElementById(id);
@@ -43,9 +46,43 @@ export default function Work() {
       }
     };
 
+    const fetchProjects = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+        const res = await fetch(`${apiUrl}/projects`);
+        if (res.ok) {
+          const data = await res.json();
+          // Filter to only visible projects and sort by order
+          const visibleProjects = data
+            .filter((p: any) => p.visible !== false)
+            .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+          
+          if (visibleProjects.length > 0) {
+            setProjects(visibleProjects);
+          } else {
+            // fallback if empty db
+            setProjects([]); 
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch projects', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white pt-24 pb-20 flex items-center justify-center">
+        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs animate-pulse">Loading Projects...</div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-white pt-24 pb-20 relative">
@@ -57,6 +94,7 @@ export default function Work() {
           className="object-cover opacity-5"
           priority
           sizes="100vw"
+          quality={85}
         />
       </div>
       <div className="relative z-10">
@@ -84,28 +122,30 @@ export default function Work() {
                     {category.label}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                    {categoryProjects.map((project) => (
+                    {categoryProjects.map((project, index) => (
                       <div key={project.id} className="group mb-8">
                         <div className="relative w-full overflow-hidden border-t-[2px] border-primary-gold mb-4 group/img">
-                          <Link href={project.link} className="block w-full">
+                          <Link href={`/projects/${project.slug || project.id}`} className="block w-full">
                             <div className="relative w-full h-[250px]">
                               <Image
-                                src={project.image}
+                                src={project.coverImage ? getImageUrl(project.coverImage) : '/img/placeholder.jpg'}
                                 alt={project.title}
                                 fill
+                                priority={index < 4}
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                quality={85}
                               />
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500 pointer-events-none" />
                             </div>
                           </Link>
                         </div>
                         <h3 className="tao-fs-proj-h font-bold font-agenda uppercase tracking-wide mb-1 group-hover:text-primary-red transition-colors">
-                          <Link href={project.link}>{project.title}</Link>
+                          <Link href={`/projects/${project.slug || project.id}`}>{project.title}</Link>
                         </h3>
-                        {project.description && (
+                        {(project.subtitle || project.location) && (
                           <p className="tao-fs-proj-sub font-bold font-agenda text-neutral-medium-grey uppercase tracking-wider">
-                            {project.description}
+                            {project.subtitle || project.location}
                           </p>
                         )}
                       </div>

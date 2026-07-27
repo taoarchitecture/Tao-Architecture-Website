@@ -145,6 +145,7 @@ const Navbar = () => {
                     <div
                       className="nav-dropdown absolute left-0 top-full w-52 bg-white border-t-[3px] border-primary-gold shadow-premium-lg z-50 mt-0"
                       role="menu"
+                      aria-label={`${link.name} submenu`}
                     >
                       {link.dropdown.map((sublink) => (
                         <Link
@@ -176,13 +177,13 @@ const Navbar = () => {
             ))}
 
               {/* Search icon */}
-            <li className="pl-5 border-l border-neutral-border">
+            <li className="pl-5 !ml-5 border-l border-neutral-border">
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="text-neutral-medium-grey hover:text-primary-red transition-colors duration-200 p-1"
                 aria-label="Search"
               >
-                <FaSearch size={13} />
+                <FaSearch size={13} aria-hidden="true" />
               </button>
             </li>
           </ul>
@@ -201,7 +202,7 @@ const Navbar = () => {
              className="w-full flex items-center justify-between py-3.5 mb-2 border-b border-neutral-border text-neutral-medium-grey hover:text-primary-red transition-colors"
           >
              <span className="font-agenda font-bold tracking-[0.05em]">SEARCH</span>
-             <FaSearch size={14} />
+             <FaSearch size={14} aria-hidden="true" />
           </button>
 
           <ul className="font-agenda tao-fs-menu font-bold tracking-[0.05em] space-y-0">
@@ -271,8 +272,9 @@ const Navbar = () => {
             <button 
                 onClick={() => setIsSearchOpen(false)}
                 className="rounded-full bg-neutral-bg p-2 text-neutral-medium-grey transition-colors hover:text-primary-red"
+                aria-label="Close search"
             >
-                <FaTimes size={20} />
+                <FaTimes size={20} aria-hidden="true" />
             </button>
           </div>
           
@@ -280,20 +282,22 @@ const Navbar = () => {
           <div className="relative mb-8">
              <input
                 ref={searchInputRef}
-                type="text"
+                type="search"
+                id="search-input"
+                aria-label="Search projects"
                 placeholder="Type to search projects, sectors, categories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full text-xl md:text-3xl border-x-0 border-t-0 border-b-2 border-neutral-medium-grey/30 px-0 pb-4 pr-12 focus:ring-0 ring-0 focus:outline-none focus-visible:outline-none focus:shadow-none focus:border-primary-red transition-colors bg-transparent font-light text-neutral-dark-grey"
              />
-             <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-medium-grey/50 hover:text-primary-red transition-colors cursor-pointer" size={24} />
+             <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-medium-grey/50 hover:text-primary-red transition-colors cursor-pointer" size={24} aria-hidden="true" />
           </div>
 
           {/* Autocomplete Results */}
           <div className="flex-1 overflow-y-auto pb-8 custom-scrollbar">
             {searchQuery.trim() !== '' && searchResults.length === 0 && (
                 <div className="text-center mt-16 text-neutral-medium-grey">
-                    <FaSearch className="mx-auto mb-4 opacity-20" size={40} />
+                    <FaSearch className="mx-auto mb-4 opacity-20" size={40} aria-hidden="true" />
                     <p className="text-lg">No projects found for "{searchQuery}"</p>
                 </div>
             )}
@@ -309,7 +313,8 @@ const Navbar = () => {
                            <Image 
                                src={project.image} 
                                alt={project.title} 
-                               fill 
+                               fill
+                               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                className="object-cover transition-transform duration-700 group-hover:scale-105" 
                            />
                         </div>

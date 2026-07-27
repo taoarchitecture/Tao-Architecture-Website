@@ -196,7 +196,7 @@ export default function Services() {
 
           {/* Service cards */}
           <div className="w-full md:w-3/4">
-            {services.map((service) => (
+            {services.map((service, index) => (
               <section
                 key={service.slug || service.id}
                 id={service.slug}
@@ -211,8 +211,10 @@ export default function Services() {
                         src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
                         alt={service.title}
                         fill
+                        priority={index === 0}
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        quality={85}
                       />
                     </div>
                   </div>

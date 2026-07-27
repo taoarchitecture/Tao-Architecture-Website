@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { Service } from '@/types';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/image';
+import { uploadToCloudinary } from '@/utils/cloudinary';
 import { FiPlus, FiTrash2, FiEdit, FiEye, FiEyeOff, FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { Service } from '@/types';
 
 export default function AdminServicesPage() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function AdminServicesPage() {
   const fetchServices = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/services/all`, {
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/services`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setServices(data);
@@ -115,24 +116,31 @@ export default function AdminServicesPage() {
       return;
     }
     setSaving(true);
-    const formData = new FormData();
-    formData.append('title', formTitle);
-    formData.append('slug', formSlug);
-    formData.append('subtitle', formSubtitle);
-    formData.append('description', formDescription);
-    formData.append('items', JSON.stringify(formItems.filter(i => i.trim())));
-    formData.append('order', String(formOrder));
-    formData.append('isActive', String(formIsActive));
-    if (formImage) formData.append('image', formImage);
-
+    
     try {
+      let imageUrl = editingService?.image || null;
+      if (formImage) {
+        imageUrl = await uploadToCloudinary(formImage, 'services');
+      }
+
+      const payload = {
+        title: formTitle,
+        slug: formSlug,
+        subtitle: formSubtitle,
+        description: formDescription,
+        items: formItems.filter(i => i.trim()),
+        order: Number(formOrder),
+        isActive: formIsActive,
+        image: imageUrl,
+      };
+
       const token = localStorage.getItem('token');
-      const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' };
+      const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
 
       if (editingService) {
-        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/services/${editingService.id}`, formData, { headers });
+        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/services/${editingService.id}`, payload, { headers });
       } else {
-        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/services`, formData, { headers });
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/services`, payload, { headers });
       }
       resetForm();
       fetchServices();
@@ -170,7 +178,7 @@ export default function AdminServicesPage() {
 
   return (
     <AdminLayout>
-      <div className="mb-10 flex justify-between items-center">
+      <div className="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         <div>
           <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Services</h1>
           <p className="mt-2 text-sm uppercase tracking-wide text-neutral-medium-grey">
@@ -180,7 +188,7 @@ export default function AdminServicesPage() {
         {!isCreating && (
           <button
             onClick={openCreateForm}
-            className="flex items-center gap-2 bg-neutral-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300"
+            className="flex items-center justify-center gap-2 bg-neutral-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300 w-full sm:w-auto"
           >
             <FiPlus size={14} /> Add Service
           </button>
@@ -272,16 +280,16 @@ export default function AdminServicesPage() {
               />
               <label htmlFor="isActive" className="text-sm font-agenda text-neutral-dark-grey">Active (visible on website)</label>
             </div>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={handleSave} disabled={saving}
-                className="bg-neutral-black text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300 disabled:opacity-70"
+                className="bg-neutral-black text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300 disabled:opacity-70 w-full sm:w-auto"
               >
                 {saving ? 'Saving...' : editingService ? 'Update Service' : 'Create Service'}
               </button>
               <button
                 onClick={resetForm}
-                className="border border-neutral-border-grey text-neutral-dark-grey px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-neutral-bg transition-all duration-300"
+                className="border border-neutral-border-grey text-neutral-dark-grey px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-neutral-bg transition-all duration-300 w-full sm:w-auto"
               >
                 Cancel
               </button>

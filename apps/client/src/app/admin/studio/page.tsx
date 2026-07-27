@@ -20,7 +20,7 @@ export default function AdminStudioPage() {
 
   const fetchMembers = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/studio/team`);
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/studio`);
       setMembers(data);
     } catch (error) {
       console.error(error);
@@ -31,7 +31,7 @@ export default function AdminStudioPage() {
     if (!confirm('Delete this team member? This cannot be undone.')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/studio/team/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/studio/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchMembers();
@@ -117,7 +117,7 @@ export default function AdminStudioPage() {
                       <td className="p-4">
                         <div className="relative h-14 w-12 overflow-hidden border border-neutral-border bg-neutral-bg">
                           {imgUrl ? (
-                            <Image src={imgUrl} alt={member.name} fill className="object-cover object-top" />
+                            <Image src={imgUrl} alt={member.name} fill sizes="48px" className="object-cover object-top" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center">
                               <FiUser className="text-neutral-medium-grey" size={20} />

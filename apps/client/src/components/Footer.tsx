@@ -96,7 +96,8 @@ const Footer = () => {
                 alt="TAO Studio Logo"
                 width={190}
                 height={48}
-                className="h-auto w-full brightness-0 invert"
+                className="brightness-0 invert"
+                style={{ width: '100%', height: 'auto' }}
               />
             </Link>
             <p className="text-neutral-light-grey text-[13px] leading-relaxed max-w-[240px]">

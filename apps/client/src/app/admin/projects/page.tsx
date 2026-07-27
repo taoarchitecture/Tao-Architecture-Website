@@ -51,11 +51,11 @@ export default function ProjectsList() {
 
   return (
     <AdminLayout>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-neutral-dark-grey font-agenda uppercase tracking-wider">Projects</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-neutral-dark-grey font-agenda uppercase tracking-wider">Projects</h1>
         <Link 
           href="/admin/projects/new"
-          className="bg-neutral-black hover:bg-primary-red/90 text-white px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] flex items-center transition-all duration-300"
+          className="bg-neutral-black hover:bg-primary-red/90 text-white px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] flex items-center justify-center transition-all duration-300 w-full sm:w-auto"
         >
           <FiPlus className="mr-2" /> Add Project
         </Link>
@@ -75,61 +75,103 @@ export default function ProjectsList() {
       {isLoading ? (
         <div className="py-20 text-center text-xs uppercase tracking-widest text-neutral-medium-grey">Loading...</div>
       ) : (
-        <div className="bg-white border border-neutral-border shadow-sm">
-          <table className="min-w-full divide-y divide-neutral-border">
-            <thead className="bg-neutral-bg-light">
-              <tr>
-                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Project</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Category</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Status</th>
-                <th className="px-6 py-4 text-right text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-neutral-border">
-              {filteredProjects.map((project) => (
-                <tr key={project.id} className="hover:bg-neutral-bg-light transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-12 w-16 relative">
-                        {project.coverImage ? (
-                          <img className="h-full w-full object-cover" src={getImageUrl(project.coverImage)} alt="" />
-                        ) : (
-                          <div className="h-full w-full bg-neutral-border"></div>
-                        )}
-                      </div>
-                      <div className="ml-6">
-                        <div className="text-sm font-bold text-neutral-dark-grey uppercase tracking-wide">{project.title}</div>
-                        <div className="mt-1 text-xs text-neutral-medium-grey">{project.location}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-3 py-1 inline-flex text-xs leading-5 font-medium border border-neutral-border text-neutral-dark-grey uppercase tracking-wider">
-                      {project.category}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-bold uppercase tracking-wider ${
-                      project.status === 'Completed' 
-                        ? 'text-success' 
-                        : 'text-primary-red'
-                    }`}>
-                      {project.status || 'Ongoing'}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link href={`/admin/projects/edit/${project.id}`} className="text-neutral-dark-grey hover:text-primary-red mr-6 transition-colors inline-block">
-                      <FiEdit2 className="w-4 h-4" />
-                    </Link>
-                    <button onClick={() => handleDelete(project.id)} className="text-neutral-medium-grey hover:text-primary-red transition-colors" aria-label="Delete project">
-                      <FiTrash2 className="w-4 h-4" />
-                    </button>
-                  </td>
+        <>
+          {/* Desktop Table View */}
+          <div className="bg-white border border-neutral-border shadow-sm hidden md:block">
+            <table className="min-w-full divide-y divide-neutral-border">
+              <thead className="bg-neutral-bg-light">
+                <tr>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Project</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Category</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Status</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold text-neutral-medium-grey uppercase tracking-[0.15em]">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="bg-white divide-y divide-neutral-border">
+                {filteredProjects.map((project) => (
+                  <tr key={project.id} className="hover:bg-neutral-bg-light transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 h-12 w-16 relative">
+                          {project.coverImage ? (
+                            <img className="h-full w-full object-cover" src={getImageUrl(project.coverImage)} alt="" />
+                          ) : (
+                            <div className="h-full w-full bg-neutral-border"></div>
+                          )}
+                        </div>
+                        <div className="ml-6">
+                          <div className="text-sm font-bold text-neutral-dark-grey uppercase tracking-wide">{project.title}</div>
+                          <div className="mt-1 text-xs text-neutral-medium-grey">{project.location}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="px-3 py-1 inline-flex text-xs leading-5 font-medium border border-neutral-border text-neutral-dark-grey uppercase tracking-wider">
+                        {project.category}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-3 py-1 inline-flex text-xs leading-5 font-bold uppercase tracking-wider ${
+                        project.status === 'Completed' 
+                          ? 'text-success' 
+                          : 'text-primary-red'
+                      }`}>
+                        {project.status || 'Ongoing'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <Link href={`/admin/projects/edit/${project.id}`} className="text-neutral-dark-grey hover:text-primary-red mr-6 transition-colors inline-block">
+                        <FiEdit2 className="w-4 h-4" />
+                      </Link>
+                      <button onClick={() => handleDelete(project.id)} className="text-neutral-medium-grey hover:text-primary-red transition-colors" aria-label="Delete project">
+                        <FiTrash2 className="w-4 h-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-4">
+            {filteredProjects.map((project) => (
+              <div key={project.id} className="bg-white border border-neutral-border p-4 shadow-sm flex flex-col gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 h-16 w-20 relative">
+                    {project.coverImage ? (
+                      <img className="h-full w-full object-cover" src={getImageUrl(project.coverImage)} alt="" />
+                    ) : (
+                      <div className="h-full w-full bg-neutral-border"></div>
+                    )}
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-neutral-dark-grey uppercase tracking-wide">{project.title}</div>
+                    <div className="mt-1 text-xs text-neutral-medium-grey">{project.location}</div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2 items-center">
+                  <span className="px-3 py-1 text-[10px] font-medium border border-neutral-border text-neutral-dark-grey uppercase tracking-wider">
+                    {project.category}
+                  </span>
+                  <span className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                    project.status === 'Completed' ? 'text-success' : 'text-primary-red'
+                  }`}>
+                    {project.status || 'Ongoing'}
+                  </span>
+                </div>
+                <div className="flex justify-end gap-4 border-t border-neutral-border pt-4 mt-2">
+                  <Link href={`/admin/projects/edit/${project.id}`} className="text-neutral-dark-grey hover:text-primary-red transition-colors flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
+                    <FiEdit2 className="w-3 h-3" /> Edit
+                  </Link>
+                  <button onClick={() => handleDelete(project.id)} className="text-neutral-medium-grey hover:text-primary-red transition-colors flex items-center gap-1 text-xs font-bold uppercase tracking-widest" aria-label="Delete project">
+                    <FiTrash2 className="w-3 h-3" /> Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </AdminLayout>
   );

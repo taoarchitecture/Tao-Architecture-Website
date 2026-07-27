@@ -76,7 +76,7 @@ export default function AdminSettingsPage() {
 
       <div className="space-y-8 max-w-4xl">
         {/* Firm Info */}
-        <div className="bg-white p-8 shadow-sm border-l-2 border-primary-red">
+        <div className="bg-white p-5 md:p-8 shadow-sm border-l-2 border-primary-red">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Firm Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -129,7 +129,7 @@ export default function AdminSettingsPage() {
         </div>
 
         {/* Social Links */}
-        <div className="bg-white p-8 shadow-sm border-l-2 border-primary-red">
+        <div className="bg-white p-5 md:p-8 shadow-sm border-l-2 border-primary-red">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Social Media Links</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -172,7 +172,7 @@ export default function AdminSettingsPage() {
         </div>
 
         {/* Footer */}
-        <div className="bg-white p-8 shadow-sm border-l-2 border-neutral-dark-grey">
+        <div className="bg-white p-5 md:p-8 shadow-sm border-l-2 border-neutral-dark-grey">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Footer</h3>
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Footer Tagline</label>
@@ -188,7 +188,7 @@ export default function AdminSettingsPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-neutral-black text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+          className="bg-neutral-black text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed w-full sm:w-auto"
         >
           {saving ? 'Saving...' : 'Save Settings'}
         </button>

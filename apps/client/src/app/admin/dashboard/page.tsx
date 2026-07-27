@@ -34,7 +34,7 @@ export default function Dashboard() {
           axios.get(`${apiUrl}/career`, { headers }),
           axios.get(`${apiUrl}/contact`, { headers }).catch(() => ({ data: [] })),
           axios.get(`${apiUrl}/services`).catch(() => ({ data: [] })),
-          axios.get(`${apiUrl}/studio/team`).catch(() => ({ data: [] })),
+          axios.get(`${apiUrl}/studio`).catch(() => ({ data: [] })),
         ]);
         
         setStats({
@@ -64,11 +64,11 @@ export default function Dashboard() {
   return (
     <AdminLayout>
       <div className="mb-10">
-        <h1 className="font-agenda text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Dashboard</h1>
+        <h1 className="font-agenda text-2xl md:text-3xl font-bold uppercase tracking-[0.14em] text-neutral-dark-grey">Dashboard</h1>
         <p className="mt-2 text-sm uppercase tracking-wide text-neutral-medium-grey">Welcome back to Tao Architecture Admin</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
         {statCards.map((card) => (
           <Link key={card.label} href={card.href} className="group">
             <div className={`bg-white p-6 shadow-sm border-l-2 ${card.color} transition-all duration-300 group-hover:shadow-md group-hover:translate-y-[-2px]`}>
@@ -85,7 +85,7 @@ export default function Dashboard() {
       {/* Quick Actions */}
       <div className="mt-12">
         <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { label: 'Add New Project', href: '/admin/projects/new' },
             { label: 'Manage Services', href: '/admin/services' },

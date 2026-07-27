@@ -1,0 +1,55 @@
+import imageCompression from 'browser-image-compression';
+
+export async function uploadToCloudinary(file: File, folder: string = 'tao'): Promise<string> {
+  // 1. Compress large images client-side before uploading!
+  // Cloudinary has a strict 10MB limit on standard uploads, and big files are slow.
+  let fileToUpload = file;
+  if (file.type.startsWith('image/')) {
+    try {
+      const options = {
+        maxSizeMB: 2, // Compress to max 2MB
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      fileToUpload = await imageCompression(file, options);
+    } catch (error) {
+      console.warn('Image compression failed, using original file', error);
+    }
+  }
+
+  // 2. Get signature from our serverless API
+  const sigRes = await fetch('/api/upload/signature', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ folder }),
+  });
+
+  if (!sigRes.ok) {
+    throw new Error('Failed to get upload signature');
+  }
+
+  const { signature, timestamp, cloudName, apiKey } = await sigRes.json();
+
+  // 3. Upload directly to Cloudinary using FormData
+  const formData = new FormData();
+  formData.append('file', fileToUpload);
+  formData.append('api_key', apiKey);
+  formData.append('timestamp', timestamp.toString());
+  formData.append('signature', signature);
+  if (folder) {
+    formData.append('folder', folder);
+  }
+
+  const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!uploadRes.ok) {
+    const err = await uploadRes.json();
+    throw new Error(err.error?.message || 'Failed to upload to Cloudinary');
+  }
+
+  const data = await uploadRes.json();
+  return data.secure_url;
+}

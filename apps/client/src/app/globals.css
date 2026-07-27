@@ -555,3 +555,10 @@ input::placeholder, textarea::placeholder {
 
 /* ─── 14. WEBKIT SCROLLBAR HIDE (for MobilePageNav) ─────────── */
 .overflow-x-auto::-webkit-scrollbar { display: none; }
+
+/* ─── 15. IMAGE SHARPNESS & RENDERING ──────────────────────── */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+}

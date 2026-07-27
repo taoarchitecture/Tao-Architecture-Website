@@ -60,7 +60,7 @@ export default function Contact() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
-      const sections = ['contact-details', 'email-form'];
+      const sections = ['contact-details', 'email-form', 'careers-cta'];
 
       for (const id of sections) {
         const element = document.getElementById(id);
@@ -112,7 +112,8 @@ export default function Contact() {
       <MobilePageNav 
         items={[
           { id: 'contact-details', label: 'Contact us' },
-          { id: 'email-form', label: 'Email us' }
+          { id: 'email-form', label: 'Email us' },
+          { id: 'careers-cta', label: 'Careers' }
         ]}
         activeItem={activeSection}
         onSelect={scrollToSection}
@@ -204,6 +205,17 @@ export default function Contact() {
                   </div>
                 </form>
               )}
+            </section>
+
+            {/* Career CTA Section */}
+            <section id="careers-cta" className="mb-20 border-t-[3px] border-primary-gold pt-10 px-8 bg-neutral-bg">
+              <h2 className="tao-fs-form-h font-normal mb-6 font-agenda">Careers</h2>
+              <p className="text-neutral-dark-grey font-agenda mb-6 text-lg leading-relaxed max-w-2xl">
+                Interested in joining the TAO Architecture team? We are always looking for talented architects, interior designers, and interns to join our studio.
+              </p>
+              <a href="/career" className="btn btn-outline-red inline-block px-8 py-3">
+                View Openings & Apply
+              </a>
             </section>
 
           </div>

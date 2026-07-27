@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { ContactSubmission } from '@/types';
-import { FiTrash2, FiMail, FiUser, FiClock } from 'react-icons/fi';
+import { FiTrash2, FiMail, FiUser, FiClock, FiArrowLeft } from 'react-icons/fi';
 
 export default function AdminContactPage() {
   const router = useRouter();
@@ -79,7 +79,7 @@ export default function AdminContactPage() {
 
       <div className="flex gap-6 h-[calc(100vh-220px)]">
         {/* Message List */}
-        <div className="w-full overflow-y-auto border border-neutral-border bg-white shadow-sm md:w-2/5">
+        <div className={`w-full overflow-y-auto border border-neutral-border bg-white shadow-sm md:w-2/5 ${selectedMessage ? 'hidden md:block' : 'block'}`}>
           {submissions.length === 0 ? (
             <div className="flex h-full items-center justify-center text-sm text-neutral-medium-grey">
               No messages yet
@@ -111,9 +111,17 @@ export default function AdminContactPage() {
         </div>
 
         {/* Message Detail */}
-        <div className="hidden flex-1 overflow-y-auto border border-neutral-border bg-white p-8 shadow-sm md:block">
+        <div className={`flex-1 overflow-y-auto border border-neutral-border bg-white p-5 md:p-8 shadow-sm ${selectedMessage ? 'block' : 'hidden md:block'}`}>
           {selectedMessage ? (
             <div>
+              {/* Mobile Back Button */}
+              <button 
+                onClick={() => setSelectedMessage(null)}
+                className="md:hidden flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-medium-grey hover:text-primary-red mb-6 transition-colors"
+              >
+                <FiArrowLeft size={14} /> Back to messages
+              </button>
+              
               <div className="flex justify-between items-start mb-8">
                 <div>
                   <h2 className="mb-1 font-agenda text-xl font-bold uppercase tracking-[0.08em] text-neutral-dark-grey">

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { ReactNode } from 'react';
-import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers, FiBarChart2 } from 'react-icons/fi';
+import { ReactNode, useState } from 'react';
+import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers, FiBarChart2, FiMenu, FiX } from 'react-icons/fi';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -33,6 +33,7 @@ const SidebarSection = ({ title, children }: { title: string, children: ReactNod
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -41,8 +42,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   return (
     <div className="flex min-h-screen bg-neutral-bg-light">
+      {/* Mobile Backdrop */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-20 md:hidden" 
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-neutral-black text-white hidden md:flex flex-col fixed h-full z-10 border-r border-neutral-off-black">
+      <aside className={`w-64 bg-neutral-black text-white flex flex-col fixed h-full z-30 border-r border-neutral-off-black transition-transform duration-300 ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}>
         <div className="h-20 border-b border-neutral-off-black flex items-center justify-center bg-neutral-black">
           <h1 className="text-2xl font-bold tracking-[0.2em] text-white font-agenda">
             TAO<span className="text-primary-red">ARC</span>
@@ -96,8 +107,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <SidebarItem 
               icon={FiFileText} 
               label="Applications" 
-              href="/admin/career" 
-              active={pathname.startsWith('/admin/career')} 
+              href="/admin/careers" 
+              active={pathname.startsWith('/admin/careers')} 
             />
             <SidebarItem 
               icon={FiMail} 
@@ -135,8 +146,23 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen overflow-y-auto bg-neutral-bg p-10 md:ml-64">
-        {children}
+      <main className="flex-1 min-h-screen overflow-y-auto bg-neutral-bg md:ml-64 flex flex-col relative">
+        {/* Mobile Top Bar */}
+        <div className="md:hidden h-14 bg-neutral-black text-white flex items-center px-4 shrink-0 shadow-sm sticky top-0 z-10">
+          <button 
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 -ml-2 text-white hover:text-primary-red transition-colors"
+          >
+            <FiMenu className="w-6 h-6" />
+          </button>
+          <h1 className="text-lg font-bold tracking-[0.2em] text-white font-agenda ml-4">
+            TAO<span className="text-primary-red">ARC</span>
+          </h1>
+        </div>
+
+        <div className="flex-1 p-4 md:p-10">
+          {children}
+        </div>
       </main>
     </div>
   );

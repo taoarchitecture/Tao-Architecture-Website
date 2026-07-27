@@ -164,7 +164,7 @@ export default function AdminObservabilityPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {statusCards.map((card) => (
           <div key={card.label} className="border-l-2 border-primary-red bg-white p-6 shadow-sm">
             <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-medium-grey">
@@ -282,7 +282,7 @@ export default function AdminObservabilityPage() {
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <MetricList
                 title="Traffic Trend"
                 emptyText="No trend data returned yet."

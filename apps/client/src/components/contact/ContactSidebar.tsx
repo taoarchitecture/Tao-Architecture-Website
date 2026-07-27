@@ -24,6 +24,7 @@ const ContactSidebar = ({ activeSection }: ContactSidebarProps) => {
   const sections = [
     { id: 'contact-details', label: 'Contact us' },
     { id: 'email-form', label: 'Email us' },
+    { id: 'careers-cta', label: 'Careers' },
   ];
 
   return (

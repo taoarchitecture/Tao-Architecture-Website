@@ -15,7 +15,7 @@ const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subti
   if (!slides || slides.length === 0) return null;
 
   return (
-    <div className="w-full relative bg-black" style={{ height: 'clamp(480px, 72vh, 860px)' }}>
+    <div className="w-full relative bg-black h-[85vh] md:h-[clamp(480px,72vh,860px)]">
       <Swiper
         spaceBetween={0}
         effect="fade"
@@ -36,8 +36,8 @@ const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subti
                 src={slide.image}
                 alt={slide.title || `Tao Architecture Project ${index + 1}`}
                 fill
-                priority={index <= 1}
-                loading={index <= 1 ? "eager" : "lazy"}
+                priority={index === 0}
+                fetchPriority={index === 0 ? "high" : "auto"}
                 className="object-cover object-center"
                 sizes="100vw"
                 quality={85}

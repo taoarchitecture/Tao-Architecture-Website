@@ -6,6 +6,7 @@ import axios from 'axios';
 import { TeamMember } from '@/types';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/image';
+import { uploadToCloudinary } from '@/utils/cloudinary';
 import { FiPlus, FiTrash2, FiUploadCloud, FiX } from 'react-icons/fi';
 
 interface Props {
@@ -51,43 +52,47 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
 
   const onSubmit = async (data: Omit<TeamMember, 'bio'>) => {
     setSubmitting(true);
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('role', data.role);
-    formData.append('order', String(data.order));
-    formData.append('active', String(data.active));
-
-    // Serialize bio paragraphs (filter out empty ones)
-    const cleanBio = bioParagraphs.filter(p => p.trim() !== '');
-    formData.append('bio', JSON.stringify(cleanBio));
-
-    const file = fileInputRef.current?.files?.[0];
-    if (file) {
-      formData.append('image', file);
-    }
-
     try {
+      let imageUrl = initialData?.image || '';
+      const file = fileInputRef.current?.files?.[0];
+      
+      if (file) {
+        imageUrl = await uploadToCloudinary(file, 'studio');
+      }
+
+      const cleanBio = bioParagraphs.filter(p => p.trim() !== '');
+
+      const payload = {
+        name: data.name,
+        role: data.role,
+        order: Number(data.order || 0),
+        active: data.active,
+        bio: cleanBio,
+        image: imageUrl,
+      };
+
       const token = localStorage.getItem('token');
       const headers = {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       };
 
       if (initialData?.id) {
         await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL}/studio/team/${initialData.id}`,
-          formData,
+          `${process.env.NEXT_PUBLIC_API_URL}/studio/${initialData.id}`,
+          payload,
           { headers }
         );
       } else {
         await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/studio/team`,
-          formData,
+          `${process.env.NEXT_PUBLIC_API_URL}/studio`,
+          payload,
           { headers }
         );
       }
       onSuccess();
     } catch (error) {
+      console.error(error);
       alert('Error saving team member. Please try again.');
     } finally {
       setSubmitting(false);
@@ -148,7 +153,7 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
           >
             {imagePreview ? (
               <>
-                <Image src={imagePreview} alt="Preview" fill className="object-cover object-top" />
+                <Image src={imagePreview} alt="Preview" fill sizes="200px" className="object-cover object-top" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <FiUploadCloud className="text-white" size={22} />
                 </div>

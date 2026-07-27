@@ -277,14 +277,14 @@ export default function Loader() {
 
     window.history.pushState = function pushState(...args) {
       if (shouldTriggerForUrl(args[2])) {
-        showLoader();
+        queueMicrotask(() => showLoader());
       }
       return originalPushState.apply(this, args);
     };
 
     window.history.replaceState = function replaceState(...args) {
       if (shouldTriggerForUrl(args[2])) {
-        showLoader();
+        queueMicrotask(() => showLoader());
       }
       return originalReplaceState.apply(this, args);
     };

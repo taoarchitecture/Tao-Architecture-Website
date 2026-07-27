@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/image';
+import { uploadToCloudinary } from '@/utils/cloudinary';
 import { Project } from '@/types';
 
 interface ProjectFormValues extends Omit<Project, 'description' | 'gallery'> {
@@ -125,39 +126,48 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
   const onSubmit = async (data: ProjectFormValues) => {
     setIsSubmitting(true);
     setUploadStatus('uploading');
-    const formData = new FormData();
-
-    // Basic fields
-    const descriptionArray = data.description.map(d => d.value);
-    formData.append('description', JSON.stringify(descriptionArray));
-
-    (Object.keys(data) as Array<keyof ProjectFormValues>).forEach(key => {
-      if (key === 'description' || key === 'coverImageFile' || key === 'galleryFiles' || key === 'gallery') return;
-      const value = data[key];
-      if (value !== undefined && value !== null) {
-        formData.append(key, String(value));
-      }
-    });
-
-    // Cover file
-    if (coverFile) formData.append('coverImage', coverFile);
-
-    // New gallery files
-    newGalleryFiles.forEach(f => formData.append('gallery', f));
-
-    // Existing gallery (for updates)
-    if (isEditing) {
-      formData.append('existingGallery', JSON.stringify(galleryPreviews.filter(p => !p.isNew)));
-    }
 
     try {
+      // 1. Upload Cover Image to Cloudinary directly if changed
+      let coverImageUrl = isEditing && initialData?.coverImage ? initialData.coverImage : undefined;
+      if (coverFile) {
+        coverImageUrl = await uploadToCloudinary(coverFile, 'projects');
+      }
+
+      // 2. Upload new Gallery Images to Cloudinary
+      const uploadedGalleryUrls = await Promise.all(
+        newGalleryFiles.map(file => uploadToCloudinary(file, 'projects'))
+      );
+
+      // 3. Construct JSON Payload
+      const existingGalleryItems = isEditing ? galleryPreviews.filter(p => !p.isNew).map(p => ({ url: p.url, caption: '', order: 0 })) : [];
+      const newGalleryItems = uploadedGalleryUrls.map((url, i) => ({ url, caption: '', order: existingGalleryItems.length + i }));
+      
+      const payload = {
+        title: data.title,
+        slug: data.slug,
+        category: data.category,
+        status: data.status,
+        location: data.location,
+        plotArea: data.plotArea,
+        builtUpArea: data.builtUpArea,
+        description: data.description.map(d => d.value),
+        seoTitle: data.seoTitle,
+        seoDesc: data.seoDesc,
+        isPublished: data.isPublished,
+        isFeatured: data.isFeatured,
+        order: Number(data.order || 0),
+        coverImage: coverImageUrl,
+        gallery: [...existingGalleryItems, ...newGalleryItems],
+      };
+
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } };
+      const config = { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } };
 
       if (isEditing && initialData?.id) {
-        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/projects/${initialData.id}`, formData, config);
+        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/projects/${initialData.id}`, payload, config);
       } else {
-        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/projects`, formData, config);
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/projects`, payload, config);
       }
 
       setUploadStatus('success');
@@ -278,11 +288,11 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
         {/* Cover Image Drop Zone */}
         <div className="mb-10">
           <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-4">Cover Image</label>
-          <div className="flex items-start gap-6">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
             {/* Drop zone */}
             <div
               ref={coverDropRef}
-              className={`relative flex-shrink-0 w-56 h-36 border-2 border-dashed overflow-hidden transition-all duration-200 cursor-pointer ${isDraggingCover ? 'border-primary-red bg-primary-red/5 scale-[1.02]' : coverPreview ? 'border-neutral-border' : 'border-neutral-border hover:border-neutral-black'}`}
+              className={`relative flex-shrink-0 w-full max-w-[14rem] sm:max-w-none sm:w-56 h-36 border-2 border-dashed overflow-hidden transition-all duration-200 cursor-pointer ${isDraggingCover ? 'border-primary-red bg-primary-red/5 scale-[1.02]' : coverPreview ? 'border-neutral-border' : 'border-neutral-border hover:border-neutral-black'}`}
               onDragOver={(e) => { e.preventDefault(); setIsDraggingCover(true); }}
               onDragLeave={() => setIsDraggingCover(false)}
               onDrop={handleCoverDrop}
@@ -290,7 +300,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
             >
               {coverPreview ? (
                 <>
-                  <Image src={coverPreview} alt="Cover" fill className="object-cover" />
+                  <Image src={coverPreview} alt="Cover" fill sizes="200px" className="object-cover" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                     <span className="text-white text-xs font-bold uppercase tracking-wider">Change</span>
                   </div>
@@ -302,7 +312,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
                 </div>
               )}
             </div>
-            <div className="flex flex-col gap-3 pt-2">
+            <div className="flex flex-col gap-3 pt-2 w-full md:w-auto text-center md:text-left">
               <input type="file" id="coverImage" accept="image/*" onChange={handleCoverChange} className="hidden" />
               <label htmlFor="coverImage" className="cursor-pointer inline-flex items-center px-6 py-3 border border-neutral-black text-neutral-black text-xs font-bold uppercase tracking-widest hover:bg-neutral-black hover:text-white transition-all duration-300">
                 <FiUpload className="mr-2" /> Upload Cover
@@ -345,7 +355,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 {galleryPreviews.map((img, idx) => (
                   <div key={idx} className={`relative group aspect-square overflow-hidden border ${img.isNew ? 'border-primary-red/40' : 'border-neutral-border'}`}>
-                    <Image src={getImageUrl(img.url)} alt="" fill className="object-cover" />
+                    <Image src={getImageUrl(img.url)} alt="" fill sizes="200px" className="object-cover" />
                     {img.isNew && (
                       <div className="absolute top-1 left-1 bg-primary-red text-white text-[9px] font-bold px-1 py-0.5 uppercase tracking-wider">New</div>
                     )}
@@ -367,18 +377,18 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
       </div>
 
       {/* Actions */}
-      <div className="flex justify-end space-x-4 pt-4 border-t border-neutral-border">
+      <div className="flex flex-col-reverse sm:flex-row justify-end gap-4 sm:gap-4 sm:space-x-4 pt-4 border-t border-neutral-border">
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-8 py-4 border border-transparent text-neutral-medium-grey text-xs font-bold uppercase tracking-widest hover:text-neutral-black transition-colors"
+          className="px-8 py-4 border border-transparent text-neutral-medium-grey text-xs font-bold uppercase tracking-widest hover:text-neutral-black transition-colors w-full sm:w-auto text-center"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`px-10 py-4 text-white text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-50 flex items-center gap-2 ${
+          className={`px-10 py-4 text-white text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 w-full sm:w-auto ${
             uploadStatus === 'success' ? 'bg-emerald-600' :
             uploadStatus === 'error' ? 'bg-primary-red' :
             'bg-neutral-black hover:bg-primary-red'

@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { projectDetails, projects } from '@/data/projects';
+import { getImageUrl } from '@/utils/image';
 import { notFound } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP, FaWhatsapp, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -12,10 +12,52 @@ import { MdEmail } from 'react-icons/md';
 export default function ProjectDetail() {
   const params = useParams();
   const slug = params?.slug as string;
-  const project = projectDetails[slug];
+  const [project, setProject] = useState<any>(null);
+  const [allProjects, setAllProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showFullText, setShowFullText] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.href);
+    }
+    
+    const fetchData = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+        const [projRes, allRes] = await Promise.all([
+          fetch(`${apiUrl}/projects/slug/${slug}`),
+          fetch(`${apiUrl}/projects`)
+        ]);
+
+        if (projRes.ok) {
+          const projData = await projRes.json();
+          // parse JSON fields
+          if (typeof projData.description === 'string') projData.description = JSON.parse(projData.description);
+          if (typeof projData.details === 'string') projData.details = JSON.parse(projData.details);
+          if (typeof projData.gallery === 'string') projData.gallery = JSON.parse(projData.gallery);
+          if (typeof projData.relatedProjects === 'string') projData.relatedProjects = JSON.parse(projData.relatedProjects);
+          
+          setProject(projData);
+        }
+
+        if (allRes.ok) {
+           const allData = await allRes.json();
+           const visibleProjects = allData.filter((p: any) => p.visible !== false).sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+           setAllProjects(visibleProjects);
+        }
+
+      } catch (err) {
+        console.error('Failed to fetch project details', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [slug]);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -23,12 +65,20 @@ export default function ProjectDetail() {
   };
 
   const nextImage = () => {
-    setLightboxIndex((prev) => (prev + 1) % project.gallery.length);
+    if(project) setLightboxIndex((prev) => (prev + 1) % (project.gallery?.length || 1));
   };
 
   const prevImage = () => {
-    setLightboxIndex((prev) => (prev - 1 + project.gallery.length) % project.gallery.length);
+    if(project) setLightboxIndex((prev) => (prev - 1 + (project.gallery?.length || 1)) % (project.gallery?.length || 1));
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs animate-pulse">Loading Project...</div>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -43,33 +93,27 @@ export default function ProjectDetail() {
   }
 
   // Find next/prev projects
-  // We use the 'projects' array to find the order
-  // Note: projects array uses 'link' which contains the slug, or 'id' which matches the slug
-  const currentIndex = projects.findIndex(p => p.id === project.id);
-  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
-  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
-
-  const [currentUrl, setCurrentUrl] = useState('');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.href);
-    }
-  }, []);
+  const currentIndex = allProjects.findIndex(p => p.id === project.id);
+  const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+  const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 
   return (
     <main className="min-h-screen bg-white pt-20">
       
       {/* Hero Section */}
       <section className="relative mb-12 h-[60vh] w-full bg-neutral-bg md:h-[80vh]">
-         {project.heroImage && (
+         {project.coverImage ? (
              <Image 
-                src={project.heroImage} 
+                src={getImageUrl(project.coverImage)} 
                 alt={project.title} 
-                fill 
+                fill
+                sizes="100vw"
                 className="object-cover"
                 priority
+                quality={85}
              />
+         ) : (
+            <div className="w-full h-full bg-neutral-200"></div>
          )}
          <div className="absolute top-0 right-0 p-4 md:p-8 flex gap-2">
             <button 
@@ -122,32 +166,36 @@ export default function ProjectDetail() {
                         </h2>
                     )}
 
-                    <div className="bg-neutral-bg p-6 mb-8 border-l-[3px] border-primary-gold font-agenda tao-fs-details font-bold">
-                        {project.details.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.details.location}</p>}
-                        {project.details.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.details.status}</p>}
-                        {project.details.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.details.plotArea}</p>}
-                        {project.details.builtUpArea && <p className="mb-1"><span className="font-bold">Built Up Area :</span> {project.details.builtUpArea}</p>}
-                    </div>
+                    {project.details && (
+                        <div className="bg-neutral-bg p-6 mb-8 border-l-[3px] border-primary-gold font-agenda tao-fs-details font-bold">
+                            {project.details.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.details.location}</p>}
+                            {project.details.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.details.status}</p>}
+                            {project.details.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.details.plotArea}</p>}
+                            {project.details.builtUpArea && <p className="mb-1"><span className="font-bold">Built Up Area :</span> {project.details.builtUpArea}</p>}
+                        </div>
+                    )}
 
-                    <div className="prose max-w-none font-agenda tao-fs-desc font-normal text-neutral-dark-grey leading-relaxed">
-                        {project.description.slice(0, showFullText ? undefined : 2).map((paragraph, idx) => (
-                            <p key={idx} className="mb-6">{paragraph}</p>
-                        ))}
-                        
-                        {/* Hidden text for read more */}
-                         {showFullText && project.description.slice(2).map((paragraph, idx) => (
-                            <p key={`more-${idx}`} className="mb-6 animate-fadeIn">{paragraph}</p>
-                        ))}
+                    {project.description && project.description.length > 0 && (
+                        <div className="prose max-w-none font-agenda tao-fs-desc font-normal text-neutral-dark-grey leading-relaxed">
+                            {project.description.slice(0, showFullText ? undefined : 2).map((paragraph: string, idx: number) => (
+                                <p key={idx} className="mb-6">{paragraph}</p>
+                            ))}
+                            
+                            {/* Hidden text for read more */}
+                             {showFullText && project.description.slice(2).map((paragraph: string, idx: number) => (
+                                <p key={`more-${idx}`} className="mb-6 animate-fadeIn">{paragraph}</p>
+                            ))}
 
-                        {project.description.length > 2 && (
-                            <button 
-                                onClick={() => setShowFullText(!showFullText)}
-                                className="btn btn-stroke mt-4"
-                            >
-                                {showFullText ? 'Read Less' : 'Read More'}
-                            </button>
-                        )}
-                    </div>
+                            {project.description.length > 2 && (
+                                <button 
+                                    onClick={() => setShowFullText(!showFullText)}
+                                    className="btn btn-stroke mt-4"
+                                >
+                                    {showFullText ? 'Read Less' : 'Read More'}
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -187,7 +235,7 @@ export default function ProjectDetail() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {project.gallery.map((item, idx) => (
+                {project.gallery.map((item: any, idx: number) => (
                     <div 
                       key={idx} 
                       className="group relative cursor-pointer"
@@ -195,10 +243,12 @@ export default function ProjectDetail() {
                     >
                         <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
                             <Image 
-                                src={item.src} 
+                                src={getImageUrl(item.src)} 
                                 alt={item.title || `Gallery Image ${idx + 1}`}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                quality={85}
                             />
                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
                                 <div className="w-12 h-12 rounded-full border border-primary-red text-primary-red flex items-center justify-center mb-4">
@@ -222,7 +272,7 @@ export default function ProjectDetail() {
              {/* Navigation */}
              <div className="flex justify-between items-center mb-20">
                 {prevProject ? (
-                    <Link href={prevProject.link} className="flex items-center gap-4 group">
+                    <Link href={`/projects/${prevProject.slug || prevProject.id}`} className="flex items-center gap-4 group">
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
                             <FaChevronLeft size={12} />
                         </div>
@@ -235,7 +285,7 @@ export default function ProjectDetail() {
                 </Link>
 
                 {nextProject ? (
-                    <Link href={nextProject.link} className="flex items-center gap-4 group">
+                    <Link href={`/projects/${nextProject.slug || nextProject.id}`} className="flex items-center gap-4 group">
                         <span className="uppercase font-bold text-sm tracking-wider hidden md:block">{nextProject.title}</span>
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-primary-red group-hover:border-primary-red group-hover:text-white transition-all">
                             <FaChevronRight size={12} />
@@ -249,23 +299,25 @@ export default function ProjectDetail() {
                  <div>
                      <h3 className="text-center text-2xl font-light uppercase tracking-widest mb-12">Related Projects</h3>
                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                         {project.relatedProjects.map(relatedId => {
-                             const related = projects.find(p => p.id === relatedId);
+                         {project.relatedProjects.map((relatedId: string) => {
+                             const related = allProjects.find(p => p.id === relatedId || p.slug === relatedId);
                              if (!related) return null;
                              return (
                                  <div key={related.id} className="group text-center">
-                                     <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-[3px] border-primary-gold">
-                                         <Link href={related.link}>
+                                     <Link href={`/projects/${related.slug || related.id}`} className="block">
+                                         <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-[3px] border-primary-gold">
                                             <Image 
-                                                src={related.image} 
+                                                src={related.coverImage ? getImageUrl(related.coverImage) : '/img/placeholder.jpg'} 
                                                 alt={related.title} 
-                                                fill 
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, 33vw"
                                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                quality={85}
                                             />
-                                         </Link>
-                                     </div>
+                                         </div>
+                                     </Link>
                                      <h5 className="text-sm font-bold uppercase mb-1 hover:text-primary-red transition-colors">
-                                         <Link href={related.link}>{related.title}</Link>
+                                         <Link href={`/projects/${related.slug || related.id}`}>{related.title}</Link>
                                      </h5>
                                      <p className="text-xs text-neutral-dark-grey uppercase tracking-wider">{related.description}</p>
                                  </div>
@@ -296,14 +348,18 @@ export default function ProjectDetail() {
           
           <div className="relative w-full max-w-6xl h-[90vh] flex flex-col items-center justify-center pt-8">
             <div className="relative w-full flex-1 min-h-0 mb-6">
-              <Image
-                src={project.gallery[lightboxIndex].src}
-                alt={project.gallery[lightboxIndex].title || ''}
-                fill
-                className="object-contain"
-              />
+              {project.gallery && project.gallery[lightboxIndex] && (
+                <Image
+                  src={getImageUrl(project.gallery[lightboxIndex].src)}
+                  alt={project.gallery[lightboxIndex].title || ''}
+                  fill
+                  sizes="100vw"
+                  className="object-contain"
+                  quality={85}
+                />
+              )}
             </div>
-            {(project.gallery[lightboxIndex].title || project.gallery[lightboxIndex].description) && (
+            {project.gallery && project.gallery[lightboxIndex] && (project.gallery[lightboxIndex].title || project.gallery[lightboxIndex].description) && (
               <div className="w-full text-center mt-2 px-4 shrink-0 pb-4">
                  {project.gallery[lightboxIndex].title && (
                    <h4 className="text-white text-xl font-bold uppercase tracking-widest mb-2 font-agenda">

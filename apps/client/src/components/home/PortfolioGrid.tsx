@@ -39,7 +39,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
     <motion.article variants={cardVariants} className="group">
       <div className="relative overflow-hidden bg-white">
         <div className="absolute inset-x-0 top-0 z-10 h-[6px] bg-neutral-black pointer-events-none" />
-        <div className="absolute left-6 top-[6px] z-20 pointer-events-none md:left-7">
+        <div className="absolute left-6 top-0 z-20 pointer-events-none md:left-7">
           <span className="portfolio-badge block !px-4 !py-[7px] !leading-none text-[10px] sm:text-[11px] shadow-none align-top">
             {item.category}
           </span>
@@ -53,7 +53,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
               fill
               className="object-cover img-hover-zoom"
               sizes="(max-width: 767px) 100vw, 44vw"
-              quality={90}
+              quality={85}
             />
           </div>
         </Link>
@@ -63,7 +63,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
             {lines.map((line, index) => (
               <div
                 key={index}
-                className="w-fit max-w-full border-b border-[#c9d3dd] bg-white/95 px-5 py-2 shadow-[0_1px_0_rgba(0,0,0,0.03)] md:px-6"
+                className="border-b border-[#c9d3dd] bg-white/60 px-5 py-2 shadow-[0_1px_0_rgba(0,0,0,0.03)] md:px-6"
               >
                 <span className="block font-agenda text-[clamp(18px,1rem+1vw,26px)] font-normal leading-[1.15] tracking-[-0.02em] text-neutral-dark-grey">
                   {line}
@@ -106,7 +106,7 @@ const StandardCard = ({ item }: { item: PortfolioItem }) => (
             fill
             className="object-cover img-hover-zoom"
             sizes="(max-width: 767px) 100vw, 44vw"
-            quality={90}
+            quality={85}
           />
         </div>
       </Link>
@@ -179,7 +179,7 @@ const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
         <div className="space-y-20 lg:space-y-24">
           {leftColumnItems.map(renderCard)}
         </div>
-        <div className="space-y-20 pt-14 lg:space-y-24 lg:pt-20">
+        <div className="space-y-20 lg:space-y-24 pt-0 lg:pt-0">
           {rightColumnItems.map(renderCard)}
         </div>
       </motion.div>
