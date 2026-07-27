@@ -103,8 +103,27 @@ export default function Publications() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-white pt-32 pb-20 flex justify-center items-center">
-        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs">Loading...</div>
+      <main className="min-h-screen bg-white pt-32 pb-20 animate-pulse">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-20">
+            <div className="h-12 w-64 bg-neutral-100/50 mx-auto"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={`skel-${i}`} className="flex flex-col h-full">
+                <div className="border-[1.5px] border-neutral-100/50 p-[14px] mb-5 bg-white">
+                  <div className={`relative ${i % 2 === 0 ? 'aspect-[3/4]' : 'aspect-[4/5]'} w-full bg-neutral-100/50`}></div>
+                </div>
+                <div className="flex flex-col px-1">
+                  <div className="h-3 w-1/3 bg-neutral-100/50 mb-2"></div>
+                  <div className="h-6 w-full bg-neutral-100/50 mb-2"></div>
+                  <div className="h-6 w-3/4 bg-neutral-100/50 mb-5"></div>
+                  <div className="h-8 w-32 bg-neutral-100/50"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
     );
   }

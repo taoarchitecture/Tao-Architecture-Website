@@ -74,9 +74,29 @@ export default function ProjectDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center pt-20">
-        <div className="text-neutral-medium-grey uppercase tracking-widest text-xs animate-pulse">Loading Project...</div>
-      </div>
+      <main className="min-h-screen bg-white pt-20 animate-pulse">
+        {/* Hero Section Skeleton */}
+        <section className="relative mb-12 h-[60vh] w-full bg-neutral-100/50 md:h-[80vh]"></section>
+        
+        {/* Details Section Skeleton */}
+        <section className="container mx-auto px-4 mb-20">
+          <div className="flex flex-wrap md:flex-nowrap">
+              <div className="w-full md:w-3/4 pr-0 md:pr-12">
+                  <div className="mb-8">
+                      <div className="w-24 h-4 bg-neutral-100/50 mb-4"></div>
+                      <div className="w-3/4 h-10 bg-neutral-100/50 mb-4"></div>
+                      <div className="w-1/2 h-6 bg-neutral-100/50 mb-8"></div>
+                      <div className="w-full h-32 bg-neutral-100/50 mb-8 border-l-[3px] border-neutral-200"></div>
+                      <div className="space-y-4">
+                        <div className="w-full h-4 bg-neutral-100/50"></div>
+                        <div className="w-full h-4 bg-neutral-100/50"></div>
+                        <div className="w-5/6 h-4 bg-neutral-100/50"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </section>
+      </main>
     );
   }
 
