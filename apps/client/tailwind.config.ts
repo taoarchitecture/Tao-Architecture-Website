@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          red: '#ee1c25',
+          red: '#d81219',
           gold: '#c8b273',
         },
         neutral: {

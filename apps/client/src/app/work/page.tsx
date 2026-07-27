@@ -112,7 +112,7 @@ export default function Work() {
               
               return (
                 <section key={category.id} id={category.id} className="mb-20 min-h-[300px] border-t-[1px] border-neutral-border pt-8 relative">
-                  <div className="absolute top-0 right-0 bg-primary-gold text-white text-[10px] tracking-[0.15em] font-bold uppercase px-3 py-1">
+                  <div className="absolute top-0 right-0 bg-primary-gold text-neutral-dark-grey text-[10px] tracking-[0.15em] font-bold uppercase px-3 py-1">
                     {category.label}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -127,8 +127,8 @@ export default function Work() {
                                 fill
                                 priority={index < 4}
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                                quality={85}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                quality={75}
                               />
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500 pointer-events-none" />
                             </div>
@@ -144,11 +144,17 @@ export default function Work() {
                         )}
                       </div>
                     ))}
-                    {/* If loading, show inline loader */}
+                    {/* If loading, show skeletons to prevent CLS */}
                     {loading && categoryProjects.length === 0 && (
-                      <div className="col-span-3 py-10 text-neutral-medium-grey animate-pulse uppercase tracking-widest text-xs">
-                        Loading Projects...
-                      </div>
+                      <>
+                        {[1, 2, 3, 4].map((i) => (
+                          <div key={`skeleton-${i}`} className="group mb-8 w-full animate-pulse">
+                            <div className="w-full h-[250px] bg-neutral-100/50 mb-4 border-t-[2px] border-neutral-border"></div>
+                            <div className="w-3/4 h-5 bg-neutral-100/50 mb-2"></div>
+                            <div className="w-1/2 h-4 bg-neutral-100/50"></div>
+                          </div>
+                        ))}
+                      </>
                     )}
                     {/* If no projects after loading, show empty state */}
                     {!loading && categoryProjects.length === 0 && (

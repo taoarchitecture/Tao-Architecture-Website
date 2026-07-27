@@ -97,7 +97,7 @@ export default function Studio() {
             {/* Team Section */}
             <section id="team" className="mb-20 pt-8">
               <div className="mb-12">
-                <h5 className="text-fluid-h1 uppercase font-bold mb-8 font-agenda">Tao Team</h5>
+                <h1 className="text-fluid-h1 uppercase font-bold mb-8 font-agenda">Tao Team</h1>
                 <p className="font-agenda text-lg leading-relaxed text-neutral-dark-grey">
                   {introText}
                 </p>
@@ -128,7 +128,7 @@ export default function Studio() {
                             </div>
                         </div>
                         <div className="md:col-span-8">
-                            <h5 className="text-xl uppercase font-bold mb-2 font-agenda">{lead.name}</h5>
+                            <h2 className="text-xl uppercase font-bold mb-2 font-agenda">{lead.name}</h2>
                             <p className="text-primary-red mb-6 font-agenda italic">{lead.role}</p>
                             <div className="space-y-4">
                                 {lead.bio.map((paragraph, idx) => (
@@ -169,7 +169,7 @@ export default function Studio() {
                                 <div className="h-full w-full bg-neutral-100" aria-hidden="true" />
                               )}
                           </div>
-                          <h5 className="text-lg uppercase font-bold font-agenda text-center">{member.name}</h5>
+                          <h3 className="text-lg uppercase font-bold font-agenda text-center">{member.name}</h3>
                           <div 
                             className={`text-center mt-1 transition-all duration-300 ease-in-out ${
                               isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'

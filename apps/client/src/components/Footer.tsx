@@ -107,9 +107,9 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
+            <h2 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
               Quick Links
-            </h6>
+            </h2>
             <ul className="space-y-3.5">
               {[
                 { label: 'Work', href: '/work' },
@@ -132,9 +132,9 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
+            <h2 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
               Contact Us
-            </h6>
+            </h2>
             <div className="space-y-3.5 text-[13px] text-neutral-light-grey">
               <p className="leading-relaxed">
                 <strong className="block text-white mb-1 font-semibold">Pune Office:</strong>
@@ -159,9 +159,9 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h6 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
+            <h2 className="text-white mb-6 border-b border-neutral-medium-grey pb-2.5 w-fit tracking-[0.15em]">
               Follow Us
-            </h6>
+            </h2>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -188,8 +188,8 @@ const Footer = () => {
             © {new Date().getFullYear()} {val('siteName')}. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-white transition-colors duration-200">Privacy Policy</Link>
-            <Link href="/terms"   className="hover:text-white transition-colors duration-200">Terms of Use</Link>
+            <a href="#" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors duration-200">Terms of Use</a>
           </div>
         </div>
       </div>
