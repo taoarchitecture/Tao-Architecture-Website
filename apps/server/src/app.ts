@@ -16,6 +16,7 @@ import settingsRoutes from './routes/settings.routes';
 import pageContentRoutes from './routes/page-content.routes';
 import servicesRoutes from './routes/services.routes';
 import observabilityRoutes from './routes/observability.routes';
+import cronRoutes from './routes/cron.routes';
 import path from 'path';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 
@@ -46,6 +47,7 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/pages', pageContentRoutes);
 app.use('/api/services', servicesRoutes);
 app.use('/api/observability', observabilityRoutes);
+app.use('/api/cron', cronRoutes);
 
 // Health check
 app.get('/', (req, res) => {
