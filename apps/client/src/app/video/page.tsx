@@ -1,6 +1,7 @@
 import React from 'react';
 import { PlayerModal } from './player-modal';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Cache for 1 hour
 
 async function fetchVideos(searchParams: { [key: string]: string | undefined }, isShort: boolean) {

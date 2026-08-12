@@ -1,6 +1,7 @@
 import React from 'react';
 import { PlayerModal } from '@/app/video/player-modal';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
 export const metadata = {
