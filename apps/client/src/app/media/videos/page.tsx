@@ -44,7 +44,8 @@ async function fetchVideos(
       console.error(`[Videos] Fetch failed: ${res.status} ${url}`);
       return { items: [], total: 0 };
     }
-    return res.json();
+    const data = await res.json();
+    return data;
   } catch (err) {
     console.error('[Videos] Fetch error:', err);
     return { items: [], total: 0 };

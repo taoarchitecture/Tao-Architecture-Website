@@ -29,7 +29,8 @@ async function fetchVideos(searchParams: { [key: string]: string | undefined }, 
       console.error(`Failed to fetch videos: ${res.status} ${res.statusText}`);
       return { items: [], total: 0 };
     }
-    return res.json();
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error('Error fetching videos:', error);
     return { items: [], total: 0 };
