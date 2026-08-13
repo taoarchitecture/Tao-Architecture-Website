@@ -20,6 +20,8 @@ const nextConfig = {
         removeConsole: process.env.NODE_ENV === 'production',
     },
     poweredByHeader: false,
+    // Introduced in Next 16.3; don't auto-generate AGENTS.md/CLAUDE.md on every dev run.
+    agentRules: false,
 }
 
 module.exports = nextConfig

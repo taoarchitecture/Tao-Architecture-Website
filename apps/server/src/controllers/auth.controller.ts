@@ -3,13 +3,18 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '../prisma';
 import { AuthRequest } from '../middleware/auth.middleware';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
+import { getJwtSecret } from '../utils/jwtSecret';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
+    const secret = getJwtSecret();
+    if (!secret) {
+      console.error('JWT_SECRET is not configured — refusing to issue a token.');
+      return res.status(500).json({ message: 'Server misconfigured' });
+    }
+
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
@@ -22,7 +27,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, {
+    const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, secret, {
       expiresIn: '1d',
     });
 

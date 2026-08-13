@@ -15,6 +15,8 @@ export default function Studio() {
   const [introText, setIntroText] = useState(DEFAULT_INTRO);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     // Fetch dynamic intro text
@@ -41,9 +43,15 @@ export default function Studio() {
           if (activeMembers.length > 0) {
             setTeamMembers(activeMembers);
           }
+        } else {
+          console.error('Studio API returned:', res.status);
+          setError(true);
         }
       } catch (err) {
         console.error('Failed to fetch team members', err);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -102,6 +110,32 @@ export default function Studio() {
                   {introText}
                 </p>
               </div>
+
+              {/* Loading skeleton */}
+              {loading && (
+                <div className="space-y-16 animate-pulse">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div className="md:col-span-4">
+                      <div className="w-full aspect-[3/4] bg-neutral-100 rounded" />
+                    </div>
+                    <div className="md:col-span-8 space-y-4 pt-4">
+                      <div className="h-6 bg-neutral-100 rounded w-1/3" />
+                      <div className="h-4 bg-neutral-100 rounded w-1/4" />
+                      <div className="h-4 bg-neutral-100 rounded w-full" />
+                      <div className="h-4 bg-neutral-100 rounded w-5/6" />
+                      <div className="h-4 bg-neutral-100 rounded w-4/5" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Error state */}
+              {!loading && error && (
+                <div className="py-16 text-center">
+                  <p className="text-neutral-medium-grey text-lg mb-2">Unable to load team members.</p>
+                  <p className="text-neutral-medium-grey text-sm">Please try refreshing the page.</p>
+                </div>
+              )}
 
               <div className="space-y-16">
                 {/* Lead Member */}

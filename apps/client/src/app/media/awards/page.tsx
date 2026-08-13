@@ -5,6 +5,22 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { awards } from '@/data/studio';
 
+// Real pixel aspect ratios (width/height) of the known local award images, so each
+// card renders at its true proportions instead of an arbitrary alternating crop.
+const AWARD_IMAGE_ASPECT: Record<string, number> = {
+  '/img/studio/award/01.jpg': 600 / 734,
+  '/img/studio/award/02.jpg': 600 / 495,
+  '/img/studio/award/03.jpg': 600 / 869,
+  '/img/studio/award/04.jpg': 600 / 396,
+  '/img/studio/award/05.jpg': 600 / 416,
+  '/img/studio/award/06.jpg': 600 / 416,
+  '/img/studio/award/07.jpg': 600 / 416,
+  '/img/studio/award/08.jpg': 1500 / 1000,
+  '/img/studio/award/09.jpg': 1500 / 1000,
+  '/img/studio/award/10.jpg': 1500 / 988,
+};
+const DEFAULT_AWARD_ASPECT = 4 / 5;
+
 const containerVariants = {
   hidden: {},
   visible: {
@@ -58,7 +74,7 @@ export default function Awards() {
               <div className="relative overflow-hidden w-full inline-block mb-6">
                 {/* Top Black Bar */}
                 <div className="absolute top-0 left-0 w-full h-[8px] bg-neutral-black z-20 pointer-events-none" />
-                
+
                 {/* Category Badge */}
                 <div className="absolute top-[8px] left-6 z-20 pointer-events-none">
                   <span className="portfolio-badge block !pt-2 !pb-2.5 shadow-none text-[10px] sm:text-[11px]">
@@ -67,11 +83,14 @@ export default function Awards() {
                 </div>
 
                 <Link href={award.link} className="block relative focus-ring" aria-label={`View ${award.title}`}>
-                  <div className={`relative w-full ${index % 2 === 0 ? 'aspect-square' : 'aspect-[4/5]'} overflow-hidden bg-neutral-bg`}>
-                    <Image 
-                      src={award.image} 
-                      alt={award.title} 
-                      fill 
+                  <div
+                    className="relative w-full overflow-hidden bg-neutral-bg"
+                    style={{ aspectRatio: AWARD_IMAGE_ASPECT[award.image] || DEFAULT_AWARD_ASPECT }}
+                  >
+                    <Image
+                      src={award.image}
+                      alt={award.title}
+                      fill
                       priority={index < 3}
                       className="object-cover transition-transform duration-1000 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

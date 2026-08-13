@@ -6,33 +6,51 @@ import Link from 'next/link';
 import { getPublications } from '@/lib/api';
 import { Publication } from '@/types';
 
-const PublicationCard = ({ pub, index }: { pub: Publication, index: number }) => (
-  <div className="flex flex-col h-full group">
+// Real pixel dimensions of the known local publication cover/spread images, so each
+// card renders at its true aspect ratio instead of being cropped to a guessed one.
+const PUBLICATION_IMAGE_DIMENSIONS: Record<string, { width: number; height: number }> = {
+  '/img/studio/publication/01.jpg': { width: 600, height: 1052 },
+  '/img/studio/publication/02.jpg': { width: 490, height: 516 },
+  '/img/studio/publication/03.jpg': { width: 600, height: 432 },
+  '/img/studio/publication/04.jpg': { width: 600, height: 280 },
+  '/img/studio/publication/05.jpg': { width: 600, height: 442 },
+  '/img/studio/publication/07.jpg': { width: 600, height: 603 },
+  '/img/studio/publication/08.jpg': { width: 600, height: 425 },
+  '/img/studio/publication/09.jpg': { width: 600, height: 814 },
+  '/img/studio/publication/10.jpg': { width: 600, height: 681 },
+};
+const DEFAULT_DIMENSIONS = { width: 4, height: 5 };
+
+const PublicationCard = ({ pub, index }: { pub: Publication, index: number }) => {
+  const { width, height } = PUBLICATION_IMAGE_DIMENSIONS[pub.image] || DEFAULT_DIMENSIONS;
+  return (
+  <div className="break-inside-avoid mb-16 flex flex-col group">
     {/* Image Container with Frame Appearance */}
     <div className="border-[1.5px] border-neutral-dark-grey p-[14px] mb-5 bg-white shadow-sm transition-shadow duration-500 hover:shadow-premium-md">
-      {/* Dynamic Aspect Ratios to give a masonry feel like the mockup */}
-      <div className={`relative ${index % 2 === 0 ? 'aspect-[3/4]' : 'aspect-[4/5]'} w-full overflow-hidden`}>
+      {/* True aspect ratio per image, so columns stagger like real masonry with no cropping */}
+      <div className="relative w-full overflow-hidden">
         <Image
           src={pub.image}
           alt={pub.title}
-          fill
+          width={width}
+          height={height}
           priority={index < 3}
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           quality={85}
         />
       </div>
     </div>
 
     {/* Text Content */}
-    <div className="flex flex-col flex-grow px-1">
+    <div className="flex flex-col px-1">
       {/* Category */}
       <h4 className="text-[11px] md:text-sm text-primary-red font-bold uppercase tracking-[0.15em] mb-2 leading-relaxed">
         {pub.category}
       </h4>
 
       {/* Title */}
-      <h3 className="text-[17px] md:text-xl font-normal font-agenda text-neutral-dark-grey leading-[1.4] mb-5 flex-grow">
+      <h3 className="text-[17px] md:text-xl font-normal font-agenda text-neutral-dark-grey leading-[1.4] mb-5">
         {pub.title}
       </h3>
 
@@ -53,12 +71,16 @@ const PublicationCard = ({ pub, index }: { pub: Publication, index: number }) =>
       </div>
     </div>
   </div>
-);
+  );
+};
+
+const INITIAL_VISIBLE_COUNT = 9;
 
 export default function Publications() {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
   const fetchPublications = async () => {
     setIsLoading(true);
@@ -108,9 +130,9 @@ export default function Publications() {
           <div className="text-center mb-20">
             <div className="h-12 w-64 bg-neutral-100/50 mx-auto"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-x-8">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={`skel-${i}`} className="flex flex-col h-full">
+              <div key={`skel-${i}`} className="break-inside-avoid mb-16 flex flex-col">
                 <div className="border-[1.5px] border-neutral-100/50 p-[14px] mb-5 bg-white">
                   <div className={`relative ${i % 2 === 0 ? 'aspect-[3/4]' : 'aspect-[4/5]'} w-full bg-neutral-100/50`}></div>
                 </div>
@@ -152,13 +174,26 @@ export default function Publications() {
           </h1>
         </div>
 
-        {/* Grid */}
+        {/* Masonry Grid */}
         {publications.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            {publications.map((pub, index) => (
-              <PublicationCard key={pub.id} pub={pub} index={index} />
-            ))}
-          </div>
+          <>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-x-8">
+              {publications.slice(0, visibleCount).map((pub, index) => (
+                <PublicationCard key={pub.id} pub={pub} index={index} />
+              ))}
+            </div>
+
+            {visibleCount < publications.length && (
+              <div className="text-center mt-4">
+                <button
+                  onClick={() => setVisibleCount((count) => count + INITIAL_VISIBLE_COUNT)}
+                  className="inline-block border-[1.5px] border-neutral-dark-grey text-neutral-dark-grey px-6 py-[10px] text-[11px] font-bold uppercase tracking-[0.16em] hover:bg-neutral-dark-grey hover:text-white transition-all duration-300"
+                >
+                  Read More
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="border border-neutral-border bg-neutral-bg px-6 py-12 text-center">
             <p className="text-sm font-medium uppercase tracking-[0.16em] text-neutral-medium-grey">

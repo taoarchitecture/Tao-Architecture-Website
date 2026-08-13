@@ -24,9 +24,28 @@ dotenv.config();
 
 const app = express();
 
+// Known browser origins that legitimately call this API. Extra origins (e.g. a
+// Vercel preview deployment) can be added without a code change via the
+// comma-separated CORS_EXTRA_ORIGINS env var.
+const allowedOrigins = [
+  'https://tao-architecture-website.vercel.app',
+  'http://localhost:3000',
+  ...(process.env.CORS_EXTRA_ORIGINS?.split(',').map((o) => o.trim()).filter(Boolean) || []),
+];
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    // Requests with no Origin header (server-to-server, curl, the cron job) aren't
+    // subject to CORS at all — only allow-list browser-supplied origins.
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
 app.use(helmet({ crossOriginResourcePolicy: false })); // Allow cross-origin images
 app.use(morgan('dev'));
 

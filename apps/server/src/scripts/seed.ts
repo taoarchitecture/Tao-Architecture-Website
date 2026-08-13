@@ -59,28 +59,62 @@ const publications = [
     title: 'Paradiso Residence in Timeless Living: Houses Under the Sun',
     category: 'ARCHITECTURE + INTERIORS',
     image: '/img/studio/publication/01.jpg',
-    link: '/projects/paradiso-residence',
+    link: '/projects/paradiso',
     order: 1
+  },
+  {
+    title: 'Manish Banker’s Editorial note on \'The TAO of Architecture\' for Building Giants Magazine May-July 2017',
+    category: 'ARCHITECTURE + RETAIL + RECREATION',
+    image: '/img/studio/publication/03.jpg',
+    order: 2
+  },
+  {
+    title: 'Our Unbuilt \'Wind Dunes\' Project featured in FOAID IdeaNext Coffee Table Book, 2017',
+    category: 'ARCHITECTURE + RETAIL + RECREATION',
+    image: '/img/studio/publication/05.jpg',
+    order: 3
   },
   {
     title: 'Nest Residence in The Modern Home',
     category: 'ARCHITECTURE + INTERIORS',
     image: '/img/studio/publication/02.jpg',
     link: '/projects/nest-residence',
-    order: 2
-  },
-  {
-    title: 'Manish Banker’s Editorial note on \'The TAO of Architecture\' for Building Giants Magazine May-July 2017',
-    category: 'ARCHITECTURE + RETAIL + RECREATION',
-    image: '/img/studio/publication/03.jpg',
-    order: 3
+    order: 4
   },
   {
     title: 'Onella Residence in Design Detail Magazine, Oct, 2017',
     category: 'ARCHITECTURE + INTERIORS + CRAFT + LANDSCAPE',
     image: '/img/studio/publication/04.jpg',
     link: '/projects/onella',
-    order: 4
+    order: 5
+  },
+  {
+    title: 'God\'s Blessing featured in the book, 50 Luxury Apartments in India',
+    category: 'ARCHITECTURE + INTERIORS + CRAFT + LANDSCAPE',
+    image: '/img/studio/publication/10.jpg',
+    link: '/projects/gods-blessing',
+    order: 6
+  },
+  {
+    title: 'Paradiso Residence featured in Luxury Indian Interiors: Perspectives of the New Indian Aesthetics',
+    category: 'ARCHITECTURE + RETAIL + RECREATION',
+    image: '/img/studio/publication/07.jpg',
+    link: '/projects/paradiso',
+    order: 7
+  },
+  {
+    title: 'Shunyam Jodhpur, featured in 50 Amazing Homes in India, Vol 1',
+    category: 'ARCHITECTURE + RETAIL + RECREATION',
+    image: '/img/studio/publication/09.jpg',
+    link: '/projects/shunyam-jodhpur',
+    order: 8
+  },
+  {
+    title: 'Nyati Unitree shortlisted among the Top 50 at IIA Awards for Excellence in Architecture, 2016',
+    category: 'ARCHITECTURE + INTERIORS + CRAFT + LANDSCAPE',
+    image: '/img/studio/publication/08.jpg',
+    link: '/projects/nyati-unitree',
+    order: 9
   }
 ];
 
@@ -119,6 +153,7 @@ async function main() {
   console.log('Team Members seeded.');
 
   // Seed Publications
+  await prisma.publication.deleteMany();
   for (const pub of publications) {
     await prisma.publication.create({
       data: {

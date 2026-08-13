@@ -35,8 +35,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('token');
+    // Await this — navigating away before the response lands could drop the
+    // Set-Cookie header that actually clears the session cookie.
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {
+      // Network hiccup: localStorage is already cleared, and the cookie will
+      // simply expire on its own in the worst case. Still proceed to login.
+    }
     router.push('/admin/login');
   };
 

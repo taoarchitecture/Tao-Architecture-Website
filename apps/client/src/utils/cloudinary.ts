@@ -17,10 +17,15 @@ export async function uploadToCloudinary(file: File, folder: string = 'tao'): Pr
     }
   }
 
-  // 2. Get signature from our serverless API
+  // 2. Get signature from our serverless API. Admin-content folders require
+  // the admin session token; the public 'careers' folder doesn't need one.
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const sigRes = await fetch('/api/upload/signature', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     body: JSON.stringify({ folder }),
   });
 

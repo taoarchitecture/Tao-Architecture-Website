@@ -2,11 +2,28 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '@/lib/prisma';
+import { getJwtSecret, ADMIN_TOKEN_COOKIE } from '@/lib/auth';
+import { checkRateLimit, getClientIp } from '@/lib/rateLimit';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
+const LOGIN_LIMIT = 5;
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+    if (!checkRateLimit(`login:${ip}`, LOGIN_LIMIT, LOGIN_WINDOW_MS)) {
+      return NextResponse.json(
+        { message: 'Too many login attempts. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const secret = getJwtSecret();
+    if (!secret) {
+      console.error('JWT_SECRET is not configured — refusing to issue a token.');
+      return NextResponse.json({ message: 'Server misconfigured' }, { status: 500 });
+    }
+
     const { email, password } = await req.json();
 
     if (!email || !password) {
@@ -27,14 +44,24 @@ export async function POST(req: NextRequest) {
 
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
-      JWT_SECRET,
+      secret,
       { expiresIn: '1d' }
     );
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       token,
       user: { id: user.id, email: user.email, role: user.role },
     });
+
+    response.cookies.set(ADMIN_TOKEN_COOKIE, token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24, // 1 day, matching the JWT's own expiry
+    });
+
+    return response;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ message: 'Server error' }, { status: 500 });

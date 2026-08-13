@@ -15,14 +15,24 @@ export default function AdminLogin() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+      // Always same-origin (not NEXT_PUBLIC_API_URL, which points at the
+      // separate Express API in production) so the httpOnly session cookie
+      // this route sets actually lands on this site's own domain.
+      const response = await axios.post('/api/auth/login', {
         email,
         password,
       });
+      // Also kept in localStorage: admin pages that fetch data from the
+      // separate Express API (a different origin) rely on this token via
+      // the Authorization header, since the cookie can't cross origins.
       localStorage.setItem('token', response.data.token);
       router.push('/admin/projects');
-    } catch (error) {
-      alert('Invalid credentials');
+    } catch (error: any) {
+      if (error?.response?.status === 429) {
+        alert('Too many login attempts. Please try again later.');
+      } else {
+        alert('Invalid credentials');
+      }
     } finally {
       setIsLoading(false);
     }

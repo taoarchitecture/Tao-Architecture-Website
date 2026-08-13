@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const LEGACY_HIDE_DELAY_MS = 350;
-const LEGACY_FADE_DURATION_MS = 600;
-const MIN_VISIBLE_MS = 300;
-const DOM_IDLE_MS = 180;
+const LEGACY_HIDE_DELAY_MS = 120;
+const LEGACY_FADE_DURATION_MS = 300;
+const MIN_VISIBLE_MS = 150;
+const DOM_IDLE_MS = 100;
 const DOM_IDLE_MAX_WAIT_MS = 5000;
 const IMAGE_WAIT_MAX_MS = 4000;
 

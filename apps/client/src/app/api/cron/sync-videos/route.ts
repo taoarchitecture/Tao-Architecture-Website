@@ -7,11 +7,13 @@ import { NextRequest, NextResponse } from 'next/server';
  * the Authorization header automatically when invoking cron jobs.
  */
 export async function GET(req: NextRequest) {
-  // Verify the request is from Vercel Cron (or an authorised manual call)
+  // Verify the request is from Vercel Cron (or an authorised manual call).
+  // Fails closed: an unconfigured CRON_SECRET denies the request rather than
+  // silently making this endpoint public.
   const authHeader = req.headers.get('authorization');
   const cronSecret = process.env.CRON_SECRET;
 
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 

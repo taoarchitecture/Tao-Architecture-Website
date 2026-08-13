@@ -2675,7 +2675,6 @@ export const projectDetails: Record<string, ProjectDetail> = {
       { src: '/img/villa/paradiso/09-Evening-view---Composition-of-Tubes.jpg', thumb: '/img/villa/paradiso/09-Evening-view---Composition-of-Tubes.jpg', title: 'Evening View' },
       { src: '/img/villa/paradiso/10-Poolside-deck.jpg', thumb: '/img/villa/paradiso/10-Poolside-deck.jpg', title: 'Poolside Deck' },
       { src: '/img/villa/paradiso/11-Dayview.jpg', thumb: '/img/villa/paradiso/11-Dayview.jpg', title: 'Day View' },
-      { src: '/img/villa/paradiso/12-Central-Courtyard-welcomes-the-sky\'s-ever-evolving-existential-energy.jpg', thumb: '/img/villa/paradiso/12-Central-Courtyard-welcomes-the-sky\'s-ever-evolving-existential-energy.jpg', title: 'Central Courtyard' },
       { src: '/img/villa/paradiso/13-Double-Height-living.jpg', thumb: '/img/villa/paradiso/13-Double-Height-living.jpg', title: 'Double Height Living' },
       { src: '/img/villa/paradiso/14-Kitchen.jpg', thumb: '/img/villa/paradiso/14-Kitchen.jpg', title: 'Kitchen' },
       { src: '/img/villa/paradiso/15-Dining.jpg', thumb: '/img/villa/paradiso/15-Dining.jpg', title: 'Dining' },
