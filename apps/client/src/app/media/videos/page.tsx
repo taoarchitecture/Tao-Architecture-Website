@@ -12,10 +12,10 @@ export const metadata = {
 // In production the API lives on the same Vercel domain.
 // In development the Express server runs on port 5000.
 function getApiBase() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   if (process.env.NEXT_PUBLIC_API_BASE && !process.env.NEXT_PUBLIC_API_BASE.includes('localhost:3000')) {
     return process.env.NEXT_PUBLIC_API_BASE;
   }
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return 'http://localhost:5000';
 }
 

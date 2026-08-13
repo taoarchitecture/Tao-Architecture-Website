@@ -5,9 +5,11 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Cache for 1 hour
 
 async function fetchVideos(searchParams: { [key: string]: string | undefined }, isShort: boolean) {
-  const base = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:5000';
+  const base = (process.env.NEXT_PUBLIC_API_BASE && !process.env.NEXT_PUBLIC_API_BASE.includes('localhost:3000'))
+    ? process.env.NEXT_PUBLIC_API_BASE
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:5000';
   const url = new URL(`${base}/api/videos`);
   const q = searchParams?.q || '';
   const category = searchParams?.category || '';
