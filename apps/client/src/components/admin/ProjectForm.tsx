@@ -151,14 +151,14 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
         location: data.location,
         plotArea: data.plotArea,
         builtUpArea: data.builtUpArea,
-        description: data.description.map(d => d.value),
+        description: JSON.stringify(data.description.map(d => d.value)),
         seoTitle: data.seoTitle,
         seoDesc: data.seoDesc,
         isPublished: data.isPublished,
         isFeatured: data.isFeatured,
         order: Number(data.order || 0),
         coverImage: coverImageUrl,
-        gallery: [...existingGalleryItems, ...newGalleryItems],
+        gallery: JSON.stringify([...existingGalleryItems, ...newGalleryItems]),
       };
 
       const token = localStorage.getItem('token');

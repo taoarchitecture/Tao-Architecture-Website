@@ -113,8 +113,8 @@ export const createProjectService = async (input: CreateProjectInput, files?: Up
       isFeatured: input.isFeatured,
       order: input.order,
       relatedProjects: input.relatedProjects || '[]',
-      coverImage: coverImageFile ? toPublicFilePath(coverImageFile) : null,
-      gallery: JSON.stringify(galleryData),
+      coverImage: input.coverImage || (coverImageFile ? toPublicFilePath(coverImageFile) : null),
+      gallery: input.gallery || JSON.stringify(galleryData),
     },
   });
 
@@ -135,20 +135,28 @@ export const updateProjectService = async (
   const newGalleryFiles = files?.gallery || [];
 
   let coverImageUrl = existingProject.coverImage;
-  if (coverImageFile) {
-    if (existingProject.coverImage) {
+  if (input.coverImage !== undefined) {
+    if (existingProject.coverImage && existingProject.coverImage !== input.coverImage && !isUrl(existingProject.coverImage)) {
+      await deleteUploadedFile(existingProject.coverImage);
+    }
+    coverImageUrl = input.coverImage;
+  } else if (coverImageFile) {
+    if (existingProject.coverImage && !isUrl(existingProject.coverImage)) {
       await deleteUploadedFile(existingProject.coverImage);
     }
     coverImageUrl = toPublicFilePath(coverImageFile);
   }
 
-  const existingGallery = safeJsonParse<GalleryItem[]>(input.existingGallery, []);
-  const newGalleryItems: GalleryItem[] = newGalleryFiles.map((file, idx) => ({
-    url: toPublicFilePath(file),
-    caption: '',
-    order: existingGallery.length + idx,
-  }));
-  const galleryData = [...existingGallery, ...newGalleryItems];
+  let galleryDataString = input.gallery;
+  if (galleryDataString === undefined) {
+    const existingGallery = safeJsonParse<GalleryItem[]>(input.existingGallery, []);
+    const newGalleryItems: GalleryItem[] = newGalleryFiles.map((file, idx) => ({
+      url: toPublicFilePath(file),
+      caption: '',
+      order: existingGallery.length + idx,
+    }));
+    galleryDataString = JSON.stringify([...existingGallery, ...newGalleryItems]);
+  }
 
   const updatedProject = await prisma.project.update({
     where: { id },
@@ -169,7 +177,7 @@ export const updateProjectService = async (
       order: input.order ?? existingProject.order,
       relatedProjects: input.relatedProjects ?? existingProject.relatedProjects,
       coverImage: coverImageUrl,
-      gallery: JSON.stringify(galleryData),
+      gallery: galleryDataString,
     },
   });
 

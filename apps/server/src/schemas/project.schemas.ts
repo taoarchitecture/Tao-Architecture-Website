@@ -40,6 +40,8 @@ export const createProjectSchema = z.object({
   isFeatured: booleanLike.default(false),
   order: numberLike.default(0),
   relatedProjects: optionalString,
+  coverImage: optionalString,
+  gallery: optionalString,
 });
 
 export const updateProjectSchema = z.object({
@@ -82,6 +84,8 @@ export const updateProjectSchema = z.object({
   }, z.number().int().nonnegative().optional()),
   relatedProjects: optionalString,
   existingGallery: optionalString,
+  coverImage: optionalString,
+  gallery: optionalString,
 });
 
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;
