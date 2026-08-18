@@ -31,11 +31,12 @@ export default function Studio() {
       } catch { /* use default */ }
     };
 
-    // Fetch team members
+    // Fetch team members – use the local Next.js API route which queries the
+    // database directly. The external Express server exposes this data at
+    // /api/studio/team, but the client already has its own /api/studio handler.
     const fetchTeam = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
-        const res = await fetch(`${apiUrl}/studio`);
+        const res = await fetch('/api/studio');
         if (res.ok) {
           const data = await res.json();
           // Filter out inactive members
@@ -54,6 +55,7 @@ export default function Studio() {
         setLoading(false);
       }
     };
+
 
     fetchIntro();
     fetchTeam();
