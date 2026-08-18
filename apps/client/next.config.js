@@ -15,6 +15,11 @@ const nextConfig = {
         minimumCacheTTL: 60,
         deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
         imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+        // Explicit allow-list for the quality values actually requested across
+        // the codebase (Image components use 75 or 85). Without this, Next
+        // silently clamps any unlisted quality down to whatever it defaults
+        // to, degrading every image that asks for 85.
+        qualities: [75, 85],
     },
     compiler: {
         removeConsole: process.env.NODE_ENV === 'production',
