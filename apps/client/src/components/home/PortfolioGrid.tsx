@@ -157,8 +157,18 @@ const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
     ? items.filter((item) => item.desktopColumn === 'right')
     : items.slice(midPoint);
 
+  // Columns are curated per-item (desktopColumn), so they rarely land on equal
+  // length or equal aspect-ratio totals. Once the shorter column runs out,
+  // whatever's left in the taller one gets pulled out of the 2-up grid and
+  // rendered full-width below — turns a dead gap beside the last card into a
+  // deliberate closing banner instead.
+  const pairedCount = Math.min(leftColumnItems.length, rightColumnItems.length);
+  const pairedLeft = leftColumnItems.slice(0, pairedCount);
+  const pairedRight = rightColumnItems.slice(0, pairedCount);
+  const overflowItems = [...leftColumnItems.slice(pairedCount), ...rightColumnItems.slice(pairedCount)];
+
   return (
-    <section className="container mx-auto max-w-6xl bg-white px-4 pb-16 pt-32 sm:px-6 md:pb-20 md:pt-36 lg:px-8 lg:pt-40">
+    <section className="container mx-auto max-w-6xl bg-white px-4 pb-10 pt-20 sm:px-6 md:pb-14 md:pt-24 lg:px-8 lg:pt-28">
       <motion.div
         className="space-y-14 md:hidden"
         initial="hidden"
@@ -170,18 +180,25 @@ const PortfolioGrid = ({ items }: { items: PortfolioItem[] }) => {
       </motion.div>
 
       <motion.div
-        className="hidden md:grid md:grid-cols-2 md:gap-x-7 lg:gap-x-10"
+        className="hidden md:block"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-120px' }}
         transition={{ staggerChildren: 0.16 }}
       >
-        <div className="space-y-20 lg:space-y-24">
-          {leftColumnItems.map(renderCard)}
+        <div className="grid grid-cols-2 gap-x-7 lg:gap-x-10">
+          <div className="space-y-12 lg:space-y-16">
+            {pairedLeft.map(renderCard)}
+          </div>
+          <div className="space-y-12 lg:space-y-16">
+            {pairedRight.map(renderCard)}
+          </div>
         </div>
-        <div className="space-y-20 lg:space-y-24 pt-0 lg:pt-0">
-          {rightColumnItems.map(renderCard)}
-        </div>
+        {overflowItems.length > 0 && (
+          <div className="mt-12 space-y-12 lg:mt-16 lg:space-y-16">
+            {overflowItems.map(renderCard)}
+          </div>
+        )}
       </motion.div>
     </section>
   );

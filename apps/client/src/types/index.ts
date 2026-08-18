@@ -63,6 +63,17 @@ export interface Award {
   order: number;
 }
 
+export interface Video {
+  id: number;
+  videoId: string;
+  title: string;
+  description?: string | null;
+  thumbnailUrl: string;
+  publishedAt: string;
+  viewCount?: number | null;
+  isShort: boolean;
+}
+
 export interface ProjectFormData {
   title: string;
   slug: string;

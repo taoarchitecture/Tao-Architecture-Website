@@ -125,9 +125,9 @@ export default function Publications() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-white pt-32 pb-20 animate-pulse">
+      <main className="min-h-screen bg-white pb-20 animate-pulse">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <div className="h-12 w-64 bg-neutral-100/50 mx-auto"></div>
           </div>
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-x-8">
@@ -152,7 +152,7 @@ export default function Publications() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-white pt-32 pb-20 flex flex-col justify-center items-center">
+      <main className="min-h-screen bg-white pb-20 flex flex-col justify-center items-center">
         <div className="text-primary-red uppercase tracking-widest text-xs mb-4">{error}</div>
         <button 
           onClick={fetchPublications}
@@ -165,10 +165,10 @@ export default function Publications() {
   }
 
   return (
-    <main className="min-h-screen bg-white pt-32 pb-20">
+    <main className="min-h-screen bg-white pb-20">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Page Title */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-primary-red uppercase tracking-wide">
             Publications
           </h1>

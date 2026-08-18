@@ -74,12 +74,12 @@ export default function ProjectDetail() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white pt-20 animate-pulse">
+      <main className="min-h-screen bg-white animate-pulse">
         {/* Hero Section Skeleton */}
         <section className="relative mb-12 h-[60vh] w-full bg-neutral-100/50 md:h-[80vh]"></section>
         
         {/* Details Section Skeleton */}
-        <section className="container mx-auto px-4 mb-20">
+        <section className="container mx-auto px-4 mb-12">
           <div className="flex flex-wrap md:flex-nowrap">
               <div className="w-full md:w-3/4 pr-0 md:pr-12">
                   <div className="mb-8">
@@ -118,7 +118,7 @@ export default function ProjectDetail() {
   const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 
   return (
-    <main className="min-h-screen bg-white pt-20">
+    <main className="min-h-screen bg-white">
       
       {/* Hero Section */}
       <section className="relative mb-12 h-[60vh] w-full bg-neutral-bg md:h-[80vh]">
@@ -162,7 +162,7 @@ export default function ProjectDetail() {
       </section>
 
       {/* Details Section */}
-      <section id="details" className="container mx-auto px-4 mb-20">
+      <section id="details" className="container mx-auto px-4 mb-12">
         <div className="flex flex-wrap md:flex-nowrap">
             {/* Main Content */}
             <div className="w-full md:w-3/4 pr-0 md:pr-12">
@@ -248,7 +248,7 @@ export default function ProjectDetail() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="bg-neutral-bg py-20">
+      <section id="gallery" className="bg-neutral-bg py-14">
          <div className="container mx-auto px-4">
             <div className="flex items-center justify-center gap-4 mb-12">
                 <span className="w-12 h-px bg-neutral-border"></span>
@@ -273,9 +273,6 @@ export default function ProjectDetail() {
                                 quality={85}
                             />
                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
-                                <div className="w-12 h-12 rounded-full border border-primary-red text-primary-red flex items-center justify-center mb-4">
-                                    <span className="text-2xl">+</span>
-                                </div>
                                 {item.title && <h4 className="text-xl font-bold uppercase mb-2">{item.title}</h4>}
                                 {item.description && <p className="text-sm font-light">{item.description}</p>}
                             </div>
@@ -289,10 +286,10 @@ export default function ProjectDetail() {
       </section>
 
       {/* Navigation & Related */}
-      <section className="border-t border-neutral-border py-20">
+      <section className="border-t border-neutral-border py-14">
          <div className="container mx-auto px-4">
              {/* Navigation */}
-             <div className="flex justify-between items-center mb-20">
+             <div className="flex justify-between items-center mb-12">
                 {prevProject ? (
                     <Link href={`/projects/${prevProject.slug || prevProject.id}`} className="flex items-center gap-4 group" aria-label={`Previous project: ${prevProject.title}`}>
                         <div className="w-10 h-10 border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
@@ -341,7 +338,17 @@ export default function ProjectDetail() {
                                      <h5 className="text-sm font-bold uppercase mb-1 hover:text-primary-red transition-colors">
                                          <Link href={`/projects/${related.slug || related.id}`}>{related.title}</Link>
                                      </h5>
-                                     <p className="text-xs text-neutral-dark-grey uppercase tracking-wider">{related.description}</p>
+                                     <p className="text-xs text-neutral-dark-grey uppercase tracking-wider line-clamp-3 mt-2">
+                                        {related.subtitle || related.location || (() => {
+                                            if (!related.description) return null;
+                                            try {
+                                                const desc = typeof related.description === 'string' && related.description.startsWith('[') ? JSON.parse(related.description) : related.description;
+                                                return Array.isArray(desc) ? desc[0] : desc;
+                                            } catch (e) {
+                                                return related.description;
+                                            }
+                                        })()}
+                                     </p>
                                  </div>
                              );
                          })}
@@ -381,20 +388,6 @@ export default function ProjectDetail() {
                 />
               )}
             </div>
-            {project.gallery && project.gallery[lightboxIndex] && (project.gallery[lightboxIndex].title || project.gallery[lightboxIndex].description) && (
-              <div className="w-full text-center mt-2 px-4 shrink-0 pb-4">
-                 {project.gallery[lightboxIndex].title && (
-                   <h4 className="text-white text-xl font-bold uppercase tracking-widest mb-2 font-agenda">
-                     {project.gallery[lightboxIndex].title}
-                   </h4>
-                 )}
-                 {project.gallery[lightboxIndex].description && (
-                   <p className="mx-auto max-w-4xl font-agenda text-sm font-light tracking-wide text-white/75">
-                     {project.gallery[lightboxIndex].description}
-                   </p>
-                 )}
-              </div>
-            )}
           </div>
 
           <button

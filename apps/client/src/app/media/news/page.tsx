@@ -2,7 +2,7 @@
 
 export default function News() {
   return (
-    <main className="min-h-screen bg-white pt-24 pb-20">
+    <main className="min-h-screen bg-white pb-20">
       <div className="container mx-auto px-4">
         <h1 className="text-fluid-h1 mb-12 font-agenda font-bold uppercase text-neutral-dark-grey">News</h1>
         

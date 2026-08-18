@@ -6,7 +6,7 @@ import { PortfolioItem } from '@/components/home/PortfolioGrid';
 const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
   ssr: true,
   loading: () => (
-    <section className="container mx-auto max-w-6xl bg-white px-4 pb-16 pt-32 sm:px-6 md:pb-20 md:pt-36 lg:px-8 lg:pt-40">
+    <section className="container mx-auto max-w-6xl bg-white px-4 pb-10 pt-20 sm:px-6 md:pb-14 md:pt-24 lg:px-8 lg:pt-28">
       <div className="space-y-12 md:hidden animate-pulse">
         <div className="space-y-4">
           <div className="aspect-[10/11] bg-neutral-border" />
@@ -20,7 +20,7 @@ const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
         </div>
       </div>
       <div className="hidden animate-pulse md:grid md:grid-cols-2 md:gap-x-7 lg:gap-x-10">
-        <div className="space-y-20 lg:space-y-24">
+        <div className="space-y-12 lg:space-y-16">
           <div className="space-y-4">
             <div className="aspect-[10/11] bg-neutral-border" />
             <div className="h-4 w-2/3 bg-neutral-border" />
@@ -31,7 +31,7 @@ const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
             <div className="h-5 w-4/5 bg-neutral-border" />
           </div>
         </div>
-        <div className="space-y-20 pt-14 lg:space-y-24 lg:pt-20">
+        <div className="space-y-12 lg:space-y-16">
           <div className="space-y-4">
             <div className="aspect-[10/6] bg-neutral-border" />
             <div className="h-3 w-2/3 bg-neutral-border" />

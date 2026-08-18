@@ -1,9 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { awards } from '@/data/studio';
+import { awards as awardsData, Award } from '@/data/studio';
 
 // Real pixel aspect ratios (width/height) of the known local award images, so each
 // card renders at its true proportions instead of an arbitrary alternating crop.
@@ -21,113 +21,167 @@ const AWARD_IMAGE_ASPECT: Record<string, number> = {
 };
 const DEFAULT_AWARD_ASPECT = 4 / 5;
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
+// AwardCard reuses PublicationCard's shell (framed border, native aspect ratio,
+// text block, persistent bordered CTA) for structural parity with the
+// Publications page, but keeps two signature Awards details: the black top
+// bar on the image frame, and the filled category badge (vs. plain text).
+const AwardCard = ({ award, index }: { award: Award; index: number }) => (
+  <div className="break-inside-avoid mb-16 flex flex-col group">
+    {/* Image Container with Frame Appearance — matches PublicationCard, plus the Awards top bar */}
+    <div className="relative border-[1.5px] border-neutral-dark-grey p-[14px] mb-5 bg-white shadow-sm transition-shadow duration-500 hover:shadow-premium-md">
+      <div className="absolute top-0 left-0 w-full h-[6px] bg-neutral-black pointer-events-none" />
+      <Link href={award.link} className="block focus-ring" aria-label={`View ${award.title}`}>
+        <div
+          className="relative w-full overflow-hidden bg-neutral-bg"
+          style={{ aspectRatio: AWARD_IMAGE_ASPECT[award.image] || DEFAULT_AWARD_ASPECT }}
+        >
+          <Image
+            src={award.image}
+            alt={award.title}
+            fill
+            priority={index < 3}
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={85}
+          />
+        </div>
+      </Link>
+    </div>
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      duration: 0.8, 
-      ease: [0.16, 1, 0.3, 1] as const
-    } 
-  }
-};
+    {/* Text Content */}
+    <div className="flex flex-col px-1">
+      {/* Category — kept as the Awards filled badge instead of plain text */}
+      <span className="portfolio-badge inline-block w-fit !px-3 !py-[5px] !text-[10px] md:!text-[11px] mb-3">
+        {award.category}
+      </span>
+
+      {award.subtitle && (
+        <h4 className="text-[11px] md:text-sm font-bold uppercase tracking-[0.1em] text-primary-red mb-2 opacity-90 line-clamp-1">
+          {award.subtitle}
+        </h4>
+      )}
+
+      {/* Title */}
+      <h3 className="text-[17px] md:text-xl font-normal font-agenda text-neutral-dark-grey leading-[1.4] mb-5">
+        {award.title}
+      </h3>
+
+      {/* CTA Button — Awards' own copy, Publications' persistent bordered style */}
+      <div>
+        <Link
+          href={award.link}
+          className="inline-block border-[1.5px] border-neutral-dark-grey text-neutral-dark-grey px-4 py-[6px] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.16em] hover:bg-neutral-dark-grey hover:text-white transition-all duration-300"
+        >
+          View Project
+        </Link>
+      </div>
+    </div>
+  </div>
+);
+
+const INITIAL_VISIBLE_COUNT = 9;
 
 export default function Awards() {
+  const [awards, setAwards] = useState<Award[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+
+  const loadAwards = () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      setAwards(awardsData);
+    } catch (err) {
+      console.error('Failed to load awards:', err);
+      setError('Failed to load awards. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadAwards();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-white pb-24 animate-pulse">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-12">
+            <div className="h-12 w-64 bg-neutral-100/50 mx-auto"></div>
+          </div>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-x-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={`skel-${i}`} className="break-inside-avoid mb-16 flex flex-col">
+                <div className="border-[1.5px] border-neutral-100/50 p-[14px] mb-5 bg-white">
+                  <div className={`relative ${i % 2 === 0 ? 'aspect-[3/4]' : 'aspect-[4/5]'} w-full bg-neutral-100/50`}></div>
+                </div>
+                <div className="flex flex-col px-1">
+                  <div className="h-5 w-24 bg-neutral-100/50 mb-3"></div>
+                  <div className="h-6 w-full bg-neutral-100/50 mb-2"></div>
+                  <div className="h-6 w-3/4 bg-neutral-100/50 mb-5"></div>
+                  <div className="h-8 w-32 bg-neutral-100/50"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-white pb-24 flex flex-col justify-center items-center">
+        <div className="text-primary-red uppercase tracking-widest text-xs mb-4">{error}</div>
+        <button
+          onClick={loadAwards}
+          className="px-6 py-2 border border-neutral-dark-grey text-xs font-bold uppercase tracking-widest hover:bg-neutral-dark-grey hover:text-white transition-colors"
+        >
+          Retry
+        </button>
+      </main>
+    );
+  }
+
   return (
-    <main className="min-h-screen bg-white pt-32 pb-24">
+    <main className="min-h-screen bg-white pb-24">
       <div className="container mx-auto px-4 max-w-7xl">
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8, ease: "easeOut" }}
-           className="mb-16 md:mb-24 text-center md:text-left"
-        >
-          <h1 className="text-fluid-h1 mb-4 font-agenda font-bold uppercase text-neutral-black">
-            Awards & <span className="text-primary-red">Appreciation</span>
+        {/* Page Title */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-red uppercase tracking-wide">
+            Awards &amp; Appreciation
           </h1>
-          <p className="mx-auto max-w-2xl font-agenda tao-fs-desc text-neutral-medium-grey md:mx-0">
-            Recognizing our steadfast commitment to sustainable design, 
-            spatial innovation, and architectural excellence across varied domains.
-          </p>
-        </motion.div>
-        
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {awards.map((award, index) => (
-            <motion.div key={award.id} variants={cardVariants} className="group flex flex-col h-full">
-              {/* Image & Overlay Wrapper */}
-              <div className="relative overflow-hidden w-full inline-block mb-6">
-                {/* Top Black Bar */}
-                <div className="absolute top-0 left-0 w-full h-[8px] bg-neutral-black z-20 pointer-events-none" />
+        </div>
 
-                {/* Category Badge */}
-                <div className="absolute top-[8px] left-6 z-20 pointer-events-none">
-                  <span className="portfolio-badge block !pt-2 !pb-2.5 shadow-none text-[10px] sm:text-[11px]">
-                    {award.category}
-                  </span>
-                </div>
+        {/* Masonry Grid */}
+        {awards.length > 0 ? (
+          <>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-x-8">
+              {awards.slice(0, visibleCount).map((award, index) => (
+                <AwardCard key={award.id} award={award} index={index} />
+              ))}
+            </div>
 
-                <Link href={award.link} className="block relative focus-ring" aria-label={`View ${award.title}`}>
-                  <div
-                    className="relative w-full overflow-hidden bg-neutral-bg"
-                    style={{ aspectRatio: AWARD_IMAGE_ASPECT[award.image] || DEFAULT_AWARD_ASPECT }}
-                  >
-                    <Image
-                      src={award.image}
-                      alt={award.title}
-                      fill
-                      priority={index < 3}
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      quality={85}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-700" />
-                  </div>
-                </Link>
-                
-                {/* SEE PROJECT Overlay CTA */}
-                <div className="absolute bottom-6 left-6 z-20 pointer-events-auto opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                  <Link
-                    href={award.link}
-                    className="inline-block border border-white/80 bg-black/30 backdrop-blur-sm text-white px-4 py-2 text-[10px] uppercase font-bold tracking-[0.15em] hover:bg-white hover:text-black transition-colors duration-300"
-                  >
-                    View Project
-                  </Link>
-                </div>
+            {visibleCount < awards.length && (
+              <div className="text-center mt-4">
+                <button
+                  onClick={() => setVisibleCount((count) => count + INITIAL_VISIBLE_COUNT)}
+                  className="inline-block border-[1.5px] border-neutral-dark-grey text-neutral-dark-grey px-6 py-[10px] text-[11px] font-bold uppercase tracking-[0.16em] hover:bg-neutral-dark-grey hover:text-white transition-all duration-300"
+                >
+                  Read More
+                </button>
               </div>
-
-              {/* Text Content */}
-              <div className="flex-grow flex flex-col justify-start">
-                {award.subtitle && (
-                  <h4 className="text-[11px] md:text-sm font-bold uppercase tracking-[0.1em] text-primary-red mb-2 opacity-90 line-clamp-1">
-                    {award.subtitle}
-                  </h4>
-                )}
-                <h3 className="text-base md:text-lg font-normal font-agenda text-neutral-dark-grey leading-snug group-hover:text-primary-red transition-colors duration-300">
-                  <Link href={award.link} className="hover:underline decoration-1 underline-offset-4 decoration-primary-red/50">
-                    {award.title}
-                  </Link>
-                </h3>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            )}
+          </>
+        ) : (
+          <div className="border border-neutral-border bg-neutral-bg px-6 py-12 text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.16em] text-neutral-medium-grey">
+              Awards will appear here once the content service is available.
+            </p>
+          </div>
+        )}
       </div>
     </main>
   );

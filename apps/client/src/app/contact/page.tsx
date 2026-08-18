@@ -108,7 +108,7 @@ export default function Contact() {
   const addressLines = (val('address') || '').split('\n');
 
   return (
-    <main className="min-h-screen bg-white pt-24 pb-20">
+    <main className="min-h-screen bg-white pb-20">
       <MobilePageNav 
         items={[
           { id: 'contact-details', label: 'Contact us' },
@@ -129,7 +129,7 @@ export default function Contact() {
           <div className="w-full md:w-3/4 pl-0 md:pl-8">
             
             {/* Contact Details Section */}
-            <section id="contact-details" className="mb-20 pt-8">
+            <section id="contact-details" className="mb-10 pt-8">
               <div className="border-t-[3px] border-primary-gold mb-8">
                 <iframe 
                   src={val('googleMapsUrl')} 
@@ -171,7 +171,7 @@ export default function Contact() {
             </section>
 
             {/* Email Form Section */}
-            <section id="email-form" className="mb-20 border-t-[3px] border-primary-gold pt-10 px-8 bg-neutral-bg">
+            <section id="email-form" className="mb-10 border-t-[3px] border-primary-gold pt-8 px-8 bg-neutral-bg">
               <h2 className="tao-fs-form-h font-normal mb-8 font-agenda">Email us</h2>
               
               {submitted ? (
@@ -208,7 +208,7 @@ export default function Contact() {
             </section>
 
             {/* Career CTA Section */}
-            <section id="careers-cta" className="mb-20 border-t-[3px] border-primary-gold pt-10 px-8 bg-neutral-bg">
+            <section id="careers-cta" className="mb-10 border-t-[3px] border-primary-gold pt-8 px-8 bg-neutral-bg">
               <h2 className="tao-fs-form-h font-normal mb-6 font-agenda">Careers</h2>
               <p className="text-neutral-dark-grey font-agenda mb-6 text-lg leading-relaxed max-w-2xl">
                 Interested in joining the TAO Architecture team? We are always looking for talented architects, interior designers, and interns to join our studio.

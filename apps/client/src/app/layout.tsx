@@ -65,7 +65,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'ArchitectureFirm',
     'name': 'Tao Architecture Pvt. Ltd.',
-    'image': 'https://taoarchitecture.com/logo.png',
+    'image': 'https://taoarchitecture.com/img/tao-logo.png',
     'url': 'https://taoarchitecture.com',
     'telephone': '+91-744-771-9343',
     'priceRange': '$$$',

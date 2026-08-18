@@ -58,6 +58,30 @@ export const getPublications = async () => {
   }
 };
 
+// Video data lives only on the standalone Express server (apps/server), not the
+// client's own Next API routes — unlike the rest of this file, NEXT_PUBLIC_API_URL
+// can't be used as-is because in local dev it's deliberately pointed at the
+// client's own origin (see .env.local), which has no /api/videos route.
+function getVideosApiBase() {
+  if (process.env.NEXT_PUBLIC_API_BASE && !process.env.NEXT_PUBLIC_API_BASE.includes('localhost:3000')) {
+    return process.env.NEXT_PUBLIC_API_BASE;
+  }
+  return 'http://localhost:5000';
+}
+
+export const getVideos = async () => {
+  try {
+    const { data } = await axios.get(`${getVideosApiBase()}/api/videos`, {
+      params: { pageSize: 100, sort: 'date' },
+      timeout: API_TIMEOUT_MS,
+    });
+    return data.items || [];
+  } catch (error) {
+    console.warn('Failed to fetch videos:', error instanceof Error ? error.message : String(error));
+    return [];
+  }
+};
+
 export const getAwards = async () => {
   try {
     const { data } = await api.get('/media/awards');

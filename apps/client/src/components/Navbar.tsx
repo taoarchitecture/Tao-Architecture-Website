@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import { projects } from '@/data/projects';
+import TaoLogoMark from '@/components/ui/TaoLogoMark';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,7 +85,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${
+      className={`sticky w-full z-50 top-0 left-0 transition-all duration-300 ${
         isScrolled ? 'navbar-scrolled py-2' : 'navbar-glass py-4'
       }`}
       role="navigation"
@@ -92,19 +93,13 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center rounded-sm flex-shrink-0">
-          <div className={`relative transition-all duration-300 ${
-            isScrolled ? 'h-[32px] w-[130px]' : 'h-[40px] w-[160px] md:h-[44px] md:w-[180px]'
-          }`}>
-            <Image
-              src="/img/tao-logo.png"
-              alt="Tao Architecture - Home"
-              fill
-              className="object-contain object-left"
-              priority
-              sizes="(max-width: 768px) 160px, 180px"
-            />
-          </div>
+        <Link href="/" className="flex items-center rounded-sm flex-shrink-0" aria-label="Tao Architecture - Home">
+          <TaoLogoMark
+            aria-hidden="true"
+            className={`text-[#818285] transition-all duration-300 ${
+              isScrolled ? 'h-[32px] w-[130px]' : 'h-[40px] w-[160px] md:h-[44px] md:w-[180px]'
+            }`}
+          />
         </Link>
 
         {/* Mobile Hamburger */}

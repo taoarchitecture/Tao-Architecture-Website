@@ -1,8 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import TaoLogoMark from '@/components/ui/TaoLogoMark';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { GlobalSettings } from '@/types';
@@ -90,15 +90,8 @@ const Footer = () => {
 
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link href="/" className="block w-[190px] hover:opacity-85 transition-opacity duration-200">
-              <Image
-                src="/img/tao-logo.png"
-                alt="TAO Studio Logo"
-                width={190}
-                height={48}
-                className="brightness-0 invert"
-                style={{ width: '100%', height: 'auto' }}
-              />
+            <Link href="/" className="block w-[190px] text-white hover:opacity-85 transition-opacity duration-200" aria-label="TAO Studio Logo">
+              <TaoLogoMark aria-hidden="true" className="h-auto w-full" />
             </Link>
             <p className="text-neutral-light-grey text-[13px] leading-relaxed max-w-[240px]">
               {val('footerTagline')}

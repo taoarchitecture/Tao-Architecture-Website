@@ -160,7 +160,7 @@ export default function Services() {
 
 
   return (
-    <main className="min-h-screen bg-white pt-20">
+    <main className="min-h-screen bg-white">
       <MobilePageNav
         items={serviceItems}
         activeItem={activeSection}
@@ -194,7 +194,7 @@ export default function Services() {
               <section
                 key={service.slug || service.id}
                 id={service.slug}
-                className="mb-16 pt-8 border-t-2 border-neutral-dark-grey scroll-mt-32"
+                className="mb-8 pt-8 border-t-2 border-neutral-dark-grey scroll-mt-32"
               >
                 {/* Desktop: Grid / Mobile: Stack */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

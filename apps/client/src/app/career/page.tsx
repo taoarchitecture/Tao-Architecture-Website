@@ -52,7 +52,7 @@ const CareerPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-white pt-28 pb-20">
+    <main className="min-h-screen bg-white pb-20">
       <div className="container mx-auto max-w-4xl px-4">
         <div className="mb-12 border-b border-neutral-border pb-8">
           <h1 className="text-fluid-h1 font-agenda font-bold uppercase text-neutral-dark-grey">

@@ -15,7 +15,11 @@ const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subti
   if (!slides || slides.length === 0) return null;
 
   return (
-    <div className="w-full relative bg-black h-[85vh] md:h-[clamp(480px,72vh,860px)]">
+    // mb-* clears the caption card below, which intentionally bleeds past this
+    // container's own bottom edge via translate-y — sized to the card's actual
+    // measured overlap per breakpoint (~95-140px) plus a small buffer, so the
+    // next section's own top padding stays independent, ordinary section rhythm.
+    <div className="w-full relative bg-black h-[85vh] mb-[120px] sm:mb-[144px] md:mb-[164px] lg:mb-[156px] md:h-[clamp(480px,72vh,860px)]">
       <Swiper
         spaceBetween={0}
         effect="fade"

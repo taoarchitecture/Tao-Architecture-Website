@@ -79,7 +79,7 @@ export default function Work() {
 
 
   return (
-    <main className="min-h-screen bg-white pt-24 pb-20 relative">
+    <main className="min-h-screen bg-white pb-20 relative">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <Image
           src="/img/projects_gray.jpg"
@@ -111,7 +111,7 @@ export default function Work() {
               // We'll render a min-height section to allow scrolling
               
               return (
-                <section key={category.id} id={category.id} className="mb-20 min-h-[300px] border-t-[1px] border-neutral-border pt-8 relative">
+                <section key={category.id} id={category.id} className="mb-10 min-h-[300px] border-t-[1px] border-neutral-border pt-8 relative">
                   <div className="absolute top-0 right-0 bg-primary-gold text-neutral-dark-grey text-[10px] tracking-[0.15em] font-bold uppercase px-3 py-1">
                     {category.label}
                   </div>

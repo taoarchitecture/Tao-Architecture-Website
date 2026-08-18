@@ -17,8 +17,8 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 25%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 25%)'
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%)'
         }}
       >
         <Image

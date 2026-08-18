@@ -88,7 +88,7 @@ export default function Studio() {
   };
 
   return (
-    <main className="min-h-screen bg-white pt-24 pb-20">
+    <main className="min-h-screen bg-white pb-20">
       <MobilePageNav 
         items={[{ id: 'team', label: 'Team' }]}
         activeItem={activeSection}
@@ -105,7 +105,7 @@ export default function Studio() {
           <div className="w-full md:w-3/4 pl-0 md:pl-8">
             
             {/* Team Section */}
-            <section id="team" className="mb-20 pt-8">
+            <section id="team" className="mb-10 pt-8">
               <div className="mb-12">
                 <h1 className="text-fluid-h1 uppercase font-bold mb-8 font-agenda">Tao Team</h1>
                 <p className="font-agenda text-lg leading-relaxed text-neutral-dark-grey">
