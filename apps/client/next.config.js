@@ -22,6 +22,23 @@ const nextConfig = {
     poweredByHeader: false,
     // Introduced in Next 16.3; don't auto-generate AGENTS.md/CLAUDE.md on every dev run.
     agentRules: false,
+    // Prevent HTML pages from being cached as immutable so Vercel can patch
+    // preview-comment injection after the build completes (required by Vercel
+    // infra when using immutable static file uploads with next@>=16.3.0-canary.32).
+    async headers() {
+        return [
+            {
+                // Only apply to HTML pages — JS/CSS/images stay immutable.
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=0, must-revalidate',
+                    },
+                ],
+            },
+        ];
+    },
 }
 
 module.exports = nextConfig

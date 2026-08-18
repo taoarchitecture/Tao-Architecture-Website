@@ -1,15 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "apps/client/package.json",
-      "use": "@vercel/next"
-    },
-    {
-      "src": "apps/server/api/index.ts",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     {
       "source": "/server-api/:path*",
@@ -17,3 +7,4 @@
     }
   ]
 }
+
