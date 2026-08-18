@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { upload } from '../middleware/upload.middleware';
 import * as ServicesController from '../controllers/services.controller';
-import { authenticateToken } from '../middleware/auth.middleware';
+import { authenticateToken, requireAdmin } from '../middleware/auth.middleware';
 
 const router = Router();
 
@@ -9,10 +9,10 @@ const router = Router();
 router.get('/', ServicesController.getServices);
 
 // Admin: all services including inactive
-router.get('/all', authenticateToken, ServicesController.getAllServices);
+router.get('/all', authenticateToken, requireAdmin, ServicesController.getAllServices);
 router.get('/:id', ServicesController.getServiceById);
-router.post('/', authenticateToken, upload.single('image'), ServicesController.createService);
-router.put('/:id', authenticateToken, upload.single('image'), ServicesController.updateService);
-router.delete('/:id', authenticateToken, ServicesController.deleteService);
+router.post('/', authenticateToken, requireAdmin, upload.single('image'), ServicesController.createService);
+router.put('/:id', authenticateToken, requireAdmin, upload.single('image'), ServicesController.updateService);
+router.delete('/:id', authenticateToken, requireAdmin, ServicesController.deleteService);
 
 export default router;

@@ -50,7 +50,10 @@ export default function CareersAdmin() {
     setProcessingId(id);
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/career/${id}/${action}`, {}, {
+      // Same-origin call: approve/reject only exists on this Next.js API layer today
+      // (Express has no equivalent route), so this must not go through
+      // NEXT_PUBLIC_API_URL, which points at the external Express server in production.
+      await axios.post(`/api/career/${id}/${action}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`Application ${action}d successfully. Email sent.`);

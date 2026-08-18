@@ -38,8 +38,10 @@ const mapProjectForRead = (project: {
 
 export const listProjects = async (limit?: number, cursor?: number) => {
   if (!limit) {
+    // Admin-configurable display order, not insertion order — this is what the
+    // public site's category listings (e.g. /work) expect to sort by.
     const projects = await prisma.project.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: { order: 'asc' },
     });
 
     return projects.map(mapProjectForRead);

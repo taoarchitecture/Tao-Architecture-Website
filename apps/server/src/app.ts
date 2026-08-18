@@ -8,7 +8,6 @@ import careerRoutes from './routes/career.routes';
 import contactRoutes from './routes/contact.routes';
 import projectRoutes from './routes/project.routes';
 import videoRoutes from './routes/video.routes';
-import youtubeWebsubRoutes from './routes/youtube.websub.routes';
 import homeRoutes from './routes/home.routes';
 import studioRoutes from './routes/studio.routes';
 import mediaRoutes from './routes/media.routes';
@@ -16,7 +15,6 @@ import settingsRoutes from './routes/settings.routes';
 import pageContentRoutes from './routes/page-content.routes';
 import servicesRoutes from './routes/services.routes';
 import observabilityRoutes from './routes/observability.routes';
-import cronRoutes from './routes/cron.routes';
 import path from 'path';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 
@@ -58,7 +56,6 @@ app.use('/api/career', careerRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/videos', videoRoutes);
-app.use('/api/youtube/websub', youtubeWebsubRoutes);
 app.use('/api/home', homeRoutes);
 app.use('/api/studio', studioRoutes);
 app.use('/api/media', mediaRoutes);
@@ -66,7 +63,6 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/pages', pageContentRoutes);
 app.use('/api/services', servicesRoutes);
 app.use('/api/observability', observabilityRoutes);
-app.use('/api/cron', cronRoutes);
 
 // Health check
 app.get('/', (req, res) => {

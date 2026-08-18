@@ -77,7 +77,6 @@ const Navbar = () => {
         { name: 'VIDEOS', href: '/media/videos' },
         { name: 'PUBLICATIONS', href: '/media/publications' },
         { name: 'AWARDS', href: '/media/awards' },
-        { name: 'TAO DOTS', href: '/media/tao-dots' },
       ]
     },
     { name: 'CONTACT', href: '/contact' },

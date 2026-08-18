@@ -5,13 +5,13 @@ import {
   upsertPageContent,
   deletePageContent,
 } from '../controllers/page-content.controller';
-import { authenticateToken } from '../middleware/auth.middleware';
+import { authenticateToken, requireAdmin } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.get('/', getAllPageContent);
+router.get('/', authenticateToken, requireAdmin, getAllPageContent);
 router.get('/:slug', getPageContentBySlug);
-router.put('/', authenticateToken, upsertPageContent);
-router.delete('/:slug', authenticateToken, deletePageContent);
+router.put('/', authenticateToken, requireAdmin, upsertPageContent);
+router.delete('/:slug', authenticateToken, requireAdmin, deletePageContent);
 
 export default router;

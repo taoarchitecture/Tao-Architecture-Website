@@ -38,6 +38,19 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const me = async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.user!.id } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json({ id: user.id, email: user.email, role: user.role });
+  } catch (error) {
+    console.error('Error fetching current user:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 export const register = async (req: AuthRequest, res: Response) => {
   const { email, password } = req.body;
 

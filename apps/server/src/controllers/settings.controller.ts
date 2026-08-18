@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import prisma from '../prisma';
+import { asyncHandler } from '../utils/async-handler';
 
 // Default settings used as fallback when no DB row exists yet.
 // This ensures the website never breaks even before admin configures settings.
@@ -16,21 +17,17 @@ const DEFAULTS = {
   footerTagline: 'Touching intangible beauty of nature, through tangible forms of Architecture.',
 };
 
-export const getSettings = async (req: Request, res: Response) => {
-  try {
-    let settings = await prisma.globalSettings.findFirst();
-    if (!settings) {
-      // Return defaults if nothing configured yet — no DB write needed
-      return res.json({ id: null, ...DEFAULTS });
-    }
-    res.json(settings);
-  } catch (error) {
-    console.error('Error fetching settings:', error);
-    res.status(500).json({ message: 'Error fetching settings' });
+export const getSettings = asyncHandler(async (req: Request, res: Response) => {
+  const settings = await prisma.globalSettings.findFirst();
+  if (!settings) {
+    // Return defaults if nothing configured yet — no DB write needed
+    res.json({ id: null, ...DEFAULTS });
+    return;
   }
-};
+  res.json(settings);
+});
 
-export const updateSettings = async (req: Request, res: Response) => {
+export const updateSettings = asyncHandler(async (req: Request, res: Response) => {
   try {
     const {
       siteName, contactEmail, phoneNumbers, address,
@@ -68,4 +65,4 @@ export const updateSettings = async (req: Request, res: Response) => {
     console.error('Error updating settings:', error);
     res.status(500).json({ message: 'Error updating settings' });
   }
-};
+});

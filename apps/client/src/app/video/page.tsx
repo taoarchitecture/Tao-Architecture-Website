@@ -4,7 +4,9 @@ import { PlayerModal } from './player-modal';
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Cache for 1 hour
 
-async function fetchVideos(searchParams: { [key: string]: string | undefined }, isShort: boolean) {
+type VideoSearchParams = { [key: string]: string | undefined };
+
+async function fetchVideos(searchParams: VideoSearchParams, isShort: boolean) {
   const base = (process.env.NEXT_PUBLIC_API_BASE && !process.env.NEXT_PUBLIC_API_BASE.includes('localhost:3000'))
     ? process.env.NEXT_PUBLIC_API_BASE
     : process.env.VERCEL_URL
@@ -39,10 +41,11 @@ async function fetchVideos(searchParams: { [key: string]: string | undefined }, 
   }
 }
 
-export default async function Page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
+export default async function Page({ searchParams }: { searchParams: Promise<VideoSearchParams> }) {
+  const resolvedSearchParams = await searchParams;
   const [longFormVideos, shorts] = await Promise.all([
-    fetchVideos(searchParams, false),
-    fetchVideos(searchParams, true)
+    fetchVideos(resolvedSearchParams, false),
+    fetchVideos(resolvedSearchParams, true)
   ]);
 
   return (
@@ -51,7 +54,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
         <form className="flex w-full max-w-lg" action="/video">
           <input
             name="q"
-            defaultValue={searchParams?.q || ''}
+            defaultValue={resolvedSearchParams?.q || ''}
             placeholder="Search videos..."
             className="flex-1 rounded-l border border-neutral-border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-black"
           />

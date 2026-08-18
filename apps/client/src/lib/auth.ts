@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
+// Express (apps/server) is the single source of truth for authorization on
+// every route that touches the database — those routes now forward the
+// Authorization header via proxyToServer() and trust whatever status Express
+// returns, rather than calling verifyAuth() themselves. This file's real,
+// authoritative use is now limited to the handful of routes that never
+// touched the database in the first place and so were never part of that
+// consolidation: apps/client/src/app/api/upload/signature and
+// apps/client/src/app/api/observability/**. Keep it that way — re-adding a
+// verifyAuth() gate to a route Express also gates is exactly the duplicated,
+// driftable auth logic this migration removed everywhere else.
+
 export interface JwtPayload {
   id: number;
   email: string;

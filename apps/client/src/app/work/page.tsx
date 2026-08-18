@@ -52,9 +52,9 @@ export default function Work() {
         const res = await fetch(`${apiUrl}/projects`);
         if (res.ok) {
           const data = await res.json();
-          // Filter to only visible projects and sort by order
+          // Filter to only published projects and sort by order
           const visibleProjects = data
-            .filter((p: any) => p.visible !== false)
+            .filter((p: any) => p.isPublished !== false)
             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
           
           if (visibleProjects.length > 0) {

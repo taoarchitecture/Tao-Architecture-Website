@@ -24,7 +24,10 @@ export async function GET(req: NextRequest) {
   try {
     const res = await fetch(`${serverUrl}/api/videos/sync`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${cronSecret}`,
+      },
       // Allow up to 60 s for a full channel sync
       signal: AbortSignal.timeout(60_000),
     });
