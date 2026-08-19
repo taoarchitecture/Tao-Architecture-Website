@@ -14,6 +14,14 @@ process.on('unhandledRejection', (reason) => {
   console.error('Unhandled promise rejection (process kept alive):', reason);
 });
 
+// unhandledRejection only covers rejected promises; a synchronous throw
+// outside of Express's own request handling (e.g. in a callback a library
+// invokes directly) needs this separate handler to avoid killing the process
+// the same way.
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught exception (process kept alive):', err);
+});
+
 app.listen(PORT as number, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 

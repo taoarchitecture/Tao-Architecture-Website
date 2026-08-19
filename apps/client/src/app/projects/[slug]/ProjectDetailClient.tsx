@@ -264,16 +264,15 @@ export default function ProjectDetailClient() {
                     >
                         <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
                             <Image
-                                src={getImageUrl(item.src)}
-                                alt={item.title || `Gallery Image ${idx + 1}`}
+                                src={getImageUrl(item.url)}
+                                alt={item.caption || `Gallery Image ${idx + 1}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                                 quality={85}
                             />
                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
-                                {item.title && <h4 className="text-xl font-bold uppercase mb-2">{item.title}</h4>}
-                                {item.description && <p className="text-sm font-light">{item.description}</p>}
+                                {item.caption && <h4 className="text-xl font-bold uppercase mb-2">{item.caption}</h4>}
                             </div>
                         </div>
                     </div>
@@ -378,8 +377,8 @@ export default function ProjectDetailClient() {
             <div className="relative w-full flex-1 min-h-0 mb-6">
               {project.gallery && project.gallery[lightboxIndex] && (
                 <Image
-                  src={getImageUrl(project.gallery[lightboxIndex].src)}
-                  alt={project.gallery[lightboxIndex].title || ''}
+                  src={getImageUrl(project.gallery[lightboxIndex].url)}
+                  alt={project.gallery[lightboxIndex].caption || ''}
                   fill
                   sizes="100vw"
                   className="object-contain"
