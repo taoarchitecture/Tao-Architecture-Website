@@ -38,6 +38,16 @@ export const getHomeConfig = async () => {
   }
 };
 
+export const getHomeGridItems = async () => {
+  try {
+    const { data } = await api.get('/home-grid');
+    return data;
+  } catch (error) {
+    console.warn('Failed to fetch home grid items:', error instanceof Error ? error.message : String(error));
+    return [];
+  }
+};
+
 export const getTeamMembers = async () => {
   try {
     const { data } = await api.get('/studio');

@@ -85,6 +85,24 @@ model HomeConfig {
   updatedAt      DateTime @updatedAt
 }
 
+// Content for the homepage's category grid (Corporate / Luxury Villas / etc.
+// cards). Layout — which column, card height/aspect ratio, overlay-vs-standard
+// card style — stays defined in code (keyed by slotKey) since those are design
+// decisions tied to the fixed grid composition, not editorial content. Only
+// the fields here are what the admin panel can actually change.
+model HomeGridItem {
+  id          Int      @id @default(autoincrement())
+  slotKey     String   @unique // matches a fixed slot defined in apps/client's homepage
+  category    String
+  title       String
+  titleLines  String?  // optional JSON array of strings for a multi-line title layout
+  disciplines String?
+  image       String
+  link        String
+  order       Int      @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
 model TeamMember {
   id        Int      @id @default(autoincrement())
   name      String
