@@ -11,7 +11,21 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subtitle?: string }[] }) => {
+const DEFAULT_BANNER_TEXT = (
+  <>
+    Touching intangible beauty of nature,{' '}
+    through tangible forms of{' '}
+    <span className="font-bold">Architecture</span>
+  </>
+);
+
+const HeroSlider = ({
+  slides,
+  bannerText,
+}: {
+  slides: { image: string; title?: string; subtitle?: string }[];
+  bannerText?: string;
+}) => {
   if (!slides || slides.length === 0) return null;
 
   return (
@@ -60,9 +74,7 @@ const HeroSlider = ({ slides }: { slides: { image: string; title?: string; subti
           <div className="pointer-events-auto w-full" style={{ maxWidth: 'clamp(320px, 45%, 550px)' }}>
             <div className="bg-white border-t-[12px] border-neutral-black px-6 py-8 md:px-10 md:py-10 shadow-premium-lg">
               <h1 className="tao-fs-banner font-bold leading-tight tracking-tight font-agenda text-neutral-dark-grey mb-6">
-                Touching intangible beauty of nature,{' '}
-                through tangible forms of{' '}
-                <span className="font-bold">Architecture</span>
+                {bannerText || DEFAULT_BANNER_TEXT}
               </h1>
               <Magnetic>
                 <Link

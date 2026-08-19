@@ -219,7 +219,10 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      <HeroSlider slides={homeConfig?.heroSlides?.length ? homeConfig.heroSlides : defaultSlides} />
+      <HeroSlider
+        slides={homeConfig?.heroSlides?.length ? homeConfig.heroSlides : defaultSlides}
+        bannerText={homeConfig?.bannerText || undefined}
+      />
       <PortfolioGrid items={homeGridItems} />
       <HomeBottomSection config={homeConfig} />
     </main>

@@ -1,13 +1,30 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { uploadToCloudinary } from '@/utils/cloudinary';
 
+const DEFAULT_INTRO = 'Join the TAO Architecture team. Share your background, the role you are applying for, and your supporting documents using the form below.';
+
 const CareerPage = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [introText, setIntroText] = useState(DEFAULT_INTRO);
+
+  useEffect(() => {
+    const fetchIntro = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        const res = await fetch(`${apiUrl}/pages/career-intro`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.content) setIntroText(data.content);
+        }
+      } catch { /* use default */ }
+    };
+    fetchIntro();
+  }, []);
 
   const onSubmit = async (data: any) => {
     setIsSubmitting(true);
@@ -59,8 +76,7 @@ const CareerPage = () => {
             Career Application
           </h1>
           <p className="mt-4 max-w-2xl font-agenda tao-fs-desc text-neutral-medium-grey">
-            Join the TAO Architecture team. Share your background, the role you are applying for,
-            and your supporting documents using the form below.
+            {introText}
           </p>
         </div>
 
