@@ -20,7 +20,11 @@ export default function AdminStudioPage() {
 
   const fetchMembers = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/studio`);
+      // Relative path — goes through this app's own proxy, which knows Express
+      // nests team members under /api/studio/team. NEXT_PUBLIC_API_URL can't be
+      // used directly here: in production it points at the external Express
+      // server, which has no route at bare /studio.
+      const { data } = await axios.get('/api/studio');
       setMembers(data);
     } catch (error) {
       console.error(error);
@@ -31,7 +35,7 @@ export default function AdminStudioPage() {
     if (!confirm('Delete this team member? This cannot be undone.')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/studio/${id}`, {
+      await axios.delete(`/api/studio/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchMembers();

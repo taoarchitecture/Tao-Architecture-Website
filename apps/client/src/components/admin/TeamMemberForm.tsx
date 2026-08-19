@@ -77,15 +77,18 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
         'Content-Type': 'application/json',
       };
 
+      // Relative paths — see the note in admin/studio/page.tsx: NEXT_PUBLIC_API_URL
+      // points at the external Express server in production, which has no route
+      // at bare /studio (it's nested under /studio/team).
       if (initialData?.id) {
         await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL}/studio/${initialData.id}`,
+          `/api/studio/${initialData.id}`,
           payload,
           { headers }
         );
       } else {
         await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/studio`,
+          '/api/studio',
           payload,
           { headers }
         );
