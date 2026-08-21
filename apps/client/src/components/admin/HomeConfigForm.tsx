@@ -145,32 +145,37 @@ export default function HomeConfigForm() {
                   <FiTrash />
                 </button>
                 <div className="flex flex-col gap-4 sm:flex-row">
-                  <div
-                    className="relative h-24 w-40 flex-shrink-0 cursor-pointer overflow-hidden border-2 border-dashed border-neutral-border bg-neutral-bg transition-colors hover:border-primary-red group"
-                    onClick={() => fileInputRefs.current[index]?.click()}
-                  >
-                    {preview ? (
-                      <>
-                        <Image src={preview} alt={`Slide ${index + 1}`} fill sizes="200px" className="object-cover" />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
-                          <FiUploadCloud className="text-white" size={20} />
+                  <div className="flex-shrink-0">
+                    <div
+                      className="relative h-24 w-40 cursor-pointer overflow-hidden border-2 border-dashed border-neutral-border bg-neutral-bg transition-colors hover:border-primary-red group"
+                      onClick={() => fileInputRefs.current[index]?.click()}
+                    >
+                      {preview ? (
+                        <>
+                          <Image src={preview} alt={`Slide ${index + 1}`} fill sizes="200px" className="object-cover" />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                            <FiUploadCloud className="text-white" size={20} />
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex h-full flex-col items-center justify-center text-neutral-medium-grey">
+                          <FiUploadCloud size={20} />
+                          <span className="mt-1 text-center text-[10px] uppercase tracking-wider">Click to upload</span>
                         </div>
-                      </>
-                    ) : (
-                      <div className="flex h-full flex-col items-center justify-center text-neutral-medium-grey">
-                        <FiUploadCloud size={20} />
-                        <span className="mt-1 text-center text-[10px] uppercase tracking-wider">Click to upload</span>
-                      </div>
-                    )}
-                    <input
-                      ref={(el) => {
-                        fileInputRefs.current[index] = el;
-                      }}
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleSlideImageChange(index, e.target.files?.[0])}
-                      className="hidden"
-                    />
+                      )}
+                      <input
+                        ref={(el) => {
+                          fileInputRefs.current[index] = el;
+                        }}
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleSlideImageChange(index, e.target.files?.[0])}
+                        className="hidden"
+                      />
+                    </div>
+                    <p className="mt-1 w-40 text-[11px] leading-snug text-neutral-medium-grey">
+                      Recommended: 1920 × 1080px, landscape. Full-bleed background — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+                    </p>
                   </div>
                   <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2">
                     <div>

@@ -7,6 +7,7 @@ export interface GalleryItem {
 export interface Project {
   id: number;
   title: string;
+  subtitle: string | null;
   slug: string;
   category: string;
   status: string;

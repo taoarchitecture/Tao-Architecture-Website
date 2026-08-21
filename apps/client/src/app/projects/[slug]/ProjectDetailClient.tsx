@@ -182,7 +182,7 @@ export default function ProjectDetailClient() {
                     </div>
 
                     {project.subtitle && (
-                        <h2 className="tao-fs-big-sub font-bold uppercase mb-8 font-agenda text-neutral-dark-grey">
+                        <h2 className="tao-fs-big-sub inline-block border-y border-primary-gold py-2 mb-8 font-agenda font-bold text-neutral-dark-grey">
                             {project.subtitle}
                         </h2>
                     )}

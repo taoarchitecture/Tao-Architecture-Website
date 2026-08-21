@@ -245,6 +245,9 @@ export default function AdminServicesPage() {
                 type="file" accept="image/*" onChange={(e) => setFormImage(e.target.files?.[0] || null)}
                 className="text-sm font-agenda text-neutral-medium-grey file:mr-4 file:border file:border-neutral-dark-grey file:bg-transparent file:px-4 file:py-2 file:text-xs file:font-bold file:uppercase file:tracking-[0.14em] file:text-neutral-dark-grey hover:file:bg-neutral-dark-grey hover:file:text-white"
               />
+              <p className="mt-1 text-xs text-neutral-medium-grey">
+                Recommended: 1600 × 900px minimum, landscape. Renders at a fixed height (240–400px depending on screen size) with fluid width — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+              </p>
               {editingService?.image && !formImage && (
                 <p className="mt-1 text-xs text-neutral-medium-grey">Current: {editingService.image}</p>
               )}

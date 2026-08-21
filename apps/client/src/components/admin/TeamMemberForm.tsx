@@ -5,9 +5,14 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { TeamMember } from '@/types';
 import Image from 'next/image';
-import { getImageUrl } from '@/utils/image';
+import { getImageUrl, getImageDimensions, checkAspectRatioMismatch } from '@/utils/image';
 import { uploadToCloudinary } from '@/utils/cloudinary';
-import { FiPlus, FiTrash2, FiUploadCloud, FiX } from 'react-icons/fi';
+import { FiPlus, FiTrash2, FiUploadCloud, FiX, FiAlertTriangle } from 'react-icons/fi';
+
+// Rendered at aspect-[3/4] (object-cover) on the Studio page — see
+// src/app/studio/page.tsx.
+const PHOTO_TARGET_RATIO = 3 / 4;
+const PHOTO_TARGET_LABEL = '3:4';
 
 interface Props {
   initialData?: TeamMember;
@@ -20,6 +25,7 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
   const [imagePreview, setImagePreview] = useState<string | null>(
     initialData?.image ? getImageUrl(initialData.image) : null
   );
+  const [aspectWarning, setAspectWarning] = useState<string | null>(null);
   const [bioParagraphs, setBioParagraphs] = useState<string[]>(
     initialData?.bio && initialData.bio.length > 0 ? initialData.bio : ['']
   );
@@ -35,6 +41,12 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
     const file = e.target.files?.[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));
+      setAspectWarning(null);
+      getImageDimensions(file)
+        .then(({ width, height }) =>
+          setAspectWarning(checkAspectRatioMismatch(width, height, PHOTO_TARGET_RATIO, PHOTO_TARGET_LABEL))
+        )
+        .catch(() => {});
     }
   };
 
@@ -178,7 +190,13 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
               <FiUploadCloud size={14} />
               {imagePreview ? 'Change Photo' : 'Upload Photo'}
             </button>
-            <p className="text-xs text-neutral-medium-grey">Recommended: portrait ratio (3:4), min 400x500px. JPG or PNG.</p>
+            <p className="text-xs text-neutral-medium-grey">Recommended: 900 × 1200px (3:4 portrait). JPG or PNG.</p>
+            {aspectWarning && (
+              <p className="flex items-start gap-1 text-xs text-amber-600">
+                <FiAlertTriangle className="mt-0.5 flex-shrink-0" size={12} />
+                <span>{aspectWarning}</span>
+              </p>
+            )}
             <input
               ref={fileInputRef}
               type="file"

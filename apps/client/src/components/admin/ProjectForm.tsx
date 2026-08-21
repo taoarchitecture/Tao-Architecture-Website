@@ -50,6 +50,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
   const { register, control, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProjectFormValues>({
     defaultValues: {
       title: initialData?.title || '',
+      subtitle: initialData?.subtitle || '',
       slug: initialData?.slug || '',
       category: initialData?.category || 'luxuryvillas',
       status: initialData?.status || 'Ongoing',
@@ -145,6 +146,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
       
       const payload = {
         title: data.title,
+        subtitle: data.subtitle,
         slug: data.slug,
         category: data.category,
         status: data.status,
@@ -196,6 +198,15 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
           <div>
             <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Slug</label>
             <input {...register('slug', { required: true })} className="w-full border border-neutral-border p-3 bg-neutral-bg text-neutral-medium-grey focus:outline-none" />
+          </div>
+          <div className="md:col-span-2">
+            <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Subtitle / Tagline</label>
+            <input
+              {...register('subtitle')}
+              placeholder="e.g. Seamlessly blending tradition and modernity"
+              className="w-full border border-neutral-border p-3 text-neutral-dark-grey focus:border-primary-red focus:outline-none transition-colors"
+            />
+            <p className="mt-1 text-xs text-neutral-medium-grey">Short line shown under the title on the project page and work listing. Optional.</p>
           </div>
           <div>
             <label className="block text-xs font-bold text-neutral-medium-grey uppercase tracking-wider mb-2">Category</label>
@@ -318,7 +329,9 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
                 <FiUpload className="mr-2" /> Upload Cover
               </label>
               <p className="text-xs text-neutral-medium-grey">Drag & drop or click to upload.</p>
-              <p className="text-xs text-neutral-medium-grey">Auto-optimized to WebP on Cloudinary CDN.</p>
+              <p className="text-xs text-neutral-medium-grey">
+                Recommended: 1920 × 1080px, landscape. Used as both a full-bleed hero and a cropped thumbnail, so no single fixed ratio — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+              </p>
               {coverFile && <p className="flex items-center gap-1 text-xs font-bold text-primary-red"><FiCheck size={12}/> {coverFile.name} ready</p>}
             </div>
           </div>
@@ -337,6 +350,9 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
               </label>
             </div>
           </div>
+          <p className="mb-4 -mt-2 text-xs text-neutral-medium-grey">
+            Recommended: 1600 × 1000px minimum, landscape. Shown in a fixed-height grid (crops to fit) and a full-image lightbox — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+          </p>
 
           {/* Drag & drop zone for gallery */}
           <div
