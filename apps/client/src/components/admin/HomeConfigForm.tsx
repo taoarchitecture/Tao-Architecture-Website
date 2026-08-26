@@ -5,9 +5,13 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { HomeConfig } from '@/types';
 import Image from 'next/image';
-import { getImageUrl } from '@/utils/image';
+import { getImageUrl, getImageDimensions, checkAspectRatioMismatch } from '@/utils/image';
 import { uploadToCloudinary } from '@/utils/cloudinary';
-import { FiTrash, FiPlus, FiUploadCloud } from 'react-icons/fi';
+import { FiTrash, FiPlus, FiUploadCloud, FiAlertTriangle } from 'react-icons/fi';
+
+// Full-bleed hero background — see the `h-screen` slide in src/app/page.tsx.
+const SLIDE_TARGET_RATIO = 1920 / 1080;
+const SLIDE_TARGET_LABEL = '16:9';
 
 interface SlideDraft {
   image: string; // existing Cloudinary URL, '' if none yet
@@ -15,6 +19,7 @@ interface SlideDraft {
   subtitle: string;
   file?: File; // a newly-chosen file pending upload, if any
   previewUrl?: string; // local blob preview for a pending file
+  aspectWarning?: string | null;
 }
 
 type BannerFields = Pick<HomeConfig, 'bannerText' | 'bottomCtaTitle' | 'bottomCtaText' | 'bottomCtaLink'>;
@@ -83,9 +88,15 @@ export default function HomeConfigForm() {
       prev.map((s, i) => {
         if (i !== idx) return s;
         if (s.previewUrl) URL.revokeObjectURL(s.previewUrl);
-        return { ...s, file, previewUrl: URL.createObjectURL(file) };
+        return { ...s, file, previewUrl: URL.createObjectURL(file), aspectWarning: null };
       })
     );
+    getImageDimensions(file)
+      .then(({ width, height }) => {
+        const warning = checkAspectRatioMismatch(width, height, SLIDE_TARGET_RATIO, SLIDE_TARGET_LABEL);
+        setSlides((prev) => prev.map((s, i) => (i === idx && s.file === file ? { ...s, aspectWarning: warning } : s)));
+      })
+      .catch(() => {});
   };
 
   const onSubmit = async (data: BannerFields) => {
@@ -176,6 +187,12 @@ export default function HomeConfigForm() {
                     <p className="mt-1 w-40 text-[11px] leading-snug text-neutral-medium-grey">
                       Recommended: 1920 × 1080px, landscape. Full-bleed background — auto-compressed to ≤1920px / 2MB. JPG or WebP.
                     </p>
+                    {slide.aspectWarning && (
+                      <p className="mt-1 flex w-40 items-start gap-1 text-[11px] leading-snug text-amber-600">
+                        <FiAlertTriangle className="mt-0.5 flex-shrink-0" size={11} />
+                        <span>{slide.aspectWarning}</span>
+                      </p>
+                    )}
                   </div>
                   <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2">
                     <div>

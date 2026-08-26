@@ -89,7 +89,7 @@ export default function HomeGridForm() {
       getImageDimensions(file)
         .then(({ width, height }) => {
           const warning = checkAspectRatioMismatch(width, height, target.ratio, target.label);
-          setItems((prev) => prev.map((i) => (i.slotKey === slotKey ? { ...i, aspectWarning: warning } : i)));
+          setItems((prev) => prev.map((i) => (i.slotKey === slotKey && i.file === file ? { ...i, aspectWarning: warning } : i)));
         })
         .catch(() => {});
     }

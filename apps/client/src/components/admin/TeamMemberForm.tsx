@@ -26,6 +26,7 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
     initialData?.image ? getImageUrl(initialData.image) : null
   );
   const [aspectWarning, setAspectWarning] = useState<string | null>(null);
+  const latestImageFile = useRef<File | null>(null);
   const [bioParagraphs, setBioParagraphs] = useState<string[]>(
     initialData?.bio && initialData.bio.length > 0 ? initialData.bio : ['']
   );
@@ -40,12 +41,14 @@ export default function TeamMemberForm({ initialData, onSuccess, onCancel }: Pro
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      latestImageFile.current = file;
       setImagePreview(URL.createObjectURL(file));
       setAspectWarning(null);
       getImageDimensions(file)
-        .then(({ width, height }) =>
-          setAspectWarning(checkAspectRatioMismatch(width, height, PHOTO_TARGET_RATIO, PHOTO_TARGET_LABEL))
-        )
+        .then(({ width, height }) => {
+          if (latestImageFile.current !== file) return;
+          setAspectWarning(checkAspectRatioMismatch(width, height, PHOTO_TARGET_RATIO, PHOTO_TARGET_LABEL));
+        })
         .catch(() => {});
     }
   };

@@ -141,7 +141,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
       );
 
       // 3. Construct JSON Payload
-      const existingGalleryItems = isEditing ? galleryPreviews.filter(p => !p.isNew).map(p => ({ url: p.url, caption: '', order: 0 })) : [];
+      const existingGalleryItems = isEditing ? galleryPreviews.filter(p => !p.isNew).map(p => ({ url: p.url || p.src, caption: p.caption || p.title || '', order: 0 })) : [];
       const newGalleryItems = uploadedGalleryUrls.map((url, i) => ({ url, caption: '', order: existingGalleryItems.length + i }));
       
       const payload = {
@@ -371,7 +371,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 {galleryPreviews.map((img, idx) => (
                   <div key={idx} className={`relative group aspect-square overflow-hidden border ${img.isNew ? 'border-primary-red/40' : 'border-neutral-border'}`}>
-                    <Image src={getImageUrl(img.url)} alt="" fill sizes="200px" className="object-cover" />
+                    <Image src={getImageUrl(img.url || img.src)} alt="" fill sizes="200px" className="object-cover" />
                     {img.isNew && (
                       <div className="absolute top-1 left-1 bg-primary-red text-white text-[9px] font-bold px-1 py-0.5 uppercase tracking-wider">New</div>
                     )}

@@ -60,6 +60,7 @@ export function checkAspectRatioMismatch(
   targetLabel: string,
   toleranceRatio: number = 0.15
 ): string | null {
+  if (!actualWidth || !actualHeight) return null;
   const actualRatio = actualWidth / actualHeight;
   if (Math.abs(actualRatio - targetRatio) / targetRatio <= toleranceRatio) return null;
   return `This image is ${simplifyRatio(actualWidth, actualHeight)} but this slot displays at ${targetLabel} — it may appear cropped or stretched.`;
