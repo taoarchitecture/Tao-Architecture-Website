@@ -36,11 +36,14 @@ const mapProjectForRead = (project: {
   gallery: safeJsonParse<GalleryItem[]>(project.gallery, []),
 });
 
-export const listProjects = async (limit?: number, cursor?: number) => {
+export const listProjects = async (limit?: number, cursor?: number, onlyPublished = false) => {
+  const where = onlyPublished ? { isPublished: true } : undefined;
+
   if (!limit) {
     // Admin-configurable display order, not insertion order — this is what the
     // public site's category listings (e.g. /work) expect to sort by.
     const projects = await prisma.project.findMany({
+      where,
       orderBy: { order: 'asc' },
     });
 
@@ -48,6 +51,7 @@ export const listProjects = async (limit?: number, cursor?: number) => {
   }
 
   const projects = await prisma.project.findMany({
+    where,
     orderBy: { id: 'desc' },
     take: limit + 1,
     ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
@@ -64,9 +68,14 @@ export const listProjects = async (limit?: number, cursor?: number) => {
   };
 };
 
-export const getProjectBySlugService = async (slug: string) => {
-  const project = await prisma.project.findUnique({
-    where: { slug },
+// onlyPublished uses findFirst (not findUnique) so it can combine the unique
+// lookup with the isPublished condition without depending on Prisma's
+// extended-where-unique support — a filtered-out project surfaces as the same
+// "not found" 404 as a nonexistent one, rather than a distinct 403 that would
+// confirm a hidden project exists at that slug/id.
+export const getProjectBySlugService = async (slug: string, onlyPublished = false) => {
+  const project = await prisma.project.findFirst({
+    where: onlyPublished ? { slug, isPublished: true } : { slug },
   });
 
   if (!project) {
@@ -76,9 +85,9 @@ export const getProjectBySlugService = async (slug: string) => {
   return mapProjectForRead(project);
 };
 
-export const getProjectByIdService = async (id: number) => {
-  const project = await prisma.project.findUnique({
-    where: { id },
+export const getProjectByIdService = async (id: number, onlyPublished = false) => {
+  const project = await prisma.project.findFirst({
+    where: onlyPublished ? { id, isPublished: true } : { id },
   });
 
   if (!project) {
@@ -138,12 +147,15 @@ export const updateProjectService = async (
 
   let coverImageUrl = existingProject.coverImage;
   if (input.coverImage !== undefined) {
-    if (existingProject.coverImage && existingProject.coverImage !== input.coverImage && !isUrl(existingProject.coverImage)) {
+    // Clean up the previous Cloudinary/local file whenever it's actually being
+    // replaced — deleteUploadedFile already knows how to handle both kinds of
+    // path, so there's no need to special-case URLs here.
+    if (existingProject.coverImage && existingProject.coverImage !== input.coverImage) {
       await deleteUploadedFile(existingProject.coverImage);
     }
     coverImageUrl = input.coverImage;
   } else if (coverImageFile) {
-    if (existingProject.coverImage && !isUrl(existingProject.coverImage)) {
+    if (existingProject.coverImage) {
       await deleteUploadedFile(existingProject.coverImage);
     }
     coverImageUrl = toPublicFilePath(coverImageFile);

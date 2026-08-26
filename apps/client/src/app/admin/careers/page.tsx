@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { FiCheck, FiX, FiFileText, FiLink } from 'react-icons/fi';
 import { format } from 'date-fns';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -22,6 +23,7 @@ interface Application {
 }
 
 export default function CareersAdmin() {
+  const router = useRouter();
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [processingId, setProcessingId] = useState<number | null>(null);
@@ -41,8 +43,13 @@ export default function CareersAdmin() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      setLoading(false);
+      router.replace('/admin/login');
+      return;
+    }
     fetchApplications();
-  }, []);
+  }, [router]);
 
   const handleStatusChange = async (id: number, action: 'approve' | 'reject') => {
     if (!window.confirm(`Are you sure you want to ${action} this application? This will send an automated email to the applicant.`)) return;

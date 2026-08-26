@@ -5,8 +5,9 @@ import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { FaSearch, FaTimes } from 'react-icons/fa';
-import { projects } from '@/data/projects';
 import TaoLogoMark from '@/components/ui/TaoLogoMark';
+import { getImageUrl } from '@/utils/image';
+import { Project } from '@/types';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,8 @@ const Navbar = () => {
   
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [dbProjects, setDbProjects] = useState<Project[]>([]);
+  const hasFetchedProjects = useRef(false);
 
   // Close mobile menu and search on route change
   useEffect(() => {
@@ -34,12 +37,23 @@ const Navbar = () => {
     }
   }, [isSearchOpen]);
 
+  // Fetch the live project list once, the first time search is opened, and
+  // cache it — reopening search re-filters in memory rather than refetching.
+  useEffect(() => {
+    if (!isSearchOpen || hasFetchedProjects.current) return;
+    hasFetchedProjects.current = true;
+    fetch('/api/projects')
+      .then((res) => res.json())
+      .then((data) => setDbProjects(Array.isArray(data) ? data : []))
+      .catch(() => {});
+  }, [isSearchOpen]);
+
   // Autocomplete matching
-  const searchResults = searchQuery.trim() !== '' 
-      ? projects.filter(p => 
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const searchResults = searchQuery.trim() !== ''
+      ? dbProjects.filter(p =>
+          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (p.description && p.description.toLowerCase().includes(searchQuery.toLowerCase()))
+          (Array.isArray(p.description) && p.description.join(' ').toLowerCase().includes(searchQuery.toLowerCase()))
         )
       : [];
 
@@ -298,15 +312,15 @@ const Navbar = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                {searchResults.slice(0, 12).map(project => (
-                   <Link 
-                        key={project.id} 
-                        href={project.link}
+                   <Link
+                        key={project.id}
+                        href={`/projects/${project.slug || project.id}`}
                         className="group flex flex-col"
                    >
                         <div className="relative mb-3 w-full aspect-[4/3] overflow-hidden rounded-sm bg-neutral-bg">
-                           <Image 
-                               src={project.image} 
-                               alt={project.title} 
+                           <Image
+                               src={project.coverImage ? getImageUrl(project.coverImage) : '/img/placeholder.jpg'}
+                               alt={project.title}
                                fill
                                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                className="object-cover transition-transform duration-700 group-hover:scale-105" 

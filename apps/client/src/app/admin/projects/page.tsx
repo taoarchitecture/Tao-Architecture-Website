@@ -17,7 +17,10 @@ export default function ProjectsList() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/projects`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setProjects(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -27,8 +30,13 @@ export default function ProjectsList() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      setIsLoading(false);
+      router.replace('/admin/login');
+      return;
+    }
     fetchProjects();
-  }, []);
+  }, [router]);
 
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this project?')) return;

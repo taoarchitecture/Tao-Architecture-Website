@@ -22,7 +22,7 @@ export default function AdminServicesPage() {
   const [formSlug, setFormSlug] = useState('');
   const [formSubtitle, setFormSubtitle] = useState('');
   const [formDescription, setFormDescription] = useState('');
-  const [formItems, setFormItems] = useState<string[]>([]);
+  const [formItems, setFormItems] = useState<{ id: string; value: string }[]>([]);
   const [formOrder, setFormOrder] = useState(0);
   const [formIsActive, setFormIsActive] = useState(true);
   const [formImage, setFormImage] = useState<File | null>(null);
@@ -76,7 +76,7 @@ export default function AdminServicesPage() {
     setFormSlug(service.slug);
     setFormSubtitle(service.subtitle || '');
     setFormDescription(service.description || '');
-    setFormItems(service.items || []);
+    setFormItems((service.items || []).map((value) => ({ id: crypto.randomUUID(), value })));
     setFormOrder(service.order);
     setFormIsActive(service.isActive);
     setFormImage(null);
@@ -97,17 +97,15 @@ export default function AdminServicesPage() {
   };
 
   const handleAddItem = () => {
-    setFormItems([...formItems, '']);
+    setFormItems([...formItems, { id: crypto.randomUUID(), value: '' }]);
   };
 
-  const handleUpdateItem = (index: number, value: string) => {
-    const updated = [...formItems];
-    updated[index] = value;
-    setFormItems(updated);
+  const handleUpdateItem = (id: string, value: string) => {
+    setFormItems(formItems.map((item) => (item.id === id ? { ...item, value } : item)));
   };
 
-  const handleRemoveItem = (index: number) => {
-    setFormItems(formItems.filter((_, i) => i !== index));
+  const handleRemoveItem = (id: string) => {
+    setFormItems(formItems.filter((item) => item.id !== id));
   };
 
   const handleSave = async () => {
@@ -128,7 +126,7 @@ export default function AdminServicesPage() {
         slug: formSlug,
         subtitle: formSubtitle,
         description: formDescription,
-        items: formItems.filter(i => i.trim()),
+        items: formItems.map((i) => i.value).filter((v) => v.trim()),
         order: Number(formOrder),
         isActive: formIsActive,
         image: imageUrl,
@@ -256,13 +254,13 @@ export default function AdminServicesPage() {
               <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey">Service Items (Bullet Points)</label>
               <div className="space-y-2">
                 {formItems.map((item, idx) => (
-                  <div key={idx} className="flex gap-2">
+                  <div key={item.id} className="flex gap-2">
                     <input
-                      type="text" value={item} onChange={(e) => handleUpdateItem(idx, e.target.value)}
+                      type="text" value={item.value} onChange={(e) => handleUpdateItem(item.id, e.target.value)}
                       placeholder={`Item ${idx + 1}`}
                       className="flex-1 border border-neutral-border-grey p-2 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
                     />
-                    <button onClick={() => handleRemoveItem(idx)} className="px-2 text-neutral-medium-grey transition-colors hover:text-primary-red" type="button">
+                    <button onClick={() => handleRemoveItem(item.id)} className="px-2 text-neutral-medium-grey transition-colors hover:text-primary-red" type="button">
                       <FiTrash2 size={14} />
                     </button>
                   </div>

@@ -2,19 +2,29 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import AdminLayout from '@/components/admin/AdminLayout';
 import ProjectForm from '@/components/admin/ProjectForm';
 
 export default function EditProjectPage() {
   const params = useParams();
+  const router = useRouter();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      router.replace('/admin/login');
+      return;
+    }
+
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/projects/${params.id}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/projects/${params.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setProject(response.data);
       } catch (error) {
         console.error('Error fetching project:', error);
@@ -26,7 +36,7 @@ export default function EditProjectPage() {
     if (params.id) {
       fetchProject();
     }
-  }, [params.id]);
+  }, [params.id, router]);
 
   if (loading) {
     return (

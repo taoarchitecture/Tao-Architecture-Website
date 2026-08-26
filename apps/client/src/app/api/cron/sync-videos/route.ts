@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * GET /api/cron/sync-videos
- * Called automatically by Vercel Cron every hour.
+ * Called automatically by Vercel Cron daily (see the schedule in vercel.json).
  * Protected by the CRON_SECRET env var — Vercel sets
  * the Authorization header automatically when invoking cron jobs.
  */

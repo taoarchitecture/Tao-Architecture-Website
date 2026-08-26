@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import prisma from '../prisma';
 import { AuthRequest } from '../middleware/auth.middleware';
 import { getJwtSecret } from '../utils/jwtSecret';
+import { ChangePasswordInput } from '../schemas/auth.schemas';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -47,6 +48,33 @@ export const me = async (req: AuthRequest, res: Response) => {
     res.json({ id: user.id, email: user.email, role: user.role });
   } catch (error) {
     console.error('Error fetching current user:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const changePassword = async (req: AuthRequest, res: Response) => {
+  const { currentPassword, newPassword } = req.body as ChangePasswordInput;
+
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.user!.id } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Current password is incorrect' });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashedPassword },
+    });
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error('Error changing password:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

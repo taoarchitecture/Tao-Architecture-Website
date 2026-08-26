@@ -63,7 +63,7 @@ export const updateTeamMember = asyncHandler(async (req: Request, res: Response)
   } else if (bodyImage !== undefined && bodyImage !== existing.image) {
     // Replaced via a pre-uploaded Cloudinary URL rather than a multipart file —
     // still clean up the old asset the same way the file-upload branch does.
-    if (existing.image && !existing.image.startsWith('http')) await deleteUploadedFile(existing.image);
+    if (existing.image) await deleteUploadedFile(existing.image);
     image = bodyImage;
   }
 

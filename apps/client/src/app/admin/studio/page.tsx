@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/admin/AdminLayout';
 import TeamMemberForm from '@/components/admin/TeamMemberForm';
 import axios from 'axios';
@@ -10,13 +11,18 @@ import Image from 'next/image';
 import { FiEdit, FiTrash, FiPlus, FiUser, FiAlignLeft } from 'react-icons/fi';
 
 export default function AdminStudioPage() {
+  const router = useRouter();
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [editingMember, setEditingMember] = useState<TeamMember | null>(null);
   const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      router.replace('/admin/login');
+      return;
+    }
     fetchMembers();
-  }, []);
+  }, [router]);
 
   const fetchMembers = async () => {
     try {

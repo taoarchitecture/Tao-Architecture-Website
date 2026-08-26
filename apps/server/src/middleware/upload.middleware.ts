@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary';
+import cloudinaryPkg, { v2 as cloudinary } from 'cloudinary';
 import CloudinaryStorage from 'multer-storage-cloudinary';
 import path from 'path';
 import fs from 'fs';
@@ -19,7 +19,9 @@ let storage;
 if (useCloudinary) {
   // Use Cloudinary whenever keys are present (both dev & production)
   storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
+    // multer-storage-cloudinary@2.x internally does `this.cloudinary.v2.uploader...`,
+    // so it needs the full package export (which has `.v2`), not the destructured v2 namespace.
+    cloudinary: cloudinaryPkg,
     params: {
       folder: 'tao-architecture',
       allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],

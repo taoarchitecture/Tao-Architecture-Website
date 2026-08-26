@@ -30,7 +30,7 @@ export default function Dashboard() {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
         const [projectsRes, appsRes, contactRes, servicesRes, teamRes] = await Promise.all([
-          axios.get(`${apiUrl}/projects`),
+          axios.get(`${apiUrl}/projects`, { headers }),
           axios.get(`${apiUrl}/career`, { headers }),
           axios.get(`${apiUrl}/contact`, { headers }).catch(() => ({ data: [] })),
           axios.get(`${apiUrl}/services`).catch(() => ({ data: [] })),

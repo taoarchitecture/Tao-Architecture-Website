@@ -1,5 +1,6 @@
 import prisma from './prisma';
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 const seedData = [
     {
@@ -40,27 +41,28 @@ const seedData = [
 async function main() {
   console.log('Start seeding ...');
 
-  // Seed User
-  const email = 'admin@tao.com';
-  // Check if user exists, if so delete to re-seed with known password
-  const existingUser = await prisma.user.findUnique({ where: { email } });
-  
-  if (existingUser) {
-    console.log('Resetting admin user...');
-    await prisma.user.delete({ where: { email } });
-  }
+  // Seed User — only ever creates the FIRST admin, and never touches an
+  // existing one. (A previous version of this script deleted and recreated
+  // the admin with a hardcoded password on every run, which is how a
+  // known-password admin account ended up live in production.)
+  const userCount = await prisma.user.count();
+  if (userCount === 0) {
+    const email = 'admin@tao.com';
+    const generatedPassword = crypto.randomBytes(24).toString('base64url');
+    const hashedPassword = await bcrypt.hash(generatedPassword, 10);
 
-  // Password: admin123
-  const hashedPassword = await bcrypt.hash('admin123', 10);
-  
-  await prisma.user.create({
-    data: {
-      email,
-      password: hashedPassword,
-      role: 'admin'
-    }
-  });
-  console.log('Created admin user: admin@tao.com / admin123');
+    await prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        role: 'admin',
+      },
+    });
+    console.log(`Created admin user: ${email}`);
+    console.log(`Generated password (shown once — save it now): ${generatedPassword}`);
+  } else {
+    console.log(`Skipping admin seed — ${userCount} user(s) already exist.`);
+  }
 
   // Seed Projects
   for (const p of seedData) {

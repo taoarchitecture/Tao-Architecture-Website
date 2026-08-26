@@ -1,10 +1,6 @@
 import { NextRequest } from 'next/server';
 import { proxyToServer } from '@/lib/proxyToServer';
 
-export async function GET(req: NextRequest) {
-  return proxyToServer(req, '/api/pages');
-}
-
 export async function PUT(req: NextRequest) {
-  return proxyToServer(req, '/api/pages');
+  return proxyToServer(req, '/api/auth/password');
 }

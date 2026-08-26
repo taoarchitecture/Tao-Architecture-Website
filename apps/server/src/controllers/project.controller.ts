@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { AuthRequest } from '../middleware/auth.middleware';
 import { CreateProjectInput, UpdateProjectInput } from '../schemas/project.schemas';
 import {
   createProjectService,
@@ -28,21 +29,24 @@ const parsePositiveInteger = (value?: string) => {
   return parsed;
 };
 
-export const getProjects = asyncHandler(async (req: Request, res: Response) => {
+export const getProjects = asyncHandler(async (req: AuthRequest, res: Response) => {
   const limit = parsePositiveInteger(req.query.limit?.toString());
   const cursor = parsePositiveInteger(req.query.cursor?.toString());
-  const response = await listProjects(limit, cursor);
+  const onlyPublished = req.user?.role !== 'admin';
+  const response = await listProjects(limit, cursor, onlyPublished);
   res.json(response);
 });
 
-export const getProjectBySlug = asyncHandler(async (req: Request, res: Response) => {
-  const project = await getProjectBySlugService(req.params.slug);
+export const getProjectBySlug = asyncHandler(async (req: AuthRequest, res: Response) => {
+  const onlyPublished = req.user?.role !== 'admin';
+  const project = await getProjectBySlugService(req.params.slug, onlyPublished);
   res.json(project);
 });
 
-export const getProjectById = asyncHandler(async (req: Request, res: Response) => {
+export const getProjectById = asyncHandler(async (req: AuthRequest, res: Response) => {
   const id = parseIdParam(req.params.id);
-  const project = await getProjectByIdService(id);
+  const onlyPublished = req.user?.role !== 'admin';
+  const project = await getProjectByIdService(id, onlyPublished);
   res.json(project);
 });
 

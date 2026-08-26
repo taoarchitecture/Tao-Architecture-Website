@@ -1,9 +1,10 @@
 declare module 'multer-storage-cloudinary' {
-  import { v2 as cloudinary } from 'cloudinary';
   import { StorageEngine } from 'multer';
 
   export interface Options {
-    cloudinary: typeof cloudinary;
+    // The runtime (v2.x) reaches into `.v2.uploader`, so this must be the full
+    // `cloudinary` package export, not the destructured `v2` namespace.
+    cloudinary: any;
     params?: {
       folder?: string;
       allowed_formats?: string[];

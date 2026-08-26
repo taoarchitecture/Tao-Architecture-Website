@@ -41,7 +41,10 @@ export default function AdminPagesPage() {
 
   const fetchPages = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pages`);
+      const token = localStorage.getItem('token');
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pages`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setPages(data);
     } catch (error) {
       console.error(error);

@@ -181,7 +181,7 @@ export default function ProjectDetailClient() {
                         </div>
                     </div>
 
-                    {project.subtitle && (
+                    {project.subtitle && project.subtitle.trim().toLowerCase() !== (project.description?.[0] || '').trim().toLowerCase() && (
                         <h2 className="tao-fs-big-sub inline-block border-y border-primary-gold py-2 mb-8 font-agenda font-bold text-neutral-dark-grey">
                             {project.subtitle}
                         </h2>

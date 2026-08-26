@@ -12,6 +12,11 @@ export default function AdminSettingsPage() {
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState<GlobalSettings | null>(null);
 
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [changingPassword, setChangingPassword] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -52,6 +57,34 @@ export default function AdminSettingsPage() {
       alert('Error saving settings');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleChangePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      alert('New password and confirmation do not match.');
+      return;
+    }
+    if (newPassword.length < 8) {
+      alert('New password must be at least 8 characters.');
+      return;
+    }
+    setChangingPassword(true);
+    try {
+      const token = localStorage.getItem('token');
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/password`,
+        { currentPassword, newPassword },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert('Password updated successfully!');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (error: any) {
+      alert(error?.response?.data?.message || 'Error changing password');
+    } finally {
+      setChangingPassword(false);
     }
   };
 
@@ -126,6 +159,50 @@ export default function AdminSettingsPage() {
               />
             </div>
           </div>
+        </div>
+
+        {/* Change Password */}
+        <div className="bg-white p-5 md:p-8 shadow-sm border-l-2 border-primary-red">
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-dark-grey mb-6">Change Password</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Current Password</label>
+              <input
+                type="password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                autoComplete="current-password"
+                className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">New Password</label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                autoComplete="new-password"
+                className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-neutral-medium-grey mb-2">Confirm New Password</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                autoComplete="new-password"
+                className="w-full border border-neutral-border-grey p-3 text-sm font-agenda focus:outline-none focus:border-primary-red transition-colors"
+              />
+            </div>
+          </div>
+          <button
+            onClick={handleChangePassword}
+            disabled={changingPassword || !currentPassword || !newPassword}
+            className="mt-6 bg-neutral-black text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-red transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed w-full sm:w-auto"
+          >
+            {changingPassword ? 'Updating...' : 'Update Password'}
+          </button>
         </div>
 
         {/* Social Links */}
