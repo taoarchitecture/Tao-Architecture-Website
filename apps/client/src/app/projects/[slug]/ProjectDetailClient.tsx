@@ -198,7 +198,7 @@ export default function ProjectDetailClient() {
 
                     {project.description && project.description.length > 0 && (
                         <div className="prose max-w-none font-agenda tao-fs-desc font-normal text-neutral-dark-grey leading-relaxed">
-                            {project.description.slice(0, showFullText ? undefined : 2).map((paragraph: string, idx: number) => (
+                            {project.description.slice(0, 2).map((paragraph: string, idx: number) => (
                                 <p key={idx} className="mb-6">{paragraph}</p>
                             ))}
 
