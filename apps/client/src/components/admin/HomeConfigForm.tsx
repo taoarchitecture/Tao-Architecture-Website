@@ -185,7 +185,7 @@ export default function HomeConfigForm() {
                       />
                     </div>
                     <p className="mt-1 w-40 text-[11px] leading-snug text-neutral-medium-grey">
-                      Recommended: 1920 × 1080px, landscape. Full-bleed background — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+                      Recommended: 2560 × 1440px, landscape. Full-bleed background — auto-compressed to ≤2560px / 2MB. JPG or WebP.
                     </p>
                     {slide.aspectWarning && (
                       <p className="mt-1 flex w-40 items-start gap-1 text-[11px] leading-snug text-amber-600">

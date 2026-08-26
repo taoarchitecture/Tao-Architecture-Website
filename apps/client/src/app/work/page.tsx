@@ -122,7 +122,7 @@ export default function Work() {
                           <Link href={`/projects/${project.slug || project.id}`} className="block w-full">
                             <div className="relative w-full h-[250px]">
                               <Image
-                                src={project.coverImage ? getImageUrl(project.coverImage) : '/img/placeholder.jpg'}
+                                src={project.coverImage ? getImageUrl(project.coverImage) : '/img/projects_gray.jpg'}
                                 alt={project.title}
                                 fill
                                 priority={index < 4}

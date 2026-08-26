@@ -8,7 +8,11 @@ export async function uploadToCloudinary(file: File, folder: string = 'tao'): Pr
     try {
       const options = {
         maxSizeMB: 2, // Compress to max 2MB
-        maxWidthOrHeight: 1920,
+        // Full-bleed hero/background images render up to ~2.5x viewport
+        // width on mobile (object-cover zoom on a tall, narrow box) and can
+        // exceed 1920px CSS width on large/high-DPI desktop screens — 1920
+        // was letting Next.js upscale past the source's native resolution.
+        maxWidthOrHeight: 2560,
         useWebWorker: true,
       };
       fileToUpload = await imageCompression(file, options);

@@ -118,13 +118,15 @@ export default function ProjectDetailClient() {
     <main className="min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="relative mb-12 h-[60vh] w-full bg-neutral-bg md:h-[80vh]">
+      <section className="relative mb-12 h-[45vh] w-full bg-neutral-bg md:h-[80vh]">
          {project.coverImage ? (
              <Image
                 src={getImageUrl(project.coverImage)}
                 alt={project.title}
                 fill
-                sizes="100vw"
+                // Same mobile object-cover zoom as the homepage hero — see
+                // HeroSlider.tsx's comment on this pattern.
+                sizes="(max-width: 767px) 200vw, 100vw"
                 className="object-cover"
                 priority
                 quality={85}
@@ -322,7 +324,7 @@ export default function ProjectDetailClient() {
                                      <Link href={`/projects/${related.slug || related.id}`} className="block">
                                          <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-[3px] border-primary-gold">
                                             <Image
-                                                src={related.coverImage ? getImageUrl(related.coverImage) : '/img/placeholder.jpg'}
+                                                src={related.coverImage ? getImageUrl(related.coverImage) : '/img/projects_gray.jpg'}
                                                 alt={related.title}
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, 33vw"

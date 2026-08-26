@@ -201,7 +201,7 @@ export default function Services() {
                   <div className="relative w-full mb-4 md:mb-0 overflow-hidden rounded-sm">
                     <div className="relative w-full h-[240px] sm:h-[300px] md:h-[350px] lg:h-[400px]">
                       <Image
-                        src={service.image ? getImageUrl(service.image) : '/img/placeholder.jpg'}
+                        src={service.image ? getImageUrl(service.image) : '/img/projects_gray.jpg'}
                         alt={service.title}
                         fill
                         priority={index === 0}

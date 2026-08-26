@@ -350,7 +350,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
               </label>
               <p className="text-xs text-neutral-medium-grey">Drag & drop or click to upload.</p>
               <p className="text-xs text-neutral-medium-grey">
-                Recommended: 1920 × 1080px, landscape. Used as both a full-bleed hero and a cropped thumbnail, so no single fixed ratio — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+                Recommended: 2560 × 1440px, landscape. Used as both a full-bleed hero and a cropped thumbnail, so no single fixed ratio — auto-compressed to ≤2560px / 2MB. JPG or WebP.
               </p>
               {coverFile && <p className="flex items-center gap-1 text-xs font-bold text-primary-red"><FiCheck size={12}/> {coverFile.name} ready</p>}
             </div>
@@ -371,7 +371,7 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
             </div>
           </div>
           <p className="mb-4 -mt-2 text-xs text-neutral-medium-grey">
-            Recommended: 1600 × 1000px minimum, landscape. Shown in a fixed-height grid (crops to fit) and a full-image lightbox — auto-compressed to ≤1920px / 2MB. JPG or WebP.
+            Recommended: 1600 × 1000px minimum, landscape. Shown in a fixed-height grid (crops to fit) and a full-image lightbox — auto-compressed to ≤2560px / 2MB. JPG or WebP.
           </p>
 
           {/* Drag & drop zone for gallery */}

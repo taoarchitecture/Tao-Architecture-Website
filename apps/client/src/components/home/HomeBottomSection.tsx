@@ -12,7 +12,7 @@ interface HomeBottomSectionProps {
 
 const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
   return (
-    <section className="relative w-full h-[70vh] min-h-[500px]">
+    <section className="relative w-full h-[50vh] min-h-[400px] md:h-[70vh] md:min-h-[500px]">
       {/* Background and overlay wrapper with mask for smooth transition */}
       <div 
         className="absolute inset-0 pointer-events-none"
@@ -27,7 +27,8 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
           fill
           className="object-cover"
           priority
-          sizes="100vw"
+          // Same mobile object-cover zoom as HeroSlider — see its comment.
+          sizes="(max-width: 767px) 220vw, 100vw"
           quality={85}
         />
         <div className="absolute inset-0 bg-black/40" />

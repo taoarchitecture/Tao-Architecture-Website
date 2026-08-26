@@ -319,7 +319,7 @@ const Navbar = () => {
                    >
                         <div className="relative mb-3 w-full aspect-[4/3] overflow-hidden rounded-sm bg-neutral-bg">
                            <Image
-                               src={project.coverImage ? getImageUrl(project.coverImage) : '/img/placeholder.jpg'}
+                               src={project.coverImage ? getImageUrl(project.coverImage) : '/img/projects_gray.jpg'}
                                alt={project.title}
                                fill
                                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"

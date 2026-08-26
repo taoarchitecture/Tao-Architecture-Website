@@ -33,7 +33,7 @@ const HeroSlider = ({
     // container's own bottom edge via translate-y — sized to the card's actual
     // measured overlap per breakpoint (~95-140px) plus a small buffer, so the
     // next section's own top padding stays independent, ordinary section rhythm.
-    <div className="w-full relative bg-black h-[85vh] mb-[120px] sm:mb-[144px] md:mb-[164px] lg:mb-[156px] md:h-[clamp(480px,72vh,860px)]">
+    <div className="w-full relative bg-black h-[58vh] mb-[120px] sm:mb-[144px] md:mb-[164px] lg:mb-[156px] md:h-[clamp(480px,72vh,860px)]">
       <Swiper
         spaceBetween={0}
         effect="fade"
@@ -57,7 +57,11 @@ const HeroSlider = ({
                 priority={index === 0}
                 fetchPriority={index === 0 ? "high" : "auto"}
                 className="object-cover object-center"
-                sizes="100vw"
+                // On mobile this box is taller (relative to width) than the
+                // landscape source, so object-cover zooms in well past 100%
+                // to cover it — sizes has to reflect that effective render
+                // width or Next fetches a source too small to stay sharp.
+                sizes="(max-width: 767px) 250vw, 100vw"
                 quality={85}
               />
 
