@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import WorkSidebar from '@/components/work/WorkSidebar';
-import { workCategories, Project as StaticProject } from '@/data/projects';
+import { workCategories } from '@/data/projects';
 import { getImageUrl } from '@/utils/image';
 
 export default function Work() {

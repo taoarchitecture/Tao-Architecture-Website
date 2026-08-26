@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { workCategories } from '@/data/projects';
 
 interface WorkSidebarProps {

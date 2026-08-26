@@ -7,7 +7,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/image';
 import { uploadToCloudinary } from '@/utils/cloudinary';
-import { FiPlus, FiTrash2, FiEdit, FiEye, FiEyeOff, FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { FiPlus, FiTrash2, FiEdit } from 'react-icons/fi';
 import { Service } from '@/types';
 
 export default function AdminServicesPage() {

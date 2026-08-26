@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import StudioSidebar from '@/components/studio/StudioSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { getImageUrl } from '@/utils/image';
@@ -11,7 +10,7 @@ import { TeamMember } from '@/types';
 const DEFAULT_INTRO = "Led by Principal Architect Manish Banker, TAO Architecture Pvt. Ltd. comprises a team of driven professionals passionately working to enrich the lives of clients through user centric sustainable design solutions. Keeping to its name, the studio leads 'The Way' to a greener future, incorporating and promoting organic design principles.";
 
 export default function Studio() {
-  const [activeSection, setActiveSection] = useState('team');
+  const [activeSection] = useState('team');
   const [introText, setIntroText] = useState(DEFAULT_INTRO);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
@@ -59,14 +58,6 @@ export default function Studio() {
 
     fetchIntro();
     fetchTeam();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Simple check since we only have one section now
-      setActiveSection('team');
-    };
-    // No scroll listener needed really if only one section, but keeping structure for safety
   }, []);
 
   const scrollToSection = (id: string) => {

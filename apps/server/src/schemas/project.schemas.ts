@@ -24,6 +24,14 @@ const optionalString = z.preprocess((value) => {
   return value;
 }, z.string().max(4000).optional());
 
+// Larger cap for fields that hold serialized JSON payloads (description
+// paragraphs, gallery items, related project lists) rather than plain text.
+const optionalLongString = z.preprocess((value) => {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value === 'string' && value.trim() === '') return undefined;
+  return value;
+}, z.string().max(65535).optional());
+
 export const createProjectSchema = z.object({
   title: z.string().min(1).max(255),
   slug: z.string().min(1).max(255),
@@ -33,15 +41,15 @@ export const createProjectSchema = z.object({
   status: optionalString,
   plotArea: optionalString,
   builtUpArea: optionalString,
-  description: optionalString,
+  description: optionalLongString,
   seoTitle: optionalString,
   seoDesc: optionalString,
   isPublished: booleanLike.default(true),
   isFeatured: booleanLike.default(false),
   order: numberLike.default(0),
-  relatedProjects: optionalString,
+  relatedProjects: optionalLongString,
   coverImage: optionalString,
-  gallery: optionalString,
+  gallery: optionalLongString,
 });
 
 export const updateProjectSchema = z.object({
@@ -53,7 +61,7 @@ export const updateProjectSchema = z.object({
   status: optionalString,
   plotArea: optionalString,
   builtUpArea: optionalString,
-  description: optionalString,
+  description: optionalLongString,
   seoTitle: optionalString,
   seoDesc: optionalString,
   isPublished: z.preprocess((value) => {
@@ -82,10 +90,10 @@ export const updateProjectSchema = z.object({
     if (typeof value === 'string') return Number(value);
     return value;
   }, z.number().int().nonnegative().optional()),
-  relatedProjects: optionalString,
-  existingGallery: optionalString,
+  relatedProjects: optionalLongString,
+  existingGallery: optionalLongString,
   coverImage: optionalString,
-  gallery: optionalString,
+  gallery: optionalLongString,
 });
 
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;

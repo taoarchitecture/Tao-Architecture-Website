@@ -177,7 +177,23 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
     } catch (error) {
       console.error('Error saving project:', error);
       setUploadStatus('error');
-      alert('Failed to save project. Please try again.');
+
+      let message = 'Failed to save project. Please try again.';
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const data = error.response.data;
+        const fieldErrors = data.details?.fieldErrors as Record<string, string[]> | undefined;
+        if (fieldErrors) {
+          const lines = Object.entries(fieldErrors)
+            .filter(([, msgs]) => msgs && msgs.length > 0)
+            .map(([field, msgs]) => `${field}: ${msgs.join(', ')}`);
+          if (lines.length > 0) {
+            message = `Validation failed:\n${lines.join('\n')}`;
+          }
+        } else if (data.message) {
+          message = data.message;
+        }
+      }
+      alert(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -237,6 +253,10 @@ export default function ProjectForm({ initialData, isEditing = false }: ProjectF
           <div className="flex items-center mt-8">
             <input type="checkbox" {...register('isFeatured')} id="isFeatured" className="w-5 h-5 text-primary-red border-neutral-border focus:ring-primary-red rounded-none" />
             <label htmlFor="isFeatured" className="ml-3 text-xs font-bold text-neutral-dark-grey uppercase tracking-wider cursor-pointer select-none">Feature on Home Page</label>
+          </div>
+          <div className="flex items-center mt-8">
+            <input type="checkbox" {...register('isPublished')} id="isPublished" className="w-5 h-5 text-primary-red border-neutral-border focus:ring-primary-red rounded-none" />
+            <label htmlFor="isPublished" className="ml-3 text-xs font-bold text-neutral-dark-grey uppercase tracking-wider cursor-pointer select-none">Published (visible on the public site)</label>
           </div>
         </div>
       </div>

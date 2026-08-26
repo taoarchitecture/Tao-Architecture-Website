@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { getImageUrl } from '@/utils/image';
 import { useState, useEffect } from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP, FaWhatsapp, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
 
 export default function ProjectDetailClient() {
   const params = useParams();
@@ -36,7 +35,6 @@ export default function ProjectDetailClient() {
           const projData = await projRes.json();
           // parse JSON fields
           if (typeof projData.description === 'string') projData.description = JSON.parse(projData.description);
-          if (typeof projData.details === 'string') projData.details = JSON.parse(projData.details);
           if (typeof projData.gallery === 'string') projData.gallery = JSON.parse(projData.gallery);
           if (typeof projData.relatedProjects === 'string') projData.relatedProjects = JSON.parse(projData.relatedProjects);
 
@@ -187,12 +185,12 @@ export default function ProjectDetailClient() {
                         </h2>
                     )}
 
-                    {project.details && (
+                    {(project.location || project.status || project.plotArea || project.builtUpArea) && (
                         <div className="bg-neutral-bg p-6 mb-8 border-l-[3px] border-primary-gold font-agenda tao-fs-details font-bold">
-                            {project.details.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.details.location}</p>}
-                            {project.details.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.details.status}</p>}
-                            {project.details.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.details.plotArea}</p>}
-                            {project.details.builtUpArea && <p className="mb-1"><span className="font-bold">Built Up Area :</span> {project.details.builtUpArea}</p>}
+                            {project.location && <p className="mb-1"><span className="font-bold">Location :</span> {project.location}</p>}
+                            {project.status && <p className="mb-1"><span className="font-bold">Status :</span> {project.status}</p>}
+                            {project.plotArea && <p className="mb-1"><span className="font-bold">Plot Area :</span> {project.plotArea}</p>}
+                            {project.builtUpArea && <p className="mb-1"><span className="font-bold">Built Up Area :</span> {project.builtUpArea}</p>}
                         </div>
                     )}
 

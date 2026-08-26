@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ServicesSidebar from '@/components/services/ServicesSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
-import { Service } from '@/types';
 import { getImageUrl } from '@/utils/image';
 
 // Hardcoded fallback services — used when no services exist in the DB
@@ -76,7 +75,7 @@ export default function Services() {
   const [services, setServices] = useState<any[]>(FALLBACK_SERVICES);
   const [introTitle, setIntroTitle] = useState(DEFAULT_INTRO.title);
   const [introContent, setIntroContent] = useState<string[]>(DEFAULT_INTRO.content);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {

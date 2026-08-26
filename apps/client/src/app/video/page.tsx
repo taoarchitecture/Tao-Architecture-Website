@@ -1,4 +1,3 @@
-import React from 'react';
 import { PlayerModal } from './player-modal';
 
 export const dynamic = 'force-dynamic';

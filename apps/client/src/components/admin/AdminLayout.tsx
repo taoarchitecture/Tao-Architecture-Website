@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { ReactNode, useState } from 'react';
-import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers, FiBarChart2, FiMenu, FiX } from 'react-icons/fi';
+import { FiHome, FiGrid, FiLogOut, FiSettings, FiFileText, FiMail, FiLayers, FiEdit3, FiUsers, FiBarChart2, FiMenu } from 'react-icons/fi';
 
 interface AdminLayoutProps {
   children: ReactNode;
