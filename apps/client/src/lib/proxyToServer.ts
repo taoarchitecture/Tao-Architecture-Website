@@ -43,6 +43,7 @@ export async function proxyToServer(
     }
   }
   init.headers = headers;
+  init.cache = 'no-store'; // Prevent Next.js from caching the proxy response
 
   try {
     const res = await fetch(url, init);
