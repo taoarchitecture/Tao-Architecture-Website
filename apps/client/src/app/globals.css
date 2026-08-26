@@ -452,6 +452,9 @@ input::placeholder, textarea::placeholder {
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   border-radius: 0 !important;
   transition: background var(--trans-base) !important;
+  color: #fff !important;
+  --swiper-navigation-color: #fff;
+  --swiper-navigation-size: 14px;
 }
 
 .swiper-button-next:hover,
@@ -459,11 +462,20 @@ input::placeholder, textarea::placeholder {
   background: rgba(255, 255, 255, 0.25) !important;
 }
 
+/* Fallback for older swiper versions that still use icon fonts */
 .swiper-button-next::after,
 .swiper-button-prev::after {
   font-size: 14px !important;
   font-weight: 700 !important;
   color: #fff !important;
+}
+
+/* Target the actual SVG icon in newer Swiper versions */
+.swiper-button-next svg,
+.swiper-button-prev svg {
+  width: 14px !important;
+  height: 14px !important;
+  fill: currentColor;
 }
 
 /* ─── 10. PORTFOLIO CARD BADGE ───────────────────────────────── */
