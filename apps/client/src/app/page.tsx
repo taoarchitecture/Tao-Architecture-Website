@@ -1,10 +1,15 @@
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import HeroSlider from '@/components/home/HeroSlider';
 import { getHomeConfig, getHomeGridItems } from '@/lib/api';
 import { PortfolioItem } from '@/components/home/PortfolioGrid';
 import { getImageUrl } from '@/utils/image';
 
-const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
+// Fetched via axios, which Next.js can't track for the Data/Route cache, so
+// without this the homepage would be statically frozen at build time and
+// never reflect admin edits to the hero/grid content.
+export const dynamic = 'force-dynamic';
+
+const PortfolioGrid = nextDynamic(() => import('@/components/home/PortfolioGrid'), {
   ssr: true,
   loading: () => (
     <section className="container mx-auto max-w-6xl bg-white px-4 pb-10 pt-20 sm:px-6 md:pb-14 md:pt-24 lg:px-8 lg:pt-28">
@@ -49,7 +54,7 @@ const PortfolioGrid = dynamic(() => import('@/components/home/PortfolioGrid'), {
   ),
 });
 
-const HomeBottomSection = dynamic(() => import('@/components/home/HomeBottomSection'), {
+const HomeBottomSection = nextDynamic(() => import('@/components/home/HomeBottomSection'), {
   ssr: true,
 });
 
