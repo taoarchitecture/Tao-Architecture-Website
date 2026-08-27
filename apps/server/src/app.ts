@@ -23,6 +23,10 @@ dotenv.config();
 
 const app = express();
 
+// Vercel sits in front of every request as a single trusted proxy hop, so
+// express-rate-limit needs this to read the real client IP from X-Forwarded-For.
+app.set('trust proxy', 1);
+
 // Known browser origins that legitimately call this API. Extra origins (e.g. a
 // Vercel preview deployment) can be added without a code change via the
 // comma-separated CORS_EXTRA_ORIGINS env var.

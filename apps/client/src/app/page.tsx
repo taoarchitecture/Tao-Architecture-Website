@@ -5,9 +5,12 @@ import { PortfolioItem } from '@/components/home/PortfolioGrid';
 import { getImageUrl } from '@/utils/image';
 
 // Fetched via axios, which Next.js can't track for the Data/Route cache, so
-// without this the homepage would be statically frozen at build time and
-// never reflect admin edits to the hero/grid content.
-export const dynamic = 'force-dynamic';
+// without a revalidate window the homepage would be statically frozen at
+// build time and never reflect admin edits to the hero/grid content.
+// force-dynamic was tried here but re-runs both API calls on every single
+// visit with no caching, which regressed LCP; ISR gets fresh content within
+// a minute while still serving cached HTML to visitors.
+export const revalidate = 60;
 
 const PortfolioGrid = nextDynamic(() => import('@/components/home/PortfolioGrid'), {
   ssr: true,

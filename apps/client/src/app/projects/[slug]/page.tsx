@@ -1,17 +1,20 @@
 import { notFound } from 'next/navigation';
 import ProjectDetailClient from './ProjectDetailClient';
+import { getProjectBySlug, getProjects } from '@/lib/api';
 
-async function projectExists(slug: string): Promise<boolean> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+// Same rationale as the homepage: ISR keeps the hero image/gallery servable
+// from cache (avoids the client-side fetch waterfall that was regressing LCP
+// and CLS) while still picking up admin edits within a minute.
+export const revalidate = 60;
+
+function safeParseArray(value: unknown): unknown[] {
+  if (Array.isArray(value)) return value;
+  if (typeof value !== 'string') return [];
   try {
-    const res = await fetch(`${apiUrl}/projects/slug/${slug}`, { cache: 'no-store' });
-    return res.ok;
-  } catch (err) {
-    // Don't 404 a real project just because this existence check itself failed
-    // (e.g. a transient network blip) — let the client component's own fetch
-    // and its existing fallback UI handle that case instead.
-    console.error('Failed to verify project existence:', err);
-    return true;
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
   }
 }
 
@@ -22,9 +25,25 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
 
-  if (!(await projectExists(slug))) {
+  const [projectData, allProjectsData] = await Promise.all([
+    getProjectBySlug(slug),
+    getProjects(),
+  ]);
+
+  if (!projectData) {
     notFound();
   }
 
-  return <ProjectDetailClient />;
+  const project = {
+    ...projectData,
+    description: safeParseArray(projectData.description),
+    gallery: safeParseArray(projectData.gallery),
+    relatedProjects: safeParseArray(projectData.relatedProjects),
+  };
+
+  const allProjects = (allProjectsData || [])
+    .filter((p: any) => p.isPublished !== false)
+    .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+
+  return <ProjectDetailClient project={project} allProjects={allProjects} />;
 }

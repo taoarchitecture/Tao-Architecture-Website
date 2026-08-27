@@ -1,60 +1,25 @@
 'use client';
 
-import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getImageUrl } from '@/utils/image';
 import { useState, useEffect } from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP, FaWhatsapp, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-export default function ProjectDetailClient() {
-  const params = useParams();
-  const slug = params?.slug as string;
-  const [project, setProject] = useState<any>(null);
-  const [allProjects, setAllProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+interface ProjectDetailClientProps {
+  project: any;
+  allProjects: any[];
+}
+
+export default function ProjectDetailClient({ project, allProjects }: ProjectDetailClientProps) {
   const [showFullText, setShowFullText] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [currentUrl, setCurrentUrl] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.href);
-    }
-
-    const fetchData = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
-        const [projRes, allRes] = await Promise.all([
-          fetch(`${apiUrl}/projects/slug/${slug}`),
-          fetch(`${apiUrl}/projects`)
-        ]);
-
-        if (projRes.ok) {
-          const projData = await projRes.json();
-          // parse JSON fields
-          if (typeof projData.description === 'string') projData.description = JSON.parse(projData.description);
-          if (typeof projData.gallery === 'string') projData.gallery = JSON.parse(projData.gallery);
-          if (typeof projData.relatedProjects === 'string') projData.relatedProjects = JSON.parse(projData.relatedProjects);
-
-          setProject(projData);
-        }
-
-        if (allRes.ok) {
-           const allData = await allRes.json();
-           const visibleProjects = allData.filter((p: any) => p.isPublished !== false).sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
-           setAllProjects(visibleProjects);
-        }
-
-      } catch (err) {
-        console.error('Failed to fetch project details', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [slug]);
+    setCurrentUrl(window.location.href);
+  }, []);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -68,46 +33,6 @@ export default function ProjectDetailClient() {
   const prevImage = () => {
     if(project) setLightboxIndex((prev) => (prev - 1 + (project.gallery?.length || 1)) % (project.gallery?.length || 1));
   };
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-white animate-pulse">
-        {/* Hero Section Skeleton */}
-        <section className="relative mb-12 h-[60vh] w-full bg-neutral-100/50 md:h-[80vh]"></section>
-
-        {/* Details Section Skeleton */}
-        <section className="container mx-auto px-4 mb-12">
-          <div className="flex flex-wrap md:flex-nowrap">
-              <div className="w-full md:w-3/4 pr-0 md:pr-12">
-                  <div className="mb-8">
-                      <div className="w-24 h-4 bg-neutral-100/50 mb-4"></div>
-                      <div className="w-3/4 h-10 bg-neutral-100/50 mb-4"></div>
-                      <div className="w-1/2 h-6 bg-neutral-100/50 mb-8"></div>
-                      <div className="w-full h-32 bg-neutral-100/50 mb-8 border-l-[3px] border-neutral-200"></div>
-                      <div className="space-y-4">
-                        <div className="w-full h-4 bg-neutral-100/50"></div>
-                        <div className="w-full h-4 bg-neutral-100/50"></div>
-                        <div className="w-5/6 h-4 bg-neutral-100/50"></div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </section>
-      </main>
-    );
-  }
-
-  if (!project) {
-    return (
-      <div className="min-h-screen flex items-center justify-center pt-20">
-        <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-            <p className="mb-8">The project you are looking for does not exist or has not been migrated yet.</p>
-            <Link href="/work" className="text-primary-red hover:underline">Back to Work</Link>
-        </div>
-      </div>
-    );
-  }
 
   // Find next/prev projects
   const currentIndex = allProjects.findIndex(p => p.id === project.id);

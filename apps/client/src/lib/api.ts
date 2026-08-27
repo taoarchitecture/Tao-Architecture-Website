@@ -20,7 +20,7 @@ export const getProjects = async () => {
 
 export const getProjectBySlug = async (slug: string) => {
   try {
-    const { data } = await api.get(`/projects/${slug}`);
+    const { data } = await api.get(`/projects/slug/${slug}`);
     return data;
   } catch (error) {
     console.warn(`Failed to fetch project ${slug}:`, error instanceof Error ? error.message : String(error));
