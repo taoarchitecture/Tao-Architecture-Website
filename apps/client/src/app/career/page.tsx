@@ -88,7 +88,7 @@ const CareerPage = () => {
               </label>
               <input
                 {...register('firstName', { required: true })}
-                className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+                className="tao-fs-input !text-base w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
               />
               {errors.firstName && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
             </div>
@@ -98,7 +98,7 @@ const CareerPage = () => {
               </label>
               <input
                 {...register('lastName', { required: true })}
-                className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+                className="tao-fs-input !text-base w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
               />
               {errors.lastName && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
             </div>
@@ -112,7 +112,7 @@ const CareerPage = () => {
               <input
                 type="email"
                 {...register('email', { required: true })}
-                className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+                className="tao-fs-input !text-base w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
               />
               {errors.email && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
             </div>
@@ -124,7 +124,7 @@ const CareerPage = () => {
               <input
                 type="tel"
                 {...register('phone', { required: true })}
-                className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+                className="tao-fs-input !text-base w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
               />
               {errors.phone && <span className="mt-2 block text-xs font-bold uppercase tracking-[0.14em] text-primary-red">Required</span>}
             </div>
@@ -136,7 +136,7 @@ const CareerPage = () => {
             </label>
             <select
               {...register('positionApply', { required: true })}
-              className="tao-fs-input w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
+              className="tao-fs-input !text-base w-full border-x-0 border-t-0 border-b border-neutral-medium-grey/30 bg-transparent px-0 pb-3 pt-2 font-agenda text-neutral-dark-grey focus:border-primary-red focus:outline-none focus:ring-0"
             >
               <option value="">Select Position</option>
               <option value="Architect">Architect</option>

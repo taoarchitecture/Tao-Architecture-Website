@@ -9,7 +9,11 @@ const router = Router();
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 5,
+  // A long-running local dev server shares one in-memory bucket across every
+  // login attempt anyone makes against it — a real 5/15min cap there locks
+  // everyone out after a handful of test logins, long before production's
+  // per-serverless-instance limiter would ever realistically trigger.
+  limit: process.env.NODE_ENV === 'production' ? 5 : 1000,
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: 'Too many login attempts. Please try again later.' },

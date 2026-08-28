@@ -431,6 +431,9 @@ input::placeholder, textarea::placeholder {
   width: 8px !important;
   height: 8px !important;
   background: rgba(255, 255, 255, 0.5) !important;
+  /* Thin dark ring keeps the dot visible over the light hero mat, not just
+     over the photo — barely noticeable on the photo itself. */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) !important;
   opacity: 1 !important;
   border-radius: 9999px !important;
   transition: width 0.35s var(--ease-out-expo), background var(--trans-base) !important;
@@ -439,15 +442,16 @@ input::placeholder, textarea::placeholder {
 .swiper-pagination-bullet-active {
   width: 28px !important;
   background: #ffffff !important;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 8px rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Navigation arrows */
+/* Navigation arrows — dark translucent pill reads on both the photo and the
+   light hero mat, unlike a white-tinted pill which disappears on the mat. */
 .swiper-button-next,
 .swiper-button-prev {
   width: 44px !important;
   height: 44px !important;
-  background: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(0, 0, 0, 0.35) !important;
   backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   border-radius: 0 !important;
@@ -459,7 +463,7 @@ input::placeholder, textarea::placeholder {
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(0, 0, 0, 0.55) !important;
 }
 
 /* Fallback for older swiper versions that still use icon fonts */
@@ -508,8 +512,10 @@ input::placeholder, textarea::placeholder {
 /* Menu — target 13px */
 .tao-fs-menu     { font-size: clamp(11.5px, 0.75rem + 0.15vw, 13.5px); }
 
-/* Home Banner heading — target 32px */
-.tao-fs-banner   { font-size: clamp(22px, 1.4rem + 1vw, 32px); }
+/* Home Banner heading — target 32px. Lower floor (was 22px) so the now much
+   narrower mobile hero card (see HeroSlider.tsx) doesn't force as many
+   wrapped lines; the ceiling and roughly where it's reached are unchanged. */
+.tao-fs-banner   { font-size: clamp(16px, 0.9rem + 1.3vw, 32px); }
 
 /* Portfolio category badge — target 16px */
 .tao-fs-badge    { font-size: clamp(13px, 0.8rem + 0.2vw, 16px); }

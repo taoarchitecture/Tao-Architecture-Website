@@ -43,16 +43,20 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
     <main className="min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="relative mb-12 h-[45vh] w-full bg-neutral-bg md:h-[80vh]">
+      {/* aspect-video on mobile instead of a vh-based height — see
+          HeroSlider.tsx's comment on why a landscape aspect ratio closes the
+          object-contain letterbox gap instead of fighting a portrait-ish box. */}
+      <section className="relative mb-12 aspect-video w-full bg-neutral-bg md:aspect-auto md:h-[80vh]">
          {project.coverImage ? (
              <Image
                 src={getImageUrl(project.coverImage)}
                 alt={project.title}
                 fill
-                // Same mobile object-cover zoom as the homepage hero — see
-                // HeroSlider.tsx's comment on this pattern.
-                sizes="(max-width: 767px) 200vw, 100vw"
-                className="object-cover"
+                // object-contain shows the full photo uncropped on every
+                // screen — the section's own bg-neutral-bg shows through as
+                // a mat where the box and photo proportions don't match.
+                sizes="100vw"
+                className="object-contain"
                 priority
                 quality={85}
              />

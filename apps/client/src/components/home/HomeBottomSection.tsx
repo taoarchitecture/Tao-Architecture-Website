@@ -12,9 +12,15 @@ interface HomeBottomSectionProps {
 
 const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
   return (
-    <section className="relative w-full h-[50vh] min-h-[400px] md:h-[70vh] md:min-h-[500px]">
+    // aspect-video (not a vh-based height) below sm: only — this box is tall
+    // and narrow there (same mismatch as HeroSlider's mobile box), which is
+    // what the object-contain/mat below actually addresses. Checked sm:/md:
+    // against the original object-cover first: that box's aspect ratio is
+    // already reasonable at those sizes, so they're left untouched — object-
+    // contain there would introduce letterbox bars that don't exist today.
+    <section className="relative w-full aspect-video sm:aspect-auto sm:h-[50vh] sm:min-h-[400px] md:h-[70vh] md:min-h-[500px]">
       {/* Background and overlay wrapper with mask for smooth transition */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%)',
@@ -25,10 +31,13 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
           src="/img/portfolio/masonry/background.jpg"
           alt="Background"
           fill
-          className="object-cover"
+          // Below sm: object-contain + this section's own dark background as
+          // a mat, replacing the aggressive mobile zoom/crop the original
+          // object-cover caused on this tall, narrow box (see HeroSlider.tsx).
+          // sm: and up restore the original full-bleed object-cover exactly.
+          className="scale-105 bg-neutral-black object-contain object-center sm:scale-100 sm:bg-transparent sm:object-cover"
           priority
-          // Same mobile object-cover zoom as HeroSlider — see its comment.
-          sizes="(max-width: 767px) 220vw, 100vw"
+          sizes="100vw"
           quality={85}
         />
         <div className="absolute inset-0 bg-black/40" />
@@ -44,7 +53,7 @@ const HomeBottomSection = ({ config }: HomeBottomSectionProps) => {
         </p>
         <div className="pointer-events-auto">
           <Magnetic>
-            <Link 
+            <Link
               href={config?.bottomCtaLink || "/contact"}
               className="inline-block border-2 border-white text-white px-8 py-3 text-sm font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300"
             >

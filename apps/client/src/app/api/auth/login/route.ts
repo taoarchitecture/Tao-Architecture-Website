@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ADMIN_TOKEN_COOKIE } from '@/lib/auth';
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit';
 
-const LOGIN_LIMIT = 5;
+// Same rationale as the Express loginLimiter — a long-running local dev
+// server shares one bucket across every attempt anyone makes against it.
+const LOGIN_LIMIT = process.env.NODE_ENV === 'production' ? 5 : 1000;
 const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 
 function getServerBaseUrl(): string {
