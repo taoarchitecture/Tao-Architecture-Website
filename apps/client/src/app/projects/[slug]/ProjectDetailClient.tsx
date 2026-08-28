@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getImageUrl } from '@/utils/image';
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaPinterestP, FaWhatsapp, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 interface ProjectDetailClientProps {
@@ -11,10 +12,31 @@ interface ProjectDetailClientProps {
   allProjects: any[];
 }
 
+// Mirrors PortfolioGrid.tsx's own cardVariants — same grid-of-cards entrance
+// pattern, extended to this page's gallery/related grids.
+const cardVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
+};
+
+const lightboxImageVariants = {
+  enter: (dir: number) => ({ opacity: 0, x: dir * 16 }),
+  center: { opacity: 1, x: 0 },
+  exit: (dir: number) => ({ opacity: 0, x: -dir * 16 }),
+};
+
 export default function ProjectDetailClient({ project, allProjects }: ProjectDetailClientProps) {
   const [showFullText, setShowFullText] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxDirection, setLightboxDirection] = useState<1 | -1>(1);
   const [currentUrl, setCurrentUrl] = useState('');
 
   useEffect(() => {
@@ -27,11 +49,17 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
   };
 
   const nextImage = () => {
-    if(project) setLightboxIndex((prev) => (prev + 1) % (project.gallery?.length || 1));
+    if(project) {
+      setLightboxDirection(1);
+      setLightboxIndex((prev) => (prev + 1) % (project.gallery?.length || 1));
+    }
   };
 
   const prevImage = () => {
-    if(project) setLightboxIndex((prev) => (prev - 1 + (project.gallery?.length || 1)) % (project.gallery?.length || 1));
+    if(project) {
+      setLightboxDirection(-1);
+      setLightboxIndex((prev) => (prev - 1 + (project.gallery?.length || 1)) % (project.gallery?.length || 1));
+    }
   };
 
   // Find next/prev projects
@@ -132,9 +160,20 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                             ))}
 
                             {/* Hidden text for read more */}
-                             {showFullText && project.description.slice(2).map((paragraph: string, idx: number) => (
-                                <p key={`more-${idx}`} className="mb-6 animate-fadeIn">{paragraph}</p>
-                            ))}
+                            <AnimatePresence initial={false}>
+                              {showFullText && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 8 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: 8 }}
+                                  transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                                >
+                                  {project.description.slice(2).map((paragraph: string, idx: number) => (
+                                    <p key={`more-${idx}`} className="mb-6">{paragraph}</p>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
 
                             {project.description.length > 2 && (
                                 <button
@@ -184,10 +223,17 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                 <span className="w-12 h-px bg-neutral-border"></span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ staggerChildren: 0.14 }}
+            >
                 {project.gallery.map((item: any, idx: number) => (
-                    <div
+                    <motion.div
                       key={idx}
+                      variants={cardVariants}
                       className="group relative cursor-pointer"
                       onClick={() => openLightbox(idx)}
                     >
@@ -204,9 +250,9 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                                 {item.caption && <h4 className="text-xl font-bold uppercase mb-2">{item.caption}</h4>}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
 
             {/* View More / View Less for gallery could go here if we had lots of images */}
          </div>
@@ -244,12 +290,18 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
              {project.relatedProjects && project.relatedProjects.length > 0 && (
                  <div>
                      <h3 className="text-center text-2xl font-light uppercase tracking-widest mb-12">Related Projects</h3>
-                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <motion.div
+                       className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                       initial="hidden"
+                       whileInView="visible"
+                       viewport={{ once: true, margin: '-80px' }}
+                       transition={{ staggerChildren: 0.14 }}
+                     >
                          {project.relatedProjects.map((relatedId: string) => {
                              const related = allProjects.find(p => p.id === relatedId || p.slug === relatedId);
                              if (!related) return null;
                              return (
-                                 <div key={related.id} className="group text-center">
+                                 <motion.div key={related.id} variants={cardVariants} className="group text-center">
                                      <Link href={`/projects/${related.slug || related.id}`} className="block">
                                          <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-[3px] border-primary-gold">
                                             <Image
@@ -276,55 +328,82 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                                             }
                                         })()}
                                      </p>
-                                 </div>
+                                 </motion.div>
                              );
                          })}
-                     </div>
+                     </motion.div>
                  </div>
              )}
          </div>
       </section>
 
       {/* Lightbox Modal */}
-      {isLightboxOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
-          <button
-            onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 z-[101] text-white transition-colors hover:text-primary-red"
+      <AnimatePresence>
+        {isLightboxOpen && (
+          <motion.div
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
-            <FaTimes size={24} />
-          </button>
+            <button
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-6 right-6 z-[101] text-white transition-colors hover:text-primary-red"
+            >
+              <FaTimes size={24} />
+            </button>
 
-          <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-4 z-[101] text-white transition-colors hover:text-primary-red md:left-8"
-          >
-            <FaChevronLeft size={32} />
-          </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+              className="absolute left-4 z-[101] text-white transition-colors hover:text-primary-red md:left-8"
+            >
+              <FaChevronLeft size={32} />
+            </button>
 
-          <div className="relative w-full max-w-6xl h-[90vh] flex flex-col items-center justify-center pt-8">
-            <div className="relative w-full flex-1 min-h-0 mb-6">
-              {project.gallery && project.gallery[lightboxIndex] && (
-                <Image
-                  src={getImageUrl(project.gallery[lightboxIndex].url || project.gallery[lightboxIndex].src)}
-                  alt={project.gallery[lightboxIndex].caption || project.gallery[lightboxIndex].title || ''}
-                  fill
-                  sizes="100vw"
-                  className="object-contain"
-                  quality={85}
-                />
-              )}
-            </div>
-          </div>
+            <motion.div
+              className="relative w-full max-w-6xl h-[90vh] flex flex-col items-center justify-center pt-8"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="relative w-full flex-1 min-h-0 mb-6">
+                <AnimatePresence mode="wait" custom={lightboxDirection}>
+                  {project.gallery && project.gallery[lightboxIndex] && (
+                    <motion.div
+                      key={lightboxIndex}
+                      custom={lightboxDirection}
+                      variants={lightboxImageVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={getImageUrl(project.gallery[lightboxIndex].url || project.gallery[lightboxIndex].src)}
+                        alt={project.gallery[lightboxIndex].caption || project.gallery[lightboxIndex].title || ''}
+                        fill
+                        sizes="100vw"
+                        className="object-contain"
+                        quality={85}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
 
-          <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-4 z-[101] text-white transition-colors hover:text-primary-red md:right-8"
-          >
-            <FaChevronRight size={32} />
-          </button>
-        </div>
-      )}
+            <button
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+              className="absolute right-4 z-[101] text-white transition-colors hover:text-primary-red md:right-8"
+            >
+              <FaChevronRight size={32} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </main>
   );

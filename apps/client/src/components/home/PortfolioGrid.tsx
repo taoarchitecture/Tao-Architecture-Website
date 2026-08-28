@@ -46,7 +46,7 @@ const OverlayCard = ({ item }: { item: PortfolioItem }) => {
         </div>
 
         <Link href={item.link} className="block focus-ring" aria-label={`View ${item.title}`}>
-          <div className={`relative w-full overflow-hidden ${item.heightClass || 'aspect-[10/11]'}`}>
+          <div className={`relative w-full overflow-hidden ${item.heightClass || 'aspect-[10/9.4]'}`}>
             <Image
               src={item.image}
               alt={item.title}

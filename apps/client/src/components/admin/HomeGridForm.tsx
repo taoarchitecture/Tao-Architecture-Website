@@ -26,7 +26,7 @@ interface GridItemDraft {
 // on mobile before the 2-column breakpoint), so uploads stay sharp on
 // retina screens.
 const SLOT_ASPECT: Record<string, { ratio: number; label: string; width: number; height: number }> = {
-  corporate: { ratio: 10 / 11, label: '10:11', width: 1200, height: 1320 },
+  corporate: { ratio: 10 / 9.4, label: '10:9.4', width: 1200, height: 1128 },
   'luxury-villas': { ratio: 10 / 5.9, label: '10:5.9', width: 1200, height: 708 },
   commercial: { ratio: 10 / 6.1, label: '10:6.1', width: 1200, height: 732 },
   'cozy-homes': { ratio: 10 / 6.1, label: '10:6.1', width: 1200, height: 732 },

@@ -18,7 +18,7 @@ const PortfolioGrid = nextDynamic(() => import('@/components/home/PortfolioGrid'
     <section className="container mx-auto max-w-6xl bg-white px-4 pb-10 pt-20 sm:px-6 md:pb-14 md:pt-24 lg:px-8 lg:pt-28">
       <div className="space-y-12 md:hidden animate-pulse">
         <div className="space-y-4">
-          <div className="aspect-[10/11] bg-neutral-border" />
+          <div className="aspect-[10/9.4] bg-neutral-border" />
           <div className="h-4 w-3/4 bg-neutral-border" />
           <div className="h-4 w-1/2 bg-neutral-border" />
         </div>
@@ -31,7 +31,7 @@ const PortfolioGrid = nextDynamic(() => import('@/components/home/PortfolioGrid'
       <div className="hidden animate-pulse md:grid md:grid-cols-2 md:gap-x-7 lg:gap-x-10">
         <div className="space-y-12 lg:space-y-16">
           <div className="space-y-4">
-            <div className="aspect-[10/11] bg-neutral-border" />
+            <div className="aspect-[10/9.4] bg-neutral-border" />
             <div className="h-4 w-2/3 bg-neutral-border" />
           </div>
           <div className="space-y-4">
@@ -93,7 +93,10 @@ const gridSlots: Record<string, GridSlotLayout> = {
     overlayStyle: true,
     overlayCtaClass: 'border-white text-white bg-white/10 hover:bg-white hover:text-black',
     desktopColumn: 'left',
-    heightClass: 'aspect-[10/11]',
+    // Landscape, not aspect-[10/11] — this slot's image is portrait (600x625),
+    // and a portrait box on top of a portrait source made the card a tall,
+    // narrow outlier next to every other (landscape) grid card.
+    heightClass: 'aspect-[10/9.4]',
   },
   'luxury-villas': {
     category: 'LUXURY VILLAS',

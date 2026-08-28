@@ -273,7 +273,7 @@ const Navbar = () => {
       <div 
         className={`fixed inset-0 bg-white z-[100] transition-all duration-300 flex flex-col ${isSearchOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       >
-        <div className="container mx-auto px-4 py-8 max-w-5xl flex-1 flex flex-col mt-4 md:mt-10">
+        <div className={`container mx-auto px-4 py-8 max-w-5xl flex-1 flex flex-col mt-4 md:mt-10 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isSearchOpen ? 'translate-y-0' : '-translate-y-2'}`}>
           {/* Header */}
           <div className="flex justify-between items-center mb-10">
             <h2 className="text-xl md:text-2xl font-agenda font-bold tracking-widest text-primary-red uppercase">Search Projects</h2>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ContactSidebar from '@/components/contact/ContactSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
@@ -174,37 +175,54 @@ export default function Contact() {
             <section id="email-form" className="mb-10 border-t-[3px] border-primary-gold pt-8 px-8 bg-neutral-bg">
               <h2 className="tao-fs-form-h font-normal mb-8 font-agenda">Email us</h2>
               
-              {submitted ? (
-                <div className="py-12 text-center">
-                  <p className="text-lg font-agenda text-neutral-dark-grey mb-4">Thank you for your message!</p>
-                  <p className="text-sm text-neutral-medium-grey mb-6">We&apos;ll get back to you as soon as possible.</p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="btn btn-outline-red"
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="py-12 text-center"
                   >
-                    Send Another Message
-                  </button>
-                </div>
-              ) : (
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
-                    <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
-                  </div>
-                  
-                  <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" />
-                  <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
-                  <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
-                  
-                  <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base"></textarea>
-                  
-                  <div className="flex justify-end">
-                    <button type="submit" disabled={submitting} className="btn btn-outline-red disabled:opacity-50">
-                      {submitting ? 'Sending...' : 'Send Message'}
+                    <p className="text-lg font-agenda text-neutral-dark-grey mb-4">Thank you for your message!</p>
+                    <p className="text-sm text-neutral-medium-grey mb-6">We&apos;ll get back to you as soon as possible.</p>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="btn btn-outline-red"
+                    >
+                      Send Another Message
                     </button>
-                  </div>
-                </form>
-              )}
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="space-y-6"
+                    onSubmit={handleSubmit}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <input type="text" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
+                      <input type="text" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
+                    </div>
+
+                    <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" />
+                    <input type="email" placeholder="Email ID*" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
+                    <input type="text" placeholder="Subject*" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base" required />
+
+                    <textarea rows={5} placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="w-full bg-transparent border-t-0 border-x-0 border-b border-neutral-border p-3 focus:outline-none focus:ring-0 focus:border-primary-gold transition-colors font-agenda tao-fs-input !text-base"></textarea>
+
+                    <div className="flex justify-end">
+                      <button type="submit" disabled={submitting} className="btn btn-outline-red disabled:opacity-50">
+                        {submitting ? 'Sending...' : 'Send Message'}
+                      </button>
+                    </div>
+                  </motion.form>
+                )}
+              </AnimatePresence>
             </section>
 
             {/* Career CTA Section */}
