@@ -169,7 +169,9 @@ export default function Services() {
       {/* ── Intro Section ── */}
       <section className="container mx-auto px-4 py-10 md:py-20">
         <div className="max-w-4xl">
-          <h1 className="tao-fs-svc-h font-bold uppercase mb-6 font-agenda">{introTitle}</h1>
+          <span className="inline-block h-[3px] w-12 bg-primary-gold mb-5" />
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-primary-red">Our Approach</p>
+          <h1 className="text-fluid-h1 font-agenda font-bold uppercase tracking-[0.04em] text-neutral-dark-grey mb-6">{introTitle}</h1>
           <div className="tao-fs-desc font-agenda text-neutral-dark-grey space-y-5 leading-relaxed">
             {introContent.map((para, idx) => (
               <p key={idx}>{para}</p>

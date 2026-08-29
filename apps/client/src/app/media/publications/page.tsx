@@ -127,8 +127,8 @@ export default function Publications() {
     return (
       <main className="min-h-screen bg-white pb-20 animate-pulse">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-12">
-            <div className="h-12 w-64 bg-neutral-100/50 mx-auto"></div>
+          <div className="text-center mb-14">
+            <div className="h-16 w-72 bg-neutral-100/50 mx-auto"></div>
           </div>
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-x-8">
             {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -168,8 +168,10 @@ export default function Publications() {
     <main className="min-h-screen bg-white pb-20">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Page Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary-red uppercase tracking-wide">
+        <div className="text-center mb-14">
+          <span className="inline-block h-[3px] w-12 bg-primary-gold mb-5" />
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-primary-red">Media &amp; Awards</p>
+          <h1 className="text-fluid-h1 font-agenda font-bold uppercase tracking-[0.04em] text-neutral-dark-grey">
             Publications
           </h1>
         </div>

@@ -32,7 +32,11 @@ export default function ServicesSidebar({ activeSection, items }: ServicesSideba
   };
 
   return (
-    <div className="hidden md:block sticky top-24 h-[calc(100vh-100px)] overflow-y-auto pl-8 pt-10">
+    // pt-[34px] matches the first service section's own top spacing exactly
+    // (its border-t-2 + pt-8 = 2px + 32px), so the sidebar's first label lines
+    // up pixel-for-pixel with that section's image/heading instead of the
+    // ~6px drift an unrelated pt-10 produced.
+    <div className="hidden md:block sticky top-24 h-[calc(100vh-100px)] overflow-y-auto pl-8 pt-[34px]">
       <div className="flex flex-col space-y-4 border-l border-neutral-light-grey pl-4">
         {serviceItems.map((item) => (
           <button
