@@ -4,9 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import TaoLogoMark from '@/components/ui/TaoLogoMark';
+import Magnetic from '@/components/ui/Magnetic';
 import { getImageUrl } from '@/utils/image';
+import { workCategories } from '@/data/projects';
 import { Project } from '@/types';
 
 const Navbar = () => {
@@ -37,6 +40,23 @@ const Navbar = () => {
     }
   }, [isSearchOpen]);
 
+  // Escape closes the overlay, and body scroll is locked while it's open —
+  // both standard expectations for a fullscreen search modal that this one
+  // was missing entirely.
+  useEffect(() => {
+    if (!isSearchOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsSearchOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isSearchOpen]);
+
   // Fetch the live project list once, the first time search is opened, and
   // cache it — reopening search re-filters in memory rather than refetching.
   useEffect(() => {
@@ -48,11 +68,17 @@ const Navbar = () => {
       .catch(() => {});
   }, [isSearchOpen]);
 
-  // Autocomplete matching
+  // Autocomplete matching. The extra normalized-category check exists for the
+  // category quick-filter chips below: project.category is stored as a plain
+  // id ("luxuryvillas"), not the human label the chip shows ("Luxury Villas"),
+  // so a plain substring match on the query would never hit — comparing both
+  // sides with spaces stripped makes clicking a chip actually filter.
+  const normalizedQuery = searchQuery.trim().toLowerCase().replace(/\s+/g, '');
   const searchResults = searchQuery.trim() !== ''
       ? dbProjects.filter(p =>
           p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.category.toLowerCase().replace(/\s+/g, '') === normalizedQuery ||
           (Array.isArray(p.description) && p.description.join(' ').toLowerCase().includes(searchQuery.toLowerCase()))
         )
       : [];
@@ -270,70 +296,142 @@ const Navbar = () => {
       </div>
 
       {/* Fullscreen Search Overlay */}
-      <div 
-        className={`fixed inset-0 bg-white z-[100] transition-all duration-300 flex flex-col ${isSearchOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-      >
-        <div className={`container mx-auto px-4 py-8 max-w-5xl flex-1 flex flex-col mt-4 md:mt-10 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isSearchOpen ? 'translate-y-0' : '-translate-y-2'}`}>
-          {/* Header */}
-          <div className="flex justify-between items-center mb-10">
-            <h2 className="text-xl md:text-2xl font-agenda font-bold tracking-widest text-primary-red uppercase">Search Projects</h2>
-            <button 
-                onClick={() => setIsSearchOpen(false)}
-                className="rounded-full bg-neutral-bg p-2 text-neutral-medium-grey transition-colors hover:text-primary-red"
-                aria-label="Close search"
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.div
+            className="fixed inset-0 bg-white z-[100] flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.div
+              className="container mx-auto flex max-w-5xl flex-1 flex-col px-4 py-8 md:mt-6 md:py-10"
+              initial={{ opacity: 0, y: -14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
             >
-                <FaTimes size={20} aria-hidden="true" />
-            </button>
-          </div>
-          
-          {/* Search Input */}
-          <div className="relative mb-8">
-             <input
-                ref={searchInputRef}
-                type="search"
-                id="search-input"
-                aria-label="Search projects"
-                placeholder="Type to search projects, sectors, categories..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xl md:text-3xl border-x-0 border-t-0 border-b-2 border-neutral-medium-grey/30 px-0 pb-4 pr-12 focus:ring-0 ring-0 focus:outline-none focus-visible:outline-none focus:shadow-none focus:border-primary-red transition-colors bg-transparent font-light text-neutral-dark-grey"
-             />
-             <FaSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-medium-grey/50 hover:text-primary-red transition-colors cursor-pointer" size={24} aria-hidden="true" />
-          </div>
-
-          {/* Autocomplete Results */}
-          <div className="flex-1 overflow-y-auto pb-8 custom-scrollbar">
-            {searchQuery.trim() !== '' && searchResults.length === 0 && (
-                <div className="text-center mt-16 text-neutral-medium-grey">
-                    <FaSearch className="mx-auto mb-4 opacity-20" size={40} aria-hidden="true" />
-                    <p className="text-lg">No projects found for "{searchQuery}"</p>
+              {/* Header */}
+              <div className="mb-8 flex items-start justify-between md:mb-10">
+                <div>
+                  <span className="mb-4 inline-block h-[3px] w-12 bg-primary-gold" />
+                  <h2 className="font-agenda text-xl font-bold uppercase tracking-[0.15em] text-neutral-dark-grey md:text-2xl">
+                    Search
+                  </h2>
                 </div>
-            )}
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-               {searchResults.slice(0, 12).map(project => (
-                   <Link
-                        key={project.id}
-                        href={`/projects/${project.slug || project.id}`}
-                        className="group flex flex-col"
-                   >
-                        <div className="relative mb-3 w-full aspect-[4/3] overflow-hidden rounded-sm bg-neutral-bg">
-                           <Image
-                               src={project.coverImage ? getImageUrl(project.coverImage) : '/img/projects_gray.jpg'}
-                               alt={project.title}
-                               fill
-                               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                               className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                           />
-                        </div>
-                        <h4 className="font-bold text-sm tracking-widest uppercase text-neutral-dark-grey group-hover:text-primary-red transition-colors font-agenda">{project.title}</h4>
-                        <p className="text-[10px] text-neutral-medium-grey/80 tracking-widest uppercase mt-1">{project.category}</p>
-                   </Link>
-               ))}
-            </div>
-          </div>
-        </div>
-      </div>
+                <Magnetic>
+                  <button
+                    onClick={() => setIsSearchOpen(false)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-bg text-neutral-medium-grey transition-colors duration-200 hover:bg-neutral-dark-grey hover:text-white"
+                    aria-label="Close search"
+                  >
+                    <FaTimes size={16} aria-hidden="true" />
+                  </button>
+                </Magnetic>
+              </div>
+
+              {/* Search Input — underline grows from the left on focus/typing,
+                  the same after:-pseudo-element treatment as the desktop nav
+                  links above, instead of the old static focus:border-color. */}
+              <div className="relative mb-10">
+                <input
+                  ref={searchInputRef}
+                  type="search"
+                  id="search-input"
+                  aria-label="Search projects"
+                  placeholder="Search projects, sectors, categories..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  // [&::-webkit-search-cancel-button]:appearance-none removes
+                  // the browser's own native clear "x" — its default styling
+                  // (a small blue glyph) doesn't match this design at all and
+                  // duplicated the icon on the right; that icon now doubles
+                  // as the clear control instead (see below).
+                  className="w-full border-none bg-transparent px-0 pb-4 pr-12 font-agenda text-2xl font-light text-neutral-dark-grey placeholder:text-neutral-medium-grey/40 focus:outline-none focus:ring-0 focus-visible:outline-none [&::-webkit-search-cancel-button]:appearance-none md:text-4xl"
+                />
+                {searchQuery ? (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-1 top-2 text-neutral-medium-grey/60 transition-colors hover:text-primary-red md:top-3"
+                    aria-label="Clear search"
+                  >
+                    <FaTimes size={20} aria-hidden="true" />
+                  </button>
+                ) : (
+                  <FaSearch
+                    className="pointer-events-none absolute right-1 top-2 text-neutral-medium-grey/40 md:top-3"
+                    size={22}
+                    aria-hidden="true"
+                  />
+                )}
+                <span className="absolute bottom-0 left-0 h-px w-full bg-neutral-border" aria-hidden="true" />
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] bg-primary-red transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    searchQuery ? 'w-full' : 'w-0'
+                  }`}
+                  aria-hidden="true"
+                />
+              </div>
+
+              {/* Browse-by-category chips — shown before typing so the modal
+                  has a curated starting point instead of blank white space. */}
+              {searchQuery.trim() === '' && (
+                <div>
+                  <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-medium-grey">
+                    Browse by category
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
+                    {workCategories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => setSearchQuery(category.label)}
+                        className="border border-neutral-border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-medium-grey transition-colors duration-200 hover:border-primary-red hover:text-primary-red"
+                      >
+                        {category.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Autocomplete Results */}
+              <div className="flex-1 overflow-y-auto pb-8 pt-8 custom-scrollbar">
+                {searchQuery.trim() !== '' && searchResults.length === 0 && (
+                    <div className="mt-16 text-center text-neutral-medium-grey">
+                        <FaSearch className="mx-auto mb-4 opacity-20" size={40} aria-hidden="true" />
+                        <p className="text-lg">No projects found for &quot;{searchQuery}&quot;</p>
+                    </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                   {searchResults.slice(0, 12).map(project => (
+                       <Link
+                            key={project.id}
+                            href={`/projects/${project.slug || project.id}`}
+                            className="group flex flex-col"
+                       >
+                            <div className="relative mb-3 w-full overflow-hidden bg-neutral-bg aspect-[4/3]">
+                               <div className="absolute inset-x-0 top-0 z-10 h-[4px] bg-primary-gold pointer-events-none" />
+                               <Image
+                                   src={project.coverImage ? getImageUrl(project.coverImage) : '/img/projects_gray.jpg'}
+                                   alt={project.title}
+                                   fill
+                                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                   className="object-cover transition-transform duration-700 group-hover:scale-105"
+                               />
+                            </div>
+                            <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary-red">{project.category}</p>
+                            <h4 className="font-agenda text-sm font-bold uppercase tracking-wide text-neutral-dark-grey transition-colors group-hover:text-primary-red">{project.title}</h4>
+                       </Link>
+                   ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

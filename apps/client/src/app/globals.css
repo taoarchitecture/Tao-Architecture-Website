@@ -544,8 +544,13 @@ input::placeholder, textarea::placeholder {
 /* Project main heading — target 41px */
 .tao-fs-proj-main { font-size: clamp(26px, 1.5rem + 1.8vw, 41px); }
 
-/* Project subtitle — target 30px */
-.tao-fs-big-sub  { font-size: clamp(20px, 1.2rem + 1vw, 30px); }
+/* Project subtitle — target 22px. Was 30px/bold, sitting close enough to
+   the 41px bold h1 above it that the two competed for the same visual
+   weight instead of stepping down; reused here alongside italic + a
+   lighter weight (see ProjectDetailClient.tsx) so it reads as a quieter
+   tagline under the title, matching how Services' own subtitle line
+   (tao-fs-input italic) is treated. */
+.tao-fs-big-sub  { font-size: clamp(16px, 0.95rem + 0.5vw, 22px); }
 
 /* Project details box — target 16px */
 .tao-fs-details  { font-size: clamp(13px, 0.8rem + 0.2vw, 16px); }

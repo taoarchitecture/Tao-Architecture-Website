@@ -158,7 +158,7 @@ export default function Work() {
                     )}
                     {/* If no projects after loading, show empty state */}
                     {!loading && categoryProjects.length === 0 && (
-                      <div className="col-span-3 py-10 text-neutral-medium-grey italic">
+                      <div className="col-span-1 md:col-span-2 lg:col-span-4 py-10 text-neutral-medium-grey italic">
                         Projects coming soon...
                       </div>
                     )}

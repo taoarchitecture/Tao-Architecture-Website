@@ -31,7 +31,12 @@ const MobilePageNav = ({ items, activeItem, onSelect }: MobilePageNavProps) => {
   }, [updateFade, items]);
 
   return (
-    <div className="md:hidden sticky top-[62px] z-40 bg-white border-b border-neutral-border shadow-premium-sm relative">
+    // top-[57px] matches the navbar's own scrolled-state height exactly (its
+    // py-2 + h-10 content row + 1px border = 57px) — MobilePageNav only
+    // engages its sticky position once scrolled past that state anyway, so
+    // any offset other than the navbar's real height leaves a visible gap
+    // (or overlap) between the two bars.
+    <div className="md:hidden sticky top-[57px] z-40 bg-white border-b border-neutral-border shadow-premium-sm relative">
       {/* Scrollable row — scrollbar hidden */}
       <div
         ref={scrollRef}

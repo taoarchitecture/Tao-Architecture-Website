@@ -81,7 +81,10 @@ const Footer = () => {
   } catch { /* use default */ }
 
   return (
-    <footer className="bg-neutral-off-black text-white relative overflow-hidden">
+    /* bg-[#262626] rather than the shared neutral-off-black (#1d1d1d) token —
+       scoped to just the footer so admin's own dark chrome (which reuses
+       that token) is untouched — a touch lighter/greyer per design request. */
+    <footer className="bg-[#262626] text-white relative overflow-hidden">
       {/* Gold accent line at top */}
       <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-80" />
 

@@ -130,6 +130,13 @@ export default function Studio() {
                 </div>
               )}
 
+              {/* Empty state — fetch succeeded but no active members */}
+              {!loading && !error && teamMembers.length === 0 && (
+                <div className="py-16 text-center">
+                  <p className="text-neutral-medium-grey text-lg">Team members will appear here soon.</p>
+                </div>
+              )}
+
               <div className="space-y-16">
                 {/* Lead Member */}
                 {teamMembers.length > 0 && (() => {

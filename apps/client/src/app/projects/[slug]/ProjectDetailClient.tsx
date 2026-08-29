@@ -139,7 +139,11 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                     </div>
 
                     {project.subtitle && project.subtitle.trim().toLowerCase() !== (project.description?.[0] || '').trim().toLowerCase() && (
-                        <h2 className="tao-fs-big-sub inline-block border-y border-primary-gold py-2 mb-8 font-agenda font-bold text-neutral-dark-grey">
+                        /* italic + font-normal (not bold) — matches the tagline
+                           treatment Services gives its own subtitle line, so this
+                           reads as a quieter step down from the bold uppercase h1
+                           above rather than a second, equally heavy statement. */
+                        <h2 className="tao-fs-big-sub inline-block border-y border-primary-gold py-2 mb-8 font-agenda italic font-normal text-neutral-medium-grey">
                             {project.subtitle}
                         </h2>
                     )}
@@ -291,7 +295,7 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                  <div>
                      <h3 className="text-center text-2xl font-light uppercase tracking-widest mb-12">Related Projects</h3>
                      <motion.div
-                       className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                       className="flex flex-col gap-8 md:flex-row md:flex-wrap md:justify-center"
                        initial="hidden"
                        whileInView="visible"
                        viewport={{ once: true, margin: '-80px' }}
@@ -301,7 +305,7 @@ export default function ProjectDetailClient({ project, allProjects }: ProjectDet
                              const related = allProjects.find(p => p.id === relatedId || p.slug === relatedId);
                              if (!related) return null;
                              return (
-                                 <motion.div key={related.id} variants={cardVariants} className="group text-center">
+                                 <motion.div key={related.id} variants={cardVariants} className="group text-center md:w-[calc((100%-4rem)/3)]">
                                      <Link href={`/projects/${related.slug || related.id}`} className="block">
                                          <div className="relative h-[250px] w-full mb-4 overflow-hidden border-t-[3px] border-primary-gold">
                                             <Image

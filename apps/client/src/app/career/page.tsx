@@ -365,29 +365,35 @@ const CareerPage = () => {
 
             <div className="mt-8">
               <h3 className={subHeadingClass}>Graduation Details</h3>
+              {/* md:min-h-[3rem] on every label here — "Institute / School /
+                  University" wraps to 2-3 lines depending on column width (3 at
+                  the narrow end of md, 2 higher up) while its siblings stay on
+                  1, and without a shared reserved height that pushed its input
+                  out of row alignment with the other four. 3rem (3 lines)
+                  covers the worst case. */}
               <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-5">
                 <div>
-                  <label className={labelClass}>Stream</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Stream</label>
                   <input {...register('graduationStream', { required: true })} className={inputClass} />
                   {errors.graduationStream && requiredError}
                 </div>
                 <div>
-                  <label className={labelClass}>Percentage</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Percentage</label>
                   <input {...register('graduationPercentage', { required: true })} className={inputClass} />
                   {errors.graduationPercentage && requiredError}
                 </div>
                 <div>
-                  <label className={labelClass}>Institute / School / University</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Institute / School / University</label>
                   <input {...register('graduationInstitute', { required: true })} className={inputClass} />
                   {errors.graduationInstitute && requiredError}
                 </div>
                 <div>
-                  <label className={labelClass}>Joining Year</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Joining Year</label>
                   <input {...register('graduationJoining', { required: true })} className={inputClass} />
                   {errors.graduationJoining && requiredError}
                 </div>
                 <div>
-                  <label className={labelClass}>Passing Year</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Passing Year</label>
                   <input {...register('graduationPassing', { required: true })} className={inputClass} />
                   {errors.graduationPassing && requiredError}
                 </div>
@@ -398,23 +404,23 @@ const CareerPage = () => {
               <h3 className={subHeadingClass}>Post-Graduation Details</h3>
               <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-5">
                 <div>
-                  <label className={labelClass}>Stream</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Stream</label>
                   <input {...register('postGraduationStream')} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Percentage</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Percentage</label>
                   <input {...register('postGraduationPercentage')} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Institute / School / University</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Institute / School / University</label>
                   <input {...register('postGraduationInstitute')} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Joining Year</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Joining Year</label>
                   <input {...register('postGraduationJoining')} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Passing Year</label>
+                  <label className={`${labelClass} md:min-h-[3rem]`}>Passing Year</label>
                   <input {...register('postGraduationPassing')} className={inputClass} />
                 </div>
               </div>
