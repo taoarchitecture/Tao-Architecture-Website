@@ -166,21 +166,29 @@ export default function Services() {
         onSelect={scrollToSection}
       />
 
-      {/* ── Intro Section ── */}
-      <section className="container mx-auto px-4 py-10 md:py-20">
-        <div className="max-w-4xl">
-          <span className="inline-block h-[3px] w-12 bg-primary-gold mb-5" />
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-primary-red">Our Approach</p>
-          <h1 className="text-fluid-h1 font-agenda font-bold uppercase tracking-[0.04em] text-neutral-dark-grey mb-6">{introTitle}</h1>
-          <div className="tao-fs-desc font-agenda text-neutral-dark-grey space-y-5 leading-relaxed">
-            {introContent.map((para, idx) => (
-              <p key={idx}>{para}</p>
-            ))}
+      {/* ── Intro ── */}
+      {/* The sidebar itself only appears lower, next to the service grid
+          (like before) — but this row reserves the same md:w-1/4 + gap-8
+          width as an invisible spacer, so the intro paragraph still lines
+          up with the photo/content column below instead of sitting flush
+          against the page's left edge. */}
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="md:w-1/4 hidden md:block" aria-hidden="true" />
+          <div className="w-full md:w-3/4 pt-10 pb-10 md:pt-16 md:pb-14">
+            <span className="inline-block h-[3px] w-12 bg-primary-gold mb-5" />
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-primary-red">Our Approach</p>
+            <h1 className="text-fluid-h1 font-agenda font-bold uppercase tracking-[0.04em] text-neutral-dark-grey mb-6">{introTitle}</h1>
+            <div className="tao-fs-desc font-agenda text-neutral-dark-grey space-y-5 leading-relaxed max-w-4xl">
+              {introContent.map((para, idx) => (
+                <p key={idx}>{para}</p>
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Main Content with Sidebar ── */}
+      {/* ── Sidebar + Service cards ── */}
       <div className="container mx-auto px-4 pb-20">
         <div className="flex flex-col md:flex-row gap-8">
 

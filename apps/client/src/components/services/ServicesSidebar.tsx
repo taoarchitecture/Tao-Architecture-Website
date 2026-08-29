@@ -34,8 +34,9 @@ export default function ServicesSidebar({ activeSection, items }: ServicesSideba
   return (
     // pt-[34px] matches the first service section's own top spacing exactly
     // (its border-t-2 + pt-8 = 2px + 32px), so the sidebar's first label lines
-    // up pixel-for-pixel with that section's image/heading instead of the
-    // ~6px drift an unrelated pt-10 produced.
+    // up pixel-for-pixel with that section's image/heading. The sidebar only
+    // runs alongside the service grid, not the intro above it — the intro
+    // row reserves matching spacer width instead so the two stay aligned.
     <div className="hidden md:block sticky top-24 h-[calc(100vh-100px)] overflow-y-auto pl-8 pt-[34px]">
       <div className="flex flex-col space-y-4 border-l border-neutral-light-grey pl-4">
         {serviceItems.map((item) => (
