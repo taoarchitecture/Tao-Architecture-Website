@@ -49,7 +49,13 @@ export async function uploadToCloudinary(file: File, folder: string = 'tao'): Pr
     formData.append('folder', folder);
   }
 
-  const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+  // 'auto' (not 'image') lets Cloudinary detect the right resource type per
+  // file — required for career-application resumes, which are commonly
+  // .doc/.docx and get flatly rejected ("Unsupported ZIP file") under the
+  // image endpoint. Images uploaded through this same function (project
+  // photos, team photos, etc.) still resolve to resource_type "image" under
+  // 'auto', so this is a no-op for every other existing caller.
+  const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
     method: 'POST',
     body: formData,
   });

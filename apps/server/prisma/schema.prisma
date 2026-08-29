@@ -23,6 +23,7 @@ model Application {
   availabilityDate      String?
   whyTao                String?
   firstName             String
+  middleName            String?
   lastName              String
   phone                 String
   landline              String?
@@ -32,7 +33,8 @@ model Application {
   birthDate             String?
   gender                String?
   maritalStatus         String?
-  
+  familyDetails         String?    // Father/mother/spouse name+occupation, per maritalStatus (JSON)
+
   // JSON fields for complex data
   education             String?    // Stores SSC, HSC, Graduation, PostGraduation details (JSON)
   experience            String?    // Stores previous work experience (JSON)

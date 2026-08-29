@@ -34,6 +34,7 @@ export const createApplicationService = async (
   const application = await prisma.application.create({
     data: {
       firstName: input.firstName,
+      middleName: input.middleName,
       lastName: input.lastName,
       email: input.email,
       phone: input.phone,
@@ -46,6 +47,7 @@ export const createApplicationService = async (
       birthDate: input.birthDate,
       gender: input.gender,
       maritalStatus: input.maritalStatus,
+      familyDetails: input.familyDetails,
       education: input.education,
       experience: input.experience,
       references: input.references,
