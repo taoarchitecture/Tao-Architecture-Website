@@ -32,6 +32,8 @@ app.set('trust proxy', 1);
 // comma-separated CORS_EXTRA_ORIGINS env var.
 const allowedOrigins = [
   'https://tao-architecture-website.vercel.app',
+  'https://taoarchitecture.com',
+  'https://www.taoarchitecture.com',
   'http://localhost:3000',
   ...(process.env.CORS_EXTRA_ORIGINS?.split(',').map((o) => o.trim()).filter(Boolean) || []),
 ];
