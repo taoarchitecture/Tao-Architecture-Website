@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { workCategories } from '@/data/projects';
+import { scrollToSection } from '@/utils/scroll';
 
 interface WorkSidebarProps {
   activeCategory: string;
@@ -9,19 +10,7 @@ interface WorkSidebarProps {
 
 const WorkSidebar = ({ activeCategory }: WorkSidebarProps) => {
   const scrollToCategory = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100; // Adjust for header height
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSection(id);
   };
 
   return (

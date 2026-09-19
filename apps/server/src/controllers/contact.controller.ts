@@ -1,48 +1,55 @@
 import { Request, Response } from 'express';
 import prisma from '../prisma';
-import nodemailer from 'nodemailer';
+import { z } from 'zod';
 import { AppError } from '../utils/app-error';
 import { asyncHandler } from '../utils/async-handler';
+import { sendContactNotification } from '../services/email.service';
+
+const contactSchema = z.object({
+  firstName: z.string().trim().min(1, 'First name is required'),
+  lastName: z.string().trim().min(1, 'Last name is required'),
+  companyName: z.string().optional().nullable(),
+  email: z.string().trim().email('Valid email is required'),
+  subject: z.string().trim().min(1, 'Subject is required'),
+  message: z.string().trim().min(1, 'Message is required'),
+});
 
 export const submitContact = asyncHandler(async (req: Request, res: Response) => {
-  const { firstName, lastName, companyName, email, subject, message } = req.body;
-
-  if (!firstName || !lastName || !email || !subject || !message) {
-    throw new AppError('All required fields must be filled', 400);
+  const parseResult = contactSchema.safeParse(req.body);
+  if (!parseResult.success) {
+    const errorMsg = parseResult.error.issues.map(issue => issue.message).join(', ');
+    throw new AppError(errorMsg, 400);
   }
 
-  try {
-    await prisma.contactSubmission.create({
-      data: { firstName, lastName, companyName, email, subject, message },
-    });
+  const { firstName, lastName, companyName, email, subject, message } = parseResult.data;
 
-    // Send email notification if SMTP is configured — the submission above
-    // has already been saved either way, so a missing/misconfigured SMTP
-    // setup shouldn't turn a successful submission into a 500.
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST || 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-      });
+  // 1. Save submission to database
+  const submission = await prisma.contactSubmission.create({
+    data: {
+      firstName,
+      lastName,
+      companyName: companyName || null,
+      email,
+      subject,
+      message,
+    },
+  });
 
-      await transporter.sendMail({
-        from: '"Tao Architecture" <noreply@taoarchitecture.com>',
-        to: process.env.CONTACT_EMAIL || 'info@taoarchitecture.com',
-        subject: `New Contact Submission: ${subject}`,
-        text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nMessage: ${message}`,
-      });
-    }
+  // 2. Dispatch email notification asynchronously (without blocking or failing the request)
+  sendContactNotification({
+    firstName,
+    lastName,
+    email,
+    subject,
+    message,
+  }).catch((err) => {
+    console.warn('Failed to send contact notification email:', err instanceof Error ? err.message : err);
+  });
 
-    res.status(201).json({ message: 'Message sent successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error sending message' });
-  }
+  res.status(201).json({
+    message: 'Message sent successfully',
+    id: submission.id,
+  });
 });
 
 export const getContactSubmissions = asyncHandler(async (req: Request, res: Response) => {

@@ -28,41 +28,33 @@ export const getSettings = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const updateSettings = asyncHandler(async (req: Request, res: Response) => {
-  try {
-    const {
-      siteName, contactEmail, phoneNumbers, address,
-      googleMapsUrl, facebookUrl, instagramUrl, linkedinUrl, youtubeUrl,
-      footerTagline,
-    } = req.body;
+  const {
+    siteName, contactEmail, phoneNumbers, address,
+    googleMapsUrl, facebookUrl, instagramUrl, linkedinUrl, youtubeUrl,
+    footerTagline,
+  } = req.body;
 
-    const existing = await prisma.globalSettings.findFirst();
+  const existing = await prisma.globalSettings.findFirst();
 
-    const data = {
-      siteName,
-      contactEmail,
-      phoneNumbers,
-      address,
-      googleMapsUrl,
-      facebookUrl,
-      instagramUrl,
-      linkedinUrl,
-      youtubeUrl,
-      footerTagline,
-    };
+  const data = {
+    siteName,
+    contactEmail,
+    phoneNumbers: typeof phoneNumbers === 'string' ? phoneNumbers : JSON.stringify(phoneNumbers || []),
+    address,
+    googleMapsUrl,
+    facebookUrl,
+    instagramUrl,
+    linkedinUrl,
+    youtubeUrl,
+    footerTagline,
+  };
 
-    let result;
-    if (existing) {
-      result = await prisma.globalSettings.update({
+  const result = existing
+    ? await prisma.globalSettings.update({
         where: { id: existing.id },
         data,
-      });
-    } else {
-      result = await prisma.globalSettings.create({ data });
-    }
+      })
+    : await prisma.globalSettings.create({ data });
 
-    res.json(result);
-  } catch (error) {
-    console.error('Error updating settings:', error);
-    res.status(500).json({ message: 'Error updating settings' });
-  }
+  res.json(result);
 });

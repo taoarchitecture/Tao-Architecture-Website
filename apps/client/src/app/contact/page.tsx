@@ -6,21 +6,15 @@ import ContactSidebar from '@/components/contact/ContactSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { GlobalSettings } from '@/types';
-import axios from 'axios';
+import { SITE_DEFAULTS } from '@/constants/siteDefaults';
+import api, { getSettings } from '@/lib/api';
+import { scrollToSection } from '@/utils/scroll';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
-// Hardcoded defaults – used when API fails or settings not configured yet
-const DEFAULTS = {
-  contactEmail: 'admin@taoarchitecture.com',
-  phoneNumbers: '["+91-744-771-9343 / 44"]',
-  address: 'A/2 , Friends Enclave Society, West Block,\nOpp Sai Hira Complex, Mundhwa,\nPune 411036 India',
-  googleMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.7520911131955!2d73.89636821535252!3d18.540101787397706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c10126443907%3A0xc8701cf41af4250e!2sTAO+ARCHITECTURE+PVT.+LTD.!5e0!3m2!1sen!2sin!4v1528098796192',
-  facebookUrl: 'https://www.facebook.com/taoarchitect/',
-  instagramUrl: 'https://www.instagram.com/tao_architecture/?hl=en',
-  linkedinUrl: 'https://www.linkedin.com/company/tao-architecture-design/',
-};
+const CONTACT_SECTIONS = ['contact-details', 'email-form', 'careers-cta'];
 
 export default function Contact() {
-  const [activeSection, setActiveSection] = useState<string>('contact-details');
+  const [activeSection] = useActiveSection(CONTACT_SECTIONS, { defaultSection: 'contact-details' });
   const [settings, setSettings] = useState<GlobalSettings | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -34,56 +28,25 @@ export default function Contact() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-        const res = await fetch(`${apiUrl}/settings`);
-        if (res.ok) setSettings(await res.json());
-      } catch { /* use defaults */ }
+    let isMounted = true;
+    getSettings()
+      .then((data) => {
+        if (isMounted && data) setSettings(data);
+      })
+      .catch(() => { /* use defaults */ });
+
+    return () => {
+      isMounted = false;
     };
-    fetchSettings();
   }, []);
 
-  const val = (key: keyof typeof DEFAULTS) => (settings as any)?.[key] || DEFAULTS[key];
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-        const offset = 120;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-      const sections = ['contact-details', 'email-form', 'careers-cta'];
-
-      for (const id of sections) {
-        const element = document.getElementById(id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const val = (key: keyof typeof SITE_DEFAULTS) => (settings as any)?.[key] || SITE_DEFAULTS[key];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+      await api.post('/contact', {
         firstName, lastName, companyName, email, subject, message
       });
       setSubmitted(true);

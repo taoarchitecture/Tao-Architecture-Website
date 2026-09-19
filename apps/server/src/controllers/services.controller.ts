@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import prisma from '../prisma';
+import { safeJsonParse } from '../utils/json';
 
 // Sensible defaults shown on the public site until an admin configures real
 // services. Returned as-is when the table is empty — never persisted here;
@@ -62,7 +63,7 @@ export const getServices = async (req: Request, res: Response) => {
     // Parse the JSON items field for each service
     const parsed = services.map(s => ({
       ...s,
-      items: s.items ? JSON.parse(s.items) : [],
+      items: safeJsonParse<string[]>(s.items, []),
     }));
     res.json(parsed);
   } catch (error) {
@@ -79,7 +80,7 @@ export const getAllServices = async (req: Request, res: Response) => {
     });
     const parsed = services.map(s => ({
       ...s,
-      items: s.items ? JSON.parse(s.items) : [],
+      items: safeJsonParse<string[]>(s.items, []),
     }));
     res.json(parsed);
   } catch (error) {
@@ -97,7 +98,7 @@ export const getServiceById = async (req: Request, res: Response) => {
     if (!service) return res.status(404).json({ message: 'Not found' });
     res.json({
       ...service,
-      items: service.items ? JSON.parse(service.items) : [],
+      items: safeJsonParse<string[]>(service.items, []),
     });
   } catch (error) {
     console.error('Error fetching service:', error);

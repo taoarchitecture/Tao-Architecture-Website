@@ -3,6 +3,7 @@ import prisma from '../prisma';
 import { deleteUploadedFile } from '../middleware/upload.middleware';
 import { AppError } from '../utils/app-error';
 import { asyncHandler } from '../utils/async-handler';
+import { safeJsonParse } from '../utils/json';
 
 // --- Team Members ---
 
@@ -12,7 +13,7 @@ export const getTeamMembers = asyncHandler(async (req: Request, res: Response) =
   });
   const parsed = members.map(m => ({
     ...m,
-    bio: m.bio ? JSON.parse(m.bio) : [],
+    bio: safeJsonParse<string[]>(m.bio, []),
   }));
   res.json(parsed);
 });

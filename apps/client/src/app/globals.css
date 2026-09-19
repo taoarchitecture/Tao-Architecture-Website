@@ -80,11 +80,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
   font-family: 'Agenda', sans-serif;
   color: var(--neutral-medium-grey);
@@ -179,16 +174,16 @@ select:focus-visible {
   /* Glassmorphism Panel */
   .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
   }
 
   /* Glassmorphism Dark (for dark overlays) */
   .glass-dark {
     background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px) saturate(1.4);
     -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    backdrop-filter: blur(12px) saturate(1.4);
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
@@ -269,40 +264,20 @@ select:focus-visible {
   box-shadow: none;
 }
 
-/* Outline Button */
-.btn-outline {
-  background-color: transparent;
-  border-color: var(--neutral-dark-grey);
-  color: var(--neutral-dark-grey);
-}
-
-.btn-outline::before {
-  background-color: var(--neutral-dark-grey);
-}
-
-.btn-outline:hover {
-  color: #ffffff;
-  border-color: var(--neutral-dark-grey);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-outline:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-/* Stroke Button */
+/* Outline & Stroke Button */
+.btn-outline,
 .btn-stroke {
   background-color: transparent;
   border-color: var(--neutral-dark-grey);
   color: var(--neutral-dark-grey);
 }
 
+.btn-outline::before,
 .btn-stroke::before {
   background-color: var(--neutral-dark-grey);
 }
 
+.btn-outline:hover,
 .btn-stroke:hover {
   color: #ffffff;
   border-color: var(--neutral-dark-grey);
@@ -310,6 +285,7 @@ select:focus-visible {
   box-shadow: var(--shadow-md);
 }
 
+.btn-outline:active,
 .btn-stroke:active {
   transform: translateY(0);
   box-shadow: none;
@@ -384,16 +360,16 @@ input::placeholder, textarea::placeholder {
 /* ─── 8. NAVBAR GLASS LAYER ─────────────────────────────────── */
 .navbar-glass {
   background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 2px 16px -4px rgba(0, 0, 0, 0.08);
 }
 
 .navbar-scrolled {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px) saturate(1.8);
   -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.8);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.10);
 }
@@ -452,6 +428,7 @@ input::placeholder, textarea::placeholder {
   width: 44px !important;
   height: 44px !important;
   background: rgba(0, 0, 0, 0.35) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   border-radius: 0 !important;
@@ -579,9 +556,3 @@ input::placeholder, textarea::placeholder {
 /* ─── 14. WEBKIT SCROLLBAR HIDE (for MobilePageNav) ─────────── */
 .overflow-x-auto::-webkit-scrollbar { display: none; }
 
-/* ─── 15. IMAGE SHARPNESS & RENDERING ──────────────────────── */
-img {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  transform: translateZ(0);
-}

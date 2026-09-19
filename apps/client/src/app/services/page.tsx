@@ -5,6 +5,7 @@ import Image from 'next/image';
 import ServicesSidebar from '@/components/services/ServicesSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { getImageUrl } from '@/utils/image';
+import { scrollToSection } from '@/utils/scroll';
 
 // Hardcoded fallback services — used when no services exist in the DB
 const FALLBACK_SERVICES = [
@@ -118,33 +119,18 @@ export default function Services() {
     label: s.title,
   }));
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 120;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   useEffect(() => {
     if (services.length === 0) return;
 
     const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
       const slugs = services.map(s => s.slug);
 
       for (const slug of slugs) {
         const element = document.getElementById(slug);
         if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= 300) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(slug);
             break;
           }
@@ -152,7 +138,7 @@ export default function Services() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [services]);
 

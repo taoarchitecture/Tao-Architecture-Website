@@ -6,6 +6,7 @@ import StudioSidebar from '@/components/studio/StudioSidebar';
 import MobilePageNav from '@/components/layout/MobilePageNav';
 import { getImageUrl } from '@/utils/image';
 import { TeamMember } from '@/types';
+import { scrollToSection } from '@/utils/scroll';
 
 const DEFAULT_INTRO = "Led by Principal Architect Manish Banker, TAO Architecture Pvt. Ltd. comprises a team of driven professionals passionately working to enrich the lives of clients through user centric sustainable design solutions. Keeping to its name, the studio leads 'The Way' to a greener future, incorporating and promoting organic design principles.";
 
@@ -60,18 +61,6 @@ export default function Studio() {
     fetchTeam();
   }, []);
 
-  const scrollToSection = (id: string) => {
-    // For now only team section exists, but future-proof
-    const element = document.getElementById(id);
-    if (element) {
-        const offset = 120;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
-  };
 
   const resolveMemberImage = (image: string | null | undefined): string | null => {
     const src = getImageUrl(image);

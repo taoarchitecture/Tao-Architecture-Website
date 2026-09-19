@@ -7,6 +7,7 @@ import MobilePageNav from '@/components/layout/MobilePageNav';
 import WorkSidebar from '@/components/work/WorkSidebar';
 import { workCategories } from '@/data/projects';
 import { getImageUrl } from '@/utils/image';
+import { scrollToSection } from '@/utils/scroll';
 
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState<string>('luxuryvillas');
@@ -14,19 +15,7 @@ export default function Work() {
   const [loading, setLoading] = useState(true);
 
   const scrollToCategory = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 120; // Adjust for header + mobile nav height
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSection(id);
   };
 
   useEffect(() => {

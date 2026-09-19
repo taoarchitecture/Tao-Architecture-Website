@@ -93,3 +93,33 @@ export const sendApplicationRejectedEmail = async (
     text: `Dear ${payload.firstName},\n\nThank you for taking the time to apply for the ${payload.positionApply} position at Tao Architecture.\n\nAfter careful consideration of your application, we regret to inform you that we will not be moving forward with your candidacy at this time. We will keep your resume on file and may reach out if a suitable opportunity arises in the future.\n\nWe wish you all the best in your job search and future career endeavors.\n\nBest regards,\nTao Architecture Team`,
   });
 };
+
+type ContactEmailInput = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+export const sendContactNotification = async (
+  payload: ContactEmailInput
+): Promise<void> => {
+  if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.warn('Skipping contact email notification: SMTP credentials are missing.');
+    return;
+  }
+
+  const transporter = createTransporter();
+  const recipient = process.env.CONTACT_EMAIL || 'info@taoarchitecture.com';
+  const sender = process.env.SMTP_FROM || process.env.SMTP_USER;
+
+  await transporter.sendMail({
+    from: `"Tao Architecture" <${sender}>`,
+    to: recipient,
+    subject: `New Contact Submission: ${payload.subject}`,
+    text: `Name: ${payload.firstName} ${payload.lastName}\nEmail: ${payload.email}\nSubject: ${payload.subject}\nMessage: ${payload.message}`,
+  });
+};
+
+export { createTransporter };

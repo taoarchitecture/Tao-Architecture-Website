@@ -1,5 +1,7 @@
 'use client';
 
+import { scrollToSection } from '@/utils/scroll';
+
 interface ServicesSidebarProps {
   activeSection: string;
   items?: { id: string; label: string }[];
@@ -16,20 +18,6 @@ const DEFAULT_ITEMS = [
 
 export default function ServicesSidebar({ activeSection, items }: ServicesSidebarProps) {
   const serviceItems = items || DEFAULT_ITEMS;
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100; // Adjust for sticky header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
     // pt-[34px] matches the first service section's own top spacing exactly

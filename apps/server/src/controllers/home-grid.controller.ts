@@ -2,10 +2,11 @@ import { Request, Response } from 'express';
 import prisma from '../prisma';
 import { AppError } from '../utils/app-error';
 import { asyncHandler } from '../utils/async-handler';
+import { safeJsonParse } from '../utils/json';
 
 const parse = (item: { titleLines: string | null; [key: string]: unknown }) => ({
   ...item,
-  titleLines: item.titleLines ? JSON.parse(item.titleLines) : [],
+  titleLines: safeJsonParse<string[]>(item.titleLines, []),
 });
 
 // GET /api/home-grid — public

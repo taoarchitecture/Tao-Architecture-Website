@@ -6,19 +6,8 @@ import TaoLogoMark from '@/components/ui/TaoLogoMark';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { GlobalSettings } from '@/types';
-
-// Hardcoded defaults — used when API fails or settings not configured
-const DEFAULTS = {
-  siteName: 'TAO Architecture Pvt. Ltd.',
-  contactEmail: 'info@taoarchitecture.com',
-  footerTagline: 'Touching intangible beauty of nature, through tangible forms of Architecture.',
-  facebookUrl: 'https://www.facebook.com/taoarchitecture',
-  instagramUrl: 'https://www.instagram.com/taoarchitecture',
-  linkedinUrl: 'https://www.linkedin.com/company/tao-architecture-pvt-ltd',
-  youtubeUrl: 'https://www.youtube.com/@TAOSTUDIO_0',
-  phoneNumbers: '["+91 98220 44555"]',
-  address: 'A/2, Friends Enclave,\nWest Block, Opp Sai Hira Complex,\nMundhwa, Pune - 411036',
-};
+import { SITE_DEFAULTS } from '@/constants/siteDefaults';
+import { getSettings } from '@/lib/api';
 
 const Footer = () => {
   const router = useRouter();
@@ -26,19 +15,20 @@ const Footer = () => {
   const [settings, setSettings] = useState<GlobalSettings | null>(null);
 
   useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
-        const res = await fetch(`${apiUrl}/settings`);
-        if (res.ok) {
-          const data = await res.json();
+    let isMounted = true;
+    getSettings()
+      .then((data) => {
+        if (isMounted && data) {
           setSettings(data);
         }
-      } catch {
+      })
+      .catch(() => {
         // Silently fail — use defaults
-      }
+      });
+
+    return () => {
+      isMounted = false;
     };
-    fetchSettings();
   }, []);
 
   // Handle click count and reset
@@ -60,8 +50,8 @@ const Footer = () => {
   };
 
   // Helper to get value with fallback
-  const val = (key: keyof typeof DEFAULTS) => {
-    return (settings as any)?.[key] || DEFAULTS[key];
+  const val = (key: keyof typeof SITE_DEFAULTS) => {
+    return (settings as any)?.[key] || SITE_DEFAULTS[key];
   };
 
   const socialLinks = [
@@ -72,7 +62,7 @@ const Footer = () => {
   ];
 
   // Parse phone for display
-  let displayPhone = '+91 98220 44555';
+  let displayPhone = '+91-744-771-9343';
   try {
     const phones = JSON.parse(val('phoneNumbers'));
     if (Array.isArray(phones) && phones.length > 0) {

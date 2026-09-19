@@ -34,7 +34,7 @@ const nextConfig = {
         return [
             {
                 // Only apply to HTML pages — JS/CSS/images stay immutable.
-                source: '/:path*',
+                source: '/((?!_next/static|_next/image|favicon.ico|img/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|css|js|woff|woff2)).*)',
                 headers: [
                     {
                         key: 'Cache-Control',

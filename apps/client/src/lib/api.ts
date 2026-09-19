@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000/api';
+export const getApiUrl = () => process.env.NEXT_PUBLIC_API_URL || '/api';
+
+const API_URL = getApiUrl();
 const API_TIMEOUT_MS = 10000;
 
 const api = axios.create({

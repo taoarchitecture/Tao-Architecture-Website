@@ -90,8 +90,7 @@ export async function fetchAndStoreAllVideos(channelHandle: string) {
       Object.assign(details, await getVideoDetails(ids.slice(i, i + 50)));
     }
     
-    let updatedCount = 0;
-    for (const item of allItems) {
+    const upsertOperations = allItems.map((item) => {
       const vid = item.contentDetails.videoId;
       const sn = item.snippet;
       const thumb =
@@ -102,7 +101,7 @@ export async function fetchAndStoreAllVideos(channelHandle: string) {
         sn.thumbnails?.default?.url ||
         '';
       const videoDetail = details[vid] || { viewCount: 0, duration: null };
-      await prisma.video.upsert({
+      return prisma.video.upsert({
         where: { videoId: vid },
         update: {
           title: sn.title,
@@ -129,9 +128,15 @@ export async function fetchAndStoreAllVideos(channelHandle: string) {
           lastSyncedAt: new Date(),
         },
       });
-      updatedCount++;
+    });
+
+    const BATCH_SIZE = 25;
+    for (let i = 0; i < upsertOperations.length; i += BATCH_SIZE) {
+      const batch = upsertOperations.slice(i, i + BATCH_SIZE);
+      await prisma.$transaction(batch);
     }
-    console.log(`[YouTube Sync] Successfully synced ${updatedCount} videos.`);
+
+    console.log(`[YouTube Sync] Successfully synced ${upsertOperations.length} videos in batches.`);
     return { count: allItems.length, channelId };
   } catch (error: any) {
     console.error(`[YouTube Sync] Error during sync:`, error.message);

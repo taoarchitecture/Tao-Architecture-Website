@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { scrollToSection } from '@/utils/scroll';
 
 interface StudioSidebarProps {
   activeSection: string;
@@ -10,21 +11,6 @@ const StudioSidebar: React.FC<StudioSidebarProps> = ({ activeSection }) => {
   const menuItems = [
     { id: 'team', label: 'Team' },
   ];
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      // Offset for fixed header
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
     <div className="sticky left-0 top-24 hidden h-[calc(100vh-6rem)] flex-col items-end border-r border-neutral-border pr-8 pt-12 md:flex">

@@ -209,11 +209,9 @@ export const deleteProjectService = async (id: number) => {
   }
 
   const galleryItems = safeJsonParse<GalleryItem[]>(project.gallery, []);
-  for (const item of galleryItems) {
-    if (item?.url) {
-      await deleteUploadedFile(item.url);
-    }
-  }
+  await Promise.allSettled(
+    galleryItems.filter(item => item?.url).map(item => deleteUploadedFile(item.url))
+  );
 
   await prisma.project.delete({ where: { id } });
 };

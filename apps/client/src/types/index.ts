@@ -1,7 +1,9 @@
 export interface GalleryItem {
-  id?: number;
+  id?: number | string;
   url: string;
   type?: string; // 'IMAGE' | 'VIDEO'
+  caption?: string;
+  order?: number;
 }
 
 export interface Project {
@@ -56,12 +58,16 @@ export interface Publication {
 }
 
 export interface Award {
-  id: number;
+  id: number | string;
   title: string;
+  subtitle?: string;
+  project?: string;
+  category: string;
   image: string;
+  link: string;
   year?: string;
   description?: string;
-  order: number;
+  order?: number;
 }
 
 export interface Video {
